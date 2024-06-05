@@ -1,12 +1,12 @@
 """Sphinx configuration file."""
 
-import {{cookiecutter.project}}
+import yieldplotlib
 
-project = "{{cookiecutter.project}}"
-copyright = "{{cookiecutter.year}}, {{cookiecutter.author}}"
-author = "{{cookiecutter.author}}"
-version = {{cookiecutter.project}}.__version__
-release = {{cookiecutter.project}}.__version__
+project = "yieldplotlib"
+copyright = "2024, Corey Spohn"
+author = "Corey Spohn"
+version = yieldplotlib.__version__
+release = yieldplotlib.__version__
 
 # -- General configuration ---------------------------------------------------
 
@@ -37,11 +37,11 @@ html_static_path = ["_static"]
 master_doc = "index"
 html_logo = "_static/logo.png"
 html_favicon = "_static/favicon.ico"
-html_title = "Yield Input Package Python Wrapper"
+html_title = "yieldplotlib"
 html_sidebars = {"posts/*": ["sbt-sidebar-nav.html"]}
 
 html_theme_options = {
-    "repository_url": "https://www.github.com/{{cookiecutter.username}}/{{cookiecutter.project}",
+    "repository_url": "https://www.github.com/CoreySpohn/yieldplotlib",
     "repository_branch": "main",
     "use_repository_button": True,
     "show_toc_level": 2,

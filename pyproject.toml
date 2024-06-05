@@ -3,10 +3,13 @@ requires = ['hatchling', "hatch-fancy-pypi-readme", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = {{cookiecutter.project}}
-authors = [{ name = {{cookiecutter.author}}, email = "TODO" }]
-description = "TODO"
-dependencies = ["TODO"]
+name = "yieldplotlib"
+authors = [
+  { name = "Corey Spohn", email = "corey.a.spohn@nasa.gov" },
+  { name = "Sarah Steiger", email = "TODO" },
+]
+description = "A Python pipeline to generate plots for exoplanet yield simulations."
+dependencies = ["matplotlib", "astropy"]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
 requires-python = ">=3.9"
@@ -18,14 +21,14 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/{{cookiecutter.username}}/{{cookiecutter.project}}"
-Issues = "https://github.com/{{cookiecutter.username}}/{{cookiecutter.project}}/issues"
+Homepage = "https://github.com/CoreySpohn/yieldplotlib"
+Issues = "https://github.com/CoreySpohn/yieldplotlib/issues"
 
 [tool.hatch.version]
 source = "vcs"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/{{cookiecutter.project}}/_version.py"
+version-file = "src/yieldplotlib/_version.py"
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
