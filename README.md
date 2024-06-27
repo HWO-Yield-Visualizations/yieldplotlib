@@ -6,8 +6,8 @@
 <p align="center">
   <a href="https://pypi.org/project/yieldplotlib/"><img src="https://img.shields.io/pypi/v/yieldplotlib.svg?style=flat-square&logo=pypi" alt="PyPI"/></a>
   <a href="https://yieldplotlib.readthedocs.io"><img src="https://readthedocs.org/projects/yieldplotlib/badge/?version=latest&style=flat-square" alt="Documentation Status"/></a>
-  <a href="https://github.com/coreyspohn/yieldplotlib/actions/workflows/ci.yml/"><img src="https://img.shields.io/github/actions/workflow/status/coreyspohn/yieldplotlib/ci.yml?branch=main&logo=github&style=flat-square" alt="CI"/></a>
 </p>
+<!-- <a href="https://github.com/coreyspohn/yieldplotlib/actions/workflows/ci.yml/"><img src="https://img.shields.io/github/actions/workflow/status/coreyspohn/yieldplotlib/ci.yml?branch=main&logo=github&style=flat-square" alt="CI"/></a> -->
 
 
 # yieldplotlib
