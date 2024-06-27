@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "yieldplotlib"
 authors = [
   { name = "Corey Spohn", email = "corey.a.spohn@nasa.gov" },
-  { name = "Sarah Steiger", email = "TODO" },
+  { name = "Sarah Steiger", email = "ssteiger@stsci.edu" },
 ]
 description = "A Python pipeline to generate plots for exoplanet yield simulations."
 dependencies = ["matplotlib", "astropy"]

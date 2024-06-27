@@ -3,8 +3,8 @@
 import yieldplotlib
 
 project = "yieldplotlib"
-copyright = "2024, Corey Spohn"
-author = "Corey Spohn"
+copyright = "2024, Corey Spohn, Sarah Steiger"
+author = "Corey Spohn, Sarah Steiger"
 version = yieldplotlib.__version__
 release = yieldplotlib.__version__
 
