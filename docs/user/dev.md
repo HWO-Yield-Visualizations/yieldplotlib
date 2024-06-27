@@ -111,8 +111,8 @@ The `(scope)` is optional, but should be used when the commit message is
 unclear without it.
 
 ##### Breaking changes
-If you're making a change that is incompatible with the current version (e.g.,
-removing a feature, changing a function call, etc) , you should also include an
+If you're making a change that is incompatible with the current version (e.g.
+removing a feature, changing a function call, etc), you should also include an
 exclamation point at the end of the commit message, like so: `feat(plotting)!:
 add new feature X` to indicate that this is a breaking change, which will
 trigger a major version bump in the next release.
