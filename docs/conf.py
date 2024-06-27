@@ -29,6 +29,7 @@ autoapi_ignore = ["**/*version.py"]
 autodoc_typehints = "description"
 
 myst_enable_extensions = ["amsmath", "dollarmath"]
+myst_heading_anchors = 4
 
 # -- Options for HTML output -------------------------------------------------
 

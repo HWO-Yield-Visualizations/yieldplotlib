@@ -9,5 +9,6 @@ provides the API reference and examples to help you get started.
 
 ```{toctree}
 :maxdepth: 2
+user/dev
 ```
 ```
