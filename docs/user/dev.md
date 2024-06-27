@@ -54,6 +54,19 @@ review and understand your changes.
     python -m pip install -U pip
     python -m pip install -U -e ".[dev]"
     ```
+3. **Install pre-commit hooks:**
+    We use pre-commit hooks to automatically format code and check for common
+    errors before you commit changes. To install these hooks, run the following
+    commands:
+    ```bash
+    pre-commit install
+    pre-commit install --hook-type commit-msg
+    ```
+    This will automatically run the hooks before each commit. If any of the hooks
+    fail, the commit will be aborted and it will tell you what needs to be
+    changed. It may fix the error itself, in which case you will see a line `-
+    files were modified by this hook`. You can also run the hooks manually with
+    `pre-commit run --all-files`.
 
 ### Making Contributions
 
@@ -127,7 +140,7 @@ and `3` is the patch version.
 
 ##### Misc
 If you're unsure about the type of commit, use `chore` as a catch-all
-and we can help you decide the correct type. 
+and we can help you decide the correct type.
 
 #### Tutorials
 Tutorials are written in Jupyter Notebooks. Tutorial files are located
@@ -154,4 +167,3 @@ When adding a new feature or fixing a bug, include at least one test to verify t
     python -m pytest -v tests
 
 We appreciate your contributions and look forward to collaborating with you!
-
