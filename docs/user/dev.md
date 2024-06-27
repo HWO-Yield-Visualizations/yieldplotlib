@@ -15,58 +15,58 @@ review and understand your changes.
 
 ### Setting Up Your Development Environment
 
-1. **Fork and Clone the Repository:**
+#### 1. Fork and Clone the Repository:
 
-    Fork the repository by going to [the GitHub](https://github.com/coreyspohn/yieldplotlib) page and clicking the
-    "Fork" button above the "About" section near the upper right corner of the
-    screen. This will create a copy of the repository under your GitHub
-    account, which you can then clone to your local machine using the shell command
-      ```bash
-      git clone git@github.com/YOURUSERNAME/yieldplotlib.git
-    ```
-    Replace `YOURUSERNAME` with your GitHub username. Next, navigate to the
-    repository directory and create a new branch:
-    ```bash
-      cd yieldplotlib
-      git checkout -b BRANCHNAME
-      ```
-    Replace `BRANCHNAME` with a descriptive name for your contribution.
+Fork the repository by going to [the GitHub](https://github.com/coreyspohn/yieldplotlib) page and clicking the
+"Fork" button above the "About" section near the upper right corner of the
+screen. This will create a copy of the repository under your GitHub
+account, which you can then clone to your local machine using the shell command
+```bash
+git clone git@github.com/YOURUSERNAME/yieldplotlib.git
+```
+Replace `YOURUSERNAME` with your GitHub username. Next, navigate to the
+repository directory and create a new branch:
+```bash
+cd yieldplotlib
+git checkout -b BRANCHNAME
+```
+Replace `BRANCHNAME` with a descriptive name for your contribution.
 
-2. **Create an Isolated Development Environment:**
+#### 2. Create an Isolated Development Environment:
 
-    Python development typically uses virtual environments to isolate
-    dependencies for different projects, ensuring that each project has its own
-    specific package versions without conflicts. Set up an isolated environment
-    using `venv`, `virtualenv`, `uv`, or a similar tool. We recommend `venv` if
-    you are unfamiliar with this process which can be used as follows:
-    ```bash
-    python3 -m venv .venv
-    source .venv/bin/activate
-    ```
-    That creates a new "virtual environment" in the `.venv` directory and
-    activates it. Now when you run `python` commands it will not be from your
-    system level python installation, but from the one in the `.venv`
-    directory. To deactivate the environment, run `deactivate` from your shell.
+Python development typically uses virtual environments to isolate
+dependencies for different projects, ensuring that each project has its own
+specific package versions without conflicts. Set up an isolated environment
+using `venv`, `virtualenv`, `uv`, or a similar tool. We recommend `venv` if
+you are unfamiliar with this process which can be used as follows:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+That creates a new "virtual environment" in the `.venv` directory and
+activates it. Now when you run `python` commands it will not be from your
+system level python installation, but from the one in the `.venv`
+directory. To deactivate the environment, run `deactivate` from your shell.
 
-    Next if using a `pip` based environment, which `venv` and `virtualenv` are,
-    install the developer dependencies as follows:
-    ```bash
-    python -m pip install -U pip
-    python -m pip install -U -e ".[dev]"
-    ```
-3. **Install pre-commit hooks:**
-    We use pre-commit hooks to automatically format code and check for common
-    errors before you commit changes. To install these hooks, run the following
-    commands:
-    ```bash
-    pre-commit install
-    pre-commit install --hook-type commit-msg
-    ```
-    This will automatically run the hooks before each commit. If any of the hooks
-    fail, the commit will be aborted and it will tell you what needs to be
-    changed. It may fix the error itself, in which case you will see a line `-
-    files were modified by this hook`. You can also run the hooks manually with
-    `pre-commit run --all-files`.
+Next if using a `pip` based environment, which `venv` and `virtualenv` are,
+install the developer dependencies as follows:
+```bash
+python -m pip install -U pip
+python -m pip install -U -e ".[dev]"
+```
+#### 3. Install pre-commit hooks
+We use pre-commit hooks to automatically format code and check for common
+errors before you commit changes. To install these hooks, run the following
+commands:
+```bash
+pre-commit install
+pre-commit install --hook-type commit-msg
+```
+This will automatically run the hooks before each commit. If any of the hooks
+fail, the commit will be aborted and it will tell you what needs to be
+changed. It may fix the error itself, in which case you will see a line `-
+files were modified by this hook`. You can also run the hooks manually with
+`pre-commit run --all-files`.
 
 ### Making Contributions
 
