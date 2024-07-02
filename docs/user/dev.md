@@ -59,7 +59,7 @@ We use pre-commit hooks to automatically format code and check for common
 errors before you commit changes. To install these hooks, run the following
 commands:
 ```bash
-pip install pre-commit 
+pip install pre-commit
 pre-commit install --hook-type commit-msg
 ```
 This will automatically run the hooks before each commit. If any of the hooks
@@ -110,7 +110,7 @@ The `type` is required and should be one of the following:
 The `(scope)` is optional, but should be used when the commit message is
 unclear without it.
 
-All commits must be "atomic" and thus able to be described by a singular `type` 
+All commits must be "atomic" and thus able to be described by a singular `type`
 and `scope` with few (rare) exceptions.
 
 ##### Breaking changes
