@@ -110,6 +110,9 @@ The `type` is required and should be one of the following:
 The `(scope)` is optional, but should be used when the commit message is
 unclear without it.
 
+All commits must be "atomic" and thus able to be described by a singular `type` 
+and `scope` with few (rare) exceptions.
+
 ##### Breaking changes
 If you're making a change that is incompatible with the current version (e.g.
 removing a feature, changing a function call, etc), you should also include an
