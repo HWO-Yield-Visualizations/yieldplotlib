@@ -22,7 +22,7 @@ Fork the repository by going to [the GitHub](https://github.com/coreyspohn/yield
 screen. This will create a copy of the repository under your GitHub
 account, which you can then clone to your local machine using the shell command
 ```bash
-git clone git@github.com/YOURUSERNAME/yieldplotlib.git
+git clone git@github.com:YOURUSERNAME/yieldplotlib.git
 ```
 Replace `YOURUSERNAME` with your GitHub username. Next, navigate to the
 repository directory and create a new branch:
@@ -59,7 +59,7 @@ We use pre-commit hooks to automatically format code and check for common
 errors before you commit changes. To install these hooks, run the following
 commands:
 ```bash
-pre-commit install
+pip install pre-commit
 pre-commit install --hook-type commit-msg
 ```
 This will automatically run the hooks before each commit. If any of the hooks
@@ -109,6 +109,9 @@ The `type` is required and should be one of the following:
 ##### `(scope)`
 The `(scope)` is optional, but should be used when the commit message is
 unclear without it.
+
+All commits must be "atomic" and thus able to be described by a singular `type`
+and `scope` with few (rare) exceptions.
 
 ##### Breaking changes
 If you're making a change that is incompatible with the current version (e.g.
