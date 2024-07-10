@@ -37,7 +37,7 @@ Replace `BRANCHNAME` with a descriptive name for your contribution.
 Python development typically uses virtual environments to isolate
 dependencies for different projects, ensuring that each project has its own
 specific package versions without conflicts. Set up an isolated environment
-using `venv`, `virtualenv`, `uv`, `conda`, or a similar tool. We recommend `venv` 
+using `venv`, `virtualenv`, `uv`, `conda`, or a similar tool. We recommend `venv`
 or `conda` if you are unfamiliar with this process which can be used as follows:
 
 ##### <u> venv </u>
