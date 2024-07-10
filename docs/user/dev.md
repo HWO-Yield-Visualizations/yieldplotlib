@@ -37,8 +37,10 @@ Replace `BRANCHNAME` with a descriptive name for your contribution.
 Python development typically uses virtual environments to isolate
 dependencies for different projects, ensuring that each project has its own
 specific package versions without conflicts. Set up an isolated environment
-using `venv`, `virtualenv`, `uv`, or a similar tool. We recommend `venv` if
+using `venv`, `virtualenv`, `uv`, `conda`, or a similar tool. We recommend `venv` or `conda` if
 you are unfamiliar with this process which can be used as follows:
+
+##### <u> venv </u>
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -54,6 +56,27 @@ install the developer dependencies as follows:
 python -m pip install -U pip
 python -m pip install -U -e ".[dev]"
 ```
+
+##### <u> conda </u>
+
+```bash
+conda create -n ypl
+conda activate ypl
+```
+Here we have named our environment `ypl`, but you can theoretically name it
+whatever you like.
+
+That creates a new "virtual environment" in the `conda/envs` directory and
+activates it. Now when you run `python` commands it will not be from your
+system level python installation, but from the one in the `envs/bin`
+directory. To deactivate the environment, run `deactivate` from your shell.
+
+Now install the developer dependencies as follows:
+```bash
+conda install pip
+python -m pip install -U -e ".[dev]"
+```
+
 #### 3. Install pre-commit hooks
 We use pre-commit hooks to automatically format code and check for common
 errors before you commit changes. To install these hooks, run the following
