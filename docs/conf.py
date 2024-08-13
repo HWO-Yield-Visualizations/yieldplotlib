@@ -39,7 +39,6 @@ master_doc = "index"
 html_logo = "_static/logo.png"
 html_favicon = "_static/favicon.ico"
 html_title = "yieldplotlib"
-html_sidebars = {"posts/*": ["sbt-sidebar-nav.html"]}
 
 html_theme_options = {
     "repository_url": "https://www.github.com/CoreySpohn/yieldplotlib",
