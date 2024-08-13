@@ -11,6 +11,9 @@ provides the API reference and examples to help you get started.
 :maxdepth: 2
 user/dev
 ```
+```{toctree}
+:maxdepth: 1
+develop/_changelog.md
 ```
 
 ```{toctree}
