@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.0.1...v0.1.0) (2024-08-13)
+
+
+### Features
+
+* Added base Plot class ([#9](https://github.com/HWO-Yield-Visualizations/yieldplotlib/issues/9)) ([5c1d56a](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/5c1d56a1c9355152d4650263fd519a34581fc2bb))
+
 ## 0.0.1 (2024-06-27)
 
 
