@@ -4,6 +4,7 @@
 various types of yield inputs. It inherits from dict for direct access to
 built-in dictionary functions such as get(), update(), etc.
 """
+from yieldplotlib.logger import logger
 
 
 class SingleInput(dict):
@@ -40,4 +41,4 @@ class SingleInput(dict):
                 raise AttributeError(f'{key} does not have a value of type astropy.units.Quantity')
 
         finally:
-            print('All unit checks passed.')
+            logger.info('All unit checks passed.')
