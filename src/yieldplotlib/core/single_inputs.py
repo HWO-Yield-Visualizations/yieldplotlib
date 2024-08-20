@@ -15,7 +15,7 @@ class SingleInput(dict):
     def apply(self, key, func):
         """Apply a function to all values of a given key."""
         try:
-            self.update(key=func(self.get(key)))
+            self[key] = func(self.get(key))
         except TypeError:
             raise TypeError(f'Could not apply function to {key}')
 
