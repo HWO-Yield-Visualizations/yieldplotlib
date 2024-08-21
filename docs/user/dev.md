@@ -15,17 +15,13 @@ review and understand your changes.
 
 ### Setting Up Your Development Environment
 
-#### 1. Fork and Clone the Repository:
+#### 1. Clone the Repository:
 
-Fork the repository by going to [the GitHub](https://github.com/coreyspohn/yieldplotlib) page and clicking the
-"Fork" button above the "About" section near the upper right corner of the
-screen. This will create a copy of the repository under your GitHub
-account, which you can then clone to your local machine using the shell command
+Clone the repository to your local machine using the shell command
 ```bash
-git clone git@github.com:YOURUSERNAME/yieldplotlib.git
+git clone git@github.com:HWO-Yield-Visualizations/yieldplotlib.git
 ```
-Replace `YOURUSERNAME` with your GitHub username. Next, navigate to the
-repository directory and create a new branch:
+Next, navigate to the repository directory and create a new branch:
 ```bash
 cd yieldplotlib
 git checkout -b BRANCHNAME
