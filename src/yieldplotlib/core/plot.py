@@ -15,9 +15,10 @@ import yieldplotlib.util as util
 class Plot:
     """Base class for all plots."""
 
-    def __init__(self, plot_kwargs=None, ax_kwargs=None):
+    def __init__(self, x, y, plot_kwargs=None, ax_kwargs=None):
         """Base class for all plots."""
-        self.ax = None
+        self.x = x
+        self.y = y
 
         # Set the default plot_kwargs, then update with any user-specified
         # kwargs. The plot_kwargs are used in the plot call.
@@ -31,7 +32,7 @@ class Plot:
         # ax.set method. Instead of using all the ax.set_xlabel, ax.set_title,
         # ax.set_yticks, etc. functions we can pass in a dictionary that has
         # {'xlabel': 'my_xlabel', 'xlim': (0, 10), 'title': "My title"}.
-        default_ax_kwargs = {"xlabel": "x", "ylabel": "y"}
+        default_ax_kwargs = {"xlabel": x, "ylabel": y}
         self.ax_kwargs = default_ax_kwargs
         if ax_kwargs is not None:
             self.ax_kwargs.update(ax_kwargs)
@@ -69,6 +70,17 @@ class Plot:
         plot_method(*data, **plot_kwargs)
 
         self.ax.set(**self.ax_kwargs)
+
+    def plot(self, result, ax):
+        """Method to execute the plot."""
+        self.data = result.data  # Assign YieldResult data to self.data
+        self.ax = ax
+
+        # Extract x and y data from the dataframe
+        x_data = self.data[self.x].values
+        y_data = self.data[self.y].values
+        self.generic_plot("scatter", (x_data, y_data))
+        return self.ax
 
     def adjust_settings(self):
         """Method to adjust the settings of the plot.
