@@ -95,3 +95,8 @@ def calculate_axis_limits_and_ticks(data_min, data_max, num_ticks=5, exact=False
     offset = 0.025 * tick_spacing
 
     return nice_min, nice_max, tick_spacing, offset
+
+
+def is_monotonic(x):
+    dx = np.diff(x)
+    return np.all(dx <= 0) or np.all(dx >= 0)
