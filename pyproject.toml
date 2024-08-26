@@ -9,7 +9,7 @@ authors = [
   { name = "Sarah Steiger", email = "ssteiger@stsci.edu" },
 ]
 description = "A Python pipeline to generate plots for exoplanet yield simulations."
-dependencies = ["matplotlib", "astropy"]
+dependencies = ["matplotlib", "astropy", "colorspacious"]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
 requires-python = ">=3.9"
