@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 
 
-class DataNode(ABC):
+class Node(ABC):
     """Abstract base class for all nodes (files and directories)."""
 
     def __init__(self, file_path: Path):

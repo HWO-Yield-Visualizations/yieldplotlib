@@ -1,9 +1,9 @@
 """Node for handling SPC-specific pickle files."""
 
-from yieldplotlib.core.pickle_node import PickleNode
+from yieldplotlib.core.file_nodes import PickleFile
 
 
-class SPCNode(PickleNode):
+class SPCFile(PickleFile):
     """Node for handling SPC-specific pickle files."""
 
     def get(self, key: str):

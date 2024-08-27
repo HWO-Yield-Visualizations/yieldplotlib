@@ -4,10 +4,10 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from yieldplotlib.core.csv_node import CSVNode
-from yieldplotlib.core.data_node import DataNode
 from yieldplotlib.core.directory_node import DirectoryNode
-from yieldplotlib.load.exosims import DRMNode, EXOSIMSInputNode, SPCNode
+from yieldplotlib.core.file_nodes import CSVFile
+from yieldplotlib.core.node import Node
+from yieldplotlib.load.exosims import DRMFile, EXOSIMSInputFile, SPCFile
 
 
 class EXOSIMSDirectory(DirectoryNode):
@@ -36,14 +36,14 @@ class EXOSIMSDirectory(DirectoryNode):
                     self.add(self._create_file_node(path))
                 pbar.update(1)
 
-    def _create_file_node(self, path: Path) -> DataNode:
+    def _create_file_node(self, path: Path) -> Node:
         """Override file node creation logic for EXOSIMS-specific files."""
         if path.suffix == ".pkl" and path.parts[-2] == "drm":
-            return DRMNode(path)
+            return DRMFile(path)
         elif path.suffix == ".spc" and path.parts[-2] == "spc":
-            return SPCNode(path)
+            return SPCFile(path)
         elif path.suffix == ".csv":
-            return CSVNode(path)
+            return CSVFile(path)
         elif path.suffix == ".json":
-            return EXOSIMSInputNode(path)
+            return EXOSIMSInputFile(path)
         return None

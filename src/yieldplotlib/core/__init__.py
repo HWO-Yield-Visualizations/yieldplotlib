@@ -1,17 +1,16 @@
 """Core module of yieldplotlib."""
 
 __all__ = [
-    "CSVNode",
-    "DataNode",
     "DirectoryNode",
-    "JSONNode",
-    "PickleNode",
+    "CSVFile",
+    "FileNode",
+    "JSONFile",
+    "PickleFile",
+    "Node",
     "Plot",
 ]
 
-from .csv_node import CSVNode
-from .data_node import DataNode
 from .directory_node import DirectoryNode
-from .json_node import JSONNode
-from .pickle_node import PickleNode
+from .file_nodes import CSVFile, FileNode, JSONFile, PickleFile
+from .node import Node
 from .plot import Plot

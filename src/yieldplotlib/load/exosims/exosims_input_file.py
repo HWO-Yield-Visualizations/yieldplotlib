@@ -1,9 +1,9 @@
 """Node for handling input json files."""
 
-from yieldplotlib.core.json_node import JSONNode
+from yieldplotlib.core.file_nodes import JSONFile
 
 
-class EXOSIMSInputNode(JSONNode):
+class EXOSIMSInputFile(JSONFile):
     """Node for handling the EXOSIMS input JSON files."""
 
     def get(self, key: str):

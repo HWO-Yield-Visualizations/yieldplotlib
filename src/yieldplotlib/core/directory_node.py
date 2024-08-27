@@ -4,10 +4,10 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from yieldplotlib.core.data_node import DataNode
+from yieldplotlib.core.node import Node
 
 
-class DirectoryNode(DataNode):
+class DirectoryNode(Node):
     """Represents a directory containing multiple nodes (files or subdirectories)."""
 
     def __init__(self, directory_path: Path):
@@ -34,7 +34,7 @@ class DirectoryNode(DataNode):
                     self.add(self._create_file_node(path))
                 pbar.update(1)
 
-    def add(self, node: DataNode):
+    def add(self, node: Node):
         """Add a child node to the directory."""
         if node is not None:
             self._children.append(node)
