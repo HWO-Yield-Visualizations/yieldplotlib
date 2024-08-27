@@ -36,6 +36,9 @@ class Plot:
         if ax_kwargs is not None:
             self.ax_kwargs.update(ax_kwargs)
 
+        # Initialize alt text for the plot.
+        self._alt_text = ""
+
     def render(self):
         """Method to render the plot."""
         self.adjust_settings()
