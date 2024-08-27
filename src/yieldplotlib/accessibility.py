@@ -65,16 +65,20 @@ class AccessibilityManager:
             self.warnings.append(warning)
             logger.warning(warning)
 
-    def check_fonts(self, size_threshold=10):
+    def check_fonts(self, size_threshold=12):
         """Checks that all font sizes in the plot are larger than a given threshold"""
         font_sizes = {}
         # Fonts to check.
-        attrs = ["xaxis.label", "yaxis.label", "title", "get_xticklabels()", "get_yticklabels()"]
+        attrs = ["xaxis.label", "yaxis.label", "title", "get_xticklabels", "get_yticklabels"]
 
         for at in attrs:
             objs = rgetattr(self.plot.ax, at)
-            for o in objs:
-                font_sizes[at] = o.get_size()
+            try:
+                font_sizes[at] = objs.get_size()
+            except AttributeError:
+                eval = objs()
+                for item in eval:
+                    font_sizes[at] = item.get_size()
 
         # Get all fonts and sizes that are less than the specified size point threshold.
         noncompliant_dict = {k: v for k, v in font_sizes.items() if v < size_threshold}
