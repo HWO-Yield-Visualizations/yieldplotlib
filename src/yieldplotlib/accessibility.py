@@ -70,9 +70,9 @@ class AccessibilityManager:
             logger.warning(warning)
 
         if not is_monotonic(lightness):
-                warning = "Colors are not monotonic"
-                self.warnings.append(warning)
-                logger.warning(warning)
+            warning = "Colors are not monotonic"
+            self.warnings.append(warning)
+            logger.warning(warning)
 
     def check_fonts(self, size_threshold=10):
         """Checks that all font sizes in the plot are larger than a given threshold"""
