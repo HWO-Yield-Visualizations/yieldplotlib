@@ -292,3 +292,6 @@ class Plot:
         # major ticks
         if use_minor:
             set_ticks(np.arange(val0 + dval / 2, valf + dval / 4, dval), minor=True)
+
+    def update_alt_text(self, text):
+        self._alt_text = text
