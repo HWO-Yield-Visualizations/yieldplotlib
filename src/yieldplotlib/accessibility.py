@@ -108,4 +108,4 @@ class AccessibilityManager:
     def update_alt_text(self, alt_text):
         """Updates the alt text for the plot"""
         # Add string formatting magic if needed.
-        self.plot._alt_text = alt_text
+        self.plot.update_alt_text(alt_text)
