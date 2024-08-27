@@ -91,7 +91,7 @@ class AccessibilityManager:
 
     def check_alt_text(self):
         """Checks if alt text has been provided for the plot."""
-        if not self.plot.alt_text:
+        if not self.plot._alt_text:
             warning = "Alt text has not been provided for this plot."
             self.warnings.append(warning)
             logger.warning(warning)
