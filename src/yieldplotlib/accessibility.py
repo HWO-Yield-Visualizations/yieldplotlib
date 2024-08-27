@@ -6,11 +6,10 @@ from yieldplotlib.util import is_monotonic, rgetattr
 
 class AccessibilityManager:
     def __init__(self, plot):
-        """Checks a given plot for various accessibility criteria.
+        """Manages accessibility features for a given Plot. .
 
-        Using the run_checks function will run a series of accessibility checks
-        for the given plot. If a check is failed it will send a warning to the console,
-        but will not raise an error.
+        Main feature is the run_checks function which will run a series of accessibility checks.
+        If a check is failed it will send a warning to the console, but will not raise an error.
 
         Args:
             plot: yieldplotlib.core.plot.Plot
