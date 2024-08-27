@@ -2,6 +2,7 @@ import numpy as np
 from yieldplotlib.logger import logger
 from colorspacious import cspace_converter
 from yieldplotlib.util import is_monotonic, rgetattr
+from matplotlib.colors import to_rgb
 
 
 class AccessibilityManager:
@@ -32,7 +33,21 @@ class AccessibilityManager:
     def check_colors(self):
         """Checks if colors used are monotonic and span an acceptable lightness range."""
         # Convert RGB colors into greyscale to check lightness.
-        rgb = self.plot.ax.get_cmap().colors
+        rgb = []
+
+        # If cmap is defined, get those colors.
+        try:
+            rgb.append(self.plot.ax.get_cmap().colors)
+        except AttributeError:
+            pass
+
+        # Get colors for all lines on the axes.
+        rgb.append([to_rgb(line.get_color()) for line in self.plot.ax.get_lines()])
+
+        # Get colors for all faces (i.e. scatter points).
+        rgb.append([to_rgb(s.get_facecolor()) for s in self.plot.ax.collections])
+
+        # Convert to greyscale to determine lightness.
         lab = cspace_converter("sRGB1", "CAM02-UCS")(rgb)
         lightness = lab[:, 0]
 
@@ -41,12 +56,12 @@ class AccessibilityManager:
             return
 
         if np.abs(np.max(lightness) - np.min(lightness)) < 50:
-            warning = "Colormap does not have enough dynamic range"
+            warning = "Colors do not have enough dynamic range"
             self.warnings.append(warning)
             logger.warning(warning)
 
         if not is_monotonic(lightness):
-            warning = "Colormap is not monotonic"
+            warning = "Colors are not monotonic"
             self.warnings.append(warning)
             logger.warning(warning)
 
