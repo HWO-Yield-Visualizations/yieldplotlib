@@ -28,7 +28,7 @@ class AccessibilityManager:
             logger.info("All accessibility checks have passed!")
 
         else:
-            logger.warning("Accessibility checks failed.")
+            logger.warning(f"{len(self.warnings)} accessibility checks failed.")
 
     def check_colors(self):
         """Checks if colors used are monotonic and span an acceptable lightness range."""
