@@ -46,7 +46,7 @@ class AccessibilityManager:
 
         # Get colors for all faces (i.e. scatter points).
         rgb.append([to_rgb(s.get_facecolor()) for s in self.plot.ax.collections])
-
+        rgb = [el for el in rgb if el !=[]][0]
         # Convert to greyscale to determine lightness.
         lab = cspace_converter("sRGB1", "CAM02-UCS")(rgb)
         lightness = lab[:, 0]
