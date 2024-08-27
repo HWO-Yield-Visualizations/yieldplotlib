@@ -40,9 +40,7 @@ class AccessibilityManager:
             rgb_values = [image.cmap(np.arange(0, 1, 0.1))[:, :3] for image in self.plot.ax.images]
             for val in rgb_values[0]:
                 rgb.append([val[0], val[1], val[2]])
-            image_rgbs = np.copy(rgb)
         except IndexError:
-            image_rgbs = None
             pass
 
         # Get colors for all lines on the axes.
@@ -62,16 +60,6 @@ class AccessibilityManager:
         lab = cspace_converter("sRGB1", "CAM02-UCS")(rgb)
         lightness = lab[:, 0]
 
-        # Convert to greyscale to determine lightness.
-        if image_rgbs is not None:
-            print(image_rgbs)
-            image_lab = cspace_converter("sRGB1", "CAM02-UCS")(image_rgbs)
-            image_lightness = image_lab[:, 0]
-            if not is_monotonic(image_lightness):
-                warning = "Colors are not monotonic"
-                self.warnings.append(warning)
-                logger.warning(warning)
-
         # If there is only one color, return.
         if len(lightness) == 1:
             return
@@ -80,6 +68,11 @@ class AccessibilityManager:
             warning = "Colors do not have enough dynamic range"
             self.warnings.append(warning)
             logger.warning(warning)
+
+        if not is_monotonic(lightness):
+                warning = "Colors are not monotonic"
+                self.warnings.append(warning)
+                logger.warning(warning)
 
     def check_fonts(self, size_threshold=10):
         """Checks that all font sizes in the plot are larger than a given threshold"""
