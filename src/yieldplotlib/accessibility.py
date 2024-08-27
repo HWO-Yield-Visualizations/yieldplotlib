@@ -7,7 +7,7 @@ from matplotlib.colors import to_rgb
 
 class AccessibilityManager:
     def __init__(self, plot):
-        """Manages accessibility features for a given Plot. .
+        """Manages accessibility features for a given Plot.
 
         Main feature is the run_checks function which will run a series of accessibility checks.
         If a check is failed it will send a warning to the console, but will not raise an error.
