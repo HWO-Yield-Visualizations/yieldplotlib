@@ -21,8 +21,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/CoreySpohn/yieldplotlib"
-Issues = "https://github.com/CoreySpohn/yieldplotlib/issues"
+Homepage = "https://github.com/HWO-Yield-Visualizations/yieldplotlib"
+Issues = "https://github.com/HWO-Yield-Visualizations/yieldplotlib/issues"
 
 [tool.hatch.version]
 source = "vcs"
