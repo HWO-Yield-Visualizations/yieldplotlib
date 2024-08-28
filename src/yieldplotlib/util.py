@@ -1,7 +1,8 @@
 """Utility functions."""
 
-import numpy as np
 import functools
+
+import numpy as np
 
 
 def get_nice_number(value, round=False):
@@ -99,11 +100,15 @@ def calculate_axis_limits_and_ticks(data_min, data_max, num_ticks=5, exact=False
 
 
 def is_monotonic(x):
+    """Checks if an array is monotonic."""
     dx = np.diff(x)
     return np.all(dx <= 0) or np.all(dx >= 0)
 
 
 def rgetattr(obj, attr, *args):
+    """Recursively get attributes of an object."""
+
     def _getattr(obj, attr):
         return getattr(obj, attr, *args)
-    return functools.reduce(_getattr, [obj] + attr.split('.'))
+
+    return functools.reduce(_getattr, [obj] + attr.split("."))

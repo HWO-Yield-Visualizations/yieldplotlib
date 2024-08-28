@@ -294,4 +294,5 @@ class Plot:
             set_ticks(np.arange(val0 + dval / 2, valf + dval / 4, dval), minor=True)
 
     def update_alt_text(self, text):
+        """Updates the alt text for the plot."""
         self._alt_text = text
