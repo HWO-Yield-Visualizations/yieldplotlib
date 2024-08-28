@@ -4,7 +4,9 @@ from pathlib import Path
 
 from tqdm import tqdm
 
+from yieldplotlib.core.file_nodes import CSVFile, JSONFile, PickleFile
 from yieldplotlib.core.node import Node
+from yieldplotlib.logger import logger
 
 
 class DirectoryNode(Node):
@@ -24,12 +26,15 @@ class DirectoryNode(Node):
         """Recursively scan directories and load all child nodes."""
         paths = list(self.directory_path.iterdir())
         with tqdm(
-            total=len(paths), desc=f"Loading {self.directory_path.name}", unit="item"
+            total=len(paths),
+            desc=f"Loading {self.__class__.__name__} {self.directory_path.name}",
+            unit="item",
         ) as pbar:
             for path in paths:
                 if path.is_dir():
-                    directory_node = DirectoryNode(path)
-                    self.add(directory_node)
+                    # directory_node = DirectoryNode(path)
+                    # self.add(directory_node)
+                    self.add(self._create_directory_node(path))
                 else:
                     self.add(self._create_file_node(path))
                 pbar.update(1)
@@ -88,3 +93,27 @@ class DirectoryNode(Node):
                 break
 
         return repr_str
+
+    def _create_directory_node(self, path: Path) -> Node:
+        """Create a directory node for the given path."""
+        return self.create_base_directory(path)
+
+    def _create_file_node(self, path: Path) -> Node:
+        """Create a file node for the given path."""
+        return self.create_base_file(path)
+
+    def create_base_file(self, path: Path):
+        """Create a base file node for the given path."""
+        if path.suffix == ".csv":
+            return CSVFile(path)
+        elif path.suffix == ".json":
+            return JSONFile(path)
+        elif path.suffix == ".pkl":
+            return PickleFile(path)
+        else:
+            logger.warning(f"Unknown file type: {path.suffix}")
+            return None
+
+    def create_base_directory(self, path: Path):
+        """Create a directory node for the given path."""
+        return DirectoryNode(path)

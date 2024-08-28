@@ -2,12 +2,9 @@
 
 from pathlib import Path
 
-from tqdm import tqdm
-
-from yieldplotlib.core.directory_node import DirectoryNode
-from yieldplotlib.core.file_nodes import CSVFile
-from yieldplotlib.core.node import Node
-from yieldplotlib.load.exosims import DRMFile, EXOSIMSInputFile, SPCFile
+from yieldplotlib.core import DirectoryNode, Node
+from yieldplotlib.load.exosims import DRMFile, EXOSIMSCSVFile, EXOSIMSInputFile, SPCFile
+from yieldplotlib.logger import logger
 
 
 class EXOSIMSDirectory(DirectoryNode):
@@ -17,33 +14,71 @@ class EXOSIMSDirectory(DirectoryNode):
         """Initialize the EXOSIMSLoader by scanning the directory structure."""
         super().__init__(root_directory)
 
-    def load(self):
-        """Override the load method to handle EXOSIMS-specific files."""
-        paths = list(self.directory_path.iterdir())
-        with tqdm(
-            total=len(paths),
-            desc=f"Loading EXOSIMS directory {self.directory_path.name}",
-            unit="item",
-        ) as pbar:
-            for path in self.directory_path.iterdir():
-                if path.is_dir():
-                    # Recursively handle subdirectories by creating
-                    # EXOSIMSDirectory nodes
-                    exosims_directory = EXOSIMSDirectory(path)
-                    self.add(exosims_directory)
-                else:
-                    # Create EXOSIMS-specific file nodes
-                    self.add(self._create_file_node(path))
-                pbar.update(1)
+    def _create_directory_node(self, path: Path) -> Node:
+        """Override directory node creation logic for EXOSIMS-specific directories."""
+        if path.name == "drm":
+            return DRMDirectory(path)
+        elif path.name == "spc":
+            return SPCDirectory(path)
+        elif path.name == "csv":
+            return EXOSIMSCSVDirectory(path)
+        else:
+            return self.create_base_directory(path)
 
     def _create_file_node(self, path: Path) -> Node:
         """Override file node creation logic for EXOSIMS-specific files."""
-        if path.suffix == ".pkl" and path.parts[-2] == "drm":
-            return DRMFile(path)
-        elif path.suffix == ".spc" and path.parts[-2] == "spc":
-            return SPCFile(path)
-        elif path.suffix == ".csv":
-            return CSVFile(path)
-        elif path.suffix == ".json":
+        if path.suffix == ".json":
             return EXOSIMSInputFile(path)
-        return None
+        else:
+            return self.create_base_file(path)
+
+
+class EXOSIMSCSVDirectory(EXOSIMSDirectory):
+    """Loader for CSV data, organizing files into a directory-based structure."""
+
+    def _create_file_node(self, path: Path):
+        """Override file node creation logic for CSV-specific files."""
+        if path.suffix == ".csv":
+            return EXOSIMSCSVFile(path)
+        else:
+            logger.warning(
+                (
+                    f"Unexpected file type {path.suffix} for CSV directory. "
+                    f"File {path.name}."
+                )
+            )
+            return self.create_base_file(path)
+
+
+class DRMDirectory(EXOSIMSDirectory):
+    """Loader for DRM data, organizing files into a directory-based structure."""
+
+    def _create_file_node(self, path: Path):
+        """Override file node creation logic for DRM-specific files."""
+        if path.suffix == ".pkl":
+            return DRMFile(path)
+        else:
+            logger.warning(
+                (
+                    f"Unexpected file type {path.suffix} for DRM directory. "
+                    f"File {path.name}."
+                )
+            )
+            return self.create_base_file(path)
+
+
+class SPCDirectory(EXOSIMSDirectory):
+    """Loader for SPC data, organizing files into a directory-based structure."""
+
+    def _create_file_node(self, path: Path):
+        """Override file node creation logic for SPC-specific files."""
+        if path.suffix == ".spc":
+            return SPCFile(path)
+        else:
+            logger.warning(
+                (
+                    f"Unexpected file type {path.suffix} for SPC directory. "
+                    f"File {path.name}."
+                )
+            )
+            return self.create_base_file(path)

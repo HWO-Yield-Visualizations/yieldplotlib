@@ -10,8 +10,15 @@ from yieldplotlib.logger import logger
 class DRMFile(PickleFile):
     """Node for handling DRM-specific pickle files."""
 
-    def get(self, key: str):
+    def load(self):
+        """Load the DRM file as a list of dictionaries."""
+        pass
+
+    def _get(self, key: str):
         """Custom logic for DRM files."""
+        # TODO: Implement custom logic for DRM files.
+        return None
+
         # DRM files are a list of dictionaries.
         # We want to return a list of values for the given key.
         drm_dict_keys = [

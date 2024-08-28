@@ -1,17 +1,27 @@
-"""Script to test the EXOSIMS directory loader."""
+"""Script to test AYO and EXOSIMS loading."""
 
 from pathlib import Path
 
-from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
+import matplotlib.pyplot as plt
+from yieldplotlib.load import AYODirectory, EXOSIMSDirectory
 
-test = EXOSIMSDirectory(Path("../input/EXOSIMS/Luvoir_b_avc1_H6C_CO_DulzE_baseA/"))
-print(test.display_tree())
-csv_col = "chars_earth_unique"
-csv_col_val = test.get(csv_col)
-print(f"Column {csv_col} has values: {csv_col_val}")
+exosims = EXOSIMSDirectory(Path("../input/EXOSIMS/Luvoir_b_avc1_H6C_CO_DulzE_baseA/"))
+ayo = AYODirectory(Path("../input/AYO/example"))
+print(exosims.display_tree())
+print(ayo.display_tree())
 
-# DRM test
-drm_str = "det_time"
-drm_val = test.get(drm_str)
-print(f"DRM key {drm_str} has values: \n{drm_val}")
-breakpoint()
+runs = [exosims, ayo]
+titles = ["EXOSIMS", "AYO"]
+fig, axs = plt.subplots(1, len(runs), figsize=(15, 5))
+y_range = (0.001, 200)
+for i, (run, title) in enumerate(zip(runs, titles)):
+    star_L = run.get("star_L")
+    star_dist = run.get("star_dist")
+    star_comp = run.get("star_comp")
+    axs[i].scatter(star_dist, star_L, c=star_comp, cmap="viridis")
+    axs[i].set_xlabel("Distance [pc]")
+    axs[i].set_ylabel("Luminosity [L_sun]")
+    axs[i].set_ylim(y_range)
+    axs[i].set_yscale("log")
+    axs[i].set_title(f"{run.file_name} ({title})")
+plt.show()
