@@ -36,6 +36,9 @@ class Plot:
         if ax_kwargs is not None:
             self.ax_kwargs.update(ax_kwargs)
 
+        # Initialize alt text for the plot.
+        self._alt_text = ""
+
     def render(self):
         """Method to render the plot."""
         self.adjust_settings()
@@ -289,3 +292,7 @@ class Plot:
         # major ticks
         if use_minor:
             set_ticks(np.arange(val0 + dval / 2, valf + dval / 4, dval), minor=True)
+
+    def update_alt_text(self, text):
+        """Updates the alt text for the plot."""
+        self._alt_text = text
