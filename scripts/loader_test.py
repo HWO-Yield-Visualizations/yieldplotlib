@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+
 from yieldplotlib.load import AYODirectory, EXOSIMSDirectory
 
 exosims = EXOSIMSDirectory(Path("../input/EXOSIMS/Luvoir_b_avc1_H6C_CO_DulzE_baseA/"))
