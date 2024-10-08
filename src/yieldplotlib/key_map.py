@@ -17,5 +17,17 @@ KEY_MAP = {
         "EXOSIMSCSVFile": "h_star_char_comp_mean",
         "AYOCSVFile": "Total HZ Completeness",
     },
+    "star_spec": {
+        "EXOSIMSCSVFile": "star_Spec",
+        "AYOCSVFile": "Type",
+    },
+    "exp_time_det": {
+        "EXOSIMSCSVFile": "h_star_det_tInt_mean",
+        "AYOCSVFile": "Total BB Imaging Time (days)",
+    },
+    "exp_time_char": {
+        "EXOSIMSCSVFile": "h_star_char_tInt_mean",
+        "AYOCSVFile": "Total Spec Char Time (days)",
+    },
     # Add more key mappings here
 }
