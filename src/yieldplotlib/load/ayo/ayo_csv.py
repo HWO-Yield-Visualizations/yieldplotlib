@@ -15,6 +15,9 @@ class AYOCSVFile(CSVFile):
         "star_L": r".*-target_list\.csv",
         "star_dist": r".*-target_list\.csv",
         "star_comp": r".*-target_list\.csv",
+        "star_spec": r".*-target_list\.csv",
+        "exp_time_det": r".*-target_list\.csv",
+        "exp_time_char": r".*-target_list\.csv",
     }
 
     def transform_star_name(self, data):
