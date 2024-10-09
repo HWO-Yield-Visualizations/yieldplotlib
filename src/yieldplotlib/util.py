@@ -3,6 +3,7 @@
 import functools
 
 import numpy as np
+import matplotlib as mpl
 
 
 def get_nice_number(value, round=False):
@@ -112,3 +113,9 @@ def rgetattr(obj, attr, *args):
         return getattr(obj, attr, *args)
 
     return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def discretize_colormap(num_colors, colormap_name, start_frac=0.1, end_frac=0.9):
+    cmap = mpl.colormaps[colormap_name]
+    colors = cmap(np.linspace(start_frac, end_frac, num_colors))
+    return colors
