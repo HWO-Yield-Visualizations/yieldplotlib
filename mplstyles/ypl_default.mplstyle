@@ -1,0 +1,16 @@
+# see https://matplotlib.org/stable/users/explain/customizing.html for information on style files
+# configure by putting the following at the top of a file: plt.style.use("ypl_default.mplstyle")
+
+# Set default font sizes and linewidths.
+axes.titlesize: 18
+axes.labelsize: 16
+lines.linewidth: 4
+lines.markersize: 8
+xtick.labelsize: 12
+ytick.labelsize: 12
+
+# Set default colors.
+image.cmap: "plasma"
+
+# Hex colors generated using https://venngage.com/tools/accessible-color-palette-generator
+axes.prop_cycle: (cycler(color=['5f7fe7', '7861e4', 'af5fd5', 'dd67aa', 'ec6e77']) + cycler(linestyle=['-', '--', ':', '-.', '(0, (3, 1, 1, 1))'])) # note these must be the same length
