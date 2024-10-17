@@ -8,13 +8,15 @@ __all__ = [
     "get_nice_number",
 ]
 
+import os
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+
 from ._version import __version__
 from .key_map import KEY_MAP
 from .logger import logger
 from .util import calculate_axis_limits_and_ticks, get_nice_number
-import matplotlib.pyplot as plt
-import os
-from pathlib import Path
 
 # Get the absolute path of the current script
 current_file = Path(__file__).resolve()
