@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.2.0...v0.3.0) (2024-10-17)
+
+
+### Features
+
+* **util:** add new utility function for pulling discrete colors from a colormap. ([5748ece](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/5748ecee04e780a082b6bd91f11784eefd131ebc))
+
 ## [0.2.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.1.0...v0.2.0) (2024-08-28)
 
 
