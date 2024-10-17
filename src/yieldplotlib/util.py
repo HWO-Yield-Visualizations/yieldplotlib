@@ -2,8 +2,8 @@
 
 import functools
 
-import numpy as np
 import matplotlib as mpl
+import numpy as np
 
 
 def get_nice_number(value, round=False):
