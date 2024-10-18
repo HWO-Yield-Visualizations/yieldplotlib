@@ -12,6 +12,9 @@ class EXOSIMSCSVFile(CSVFile):
         "star_L": "reduce-star-target.csv",
         "star_dist": "reduce-star-target.csv",
         "star_comp": "reduce-star-target.csv",
+        "star_spec": "reduce-star-target.csv",
+        "exp_time_det": "reduce-star-target.csv",
+        "exp_time_char": "reduce-star-target.csv",
     }
 
     def transform_star_name(self, data):
