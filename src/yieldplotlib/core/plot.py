@@ -7,8 +7,8 @@ managing plot settings, axis configurations, and rendering options.
 
 import inspect
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 import yieldplotlib.util as util
 
