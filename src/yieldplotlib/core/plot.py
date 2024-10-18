@@ -8,6 +8,7 @@ managing plot settings, axis configurations, and rendering options.
 import inspect
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 import yieldplotlib.util as util
 
@@ -17,6 +18,9 @@ class Plot:
 
     def __init__(self, plot_kwargs=None, ax_kwargs=None):
         """Base class for all plots."""
+        # Set default ypl style.
+        plt.style.use("../mplstyles/ypl_default.mplstyle")
+
         self.ax = None
 
         # Set the default plot_kwargs, then update with any user-specified
