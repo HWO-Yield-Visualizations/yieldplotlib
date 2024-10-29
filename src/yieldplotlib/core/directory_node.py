@@ -32,8 +32,6 @@ class DirectoryNode(Node):
         ) as pbar:
             for path in paths:
                 if path.is_dir():
-                    # directory_node = DirectoryNode(path)
-                    # self.add(directory_node)
                     self.add(self._create_directory_node(path))
                 else:
                     self.add(self._create_file_node(path))
