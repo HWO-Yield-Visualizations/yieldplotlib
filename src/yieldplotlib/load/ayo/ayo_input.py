@@ -16,22 +16,23 @@ u.add_enabled_units([read])
 
 
 class AYOInputFile(FileNode):
-    """Node for handling AYO configuration files using PyParsing."""
+    """Node for handling AYO input files using PyParsing."""
 
     def __init__(self, file_path: Path):
         """Initialize the AYOInputFile node with the file path."""
         super().__init__(file_path)
         self.data = {}
         self.parse()
+        self.is_input = True
 
     def load(self):
         """Load the text file into memory."""
         with open(self.file_path, "r", encoding="utf-8") as f:
             self.raw_data = f.read()
-        logger.info(f"Loaded AYO config file: {self.file_path}")
+        logger.info(f"Loaded AYO input file: {self.file_path}")
 
     def parse(self):
-        """Parse the AYO configuration file and populate the self.data dictionary."""
+        """Parse the AYO input file and populate the self.data dictionary."""
         # Define a unit as a word composed of alphabetic characters and underscores,
         # possibly combined with slashes for compound units
         simple_unit = pp.Word(pp.alphas, pp.alphanums + "_")
@@ -142,9 +143,9 @@ class AYOInputFile(FileNode):
                     )
                 )
 
-        # After parsing, set expected_keys based on the config keys
+        # After parsing, set expected_keys based on the input keys
         self.expected_keys = list(self.data.keys())
-        logger.info(f"Successfully parsed {len(self.data)} configuration parameters.")
+        logger.info(f"Successfully parsed {len(self.data)} input parameters.")
 
     def _convert_array(self, tokens):
         """Convert parsed array tokens to a Python list."""
