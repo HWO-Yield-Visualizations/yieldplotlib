@@ -16,7 +16,7 @@ u.add_enabled_units([read])
 
 
 class AYOInputFile(FileNode):
-    """Node for handling AYO configuration files and their associated data using PyParsing."""
+    """Node for handling AYO configuration files using PyParsing."""
 
     def __init__(self, file_path: Path):
         """Initialize the AYOInputFile node with the file path."""
