@@ -12,6 +12,7 @@ class Node(ABC):
         self.data = None
         self.file_path = file_path
         self.file_name = file_path.name
+        self.is_input = False
 
     @abstractmethod
     def load(self):
