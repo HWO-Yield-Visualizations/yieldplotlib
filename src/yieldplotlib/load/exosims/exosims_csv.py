@@ -6,19 +6,12 @@ from yieldplotlib.core import CSVFile
 class EXOSIMSCSVFile(CSVFile):
     """Node for handling reduced EXOSIMS CSV files."""
 
-    # Mapping of keys to specific filenames
-    KEY_FILENAME_MAP = {
-        "star_name": "reduce-star-target.csv",
-        "star_L": "reduce-star-target.csv",
-        "star_dist": "reduce-star-target.csv",
-        "star_comp": "reduce-star-target.csv",
-        "star_spec": "reduce-star-target.csv",
-        "exp_time_det": "reduce-star-target.csv",
-        "exp_time_char": "reduce-star-target.csv",
-    }
-
     def transform_star_name(self, data):
         """Add a prefix to the star_name data."""
+        return data.values
+
+    def transform_exp_time_det(self, data):
+        """Return values instead of the dataframe."""
         return data.values
 
     # def _get(self, key: str):
