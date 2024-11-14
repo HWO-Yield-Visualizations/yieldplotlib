@@ -2,7 +2,6 @@
 
 import json
 import pickle
-import re
 from pathlib import Path
 
 import pandas as pd
@@ -19,40 +18,27 @@ class FileNode(Node):
         """Initialize the node with the file path."""
         super().__init__(file_path)
         self.load()
-        self.expected_keys = self.get_expected_keys()
+        self.file_key_map = self.get_file_key_map()
 
-    def translate_key(self, key: str) -> str:
-        """Translate the standardized key to the file-specific key."""
-        return KEY_MAP.get(key, {}).get(self.__class__.__name__, key)
-
-    def get_expected_keys(self):
+    def get_file_key_map(self):
         """Get a list of keys expected to be in this file based on the key map."""
-        expected_keys = []
+        file_key_map = {}
         for key, mappings in KEY_MAP.items():
             if self.__class__.__name__ in mappings:
-                expected_keys.append(mappings[self.__class__.__name__])
-        return expected_keys
-
-    def has_key(self, key: str) -> bool:
-        """Check if the file contains the given key."""
-        translated_key = self.translate_key(key)
-        return translated_key in self.expected_keys
+                filename = mappings[self.__class__.__name__]["file"]
+                key_name = mappings[self.__class__.__name__]["name"]
+                matching_file = self.file_name[-len(filename) :] == filename
+                if matching_file:
+                    file_key_map[key] = key_name
+        return file_key_map
 
     def get(self, key: str):
         """Translate the key and delegate to the subclass-specific _get method."""
-        translated_key = self.translate_key(key)
-        has_key = translated_key in self.expected_keys
+        # translated_key = self.translate_key(key)
+        has_key = key in self.file_key_map.keys()
         if has_key:
-            # Check if the key is mapped to a specific filename
-            required_filename = getattr(self, "KEY_FILENAME_MAP", {}).get(key)
-            if required_filename:
-                if isinstance(required_filename, str):
-                    if not self._filename_matches(required_filename):
-                        # Skip this file if the required filename does not match
-                        logger.debug(f"Key {key} requires {required_filename}.")
-                        return None
             logger.info(f"Key {key} found in {self.file_name}.")
-            data = self._get(translated_key)
+            data = self._get(self.file_key_map[key])
             return self.transform_data(key, data)
         else:
             logger.debug(f"Key {key} not found in {self.file_name}.")
@@ -68,16 +54,6 @@ class FileNode(Node):
         if callable(transform_func):
             return transform_func(data)
         return data
-
-    def _filename_matches(self, pattern: str) -> bool:
-        """Check if the file name matches the pattern, either as a string or regex."""
-        # If pattern is a direct match
-        if pattern == self.file_path.name:
-            return True
-        # If pattern is a regex match
-        if re.match(pattern, self.file_path.name):
-            return True
-        return False
 
 
 class CSVFile(FileNode):
@@ -95,7 +71,7 @@ class CSVFile(FileNode):
     def _get(self, key: str):
         """Return the data associated with the key."""
         if key in self.data.columns:
-            return self.data[key]
+            return self.data[key].values
         return None
 
 
