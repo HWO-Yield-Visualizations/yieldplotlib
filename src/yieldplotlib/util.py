@@ -2,6 +2,7 @@
 
 import functools
 
+import matplotlib as mpl
 import numpy as np
 
 
@@ -112,3 +113,10 @@ def rgetattr(obj, attr, *args):
         return getattr(obj, attr, *args)
 
     return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def discretize_colormap(num_colors, colormap_name, start_frac=0.1, end_frac=0.9):
+    """Returns evenly spaced discrete colors from a matplotlib colormap."""
+    cmap = mpl.colormaps[colormap_name]
+    colors = cmap(np.linspace(start_frac, end_frac, num_colors))
+    return colors

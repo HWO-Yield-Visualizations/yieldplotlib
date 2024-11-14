@@ -32,12 +32,20 @@ class DirectoryNode(Node):
         ) as pbar:
             for path in paths:
                 if path.is_dir():
-                    # directory_node = DirectoryNode(path)
-                    # self.add(directory_node)
                     self.add(self._create_directory_node(path))
                 else:
                     self.add(self._create_file_node(path))
                 pbar.update(1)
+        # Establish the input node
+        input_files = [child for child in self._children if child.is_input]
+        if len(input_files) == 0:
+            logger.warning("No input files found")
+            self.input = None
+        elif len(input_files) == 1:
+            self.input = input_files[0]
+        else:
+            logger.warning("Multiple input files found, using the first")
+            self.input = input_files[0]
 
     def add(self, node: Node):
         """Add a child node to the directory."""
