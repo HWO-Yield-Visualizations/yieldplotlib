@@ -9,7 +9,14 @@ authors = [
   { name = "Sarah Steiger", email = "ssteiger@stsci.edu" },
 ]
 description = "A Python pipeline to generate plots for exoplanet yield simulations."
-dependencies = ["matplotlib", "astropy", "colorspacious", "synphot", "EXOSIMS", "tqdm"]
+dependencies = [
+  "matplotlib",
+  "astropy",
+  "colorspacious",
+  "synphot",
+  "EXOSIMS",
+  "tqdm",
+]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
 requires-python = ">=3.9"
@@ -46,6 +53,9 @@ docs = [
   "matplotlib",
 ]
 test = ["nox", "pytest", "hypothesis", "pytest-cov"]
+
+[tool.ruff]
+exclude = ["src/yieldplotlib/key_map.py"]
 
 [tool.ruff.lint]
 select = ["D", "E", "F", "I"]
