@@ -71,7 +71,7 @@ class CSVFile(FileNode):
     def _get(self, key: str):
         """Return the data associated with the key."""
         if key in self.data.columns:
-            return self.data[key]
+            return self.data[key].values
         return None
 
 
