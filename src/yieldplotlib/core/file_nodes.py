@@ -2,7 +2,6 @@
 
 import json
 import pickle
-import re
 from pathlib import Path
 
 import pandas as pd
