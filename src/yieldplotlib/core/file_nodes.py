@@ -76,10 +76,6 @@ class FileNode(Node):
             case "index":
                 return data[_val]
             case "sum":
-                try:
-                    data.sum()
-                except:
-                    breakpoint()
                 return data.sum()
             case _:
                 raise NotImplementedError(f"Transform type {_type} not implemented.")
