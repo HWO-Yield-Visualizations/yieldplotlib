@@ -231,7 +231,7 @@ def write_key_map(key_map, output_py):
                                 # Keep as string, ensure it's properly quoted
                                 transform_value_repr = f'"{transform_value}"'
 
-                    f.write('            "transform": {{\n')
+                    f.write('            "transform": {\n')
                     f.write(f'                "type": "{transform_type}",\n')
                     f.write(f'                "value": {transform_value_repr}\n')
                     f.write("            }\n")
