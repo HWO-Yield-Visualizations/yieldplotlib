@@ -16,10 +16,6 @@ from collections import OrderedDict
 def parse_csv(input_csv):
     """Parses the input CSV and constructs the KEY_MAP dictionary.
 
-    Parses the input CSV and constructs the KEY_MAP dictionary,
-    prioritizing keys with both EXOSIMS and AYO entries first,
-    followed by keys with only AYO, and then keys with only EXOSIMS.
-
     Args:
         input_csv (str): Path to the input CSV file.
 
@@ -47,6 +43,16 @@ def parse_csv(input_csv):
             ayo_class = row.get("AYO Class", "").strip()
             comment = row.get("Comment", "").strip()
 
+            # New columns for transformation
+            # e.g., "index"
+            exo_transform_type = row.get("EXOSIMS transform type", "").strip().lower()
+            # e.g., "2"
+            exo_transform_value = row.get("EXOSIMS transform value", "").strip()
+            # e.g., "sum"
+            ayo_transform_type = row.get("AYO transform type", "").strip().lower()
+            # e.g., "1,2"
+            ayo_transform_value = row.get("AYO transform value", "").strip()
+
             # Determine the yieldplotlib key
             if yield_name:
                 key = yield_name
@@ -56,7 +62,6 @@ def parse_csv(input_csv):
                 elif ayo_name and not exo_name:
                     key = ayo_name
                 elif exo_name and ayo_name:
-                    # If both EXOSIMS and AYO names are present but yield_name is empty
                     # Prefer EXOSIMS name as the key
                     key = exo_name
                 else:
@@ -74,10 +79,26 @@ def parse_csv(input_csv):
 
             row_entry = {
                 "key": key,
-                "EXOSIMS": {"class": exo_class, "file": exo_file, "name": exo_name}
+                "EXOSIMS": {
+                    "class": exo_class,
+                    "file": exo_file,
+                    "name": exo_name,
+                    "transform": {
+                        "type": exo_transform_type if exo_transform_type else "none",
+                        "value": exo_transform_value if exo_transform_value else None,
+                    },
+                }
                 if has_exo
                 else None,
-                "AYO": {"class": ayo_class, "file": ayo_file, "name": ayo_name}
+                "AYO": {
+                    "class": ayo_class,
+                    "file": ayo_file,
+                    "name": ayo_name,
+                    "transform": {
+                        "type": ayo_transform_type if ayo_transform_type else "none",
+                        "value": ayo_transform_value if ayo_transform_value else None,
+                    },
+                }
                 if has_ayo
                 else None,
                 "comment": comment if comment else "",
@@ -115,6 +136,10 @@ def parse_csv(input_csv):
             map_entry[exo_class] = {
                 "file": exo_entry["file"],
                 "name": exo_entry["name"],
+                "transform": {
+                    "type": exo_entry["transform"]["type"],
+                    "value": exo_entry["transform"]["value"],
+                },
             }
 
         # Add AYO entry if present
@@ -123,6 +148,10 @@ def parse_csv(input_csv):
             map_entry[ayo_class] = {
                 "file": ayo_entry["file"],
                 "name": ayo_entry["name"],
+                "transform": {
+                    "type": ayo_entry["transform"]["type"],
+                    "value": ayo_entry["transform"]["value"],
+                },
             }
 
         # Add comment
@@ -132,7 +161,7 @@ def parse_csv(input_csv):
             print(
                 (
                     f"Warning: Duplicate key '{key}' found in {context}."
-                    "Overwriting previous entry."
+                    " Overwriting previous entry."
                 )
             )
 
@@ -175,7 +204,37 @@ def write_key_map(key_map, output_py):
                     lib_entry = value[lib_class]
                     f.write(f'        "{lib_class}": {{\n')
                     f.write(f'            "file": "{lib_entry["file"]}",\n')
-                    f.write(f'            "name": "{lib_entry["name"]}"\n')
+                    f.write(f'            "name": "{lib_entry["name"]}",\n')
+                    # Handle transformation details
+                    transform_type = lib_entry["transform"]["type"]
+                    transform_value = lib_entry["transform"]["value"]
+                    # For `None` values, represent them as `None` without quotes
+                    if transform_value is None:
+                        transform_value_repr = "None"
+                    elif (
+                        isinstance(transform_value, str)
+                        and transform_value.lower() == "none"
+                    ):
+                        transform_value_repr = "None"
+                    else:
+                        # Determine if transform_value should be int, float, or string
+                        try:
+                            # Try to convert to integer
+                            transform_value_int = int(transform_value)
+                            transform_value_repr = str(transform_value_int)
+                        except ValueError:
+                            try:
+                                # Try to convert to float
+                                transform_value_float = float(transform_value)
+                                transform_value_repr = str(transform_value_float)
+                            except ValueError:
+                                # Keep as string, ensure it's properly quoted
+                                transform_value_repr = f'"{transform_value}"'
+
+                    f.write('            "transform": {{\n')
+                    f.write(f'                "type": "{transform_type}",\n')
+                    f.write(f'                "value": {transform_value_repr}\n')
+                    f.write("            }\n")
                     f.write("        },\n")
             # Add comment
             comment = value.get("comment", "").replace('"', '\\"')
