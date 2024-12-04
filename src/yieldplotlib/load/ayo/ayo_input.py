@@ -31,6 +31,10 @@ class AYOInputFile(FileNode):
             self.raw_data = f.read()
         logger.info(f"Loaded AYO input file: {self.file_path}")
 
+    def _get(self, key: str):
+        """Return the data associated with the key."""
+        return self.data.get(key, None)
+
     def parse(self):
         """Parse the AYO input file and populate the self.data dictionary."""
         # Define a unit as a word composed of alphabetic characters and underscores,
