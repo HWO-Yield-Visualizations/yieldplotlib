@@ -18,28 +18,31 @@ class FileNode(Node):
         """Initialize the node with the file path."""
         super().__init__(file_path)
         self.load()
-        self.file_key_map = self.get_file_key_map()
+        self.file_key_map, self.file_transforms = self.get_file_key_map()
 
     def get_file_key_map(self):
         """Get a list of keys expected to be in this file based on the key map."""
         file_key_map = {}
+        transforms = {}
         for key, mappings in KEY_MAP.items():
             if self.__class__.__name__ in mappings:
                 filename = mappings[self.__class__.__name__]["file"]
                 key_name = mappings[self.__class__.__name__]["name"]
-                matching_file = self.file_name[-len(filename) :] == filename
+                transform = mappings[self.__class__.__name__]["transform"]
+                matching_file = self.file_name.endswith(filename)
                 if matching_file:
                     file_key_map[key] = key_name
-        return file_key_map
+                    transforms[key] = transform
+        return file_key_map, transforms
 
-    def get(self, key: str):
+    def get(self, key: str, **kwargs):
         """Translate the key and delegate to the subclass-specific _get method."""
         # translated_key = self.translate_key(key)
         has_key = key in self.file_key_map.keys()
         if has_key:
             logger.info(f"Key {key} found in {self.file_name}.")
             data = self._get(self.file_key_map[key])
-            return self.transform_data(key, data)
+            return self.transform_data(key, data, **kwargs)
         else:
             logger.debug(f"Key {key} not found in {self.file_name}.")
             return None
@@ -48,12 +51,34 @@ class FileNode(Node):
         """Subclass-specific method to retrieve the data associated with the key."""
         raise NotImplementedError("Subclasses must implement the _get method.")
 
-    def transform_data(self, key: str, data):
+    def transform_data(self, key: str, data, type_override=None, value_override=None):
         """Apply key-specific data transformations defined in the subclass."""
-        transform_func = getattr(self, f"transform_{key}", None)
-        if callable(transform_func):
-            return transform_func(data)
-        return data
+        _type = self.file_transforms[key]["type"]
+        _val = self.file_transforms[key]["value"]
+        if type_override is not None:
+            _type = type_override
+            _val = value_override
+        else:
+            _type = self.file_transforms[key]["type"]
+            _val = self.file_transforms[key]["value"]
+
+        match _type:
+            case "none":
+                return data
+            case "custom":
+                transform_func = getattr(self, f"transform_{key}", None)
+                if callable(transform_func):
+                    return transform_func(data)
+                else:
+                    raise NotImplementedError(
+                        f"Custom transform for {key} not" "implemented."
+                    )
+            case "index":
+                return data[_val]
+            case "sum":
+                return data.sum()
+            case _:
+                raise NotImplementedError(f"Transform type {_type} not implemented.")
 
 
 class CSVFile(FileNode):
@@ -67,6 +92,8 @@ class CSVFile(FileNode):
     def load(self):
         """Load the CSV file into memory."""
         self.data = pd.read_csv(self.file_path)
+        # Strip whitespace from column names
+        self.data.columns = self.data.columns.str.strip()
 
     def _get(self, key: str):
         """Return the data associated with the key."""

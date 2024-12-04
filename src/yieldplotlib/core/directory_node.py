@@ -52,10 +52,10 @@ class DirectoryNode(Node):
         if node is not None:
             self._children.append(node)
 
-    def get(self, key: str):
+    def get(self, key: str, **kwargs):
         """Recursively search for data associated with the given key."""
         for child in self._children:
-            result = child.get(key)
+            result = child.get(key, **kwargs)
             if result is not None:
                 return result
         return None
