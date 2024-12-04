@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.3.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.2.0...v0.3.0) (2024-12-04)
+
+
+### Features
+
+* Add generate_key_map which creates a new key_map based on the google sheet ([ac35071](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/ac35071472f5e03a3c3b676711c1bf02d592904e))
+* Add handling of AYO's input files ([e9e9f2a](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/e9e9f2a371dc725d88ee269f50c6765a41127066))
+* Add input attribute for directories ([9e18413](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/9e18413db232a3218cbee7b7b7334748855124c3))
+* Add yield histogram plot ([faf64b7](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/faf64b7b421d85a4453aeed59eea58f022576b3b))
+* Update the key map generation to match the new format of the spreadsheet ([a200d89](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/a200d8997385f24fdde82821e3cb99776ad229ed))
+* Update the star name transform ([6c1ea49](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/6c1ea49260641ae9a6b534428a9c4af73fe48bba))
+* Update the transform data system to allow for custom transforms or values set in the spreadsheet ([2e5ca25](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/2e5ca253283d5741dd72afab1d477dcfff668032))
+* Updated key handling in the file_nodes to be more streamlined ([49c3ec1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/49c3ec188d768def6fdf69634c6444f390999dbe))
+* **util:** add new utility function for pulling discrete colors from a colormap. ([5748ece](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/5748ecee04e780a082b6bd91f11784eefd131ebc))
+
+
+### Bug Fixes
+
+* remove extra curly bracket ([c757849](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/c757849f12f1038f22b4a6c4cc8c00bb671e041c))
+
 ## [0.2.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.1.0...v0.2.0) (2024-08-28)
 
 
