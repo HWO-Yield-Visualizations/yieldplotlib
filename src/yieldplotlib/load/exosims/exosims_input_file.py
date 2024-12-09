@@ -16,4 +16,15 @@ class EXOSIMSInputFile(JSONFile):
     def get(self, key: str):
         """Custom logic for the input JSON files."""
         # TODO: Implement custom logic for these files.
-        return super().get(key)
+        values = super().get(key)
+        if isinstance(values, dict):
+            if key.startswith('sc'):
+                for k in values.copy().keys():
+                    if 'spectro' not in k:
+                        del values[k]
+            else:
+                for k in values.copy().keys():
+                    if 'spectro' in k:
+                        del values[k]
+
+        return values
