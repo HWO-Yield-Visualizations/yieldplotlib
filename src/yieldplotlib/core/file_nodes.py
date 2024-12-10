@@ -123,7 +123,10 @@ class JSONFile(FileNode):
             if isinstance(data, dict):
                 for k, v in data.items():
                     if k == target_key:
-                        values[data["name"]] = data.get(key, None)
+                        try:
+                            values[data["name"]] = data.get(key, None)
+                        except KeyError:
+                            values[data["instName"]] = data.get(key, None)
                     elif isinstance(v, (dict, list)):
                         json_recur(v, target_key)
             elif isinstance(data, list):
