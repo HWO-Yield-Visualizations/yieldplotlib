@@ -4,9 +4,11 @@ from pathlib import Path
 
 from yieldplotlib.core.file_nodes import JSONFile
 
-# Define which nested keys correspond to the modes, systems, and instruments for parsing.
+# Define which nested keys correspond to the modes, systems,
+# and instruments for parsing.
 # Could also be added as a flag in the key_map
-INSTRUMENT_KEYS = ['qe', 'cic', 'read_noise', 'dark_current', 'pixel_scale', 'texp', 'optics_throughput']
+INSTRUMENT_KEYS = ['qe', 'cic', 'read_noise', 'dark_current', 'pixel_scale', 'texp',
+                   'optics_throughput']
 INSTRUMENT_KEYS += ['sc_' + k for k in INSTRUMENT_KEYS]
 
 MODE_KEYS = ['obs_lam', 'snr']
@@ -26,8 +28,8 @@ class EXOSIMSInputFile(JSONFile):
     def get(self, key: str):
         """Custom logic for the input JSON files."""
         # TODO: Implement custom logic for these files.
-        # Define which instruments, systems and modes are used. Will not return values for unused
-        # but defined modes/instruments/systems.
+        # Define which instruments, systems and modes are used. Will not return
+        # values for unused but defined modes/instruments/systems.
         used_modes = super().get('modes')
         used_instruments = [m["instName"] for m in used_modes]
         used_systems = [m["systName"] for m in used_modes]
