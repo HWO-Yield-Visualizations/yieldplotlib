@@ -6,13 +6,21 @@ from yieldplotlib.core.file_nodes import JSONFile
 
 # Define which nested keys correspond to the modes, systems, and instruments for parsing.
 # Could also be added as a flag in the key_map
-INSTRUMENT_KEYS = ['qe', 'cic', 'read_noise', 'dark_current', 'pixel_scale', 'texp', 'optics_throughput']
-INSTRUMENT_KEYS += ['sc_' + k for k in INSTRUMENT_KEYS]
+INSTRUMENT_KEYS = [
+    "qe",
+    "cic",
+    "read_noise",
+    "dark_current",
+    "pixel_scale",
+    "texp",
+    "optics_throughput",
+]
+INSTRUMENT_KEYS += ["sc_" + k for k in INSTRUMENT_KEYS]
 
-MODE_KEYS = ['obs_lam', 'snr']
-MODE_KEYS += ['sc_' + k for k in MODE_KEYS]
+MODE_KEYS = ["obs_lam", "snr"]
+MODE_KEYS += ["sc_" + k for k in MODE_KEYS]
 
-SYSTEM_KEYS = ['coron_lam', 'iwa', 'owa', 'bw', 'optics']
+SYSTEM_KEYS = ["coron_lam", "iwa", "owa", "bw", "optics"]
 
 
 class EXOSIMSInputFile(JSONFile):
@@ -28,7 +36,7 @@ class EXOSIMSInputFile(JSONFile):
         # TODO: Implement custom logic for these files.
         # Define which instruments, systems and modes are used. Will not return values for unused
         # but defined modes/instruments/systems.
-        used_modes = super().get('modes')
+        used_modes = super().get("modes")
         used_instruments = [m["instName"] for m in used_modes]
         used_systems = [m["systName"] for m in used_modes]
 
@@ -39,13 +47,13 @@ class EXOSIMSInputFile(JSONFile):
 
         else:
             if key in INSTRUMENT_KEYS or MODE_KEYS:
-                if key.startswith('sc'):  # indicates spectroscopy parameter.
+                if key.startswith("sc"):  # indicates spectroscopy parameter.
                     for k in values.copy().keys():
-                        if 'spectro' not in k or k not in used_instruments:
+                        if "spectro" not in k or k not in used_instruments:
                             del values[k]
                 else:
                     for k in values.copy().keys():
-                        if 'spectro' in k or k not in used_instruments:
+                        if "spectro" in k or k not in used_instruments:
                             del values[k]
 
             if key in SYSTEM_KEYS:
