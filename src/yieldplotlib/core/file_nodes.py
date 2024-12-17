@@ -117,7 +117,30 @@ class JSONFile(FileNode):
 
     def _get(self, key: str):
         """Return the data associated with the key."""
-        return self.data.get(key, None)
+        values = {}
+
+        def json_recur(data, target_key):
+            if isinstance(data, dict):
+                for k, v in data.items():
+                    if k == target_key:
+                        try:
+                            values[data["name"]] = data.get(key, None)
+                        except KeyError:
+                            values[data["instName"]] = data.get(key, None)
+                    elif isinstance(v, (dict, list)):
+                        json_recur(v, target_key)
+            elif isinstance(data, list):
+                for item in data:
+                    json_recur(item, target_key)
+            return values
+
+        if self.data.get(key):
+            return self.data.get(key)
+        else:
+            try:
+                return json_recur(self.data, key)
+            except KeyError:
+                return None
 
 
 class PickleFile(FileNode):
