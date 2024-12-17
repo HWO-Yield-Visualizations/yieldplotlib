@@ -15,7 +15,7 @@ read = u.def_unit("read")
 u.add_enabled_units([read])
 
 # Define zodis as a dimensionless unit
-zodis = u.def_unit('zodis')
+zodis = u.def_unit("zodis")
 u.add_enabled_units([zodis])
 
 

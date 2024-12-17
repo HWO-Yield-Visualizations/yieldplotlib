@@ -143,7 +143,6 @@ class JSONFile(FileNode):
                 return None
 
 
-
 class PickleFile(FileNode):
     """Node for handling generic pickle files and their associated data."""
 

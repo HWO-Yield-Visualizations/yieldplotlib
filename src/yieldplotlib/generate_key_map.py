@@ -199,7 +199,12 @@ def write_key_map(key_map, output_py):
         for key, value in key_map.items():
             f.write(f'    "{key}": {{\n')
             # Add library-specific entries
-            for lib_class in ["EXOSIMSCSVFile", "AYOCSVFile", "EXOSIMSInputFile", "AYOInputFile"]:
+            for lib_class in [
+                "EXOSIMSCSVFile",
+                "AYOCSVFile",
+                "EXOSIMSInputFile",
+                "AYOInputFile",
+            ]:
                 if lib_class in value:
                     lib_entry = value[lib_class]
                     f.write(f'        "{lib_class}": {{\n')
