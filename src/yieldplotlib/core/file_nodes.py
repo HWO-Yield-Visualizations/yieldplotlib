@@ -2,7 +2,9 @@
 
 import json
 import pickle
+import posixpath
 from pathlib import Path
+from astropy.io import fits
 
 import pandas as pd
 
@@ -159,3 +161,24 @@ class PickleFile(FileNode):
     def _get(self, key: str):
         """Return the data associated with the key."""
         return self.data.get(key, None)
+
+
+class FitsFile(FileNode):
+    """Node for handling generic fits files and their associated data."""
+
+    def __init__(self, file_path: Path):
+        """Initialize the node with the file path."""
+        super().__init__(file_path)
+        self.load()
+        self.file_name = posixpath.basename(file_path)
+
+    def load(self):
+        """Load the pickle file into memory."""
+        self.data = fits.open(self.file_path)
+
+    def get(self, key: str):
+        """Return the data associated with the key."""
+        if key == 'data':
+            return self.data[0].data
+        else:
+            return self.data[0].header.get(key, None)
