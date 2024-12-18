@@ -6,7 +6,7 @@ import posixpath
 from pathlib import Path
 
 import pandas as pd
-from astropy.io import fits
+import astropy.io.fits as pyfits
 
 from yieldplotlib.core.node import Node
 from yieldplotlib.key_map import KEY_MAP
@@ -174,11 +174,11 @@ class FitsFile(FileNode):
 
     def load(self):
         """Load the pickle file into memory."""
-        self.data = fits.open(self.file_path)
+        self.fits_file = pyfits.open(self.file_path)
 
     def get(self, key: str):
         """Return the data associated with the key."""
         if key == "data":
-            return self.data[0].data
+            return pyfits.getdata(self.fits_file)
         else:
-            return self.data[0].header.get(key, None)
+            return pyfits.getheader(self.fits_file).get(key, None)
