@@ -1,9 +1,11 @@
 """Node for handling input json files."""
 
 from pathlib import Path
+
 from astropy import units as u
-from yieldplotlib.key_map import KEY_MAP
+
 from yieldplotlib.core.file_nodes import JSONFile
+from yieldplotlib.key_map import KEY_MAP
 
 # Define which nested keys correspond to the modes, systems, and
 # instruments for parsing.
