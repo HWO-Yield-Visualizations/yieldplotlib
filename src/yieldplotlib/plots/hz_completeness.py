@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-
 from yieldplotlib.core.plot import Plot
 
 
