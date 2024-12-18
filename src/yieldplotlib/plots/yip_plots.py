@@ -31,10 +31,10 @@ def make_offax_psf_movie(
 
     """
     yip_path = yip_folder
-    yip = YieldInputPackage(Path(yip_path))
+    yip = YIPDirectory(Path(yip_path))
 
-    offax_psf_data = yip.get("offax_psf")
-    offax_psf_offsets_list = yip.get("offax_psf_offset_list")
+    offax_psf_data = yip.get("offax.data")
+    offax_psf_offsets_list = yip.get("offax_offset_list.data")
 
     if not os.path.exists(temp_folder):
         os.mkdir(temp_folder)
