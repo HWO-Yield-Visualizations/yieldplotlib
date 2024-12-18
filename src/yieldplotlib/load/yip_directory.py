@@ -6,7 +6,7 @@ from yieldplotlib.core import DirectoryNode, Node
 from yieldplotlib.core.file_nodes import FitsFile
 
 
-class YieldInputPackage(DirectoryNode):
+class YIPDirectory(DirectoryNode):
     """Loader for yield input packages, organizing files into a directory-based structure."""
 
     def __init__(self, root_directory: Path):

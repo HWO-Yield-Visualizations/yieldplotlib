@@ -2,7 +2,7 @@
 
 import os
 import glob
-from yieldplotlib.load.yip_directory import YieldInputPackage
+from yieldplotlib.load.yip_directory import YIPDirectory
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
