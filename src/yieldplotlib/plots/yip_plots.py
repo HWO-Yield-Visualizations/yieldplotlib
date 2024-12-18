@@ -1,4 +1,4 @@
-"""Generate plots for yield input packages"""
+"""Generate plots for yield input packages."""
 
 import glob
 import os
