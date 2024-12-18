@@ -32,9 +32,7 @@ class YIPDirectory(DirectoryNode):
         """Search for a key (e.g., "data" or "D") in the tree structure."""
         if key.endswith(".data"):
             if key == "offax.data":
-                return pyfits.getdata(
-                    Path(self.coronagraph.yip_path, "offax_psf.fits")
-                )
+                return pyfits.getdata(Path(self.coronagraph.yip_path, "offax_psf.fits"))
             elif key == "offax_offset_list.data":
                 return pyfits.getdata(
                     Path(self.coronagraph.yip_path, "offax_psf_offset_list.fits")
