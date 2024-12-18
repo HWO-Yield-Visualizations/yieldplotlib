@@ -32,15 +32,19 @@ def make_offax_psf_movie(
         None
 
     """
+    # Define the YIPDirectory.
     yip_path = yip_folder
     yip = YIPDirectory(Path(yip_path))
 
+    # Get the off-axis stellar PSF data from the YIP.
     offax_psf_data = yip.get("offax.data")
     offax_psf_offsets_list = yip.get("offax_offset_list.data")
 
+    # If the specified temp folder doesn't exist, make it.
     if not os.path.exists(temp_folder):
         os.mkdir(temp_folder)
 
+    # plot and save each off-axis PSF image.
     for i, im in enumerate(offax_psf_data):
         im = np.log(im)
         im[~np.isfinite(im)] = -20
@@ -48,6 +52,7 @@ def make_offax_psf_movie(
         ax = fig.add_subplot()
         ax.imshow(im)
 
+        # Add an inset with the current offset lambda/D value.
         props = dict(boxstyle="round", facecolor="white", alpha=0.5)
         ax.text(
             0.95,
@@ -64,6 +69,7 @@ def make_offax_psf_movie(
         f_name = os.path.join(temp_folder, f"{i}".zfill(3) + "_image.png")
         plt.savefig(f_name, bbox_inches="tight")
 
+    # Gather all the saved files and make and save the movie.
     files = sorted(glob.glob(os.path.join(temp_folder, "*")))
     images = [imageio.imread(file) for file in files]
     imageio.mimsave(save_name, images, fps=2)
