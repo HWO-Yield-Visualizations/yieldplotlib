@@ -44,7 +44,7 @@ def make_offax_psf_movie(
     if not os.path.exists(temp_folder):
         os.mkdir(temp_folder)
 
-    # plot and save each off-axis PSF image.
+    # Plot and save each off-axis PSF image.
     for i, im in enumerate(offax_psf_data):
         im = np.log(im)
         im[~np.isfinite(im)] = -20
