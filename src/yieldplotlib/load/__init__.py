@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 from .ayo_directory import AYODirectory
-from .cds_directory import CDSDirectory
+from .yip_directory import YieldInputPackage
 from .exosims_directory import (
     DRMDirectory,
     EXOSIMSCSVDirectory,
