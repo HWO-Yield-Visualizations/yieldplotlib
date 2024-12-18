@@ -10,7 +10,7 @@ from yieldplotlib.core.file_nodes import FitsFile
 
 
 class YIPDirectory(DirectoryNode):
-    """Loader for yield input packages, organizing files into a directory-based structure."""
+    """Loader for YIPs, organizing files into a directory-based structure."""
 
     def __init__(self, root_directory: Path):
         """Initialize the loader by scanning the directory structure."""
@@ -32,7 +32,9 @@ class YIPDirectory(DirectoryNode):
         """Search for a key (e.g., "data" or "D") in the tree structure."""
         if key.endswith(".data"):
             if key == "offax.data":
-                return pyfits.getdata(Path(self.coronagraph.yip_path, "offax_psf.fits"))
+                return pyfits.getdata(
+                    Path(self.coronagraph.yip_path, "offax_psf.fits")
+                )
             elif key == "offax_offset_list.data":
                 return pyfits.getdata(
                     Path(self.coronagraph.yip_path, "offax_psf_offset_list.fits")
