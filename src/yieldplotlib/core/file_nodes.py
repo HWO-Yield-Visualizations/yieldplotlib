@@ -5,8 +5,8 @@ import pickle
 import posixpath
 from pathlib import Path
 
-import pandas as pd
 import astropy.io.fits as pyfits
+import pandas as pd
 
 from yieldplotlib.core.node import Node
 from yieldplotlib.key_map import KEY_MAP
