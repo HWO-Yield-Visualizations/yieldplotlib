@@ -2,7 +2,7 @@
 
 __all__ = [
     "AYODirectory",
-    "CDSDirectory",
+    "YIPDirectory",
     "DRMDirectory",
     "EXOSIMSCSVDirectory",
     "EXOSIMSDirectory",
@@ -10,10 +10,10 @@ __all__ = [
 ]
 
 from .ayo_directory import AYODirectory
-from .cds_directory import CDSDirectory
 from .exosims_directory import (
     DRMDirectory,
     EXOSIMSCSVDirectory,
     EXOSIMSDirectory,
     SPCDirectory,
 )
+from .yip_directory import YIPDirectory
