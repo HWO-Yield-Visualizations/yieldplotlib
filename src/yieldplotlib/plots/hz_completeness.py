@@ -1,6 +1,4 @@
-"""Script to plot a habitable zone completeness comparison between
-an AYO and EXOSIMS run.
-"""
+"""Plots a HZ completeness comparison between an AYO and EXOSIMS run."""
 
 import matplotlib.pyplot as plt
 from matplotlib.cm import ScalarMappable
