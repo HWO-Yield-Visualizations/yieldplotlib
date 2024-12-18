@@ -1,7 +1,8 @@
 """Node for handling input json files."""
 
 from pathlib import Path
-
+from astropy import units as u
+from yieldplotlib.key_map import KEY_MAP
 from yieldplotlib.core.file_nodes import JSONFile
 
 # Define which nested keys correspond to the modes, systems, and
@@ -32,6 +33,16 @@ class EXOSIMSInputFile(JSONFile):
         super().__init__(file_path)
         self.is_input = True
 
+    def get_unit(self, key: str):
+        entry = KEY_MAP[key]
+        unit = entry["EXOSIMSInputFile"]["unit"]
+
+        if unit:
+            astropy_unit = u.Unit(unit)
+            return astropy_unit
+
+        return None
+
     def get(self, key: str):
         """Custom logic for the input JSON files."""
         # TODO: Implement custom logic for these files.
@@ -41,10 +52,15 @@ class EXOSIMSInputFile(JSONFile):
         used_instruments = [m["instName"] for m in used_modes]
         used_systems = [m["systName"] for m in used_modes]
 
+        unit = self.get_unit(key)
+
         values = super().get(key)
         # If only a single value, return.
         if not isinstance(values, dict):
-            return values
+            if unit:
+                return values * unit
+            else:
+                return values
 
         else:
             if key in INSTRUMENT_KEYS or MODE_KEYS:
@@ -61,5 +77,9 @@ class EXOSIMSInputFile(JSONFile):
                 for k in values.copy().keys():
                     if k not in used_systems:
                         del values[k]
+
+        if unit:
+            for k, v in values.items():
+                values[k] = v * unit
 
         return values
