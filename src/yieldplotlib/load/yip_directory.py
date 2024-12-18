@@ -46,8 +46,6 @@ class YIPDirectory(DirectoryNode):
                     Path(self.coronagraph.yip_path, "stellar_intens_diam_list.fits")
                 )
             elif key == "sky_trans.data":
-                return pyfits.getdata(
-                    Path(self.coronagraph.yip_path, "sky_trans.fits")
-                )
+                return pyfits.getdata(Path(self.coronagraph.yip_path, "sky_trans.fits"))
         else:
             return getattr(self.coronagraph, key)
