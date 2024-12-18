@@ -36,6 +36,7 @@ class EXOSIMSInputFile(JSONFile):
         self.is_input = True
 
     def get_unit(self, key: str):
+        """Get the associated unit for a given key."""
         entry = KEY_MAP[key]
         unit = entry["EXOSIMSInputFile"]["unit"]
 
