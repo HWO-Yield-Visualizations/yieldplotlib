@@ -62,7 +62,9 @@ def plot_hz_completeness(
     }
 
     # Plot the AYO data.
-    ayo_im = ayo_plot.generic_plot("scatter", data=ayo_data, plot_kwargs=plot_kwargs)
+    ayo_plot.generic_plot(
+        "scatter", data=ayo_data, plot_kwargs=plot_kwargs
+    )
 
     # Plot the horizontal lines differentiating the spectral types.
     ayo_ax.axhline(y=5.5, **hline_kwargs)
@@ -94,7 +96,7 @@ def plot_hz_completeness(
     }
 
     # Plot the EXOSIMS data.
-    exo_im = exo_plot.generic_plot(
+    exo_plot.generic_plot(
         "scatter", data=exosims_data, plot_kwargs=plot_kwargs
     )
 
