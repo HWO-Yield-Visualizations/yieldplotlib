@@ -4,9 +4,9 @@ import json
 import pickle
 import posixpath
 from pathlib import Path
-from astropy.io import fits
 
 import pandas as pd
+from astropy.io import fits
 
 from yieldplotlib.core.node import Node
 from yieldplotlib.key_map import KEY_MAP
@@ -178,7 +178,7 @@ class FitsFile(FileNode):
 
     def get(self, key: str):
         """Return the data associated with the key."""
-        if key == 'data':
+        if key == "data":
             return self.data[0].data
         else:
             return self.data[0].header.get(key, None)

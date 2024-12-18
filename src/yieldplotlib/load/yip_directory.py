@@ -1,11 +1,12 @@
 """Loader for YIP data, organizing files into a directory-based structure."""
 
-
 from pathlib import Path
+
+import astropy.io.fits as pyfits
+from yippy.coronagraph import Coronagraph
+
 from yieldplotlib.core import DirectoryNode, Node
 from yieldplotlib.core.file_nodes import FitsFile
-from yippy.coronagraph import Coronagraph
-import astropy.io.fits as pyfits
 
 
 class YIPDirectory(DirectoryNode):
@@ -33,13 +34,18 @@ class YIPDirectory(DirectoryNode):
             if key == "offax.data":
                 return pyfits.getdata(Path(self.coronagraph.yip_path, "offax_psf.fits"))
             elif key == "offax_offset_list.data":
-                return pyfits.getdata(Path(self.coronagraph.yip_path, "offax_psf_offset_list.fits"))
+                return pyfits.getdata(
+                    Path(self.coronagraph.yip_path, "offax_psf_offset_list.fits")
+                )
             elif key == "stellar_intens.data":
-                return pyfits.getdata(Path(self.coronagraph.yip_path, "stellar_intens.fits"))
+                return pyfits.getdata(
+                    Path(self.coronagraph.yip_path, "stellar_intens.fits")
+                )
             elif key == "stellar_intens_diam_list.data":
-                return pyfits.getdata(Path(self.coronagraph.yip_path, "stellar_intens_diam_list.fits"))
+                return pyfits.getdata(
+                    Path(self.coronagraph.yip_path, "stellar_intens_diam_list.fits")
+                )
             elif key == "sky_trans.data":
                 return pyfits.getdata(Path(self.coronagraph.yip_path, "sky_trans.fits"))
         else:
             return getattr(self.coronagraph, key)
-

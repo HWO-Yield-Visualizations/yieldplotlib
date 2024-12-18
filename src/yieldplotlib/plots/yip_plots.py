@@ -1,18 +1,20 @@
 """Generate plots for yield input packages"""
 
-import os
 import glob
-from yieldplotlib.load.yip_directory import YIPDirectory
+import os
 from pathlib import Path
+
+import imageio.v2 as imageio
 import matplotlib.pyplot as plt
 import numpy as np
-import imageio.v2 as imageio
+
+from yieldplotlib.load.yip_directory import YIPDirectory
 
 
 def make_offax_psf_movie(
-        yip_folder, temp_folder, save_name, ax_kwargs={}, plot_kwargs={}
-                         ):
-    """ Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
+    yip_folder, temp_folder, save_name, ax_kwargs={}, plot_kwargs={}
+):
+    """Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
 
     Args:
         yip_folder (str):
@@ -46,15 +48,22 @@ def make_offax_psf_movie(
         ax = fig.add_subplot()
         ax.imshow(im)
 
-        props = dict(boxstyle='round', facecolor='white', alpha=0.5)
-        ax.text(0.95, 0.9, f'$\lambda / D$ = {offax_psf_offsets_list[i]:.2f}',
-                transform=ax.transAxes, fontsize=12, verticalalignment='bottom',
-                horizontalalignment='right', bbox=props)
+        props = dict(boxstyle="round", facecolor="white", alpha=0.5)
+        ax.text(
+            0.95,
+            0.9,
+            f"$\lambda / D$ = {offax_psf_offsets_list[i]:.2f}",
+            transform=ax.transAxes,
+            fontsize=12,
+            verticalalignment="bottom",
+            horizontalalignment="right",
+            bbox=props,
+        )
 
         ax.set(**ax_kwargs)
-        f_name = os.path.join(temp_folder, f'{i}'.zfill(3) + '_image.png')
-        plt.savefig(f_name, bbox_inches='tight')
+        f_name = os.path.join(temp_folder, f"{i}".zfill(3) + "_image.png")
+        plt.savefig(f_name, bbox_inches="tight")
 
-    files = sorted(glob.glob(os.path.join(temp_folder, '*')))
+    files = sorted(glob.glob(os.path.join(temp_folder, "*")))
     images = [imageio.imread(file) for file in files]
     imageio.mimsave(save_name, images, fps=2)

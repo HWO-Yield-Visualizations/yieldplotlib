@@ -10,10 +10,10 @@ __all__ = [
 ]
 
 from .ayo_directory import AYODirectory
-from .yip_directory import YIPDirectory
 from .exosims_directory import (
     DRMDirectory,
     EXOSIMSCSVDirectory,
     EXOSIMSDirectory,
     SPCDirectory,
 )
+from .yip_directory import YIPDirectory
