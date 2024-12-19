@@ -72,3 +72,65 @@ def make_offax_psf_movie(yip_folder, save_name, ax_kwargs={}, plot_kwargs={}):
     # Save the animation to file.
     ani.save(save_name, fps=2, writer="ffmpeg")
     plt.close(fig)
+
+
+def plot_core_throughtput(
+        runs, run_labels, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None
+):
+    """Plot the core throughput as a function of lambda/D
+
+    Args:
+        runs (list):
+            List of EXOSIMSDirectories and AYODirectories to plot.
+        run_labels (list):
+            List of labels for each run.
+        ax (matplotlib.axes.Axes, optional):
+            Axes to plot on. If None, a new figure is created.
+        ax_kwargs (dict, optional):
+            Keyword arguments to pass to ax.set().
+        use_cyberpunk (bool, optional):
+            Whether to use the mplcyberpunk style. Default is False.
+        title (str, optional):
+             Title for the plot.
+
+    Returns:
+
+    """
+    if use_cyberpunk:
+        import mplcyberpunk  # noqa: F401
+        from cycler import cycler
+        plt.style.use("cyberpunk")
+        prop_cycle = plt.rcParams['axes.prop_cycle']
+        colors = prop_cycle.by_key()['color']
+        print(colors)
+        custom_cycler = (cycler(linestyle=['-', '--', ':', '-.']) +
+                         cycler(color=colors[:4]))
+        plt.rc('axes', prop_cycle=custom_cycler)
+
+    if ax is None:
+        fig, ax = plt.subplots()
+    else:
+        fig = ax.get_figure()
+
+    for i, run in enumerate(runs):
+        fits = run.get("core_thruput")
+        if isinstance(fits, dict):
+            for name in fits:
+                thruput_data = fits[name].get("data")
+                ax.plot(thruput_data[:, 0][:30], thruput_data[:, 1][:30]*np.random.rand(), label=run_labels[i])
+        else:
+            thruput_data = fits.get("data")
+            ax.plot(thruput_data[:, 0][:30], thruput_data[:, 1][:30],  label=f'{run_labels[i]}')
+
+    plt.xlabel("Separation ($\lambda/D$)")
+    plt.ylabel("Throughput")
+
+    plt.legend()
+
+    if use_cyberpunk:
+        mplcyberpunk.add_glow_effects()
+
+    if title:
+        plt.title(title)
+
+    plt.show()
