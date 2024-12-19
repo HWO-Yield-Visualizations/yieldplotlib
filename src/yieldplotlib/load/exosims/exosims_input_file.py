@@ -2,7 +2,11 @@
 
 from pathlib import Path
 
-from yieldplotlib.core.file_nodes import JSONFile
+from astropy import units as u
+
+from yieldplotlib.core.file_nodes import FitsFile, JSONFile
+from yieldplotlib.key_map import KEY_MAP
+from yieldplotlib.logger import logger
 
 # Define which nested keys correspond to the modes, systems, and
 # instruments for parsing.
@@ -21,7 +25,7 @@ INSTRUMENT_KEYS += ["sc_" + k for k in INSTRUMENT_KEYS]
 MODE_KEYS = ["obs_lam", "snr"]
 MODE_KEYS += ["sc_" + k for k in MODE_KEYS]
 
-SYSTEM_KEYS = ["coron_lam", "iwa", "owa", "bw", "optics"]
+SYSTEM_KEYS = ["coron_lam", "iwa", "owa", "bw", "optics", "core_thruput"]
 
 
 class EXOSIMSInputFile(JSONFile):
@@ -32,6 +36,17 @@ class EXOSIMSInputFile(JSONFile):
         super().__init__(file_path)
         self.is_input = True
 
+    def get_unit(self, key: str):
+        """Get the associated unit for a given key."""
+        entry = KEY_MAP[key]
+        unit = entry["EXOSIMSInputFile"]["unit"]
+
+        if unit:
+            astropy_unit = u.Unit(unit)
+            return astropy_unit
+
+        return None
+
     def get(self, key: str):
         """Custom logic for the input JSON files."""
         # TODO: Implement custom logic for these files.
@@ -41,13 +56,18 @@ class EXOSIMSInputFile(JSONFile):
         used_instruments = [m["instName"] for m in used_modes]
         used_systems = [m["systName"] for m in used_modes]
 
+        unit = self.get_unit(key)
+
         values = super().get(key)
         # If only a single value, return.
         if not isinstance(values, dict):
-            return values
+            if unit:
+                return values * unit
+            else:
+                return values
 
         else:
-            if key in INSTRUMENT_KEYS or MODE_KEYS:
+            if key in INSTRUMENT_KEYS or key in MODE_KEYS:
                 if key.startswith("sc"):  # indicates spectroscopy parameter.
                     for k in values.copy().keys():
                         if "spectro" not in k or k not in used_instruments:
@@ -61,5 +81,17 @@ class EXOSIMSInputFile(JSONFile):
                 for k in values.copy().keys():
                     if k not in used_systems:
                         del values[k]
+
+        for k, v in values.items():
+            if unit:
+                values[k] = v * unit
+            if v.endswith(".fits"):
+                try:
+                    values[k] = FitsFile(Path(v))
+                except FileNotFoundError:
+                    logger.info(
+                        f"File path {v} does not exist on the local machine. "
+                        f"Could not create FitsFile object"
+                    )
 
         return values
