@@ -4,10 +4,9 @@ from pathlib import Path
 
 from astropy import units as u
 
-from yieldplotlib.logger import logger
-from yieldplotlib.core.file_nodes import JSONFile, FitsFile
+from yieldplotlib.core.file_nodes import FitsFile, JSONFile
 from yieldplotlib.key_map import KEY_MAP
-
+from yieldplotlib.logger import logger
 
 # Define which nested keys correspond to the modes, systems, and
 # instruments for parsing.
@@ -90,7 +89,9 @@ class EXOSIMSInputFile(JSONFile):
                 try:
                     values[k] = FitsFile(Path(v))
                 except FileNotFoundError:
-                    logger.info(f"File path {v} does not exist on the local machine. "
-                                f"Could not create FitsFile object")
+                    logger.info(
+                        f"File path {v} does not exist on the local machine. "
+                        f"Could not create FitsFile object"
+                    )
 
         return values
