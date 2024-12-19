@@ -66,7 +66,7 @@ class EXOSIMSInputFile(JSONFile):
                 return values
 
         else:
-            if key in INSTRUMENT_KEYS or MODE_KEYS:
+            if key in INSTRUMENT_KEYS or key in MODE_KEYS:
                 if key.startswith("sc"):  # indicates spectroscopy parameter.
                     for k in values.copy().keys():
                         if "spectro" not in k or k not in used_instruments:
