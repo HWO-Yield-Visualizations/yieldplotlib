@@ -4,8 +4,10 @@ from pathlib import Path
 
 from astropy import units as u
 
-from yieldplotlib.core.file_nodes import JSONFile
+from yieldplotlib.logger import logger
+from yieldplotlib.core.file_nodes import JSONFile, FitsFile
 from yieldplotlib.key_map import KEY_MAP
+
 
 # Define which nested keys correspond to the modes, systems, and
 # instruments for parsing.
@@ -24,7 +26,7 @@ INSTRUMENT_KEYS += ["sc_" + k for k in INSTRUMENT_KEYS]
 MODE_KEYS = ["obs_lam", "snr"]
 MODE_KEYS += ["sc_" + k for k in MODE_KEYS]
 
-SYSTEM_KEYS = ["coron_lam", "iwa", "owa", "bw", "optics"]
+SYSTEM_KEYS = ["coron_lam", "iwa", "owa", "bw", "optics", "core_thruput"]
 
 
 class EXOSIMSInputFile(JSONFile):
@@ -81,8 +83,14 @@ class EXOSIMSInputFile(JSONFile):
                     if k not in used_systems:
                         del values[k]
 
-        if unit:
-            for k, v in values.items():
+        for k, v in values.items():
+            if unit:
                 values[k] = v * unit
+            if v.endswith(".fits"):
+                try:
+                    values[k] = FitsFile(Path(v))
+                except FileNotFoundError:
+                    logger.info(f"File path {v} does not exist on the local machine. "
+                                f"Could not create FitsFile object")
 
         return values
