@@ -102,7 +102,6 @@ def plot_core_throughtput(
         plt.style.use("cyberpunk")
         prop_cycle = plt.rcParams['axes.prop_cycle']
         colors = prop_cycle.by_key()['color']
-        print(colors)
         custom_cycler = (cycler(linestyle=['-', '--', ':', '-.']) +
                          cycler(color=colors[:4]))
         plt.rc('axes', prop_cycle=custom_cycler)
@@ -140,5 +139,3 @@ def plot_core_throughtput(
 
     if title:
         plt.title(title)
-
-    plt.show()
