@@ -75,7 +75,7 @@ def make_offax_psf_movie(yip_folder, save_name, ax_kwargs={}, plot_kwargs={}):
 
 
 def plot_core_throughtput(
-        runs, run_labels, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None
+        runs, run_labels, yip_folder, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None
 ):
     """Plot the core throughput as a function of lambda/D
 
@@ -107,10 +107,17 @@ def plot_core_throughtput(
                          cycler(color=colors[:4]))
         plt.rc('axes', prop_cycle=custom_cycler)
 
+    # Define the YIPDirectory.
+    yip_path = yip_folder
+    yip = YIPDirectory(Path(yip_path))
+
     if ax is None:
         fig, ax = plt.subplots()
     else:
         fig = ax.get_figure()
+
+    separations, core_thruput_from_yip = yip.coronagraph.get_throughput_curve(plot=False)
+    ax.plot(separations, core_thruput_from_yip, label="yippy")
 
     for i, run in enumerate(runs):
         fits = run.get("core_thruput")
