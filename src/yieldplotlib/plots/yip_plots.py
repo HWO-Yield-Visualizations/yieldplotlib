@@ -124,11 +124,12 @@ def plot_core_throughtput(
         if isinstance(fits, dict):
             for name in fits:
                 thruput_data = fits[name].get("data")
-                ax.plot(thruput_data[:, 0][:30], thruput_data[:, 1][:30]*np.random.rand(), label=run_labels[i])
+                ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=run_labels[i])
         else:
             thruput_data = fits.get("data")
-            ax.plot(thruput_data[:, 0][:30], thruput_data[:, 1][:30],  label=f'{run_labels[i]}')
+            ax.plot(thruput_data[:, 0], thruput_data[:, 1],  label=f'{run_labels[i]}')
 
+    ax.set(**ax_kwargs)
     plt.xlabel("Separation ($\lambda/D$)")
     plt.ylabel("Throughput")
 
