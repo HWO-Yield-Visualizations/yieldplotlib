@@ -97,7 +97,7 @@ class AccessibilityManager:
     def check_fonts(self, size_threshold=10):
         """Checks that all font sizes in the plot are larger than a given threshold."""
         font_sizes = {}
-        # Fonts to check.
+        # Fonts to check with a get_size() property.
         attrs = [
             "xaxis.label",
             "yaxis.label",
