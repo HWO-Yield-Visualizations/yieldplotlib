@@ -72,7 +72,8 @@ def make_offax_psf_movie(
 
 
 def plot_core_throughtput(
-        runs, run_labels, yip=None, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None, aperture_radius=0.85
+        runs, run_labels, yip=None, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None,
+        aperture_radius=0.85
 ):
     """Plot the core throughput as a function of lambda/D
 
@@ -92,6 +93,8 @@ def plot_core_throughtput(
             Whether to use the mplcyberpunk style. Default is False.
         title (str, optional):
              Title for the plot.
+        aperture_radius (float):
+            Radius of the photometric aperture to use for the YIP throughput calculation.
 
     Returns:
 
