@@ -1,5 +1,4 @@
-"""
-Loader for YIP data, organizing files into a directory-based
+"""Loader for YIP data, organizing files into a directory-based
 structure using yippy.
 """
 
