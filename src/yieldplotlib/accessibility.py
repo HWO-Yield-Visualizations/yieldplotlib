@@ -113,6 +113,14 @@ class AccessibilityManager:
                 for item in eval:
                     font_sizes[at] = item.get_size()
 
+        # Get font sizes for annotations and legends.
+        for child in self.ax.get_children():
+            if isinstance(child, matplotlib.text.Annotation):
+                font_sizes[child] = child.get_fontsize()
+            if isinstance(child, matplotlib.legend.Legend):
+                for leg in child.get_texts():
+                    font_sizes[leg] = leg.get_fontsize()
+
         # Get all fonts and sizes that are less than the specified size point threshold.
         noncompliant_dict = {k: v for k, v in font_sizes.items() if v < size_threshold}
 
