@@ -1,5 +1,6 @@
 """Accessibility features for yieldplotlib."""
 
+import matplotlib
 import numpy as np
 from colorspacious import cspace_converter
 from matplotlib.colors import to_rgb
