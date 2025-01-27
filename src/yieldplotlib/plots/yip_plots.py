@@ -84,7 +84,7 @@ def plot_core_throughtput(
     title=None,
     aperture_radius=0.85,
 ):
-    """Plot the core throughput as a function of lambda/D
+    """Plot the core throughput as a function of lambda/D.
 
     Args:
         runs (list):
@@ -103,10 +103,12 @@ def plot_core_throughtput(
         title (str, optional):
              Title for the plot.
         aperture_radius (float):
-            Radius of the photometric aperture to use for the YIP throughput calculation.
+            Radius of the photometric aperture to use for the YIP throughput
+            calculation.
 
     Returns:
-
+        matplotlib.figure.Figure, matplotlib.axes.Axes:
+            Figure and axes objects for the plot.
     """
     if use_cyberpunk:
         import mplcyberpunk  # noqa: F401
