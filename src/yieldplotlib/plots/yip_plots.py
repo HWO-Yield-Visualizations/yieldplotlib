@@ -75,8 +75,14 @@ def make_offax_psf_movie(yip_folder, save_name, ax_kwargs={}, plot_kwargs={}):
 
 
 def plot_core_throughtput(
-        runs, run_labels, yip=None, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None,
-        aperture_radius=0.85
+    runs,
+    run_labels,
+    yip=None,
+    ax=None,
+    ax_kwargs={},
+    use_cyberpunk=False,
+    title=None,
+    aperture_radius=0.85,
 ):
     """Plot the core throughput as a function of lambda/D
 
@@ -105,12 +111,14 @@ def plot_core_throughtput(
     if use_cyberpunk:
         import mplcyberpunk  # noqa: F401
         from cycler import cycler
+
         plt.style.use("cyberpunk")
-        prop_cycle = plt.rcParams['axes.prop_cycle']
-        colors = prop_cycle.by_key()['color']
-        custom_cycler = (cycler(linestyle=['-', '--', ':', '-.']) +
-                         cycler(color=colors[:4]))
-        plt.rc('axes', prop_cycle=custom_cycler)
+        prop_cycle = plt.rcParams["axes.prop_cycle"]
+        colors = prop_cycle.by_key()["color"]
+        custom_cycler = cycler(linestyle=["-", "--", ":", "-."]) + cycler(
+            color=colors[:4]
+        )
+        plt.rc("axes", prop_cycle=custom_cycler)
 
     if ax is None:
         fig, ax = plt.subplots()
@@ -119,9 +127,7 @@ def plot_core_throughtput(
 
     if yip:
         separations, core_thruput_from_yip = yip.coronagraph.get_throughput_curve(
-            plot=False,
-            aperture_radius_lod=aperture_radius,
-            oversample=1
+            plot=False, aperture_radius_lod=aperture_radius, oversample=1
         )
         ax.plot(separations, core_thruput_from_yip, label="yippy")
 
@@ -133,7 +139,7 @@ def plot_core_throughtput(
                 ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=run_labels[i])
         else:
             thruput_data = fits.get("data")
-            ax.plot(thruput_data[:, 0], thruput_data[:, 1],  label=f'{run_labels[i]}')
+            ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
 
     ax.set(**ax_kwargs)
     plt.xlabel("Separation ($\lambda/D$)")
