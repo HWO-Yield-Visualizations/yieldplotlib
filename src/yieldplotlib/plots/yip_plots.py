@@ -137,3 +137,5 @@ def plot_core_throughtput(
 
     if title:
         plt.title(title)
+
+    return fig, ax
