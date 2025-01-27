@@ -65,6 +65,13 @@ class AccessibilityManager:
         for fc in face_colors:
             rgb.append(fc)
 
+        # Get colors for all containers (i.e. bars)
+        container_colors = [
+            list(to_rgb(b.get_facecolor())) for c in self.ax.containers for b in c
+        ]
+        for cc in container_colors:
+            rgb.append(cc)
+
         # Clean up the RBG values.
         rgb = [el for el in rgb if el != []]
 
