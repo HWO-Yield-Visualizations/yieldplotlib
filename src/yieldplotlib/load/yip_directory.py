@@ -15,7 +15,7 @@ class YIPDirectory(DirectoryNode):
     def __init__(self, root_directory: Path):
         """Initialize the loader by scanning the directory structure."""
         super().__init__(root_directory)
-        self.coronagraph = Coronagraph(root_directory)
+        self.coronagraph = Coronagraph(root_directory, use_jax=False)
 
     def _create_directory_node(self, path: Path) -> Node:
         """Override directory node creation logic for YIP-specific directories."""
