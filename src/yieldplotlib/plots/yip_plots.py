@@ -17,8 +17,8 @@ def make_offax_psf_movie(
     """Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
 
     Args:
-        yip_folder (str):
-            File path to the yield input package folder.
+        yip (YIPDirectory):
+            Yield input package to use to generate the movie.
         temp_folder (str):
             File path to the folder in which to store the intermediate movie images.
         save_name (str):
@@ -81,6 +81,9 @@ def plot_core_throughtput(
             List of EXOSIMSDirectories and AYODirectories to plot.
         run_labels (list):
             List of labels for each run.
+        yip (YIPDirectory):
+            YIPDirectory to plot. If None, the throughput directly from the YIP
+            (accessed via yippy) will not be plotted.
         ax (matplotlib.axes.Axes, optional):
             Axes to plot on. If None, a new figure is created.
         ax_kwargs (dict, optional):
