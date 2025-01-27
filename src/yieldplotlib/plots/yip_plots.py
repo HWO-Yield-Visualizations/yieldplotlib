@@ -84,6 +84,9 @@ def plot_core_throughtput(
             List of EXOSIMSDirectories and AYODirectories to plot.
         run_labels (list):
             List of labels for each run.
+        yip (YIPDirectory):
+            YIPDirectory to plot. If None, the throughput directly from the YIP
+            (accessed via yippy) will not be plotted.
         ax (matplotlib.axes.Axes, optional):
             Axes to plot on. If None, a new figure is created.
         ax_kwargs (dict, optional):
