@@ -11,7 +11,7 @@ from yieldplotlib.util import is_monotonic, rgetattr
 class AccessibilityManager:
     """Manages accessibility features for a given Plot."""
 
-    def __init__(self, plot):
+    def __init__(self, ax):
         """Manages accessibility features for a given Plot.
 
         Main feature is the run_checks function which will run a series of
@@ -21,7 +21,7 @@ class AccessibilityManager:
         Args:
             plot: yieldplotlib.core.plot.Plot
         """
-        self.plot = plot
+        self.ax = ax
         self.warnings = []
 
     def run_checks(self):
@@ -44,7 +44,7 @@ class AccessibilityManager:
         # If cmap is defined, get a sample of those colors.
         try:
             rgb_values = [
-                image.cmap(np.arange(0, 1, 0.1))[:, :3] for image in self.plot.ax.images
+                image.cmap(np.arange(0, 1, 0.1))[:, :3] for image in self.ax.images
             ]
             for val in rgb_values[0]:
                 rgb.append([val[0], val[1], val[2]])
@@ -53,14 +53,14 @@ class AccessibilityManager:
 
         # Get colors for all lines on the axes.
         line_colors = [
-            list(to_rgb(line.get_color())) for line in self.plot.ax.get_lines()
+            list(to_rgb(line.get_color())) for line in self.ax.get_lines()
         ]
         for lc in line_colors:
             rgb.append(lc)
 
         # Get colors for all faces (i.e. scatter points).
         face_colors = [
-            list(to_rgb(s.get_facecolor())) for s in self.plot.ax.collections
+            list(to_rgb(s.get_facecolor())) for s in self.ax.collections
         ]
         for fc in face_colors:
             rgb.append(fc)
@@ -99,7 +99,7 @@ class AccessibilityManager:
         ]
 
         for at in attrs:
-            objs = rgetattr(self.plot.ax, at)
+            objs = rgetattr(self.ax, at)
             try:
                 font_sizes[at] = objs.get_size()
             except AttributeError:
