@@ -10,17 +10,18 @@ from yieldplotlib.util import is_monotonic, rgetattr
 
 
 class AccessibilityManager:
-    """Manages accessibility features for a given Plot."""
+    """Manages accessibility features for a given matplotlib.axes.Axes."""
 
     def __init__(self, ax):
-        """Manages accessibility features for a given Plot.
+        """Manages accessibility features for a given matplotlib.axes.Axes.
 
         Main feature is the run_checks function which will run a series of
         accessibility checks. If a check is failed it will send a warning to
         the console, but will not raise an error.
 
         Args:
-            plot: yieldplotlib.core.plot.Plot
+            ax (matplotlib.axes.Axes):
+                Axes object on which to run the accessibility checks.
         """
         self.ax = ax
         self.warnings = []
