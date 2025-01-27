@@ -1,6 +1,4 @@
-"""Loader for YIP data, organizing files into a directory-based
-structure using yippy.
-"""
+"""Loader for YIP data, organizing files into a directory-based structure."""
 
 from pathlib import Path
 
