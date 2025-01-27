@@ -12,7 +12,7 @@ from yieldplotlib.load.yip_directory import YIPDirectory
 
 
 def make_offax_psf_movie(
-    yip_folder, temp_folder, save_name, ax_kwargs={}, plot_kwargs={}
+    yip, temp_folder, save_name, ax_kwargs={}, plot_kwargs={}
 ):
     """Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
 
@@ -32,10 +32,6 @@ def make_offax_psf_movie(
         None
 
     """
-    # Define the YIPDirectory.
-    yip_path = yip_folder
-    yip = YIPDirectory(Path(yip_path))
-
     # Get the off-axis stellar PSF data from the YIP.
     offax_psf_data = yip.get("offax.data")
     offax_psf_offsets_list = yip.get("offax_offset_list.data")
@@ -76,7 +72,7 @@ def make_offax_psf_movie(
 
 
 def plot_core_throughtput(
-        runs, run_labels, yip_folder, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None
+        runs, run_labels, yip=None, ax=None, ax_kwargs={}, use_cyberpunk=False, title=None, aperture_radius=0.85
 ):
     """Plot the core throughput as a function of lambda/D
 
@@ -107,17 +103,18 @@ def plot_core_throughtput(
                          cycler(color=colors[:4]))
         plt.rc('axes', prop_cycle=custom_cycler)
 
-    # Define the YIPDirectory.
-    yip_path = yip_folder
-    yip = YIPDirectory(Path(yip_path))
-
     if ax is None:
         fig, ax = plt.subplots()
     else:
         fig = ax.get_figure()
 
-    separations, core_thruput_from_yip = yip.coronagraph.get_throughput_curve(plot=False)
-    ax.plot(separations, core_thruput_from_yip, label="yippy")
+    if yip:
+        separations, core_thruput_from_yip = yip.coronagraph.get_throughput_curve(
+            plot=False,
+            aperture_radius_lod=aperture_radius,
+            oversample=1
+        )
+        ax.plot(separations, core_thruput_from_yip, label="yippy")
 
     for i, run in enumerate(runs):
         fits = run.get("core_thruput")
