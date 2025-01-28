@@ -56,9 +56,9 @@ class EXOSIMSInputFile(JSONFile):
         used_instruments = [m["instName"] for m in used_modes]
         used_systems = [m["systName"] for m in used_modes]
 
-        unit = self.get_unit(key)
-
         values = super().get(key)
+        unit = self.get_unit(key) if values else None
+
         # If only a single value, return.
         if not isinstance(values, dict):
             if unit:
