@@ -53,16 +53,12 @@ class AccessibilityManager:
             pass
 
         # Get colors for all lines on the axes.
-        line_colors = [
-            list(to_rgb(line.get_color())) for line in self.ax.get_lines()
-        ]
+        line_colors = [list(to_rgb(line.get_color())) for line in self.ax.get_lines()]
         for lc in line_colors:
             rgb.append(lc)
 
         # Get colors for all faces (i.e. scatter points).
-        face_colors = [
-            list(to_rgb(s.get_facecolor())) for s in self.ax.collections
-        ]
+        face_colors = [list(to_rgb(s.get_facecolor())) for s in self.ax.collections]
         for fc in face_colors:
             rgb.append(fc)
 
