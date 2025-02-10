@@ -73,7 +73,7 @@ class FileNode(Node):
                     return transform_func(data)
                 else:
                     raise NotImplementedError(
-                        f"Custom transform for {key} not" "implemented."
+                        f"Custom transform for {key} notimplemented."
                     )
             case "index":
                 return data[_val]
