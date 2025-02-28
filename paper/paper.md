@@ -73,7 +73,13 @@ but is easily extensible and support for other yield codes can be easily added i
 from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a 
 universal key in `yieldplotlib`. This `key_map` is automatically generated from a CSV file which 
 has a stable version hosted locally on the repository and an active development version on Google 
-Sheets for broader collaboration. An example few lines from the CSV file can be Found in Table ??.
+Sheets for broader collaboration. An example few lines from the CSV file can be found in the 
+following table.
+
+| yieldplotlib name | description                              | EXOSIMS name      | EXOSIMS file           | EXOSIMS Class  | AYO name                 | AYO file         | AYO Class  | EXOSIMS unit | Comment | EXOSIMS transform type | EXOSIMS transform value | AYO transform type | AYO transform value |
+|-------------------|------------------------------------------|-------------------|------------------------|----------------|--------------------------|------------------|------------|--------------|---------|------------------------|-------------------------|--------------------|---------------------|
+| star_dist         | Distance to the star (in parsecs).       | star_dist         | reduce-star-target.csv | EXOSIMSCSVFile | dist (pc)                | target_list.csv  | AYOCSVFile |              |         |                        |                         |                    |                     |
+| yield_earth       | Yield of Earth-like exoplanet candidates | exoE_det_alt_mean | reduce-earth.csv       | EXOSIMSCSVFile | exoEarth candidate yield | observations.csv | AYOCSVFile |              |         |                        |                         | sum                |                     |
 
 Once the yield packages are parsed a getter can be called on the directories 
 (i.e. `ayo.get('yield_earth')`) to return the corresponding value from the yield code.  
