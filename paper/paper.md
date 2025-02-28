@@ -69,4 +69,7 @@ but is easily extensible and support for other yield codes can be easily added i
 
 # Acknowledgements
 
-We acknowledge contributions from ??
+S.S. acknowledges support from an STScI Postdoctoral Fellowship.
+
+The authors would also like to acknowledge Christopher Stark, Dmitry Savransky, Rhonda Morgan, and 
+Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories.
