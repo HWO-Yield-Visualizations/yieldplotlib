@@ -66,6 +66,55 @@ produce publication-quality plots without the need to understand the complex yie
 used to generate the data. Currently `yieldplotlib` contains modules for analyzing AYO and EXOSIMS, 
 but is easily extensible and support for other yield codes can be easily added in the future.
 
+# Methods and Functionality 
+
+## Parsing and Getting Values
+`yieldplotlib` uses a file node and directory structure to parse the yield output or input packages 
+from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a 
+universal key in `yieldplotlib`. This `key_map` is automatically generated from a CSV file which 
+has a stable version hosted locally on the repository and an active development version on Google 
+Sheets for broader collaboration. An example few lines from the CSV file can be Found in Table ??.
+
+Once the yield packages are parsed a getter can be called on the directories 
+(i.e. `ayo.get('yield_earth')`) to return the corresponding value from the yield code.  
+
+## Plotting
+
+`yieldplotlib` contains scripts for generating common plots used in yield code visualizations to 
+provide instant usability for comparing AYO and EXOSIMS as motivated by rapid pace of the ongoing 
+architecture trade studies for HWO. This also serves to provide examples on how the package can be 
+used for those who want to use the `yieldplotlib` structure to generate their own visualizations. 
+
+Figure \autoref{fig:hz_completeness} and Figure \autoref{fig:planet_hists} show two different types 
+of yield outputs. Figure \autoref{fig:hz_completeness} shows the the fraction of a star's habitable 
+zone that cen be sampled by during the lifetime of a mission known as the ``habitable zone 
+completeness'' with the two yield codes in side by side axes and using the same color bar for ease
+of comparison. Figure \autoref{fig:planet_hists} shows histograms of the total number of detected 
+planets foudn for each yield code as a function of planet type.
+
+![Plot of the Habitable Zone (HZ) completeness as a function of host star luminosity (in units of 
+Solar luminosity) and distance (in parsecs). Here the AYO results are on the left and the EXOSIMS 
+results are on the right.\label{fig:hz_completeness}](figures/TEMP_hz_completeness.jpeg)
+
+![Bar chart showing expected EXOSIMS planet yields for hot (pink), warm (yellow), and cold (blue)
+Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters.
+\label{fig:planet_hists}](figures/TEMP_planet_histograms.jpeg)
+
+Yield code inputs can also have a profound impact on their calculations and so plottign these 
+values is also important to ensure consistency. Figure \autoref{fig:core_throughput} shows the 
+throughput for a key series of optics in the observatory known as a coronagraph. Smaller 
+throughputs mean less planet late makes it onto the detector and can have a profound impact on 
+yields. 
+
+![Core throughput vs. separation (in lambda/D) for the amplitude apodized vortex coronagraph 
+assumed by AYO (dotted yellow), EXOSIMS (dashed pink) and pulled directly from the yield input 
+package using yippy (solid blue). Slight differences between the codes can be attributed to how 
+the "core" is defined. EXOSIMS and yippy adopt a fixed radius circular aperture whereas AYO 
+defines an aperture based on pixels having more than 30% of the peak flux. Additional sources 
+of difference can also lie in the interpolation methods used by all of the codes.
+\label{fig:core_throughput}](figures/TEMP_core_throughput.jpg)
+
+## Pipeline and Command Line Interface 
 
 # Acknowledgements
 
