@@ -1,5 +1,6 @@
 """Accessibility features for yieldplotlib."""
 
+import matplotlib
 import numpy as np
 from colorspacious import cspace_converter
 from matplotlib.colors import to_rgb
@@ -9,26 +10,26 @@ from yieldplotlib.util import is_monotonic, rgetattr
 
 
 class AccessibilityManager:
-    """Manages accessibility features for a given Plot."""
+    """Manages accessibility features for a given matplotlib.axes.Axes."""
 
-    def __init__(self, plot):
-        """Manages accessibility features for a given Plot.
+    def __init__(self, ax):
+        """Manages accessibility features for a given matplotlib.axes.Axes.
 
         Main feature is the run_checks function which will run a series of
         accessibility checks. If a check is failed it will send a warning to
         the console, but will not raise an error.
 
         Args:
-            plot: yieldplotlib.core.plot.Plot
+            ax (matplotlib.axes.Axes):
+                Axes object on which to run the accessibility checks.
         """
-        self.plot = plot
+        self.ax = ax
         self.warnings = []
 
     def run_checks(self):
         """Run accessibility checks."""
         self.check_colors()
         self.check_fonts()
-        self.check_alt_text()
 
         if not self.warnings:
             logger.info("All accessibility checks have passed!")
@@ -44,7 +45,7 @@ class AccessibilityManager:
         # If cmap is defined, get a sample of those colors.
         try:
             rgb_values = [
-                image.cmap(np.arange(0, 1, 0.1))[:, :3] for image in self.plot.ax.images
+                image.cmap(np.arange(0, 1, 0.1))[:, :3] for image in self.ax.images
             ]
             for val in rgb_values[0]:
                 rgb.append([val[0], val[1], val[2]])
@@ -52,18 +53,21 @@ class AccessibilityManager:
             pass
 
         # Get colors for all lines on the axes.
-        line_colors = [
-            list(to_rgb(line.get_color())) for line in self.plot.ax.get_lines()
-        ]
+        line_colors = [list(to_rgb(line.get_color())) for line in self.ax.get_lines()]
         for lc in line_colors:
             rgb.append(lc)
 
         # Get colors for all faces (i.e. scatter points).
-        face_colors = [
-            list(to_rgb(s.get_facecolor())) for s in self.plot.ax.collections
-        ]
+        face_colors = [list(to_rgb(s.get_facecolor())) for s in self.ax.collections]
         for fc in face_colors:
             rgb.append(fc)
+
+        # Get colors for all containers (i.e. bars)
+        container_colors = [
+            list(to_rgb(b.get_facecolor())) for c in self.ax.containers for b in c
+        ]
+        for cc in container_colors:
+            rgb.append(cc)
 
         # Clean up the RBG values.
         rgb = [el for el in rgb if el != []]
@@ -89,7 +93,7 @@ class AccessibilityManager:
     def check_fonts(self, size_threshold=10):
         """Checks that all font sizes in the plot are larger than a given threshold."""
         font_sizes = {}
-        # Fonts to check.
+        # Fonts to check with a get_size() property.
         attrs = [
             "xaxis.label",
             "yaxis.label",
@@ -99,13 +103,21 @@ class AccessibilityManager:
         ]
 
         for at in attrs:
-            objs = rgetattr(self.plot.ax, at)
+            objs = rgetattr(self.ax, at)
             try:
                 font_sizes[at] = objs.get_size()
             except AttributeError:
                 eval = objs()
                 for item in eval:
                     font_sizes[at] = item.get_size()
+
+        # Get font sizes for annotations and legends.
+        for child in self.ax.get_children():
+            if isinstance(child, matplotlib.text.Annotation):
+                font_sizes[child] = child.get_fontsize()
+            if isinstance(child, matplotlib.legend.Legend):
+                for leg in child.get_texts():
+                    font_sizes[leg] = leg.get_fontsize()
 
         # Get all fonts and sizes that are less than the specified size point threshold.
         noncompliant_dict = {k: v for k, v in font_sizes.items() if v < size_threshold}
@@ -117,15 +129,3 @@ class AccessibilityManager:
             )
             self.warnings.append(warning)
             logger.warning(warning)
-
-    def check_alt_text(self):
-        """Checks if alt text has been provided for the plot."""
-        if not self.plot._alt_text:
-            warning = "Alt text has not been provided for this plot."
-            self.warnings.append(warning)
-            logger.warning(warning)
-
-    def update_alt_text(self, alt_text):
-        """Updates the alt text for the plot."""
-        # Add string formatting magic if needed.
-        self.plot.update_alt_text(alt_text)
