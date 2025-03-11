@@ -1,16 +1,154 @@
-"""File to generate key_map.py when given the google sheet as a csv.
+r"""Generate key_map.py from CSV data or directly from Google Sheets.
 
-It should be called from the command line like this:
-```
-python generate_key_map.py input_csv
-```
-and it will write the key_map.py file to the current directory.
+This script creates a key_map.py file that maps parameters between different exoplanet
+simulation libraries (EXOSIMS and AYO). It can either use a local CSV file or directly
+download from a Google Sheet.
+
+Usage Examples:
+1. Generate from a local CSV file:
+   ```
+   python generate_key_map.py --csv input_data.csv
+   ```
+
+2. Download from Google Sheets using a service account credentials file:
+   ```
+   python generate_key_map.py --sheets SHEET_ID --credentials path/to/credentials.json
+   ```
+
+3. Download from Google Sheets using Base64-encoded credentials from environment:
+   ```
+   # First set the environment variable:
+   export GOOGLE_CREDENTIALS_B64=$(cat service-account.json | base64 | tr -d '\n')
+
+   # Then run:
+   python generate_key_map.py --sheets SHEET_ID
+   ```
+
+4. Use a temporary file for the downloaded CSV (cleaned up afterward):
+   ```
+   python generate_key_map.py --sheets SHEET_ID --temp
+   ```
+
+Output:
+------
+The script creates a key_map.py file in the current directory with a KEY_MAP
+dictionary that maps parameter names to their locations and transformations
+in the EXOSIMS and AYO libraries.
 """
 
 import argparse
+import base64
 import csv
+import json
+import os
 import sys
+import tempfile
 from collections import OrderedDict
+
+import pandas as pd
+
+
+def download_from_google_sheets(sheet_id, output_path, credentials_json_path=None):
+    """Download data from Google Sheets and save as CSV.
+
+    This function authenticates with Google Sheets API using service account credentials
+    and downloads the specified sheet as a CSV file.
+
+    Args:
+        sheet_id:
+            The ID of the Google Sheet to download. This is the string from the URL:
+            https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit
+
+        output_path:
+            Path where the CSV file should be saved.
+
+        credentials_json_path:
+            Optional path to a service account credentials JSON file.
+            If not provided, will use GOOGLE_CREDENTIALS_B64 environment variable,
+            which should contain the Base64-encoded JSON credentials.
+
+    Returns:
+        None. The sheet data is saved to the output_path as a CSV file.
+
+    Raises:
+        SystemExit: If credentials cannot be loaded or sheet cannot be accessed.
+    """
+    try:
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+    except ImportError:
+        print(
+            (
+                "Error: Google API libraries not installed. "
+                "Run: pip install google-auth google-auth-oauthlib"
+                " google-api-python-client"
+            )
+        )
+        sys.exit(1)
+
+    credentials = None
+
+    # First check for credentials file path
+    if credentials_json_path:
+        try:
+            with open(credentials_json_path, "r") as f:
+                credentials_info = json.load(f)
+            credentials = service_account.Credentials.from_service_account_info(
+                credentials_info,
+                scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"],
+            )
+            print(f"Using credentials from file: {credentials_json_path}")
+        except Exception as e:
+            print(f"Error loading credentials from {credentials_json_path}: {e}")
+            sys.exit(1)
+    else:
+        # Try using Base64-encoded credentials from environment variable
+        credentials_b64 = os.environ.get("GOOGLE_CREDENTIALS_B64")
+        if not credentials_b64:
+            print(
+                (
+                    "Error: No credentials provided. Either set GOOGLE_CREDENTIALS_B64"
+                    " or provide --credentials"
+                )
+            )
+            sys.exit(1)
+
+        try:
+            # Decode Base64 string to JSON
+            credentials_json = base64.b64decode(credentials_b64).decode("utf-8")
+            credentials_info = json.loads(credentials_json)
+            credentials = service_account.Credentials.from_service_account_info(
+                credentials_info,
+                scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"],
+            )
+            print("Using Base64-encoded credentials from environment variable")
+        except Exception as e:
+            print(f"Error decoding Base64 credentials: {e}")
+            sys.exit(1)
+
+    print(f"Downloading sheet {sheet_id}...")
+
+    service = build("sheets", "v4", credentials=credentials)
+    sheets = service.spreadsheets()
+
+    # Get the spreadsheet
+    try:
+        sheet = sheets.values().get(spreadsheetId=sheet_id, range="Sheet1").execute()
+        # Get the values
+        values = sheet.get("values", [])
+        if not values:
+            print("Error: No data found in the Google Sheet")
+            sys.exit(1)
+
+        # Convert to DataFrame
+        df = pd.DataFrame(values[1:], columns=values[0])
+
+        # Save to CSV
+        df.to_csv(output_path, index=False)
+        print(f"Sheet downloaded and saved to {output_path}")
+    except Exception as e:
+        print(f"Error downloading sheet: {e}")
+        sys.exit(1)
 
 
 def parse_csv(input_csv):
@@ -254,29 +392,69 @@ def write_key_map(key_map, output_py):
 
 
 def main():
-    """Main entry point for the script."""
-    parser = argparse.ArgumentParser(
-        description="Generate key_map.py from a CSV file for yieldplotlib."
-    )
-    parser.add_argument("input_csv", help="Path to the input CSV file.")
+    """Process command line arguments and run the appropriate functions.
+
+    This function parses command line arguments, downloads from Google Sheets if
+    requested, processes the CSV file, and generates the key_map.py output file.
+
+    Command-line arguments:
+    ----------------------
+    --csv: Path to a local CSV file to process
+    --sheets: Google Sheet ID to download and process
+    --credentials: Path to Google service account credentials JSON file (optional)
+    --temp: Use a temporary file for the downloaded CSV (deleted after processing)
+
+    Environment variables:
+    --------------------
+    GOOGLE_CREDENTIALS_B64: Base64-encoded Google service account JSON (required if
+                            using --sheets without --credentials)
+    """
+    parser = argparse.ArgumentParser(description="Generate key_map.py from data")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--csv", help="Path to CSV file")
+    group.add_argument("--sheets", help="Google Sheet ID to download from")
+
+    # Add optional arguments
     parser.add_argument(
-        "output_py",
-        nargs="?",
-        default="key_map.py",
-        help="Path to the output key_map.py file (default: key_map.py).",
+        "--credentials", help="Path to Google service account credentials JSON file"
     )
+    parser.add_argument(
+        "--temp", action="store_true", help=("Download to a temporary file")
+    )
+
     args = parser.parse_args()
 
+    csv_path = None
+    temp_file = None
+
     try:
-        key_map = parse_csv(args.input_csv)
-        write_key_map(key_map, args.output_py)
-        print(f"Successfully wrote KEY_MAP to '{args.output_py}'.")
-    except FileNotFoundError:
-        print(f"Error: The file '{args.input_csv}' does not exist.", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}", file=sys.stderr)
-        sys.exit(1)
+        if args.sheets:
+            # Download from Google Sheets to a temporary or specific file
+            if args.temp:
+                # Create a temporary file that will be automatically cleaned up
+                temp_file = tempfile.NamedTemporaryFile(suffix=".csv", delete=False)
+                csv_path = temp_file.name
+                temp_file.close()  # Close it so we can write to it
+            else:
+                # Use a fixed name in the current directory
+                csv_path = "_sheet_download.csv"
+
+            download_from_google_sheets(args.sheets, csv_path, args.credentials)
+        elif args.csv:
+            # Use the provided CSV file
+            csv_path = args.csv
+
+        # Parse the CSV and write the key_map.py file
+        if csv_path:
+            key_map = parse_csv(csv_path)
+            write_key_map(key_map, "key_map.py")
+            print(f"Successfully generated key_map.py from {csv_path}")
+
+    finally:
+        # Clean up the temporary file if we created one
+        if temp_file and os.path.exists(csv_path):
+            os.unlink(csv_path)
+            print(f"Temporary file {csv_path} removed")
 
 
 if __name__ == "__main__":

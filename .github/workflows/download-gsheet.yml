@@ -1,0 +1,57 @@
+# This workflow downloads data from a Google Sheet and updates the key_map.py file
+# It runs on a schedule (daily) and can also be triggered manually.
+name: Update Key Map from Google Sheets
+
+on:
+  # Run automatically at midnight UTC every day
+  schedule:
+    - cron: '0 0 * * *'
+
+  # Allow manual triggering from the GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      sheet_id:
+        description: 'Google Sheet ID (optional override)'
+        required: false
+        type: string
+
+jobs:
+  update-key-map:
+    name: Download Google Sheet and update key_map.py
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas google-auth google-auth-oauthlib google-api-python-client
+
+    - name: Generate key map from Google Sheets
+      env:
+        # Use either the manually provided sheet ID or the one from repository secrets
+        GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+        # Base64-encoded Google service account credentials
+        GOOGLE_CREDENTIALS_B64: ${{ secrets.GOOGLE_CREDENTIALS_B64 }}
+      run: |
+        cd src/yieldplotlib
+        python generate_key_map.py --sheets "$GOOGLE_SHEETS_ID" --temp
+
+    - name: Commit and push changes
+      run: |
+        # Configure git user for the commit
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+
+        # Add the generated file to git
+        git add src/yieldplotlib/key_map.py
+
+        # Only commit and push if there are actual changes to the file
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update key_map.py from Google Sheets" && git push)
