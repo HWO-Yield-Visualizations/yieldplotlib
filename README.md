@@ -29,9 +29,9 @@ Documentation for `yieldplotlib` is hosted on
 Installation
 ---------------------
 
-Before installing, we recommend running `yieldplotlib` in a clean conda or 
-virtual environment. This is done by using `venv`, `virtualenv`, `uv`, `conda`, 
-or a similar tool. We recommend `venv` or `conda` if you are unfamiliar with 
+Before installing, we recommend running `yieldplotlib` in a clean conda or
+virtual environment. This is done by using `venv`, `virtualenv`, `uv`, `conda`,
+or a similar tool. We recommend `venv` or `conda` if you are unfamiliar with
 this process which can be used as follows:
 
 ##### <u> venv </u>
@@ -72,5 +72,5 @@ cloning the repository and running:
 cd yieldplotlib
 pip install -e .
 ```
-For more information on this please also see the 
-[Developer Documentation](https://yieldplotlib.readthedocs.io/en/latest/user/dev.html). 
+For more information on this please also see the
+[Developer Documentation](https://yieldplotlib.readthedocs.io/en/latest/user/dev.html).
