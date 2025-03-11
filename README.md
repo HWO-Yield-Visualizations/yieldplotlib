@@ -20,6 +20,11 @@ to the broader community in a clear and visually appealing way. The library is
 designed interpret the outputs of yield codes (AYO and EXOSIMS) and produce 
 publication-quality plots.
 
+Documentation
+---------------------
+
+Documentation for `yieldplotlib` is hosted on 
+[Read the Docs](https://yieldplotlib.readthedocs.io/en/latest/#).
 
 Installation
 ---------------------
