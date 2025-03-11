@@ -14,10 +14,10 @@
 yieldplotlib
 ---------------------
 `yieldplotlib` is a Python library created by the Visualizations Task Group of
-the Exoplanet Science Yield Working Group (ESYWG) under the HWO Project Office. 
-The goal of this library is to communicate the results of the Exoplanet yield codes 
-to the broader community in a clear and visually appealing way. The library is 
-designed interpret the outputs of yield codes (AYO and EXOSIMS) and produce 
+the Exoplanet Science Yield Working Group (ESYWG) under the HWO Project Office.
+The goal of this library is to communicate the results of the Exoplanet yield codes
+to the broader community in a clear and visually appealing way. The library is
+designed interpret the outputs of yield codes (AYO and EXOSIMS) and produce
 publication-quality plots.
 
 Documentation
@@ -29,15 +29,15 @@ Documentation for `yieldplotlib` is hosted on
 Installation
 ---------------------
 
-`yieldplotlib` is pip installable via PyPI and the latest release version can 
+`yieldplotlib` is pip installable via PyPI and the latest release version can
 be installed by running:
 
 `pip install yieldplotlib`
 
-You can also download the development version with an editable install by 
+You can also download the development version with an editable install by
 cloning the repository and running:
 
 ```
-cd yieldplotlib 
+cd yieldplotlib
 pip install -e .
 ```
