@@ -23,7 +23,7 @@ publication-quality plots.
 Documentation
 ---------------------
 
-Documentation for `yieldplotlib` is hosted on 
+Documentation for `yieldplotlib` is hosted on
 [Read the Docs](https://yieldplotlib.readthedocs.io/en/latest/#).
 
 Installation
