@@ -74,3 +74,9 @@ pip install -e .
 ```
 For more information on this please also see the
 [Developer Documentation](https://yieldplotlib.readthedocs.io/en/latest/user/dev.html).
+
+Authors
+---------------------
+
+Corey Spohn (@CoreySpohn)
+Sarah Steiger (@steigersg)
