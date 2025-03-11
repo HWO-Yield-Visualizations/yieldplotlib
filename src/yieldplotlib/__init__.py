@@ -8,8 +8,7 @@ __all__ = [
     "get_nice_number",
 ]
 
-import os
-from pathlib import Path
+import importlib.resources
 
 import matplotlib.pyplot as plt
 
@@ -18,10 +17,8 @@ from .key_map import KEY_MAP
 from .logger import logger
 from .util import calculate_axis_limits_and_ticks, get_nice_number
 
-# Get the absolute path of the current script
-current_file = Path(__file__).resolve()
-# Navigate up to the repository root
-repo_root = current_file.parent.parent.parent
-
-stylelib_dir = os.path.join(repo_root, "mplstyles/ypl_default.mplstyle")
-plt.style.use(stylelib_dir)
+with importlib.resources.path("yieldplotlib", "style") as path:
+    ypl_stylesheets = plt.style.core.read_style_directory(path)
+    plt.style.core.update_nested_dict(plt.style.library, ypl_stylesheets)
+    # Set the default style to ypl_default
+    plt.style.use("yieldplotlib")
