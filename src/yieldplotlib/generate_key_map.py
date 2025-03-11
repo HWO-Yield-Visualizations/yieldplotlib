@@ -80,7 +80,8 @@ def download_from_google_sheets(sheet_id, output_path, credentials_json_path=Non
         print(
             (
                 "Error: Google API libraries not installed. "
-                "Run: pip install google-auth google-auth-oauthlib google-api-python-client"
+                "Run: pip install google-auth google-auth-oauthlib"
+                " google-api-python-client"
             )
         )
         sys.exit(1)
