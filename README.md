@@ -58,7 +58,7 @@ activates it. Now when you run `python` commands it will not be from your
 system level python installation, but from the one in the `envs/bin`
 directory. To deactivate the environment, run `deactivate` from your shell.
 
-Now you are ready to install `yieldplotlib`!
+##### <u> Installing yieldplotlib </u>
 
 `yieldplotlib` is pip installable via PyPI and the latest release version can
 be installed by running:
@@ -72,7 +72,7 @@ cloning the repository and running:
 cd yieldplotlib
 pip install -e .
 ```
-For more information on this please also see the
+For more information on yieldplotlib development, please also see the
 [Developer Documentation](https://yieldplotlib.readthedocs.io/en/latest/user/dev.html).
 
 Authors
