@@ -1,5 +1,4 @@
 """Example script demonstrating the yieldplotlib generic plotting functionality.
-Example script demonstrating the yieldplotlib generic plotting functionality.
 
 This example shows how to use the extended matplotlib methods to easily create plots
 directly from DirectoryNode objects using key-based access.

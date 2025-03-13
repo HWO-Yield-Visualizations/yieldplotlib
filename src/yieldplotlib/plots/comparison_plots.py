@@ -430,7 +430,7 @@ def multi(
         suptitle (str, optional):
             Super title for the entire figure.
         layout (tuple, optional):
-            Layout for subplots as (rows, cols). If None, will be determined automatically.
+            Layout for subplots as (rows, cols). If None, will be set automatically.
         sharex (bool, optional):
             Whether to share the x-axis across subplots. Default is True.
         sharey (bool, optional):
@@ -683,12 +683,13 @@ def xy_grid(
             List of titles for each subplot. Must have length equal to
             len(x_keys) * len(y_keys) if provided.
         **kwargs:
-            Additional keyword arguments passed to the plotting method. Can include 'c' for
-            color key data.
+            Additional keyword arguments passed to the plotting method. Can
+            include 'c' for color key data.
 
     Returns:
         tuple:
-            (fig, axes) where fig is the matplotlib Figure and axes is a 2D array of Axes.
+            (fig, axes) where fig is the matplotlib Figure and axes is a 2D
+            array of Axes.
     """
     if not isinstance(x_keys, list):
         raise ValueError("x_keys must be a list.")

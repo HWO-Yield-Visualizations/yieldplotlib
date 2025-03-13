@@ -4,6 +4,7 @@ __all__ = [
     "plot_hist",
     "make_offax_psf_movie",
     "comparison_plots",
+    "compare",
     "multi",
     "panel",
     "xy_grid",

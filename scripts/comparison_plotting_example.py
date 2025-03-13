@@ -4,8 +4,8 @@ This example shows how to use the compare, multi, panel, and xy_grid functions t
 plots comparing multiple directory nodes. It demonstrates various ways to visualize and
 compare data across different mission designs and astrophysical parameters.
 
-Note: The input directories are hardcoded in the example script and are not provided in the
-repository.
+Note: The input directories are hardcoded in the example script and are not
+provided in the repository.
 """
 
 from pathlib import Path
