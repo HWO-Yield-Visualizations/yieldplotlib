@@ -28,10 +28,7 @@ def _get_plot_method(ax, plot_type):
     plot_method = getattr(ax, f"ypl_{plot_type}")
     if plot_method is None:
         raise ValueError(
-            (
-                f"Unsupported plot_type: {plot_type}. "
-                "Use 'scatter', 'plot', or 'hist'."
-            )
+            (f"Unsupported plot_type: {plot_type}. Use 'scatter', 'plot', or 'hist'.")
         )
     return plot_method
 
@@ -462,7 +459,7 @@ def multi(
 
     # Ensure we have the right number of titles
     if len(titles) < n_plots:
-        titles.extend([f"Directory {i+1}" for i in range(len(titles), n_plots)])
+        titles.extend([f"Directory {i + 1}" for i in range(len(titles), n_plots)])
 
     # Create figure and axes
     fig, axes = plt.subplots(
@@ -590,7 +587,7 @@ def panel(
 
     # Ensure we have the right number of titles
     if len(titles) < n_plots:
-        titles.extend([f"Plot {i+1}" for i in range(len(titles), n_plots)])
+        titles.extend([f"Plot {i + 1}" for i in range(len(titles), n_plots)])
 
     # Plot each directory-spec combination
     plot_idx = 0
@@ -627,7 +624,9 @@ def panel(
             _plot_data(ax, directory, x, y, plot_type, plot_kwargs)
 
             # Set title for this subplot
-            title = titles[plot_idx] if plot_idx < len(titles) else f"Plot {plot_idx+1}"
+            title = (
+                titles[plot_idx] if plot_idx < len(titles) else f"Plot {plot_idx + 1}"
+            )
             ax.set_title(title)
             plot_idx += 1
 
