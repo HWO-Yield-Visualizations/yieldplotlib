@@ -981,7 +981,7 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "RA": {
+    "coords_RA": {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "RA",
@@ -992,7 +992,7 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "Dec": {
+    "coords_Dec": {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Dec",
@@ -1091,10 +1091,11 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "M_V": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "M_V",
+    "MV": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-earth-char-list.csv",
+            "name": "MV",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1102,7 +1103,7 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "Angdiam (mas)": {
+    "diameter": {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Angdiam (mas)",
@@ -1113,7 +1114,7 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "Mass (Msun)": {
+    "MsTrue": {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Mass (Msun)",
@@ -2327,18 +2328,6 @@ KEY_MAP = {
         "EXOSIMSCSVFile": {
             "file": "reduce-earth-char-list.csv",
             "name": "char_SNR",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "MV": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-earth-char-list.csv",
-            "name": "MV",
             "unit": "",
             "transform": {
                 "type": "none",
