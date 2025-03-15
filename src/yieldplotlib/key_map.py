@@ -201,6 +201,266 @@ KEY_MAP = {
         },
         "comment": ""
     },
+    "MV": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-earth-char-list.csv",
+            "name": "MV",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "M_V",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "RA": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "RA",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "coords_RA",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Dec": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Dec",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "coords_Dec",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Umag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Umag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Umag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Bmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Bmag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Bmag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Vmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Vmag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Vmag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Rmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Rmag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Rmag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Imag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Imag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Imag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Jmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Jmag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Jmag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Hmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Hmag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Hmag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Kmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Kmag",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Kmag",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "angdiam": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Angdiam (mas)",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "diameter",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Ms": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Mass (Msun)",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "MsTrue",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
     "yield_earth": {
         "EXOSIMSCSVFile": {
             "file": "reduce-earth.csv",
@@ -974,150 +1234,6 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_lambda",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "coords_RA": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "RA",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "coords_Dec": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Dec",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Umag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Umag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Bmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Bmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Vmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Vmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Rmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Rmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Imag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Imag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Jmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Jmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Hmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Hmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "Kmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Kmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "MV": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-earth-char-list.csv",
-            "name": "MV",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "diameter": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Angdiam (mas)",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "MsTrue": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Mass (Msun)",
             "transform": {
                 "type": "none",
                 "value": None
@@ -4867,6 +4983,18 @@ KEY_MAP = {
             }
         },
         "comment": ""
+    },
+    "Teff": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Teff",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
     },
     "instruments": {
         "EXOSIMSInputFile": {
