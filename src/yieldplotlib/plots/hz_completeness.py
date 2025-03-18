@@ -5,8 +5,6 @@ from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
-from yieldplotlib.core.plot import Plot
-
 
 def plot_hz_completeness(
     exosims_dir, ayo_dir, ax_kwargs={}, hline_kwargs={}, use_cyberpunk=False
@@ -38,7 +36,10 @@ def plot_hz_completeness(
     fig, axes = plt.subplots(1, 2, sharey=True)
     fig.supxlabel("d (pc)")
     fig.supylabel("Luminosity (L$_\odot$)")
+
     ayo_ax, exo_ax = axes
+    ayo_ax.set(**ax_kwargs)
+    exo_ax.set(**ax_kwargs)
 
     # Create the inset colorbar axes object.
     cax = inset_axes(
@@ -48,12 +49,7 @@ def plot_hz_completeness(
         loc="upper center",
     )
 
-    # Use the Plot base class to instantiate the AYO plot.
-    ayo_plot = Plot(ax_kwargs=ax_kwargs)
-    ayo_plot.ax = ayo_ax
-
-    # Get the AYO data.
-    ayo_data = [ayo_dir.get("star_dist"), ayo_dir.get("star_L")]
+    # Get the AYO colors.
     colors = ayo_dir.get("star_comp_det")
 
     # Get the colors and sizes for the scatter points.
@@ -64,7 +60,11 @@ def plot_hz_completeness(
     }
 
     # Plot the AYO data.
-    ayo_plot.generic_plot("scatter", data=ayo_data, plot_kwargs=plot_kwargs)
+    ayo_ax.ypl_scatter(ayo_dir,
+                       x="star_dist",
+                       y="star_L",
+                       autolabel=False,
+                       **plot_kwargs)
 
     # Plot the horizontal lines differentiating the spectral types.
     ayo_ax.axhline(y=5.5, **hline_kwargs)
@@ -80,13 +80,8 @@ def plot_hz_completeness(
     cbar.ax.xaxis.set_ticks_position("bottom")
     cbar.ax.tick_params(labelsize=8, width=1.5)
 
-    # Use the Plot base class to instantiate the EXOSIMS plot.
-    exo_plot = Plot(ax_kwargs=ax_kwargs)
-    exo_plot.ax = exo_ax
-
-    # Get the EXOSIMS data.
+    # Get the EXOSIMS colors.
     exosims_colors = exosims_dir.get("star_comp_det")
-    exosims_data = [exosims_dir.get("star_dist"), exosims_dir.get("star_L")]
 
     # Get the colors and sizes for the scatter points.
     plot_kwargs = {
@@ -96,7 +91,11 @@ def plot_hz_completeness(
     }
 
     # Plot the EXOSIMS data.
-    exo_plot.generic_plot("scatter", data=exosims_data, plot_kwargs=plot_kwargs)
+    exo_ax.ypl_scatter(exosims_dir,
+                       x="star_dist",
+                       y="star_L",
+                       autolabel=False,
+                       **plot_kwargs)
 
     # Plot the horizontal lines differentiating the spectral types
     exo_ax.axhline(y=5.5, **hline_kwargs)
@@ -107,7 +106,7 @@ def plot_hz_completeness(
     # Add the spectral type labels.
     ayo_ax.text(
         0.07,
-        0.83,
+        0.77,
         "A",
         transform=ayo_ax.transAxes,
         fontsize=12,
@@ -116,7 +115,7 @@ def plot_hz_completeness(
     )
     ayo_ax.text(
         0.07,
-        0.73,
+        0.65,
         "F",
         transform=ayo_ax.transAxes,
         fontsize=12,
@@ -125,7 +124,7 @@ def plot_hz_completeness(
     )
     ayo_ax.text(
         0.07,
-        0.61,
+        0.53,
         "G",
         transform=ayo_ax.transAxes,
         fontsize=12,
@@ -134,7 +133,7 @@ def plot_hz_completeness(
     )
     ayo_ax.text(
         0.07,
-        0.4,
+        0.32,
         "K",
         transform=ayo_ax.transAxes,
         fontsize=12,
@@ -143,7 +142,7 @@ def plot_hz_completeness(
     )
     ayo_ax.text(
         0.07,
-        0.01,
+        0.05,
         "M",
         transform=ayo_ax.transAxes,
         fontsize=12,
