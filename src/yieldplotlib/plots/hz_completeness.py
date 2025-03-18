@@ -60,11 +60,9 @@ def plot_hz_completeness(
     }
 
     # Plot the AYO data.
-    ayo_ax.ypl_scatter(ayo_dir,
-                       x="star_dist",
-                       y="star_L",
-                       autolabel=False,
-                       **plot_kwargs)
+    ayo_ax.ypl_scatter(
+        ayo_dir, x="star_dist", y="star_L", autolabel=False, **plot_kwargs
+    )
 
     # Plot the horizontal lines differentiating the spectral types.
     ayo_ax.axhline(y=5.5, **hline_kwargs)
@@ -91,11 +89,9 @@ def plot_hz_completeness(
     }
 
     # Plot the EXOSIMS data.
-    exo_ax.ypl_scatter(exosims_dir,
-                       x="star_dist",
-                       y="star_L",
-                       autolabel=False,
-                       **plot_kwargs)
+    exo_ax.ypl_scatter(
+        exosims_dir, x="star_dist", y="star_L", autolabel=False, **plot_kwargs
+    )
 
     # Plot the horizontal lines differentiating the spectral types
     exo_ax.axhline(y=5.5, **hline_kwargs)
