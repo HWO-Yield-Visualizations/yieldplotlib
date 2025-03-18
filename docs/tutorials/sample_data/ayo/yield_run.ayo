@@ -7,12 +7,12 @@
 ;Scalars cannot be encased in [ ]--scalars are not the same as one-element arrays
 ;Spaces do not matter, empty lines do not matter
 ;Parameter definitions can span multiple lines (i.e., long arrays can be split between lines if desired)
- 
+
 ;--- GENERAL PARAMETERS ---
 AYO_version = 'v16' ;{str} version of the AYO code to run, default if not supplied is 'v15'
 D = 7.22577 ;(m) {scalar} circumscribed diameter of telescope
 total_survey_time = 2.00000         ;(years) {scalar} total observation time including overheads to be devoted to survey
- 
+
 ;--- CORONAGRAPH INPUT FILES ---
 ;AYO can handle up to 8 different coronagraphs, 4 for detections and 4 for spec char
 coronagraph1 = 'FRIDAY_Coronagraphs_SHARED/eac1_aavc' ;{scalar} name of the folder where detection coronagraph files are located
@@ -23,7 +23,7 @@ sc_coronagraph1 = 'FRIDAY_Coronagraphs_SHARED/eac1_aavc' ;{scalar} name of the f
 sc_coronagraph2 = '' ;{scalar} name of the folder where spec char coronagraph files are located
 sc_coronagraph3 = '' ;{scalar} name of the folder where spec char coronagraph files are located
 sc_coronagraph4 = '' ;{scalar} name of the folder where spec char coronagraph files are located
- 
+
 ;--- CORONAGRAPH PERFORMANCE MODIFIERS ---
 ;The following are OPTIONAL inputs that override what is in the coronagraph YIP (or provides the value if it's not in the YIP).
 ;THESE SHOULD TYPICALLY BE COMMENTED OUT.
@@ -45,23 +45,23 @@ sc_coronagraph4 = '' ;{scalar} name of the folder where spec char coronagraph fi
 ;sc_coro_throughput_multiplier = 1.0 ;{scalar} multiplies the coronagraph design core throughput by this factor (stellar_intens, offax_psf, and skytrans get multiplied), shows up in coronagraph plots
 ;sc_coro_pixscale_multiplier = 1.0 ;{scalar} multiplies the coronagraph design pixelscale by this factor, shows up in coronagraph plots
 ;corosensitivity=1 ;{scalar} setting this flag to 1 evaluates sensitivity of yield to coro params, but MULTIPLIES RUNTIME BY 5x
- 
+
 ;--- CORONGRAPH PARAMETERS AND PERFORMANCE CUTS ---
 nchannels = 2 ;{scalar} number of parallel detection channels (channels evaluated as one contiguous channel)
 raw_contrast_floor = 0.000000E+00 ;{scalar} raw contrast is set to larger of design value and this, 0 means impose no floor
 IWA = 1.00000  ;(lambda/D) {scalar} hard IWA cutoff regardless of coronagraph design (making this non-zero helps reduce run time of code)
 OWA = 60.0000 ;(lambda/D) {scalar} hard OWA cutoff regardless of coronagraph design
- 
+
 ;--- PSF SUBTRACTION / NOISE FLOOR ---
 CRb_multiplier = 2 ;{scalar} all background terms multiplied by this. 1=perfect model-based PSF subtraction, 2=ADI (2 probably also roughly appropriate for RDI)
 ;Only use one of the following two options to specify how the noise floor is calculate
 ;noisefloor_contrast = 0.0 ;{scalar} 1-sigma post-processed noise floor contrast, uniform over field of view and indepent of raw contrast (cannot specify this and noisefloor_PPF at same time)
 noisefloor_PPF = 30.0000 ;{scalar} the post-processing factor that sets the 1-sigma noise floor contrast, noisefloor = raw_contrast / PPF (cannot specify this and nosiefloor_contrast at same time)
- 
+
 ;--- TARGET LIST CUTS ---
 target_vmag_cut = 9.00000 ;(mags) {scalar} maximum magnitude at V band, removes fainter targets, speeds up calculations but runs the risk of artificially limiting results
 target_distance_cut = 30.0000 ;(pc) {scalar} maximum distance, removes more distant targets, speeds up calculations but runs the risk of artificially limiting results
- 
+
 ;--- MISC ---
 nexozodis = 3.00000 ;(zodis) {scalar} exozodi level of all stars
 Tcontam = 0.950000 ;{scalar} effective throughput factor to budget for contamination, scalar value only
@@ -69,7 +69,7 @@ temperature = 290.000 ;(K) {scalar} temperature of warm optics
 photap_rad = 0.850000 ;(l/D) {scalar} photometric aperture radius used for plots and some basic exp time estimates, recommended = 0.7 l/D_inscribed ~ 0.85 l/D
 sc_photap_rad = 0.850000 ;(l/D) {scalar} photometric aperture radius used for plots and some basic exp time estimates, recommended = 0.7 l/D_inscribed ~ 0.85 l/D
 PSF_trunc_ratio = [0.30] ;{array} PSF truncation ratios defining possible photometric apertures to use for all exp times, using a single value (recommended [0.35]) will speed up calculations
- 
+
 ;--- DETECTION OBSERVATIONS ---
 minvisits =                6 ;{scalar} minimum # of detection obs. per star
 broadband = 		   1 ;{scalar} setting to 1 overrides SR below and sets the BW of the observation to equal that of the coronagraph (usually this = 1 for detections)
@@ -89,7 +89,7 @@ det_CIC =             0.000000E+00  ;(counts pix^-1 photon_count^-1) {scalar OR 
 det_tread =           1000.0 ;(s) {scalar OR array of length NLD} detector read times for detection observations
 det_npix_multiplier = 2.0  ;{scalar OR array of length NLD} mutiplication factor on # of detector pixels for detection observations
 det_pixscale_mas =    4.62000 ;(mas) {scalar} detector pixel scale for detection observations
- 
+
 ;--- CHARACTERIZATION OBSERVATIONS ---
 tsc_limit =                         5.18400e+06  ;(s) {scalar} spec char time upper limit, 2 months = 5.184e6 s
 sc_broadband = 		   0 ;{scalar} setting to 1 overrides sc_SR below and sets the BW of the observation to equal that of the coronagraph (usually this = 0 for characterizations)
