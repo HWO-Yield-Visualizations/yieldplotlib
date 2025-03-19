@@ -944,7 +944,7 @@ KEY_MAP = {
     "sc_qe": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "QE",
+            "name": "sc_QE",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -964,7 +964,7 @@ KEY_MAP = {
     "sc_optics_throughput": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "optics",
+            "name": "sc_optics",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -984,7 +984,7 @@ KEY_MAP = {
     "sc_pixel_scale": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "pixelScale",
+            "name": "sc_pixelScale",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1004,7 +1004,7 @@ KEY_MAP = {
     "sc_read_noise": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "sread",
+            "name": "sc_sread",
             "unit": "count pix^-1 read^-1",
             "transform": {
                 "type": "none",
@@ -1024,7 +1024,7 @@ KEY_MAP = {
     "sc_dark_current": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "idark",
+            "name": "sc_idark",
             "unit": "count pix^-1 s^-1",
             "transform": {
                 "type": "none",
@@ -1044,7 +1044,7 @@ KEY_MAP = {
     "sc_cic": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "CIC",
+            "name": "sc_CIC",
             "unit": "count pix^-1 s^-1",
             "transform": {
                 "type": "none",
@@ -1064,7 +1064,7 @@ KEY_MAP = {
     "sc_texp": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "texp",
+            "name": "sc_texp",
             "unit": "s",
             "transform": {
                 "type": "none",
@@ -1104,7 +1104,7 @@ KEY_MAP = {
     "owa": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "_OWA",
+            "name": "OWA",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1164,7 +1164,7 @@ KEY_MAP = {
     "sc_snr": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "SNR",
+            "name": "sc_SNR",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1184,7 +1184,7 @@ KEY_MAP = {
     "sc_R": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "Rs",
+            "name": "sc_Rs",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1224,7 +1224,7 @@ KEY_MAP = {
     "sc_obs_lambda": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "lam",
+            "name": "sc_lam",
             "unit": "",
             "transform": {
                 "type": "none",
