@@ -20,7 +20,7 @@ class Node(ABC):
         pass
 
     @abstractmethod
-    def get(self, key: str):
+    def get(self, key: str, **kwargs):
         """Abstract method to search for data associated with a key."""
         pass
 
