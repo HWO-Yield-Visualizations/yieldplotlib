@@ -35,7 +35,7 @@ class AYOInputFile(FileNode):
             self.raw_data = f.read()
         logger.info(f"Loaded AYO input file: {self.file_path}")
 
-    def _get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""
         return self.data.get(key, None)
 
