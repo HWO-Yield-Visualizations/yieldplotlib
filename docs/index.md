@@ -15,3 +15,8 @@ user/dev
 :maxdepth: 1
 develop/_changelog.md
 ```
+
+```{toctree}
+:maxdepth: 1
+tutorials/yieldplotlib_tutorial.ipynb
+```
