@@ -1,0 +1,110 @@
+;This is an input file for AYO
+;Comments are preceeded with a # or a ;
+;In the comments below, ( ) indicates the units and { } indicates the data format
+;Variable names cannot be changed
+;All string data types must be encased in ' ' or " "
+;Arrays are encased by [ ] and entries are separated by ,
+;Scalars cannot be encased in [ ]--scalars are not the same as one-element arrays
+;Spaces do not matter, empty lines do not matter
+;Parameter definitions can span multiple lines (i.e., long arrays can be split between lines if desired)
+
+;--- GENERAL PARAMETERS ---
+AYO_version = 'v16' ;{str} version of the AYO code to run, default if not supplied is 'v15'
+D = 7.22577 ;(m) {scalar} circumscribed diameter of telescope
+total_survey_time = 2.00000         ;(years) {scalar} total observation time including overheads to be devoted to survey
+
+;--- CORONAGRAPH INPUT FILES ---
+;AYO can handle up to 8 different coronagraphs, 4 for detections and 4 for spec char
+coronagraph1 = '' ;{scalar} name of the folder where detection coronagraph files are located
+coronagraph2 = '' ;{scalar} name of the folder where detection coronagraph files are located
+coronagraph3 = '' ;{scalar} name of the folder where detection coronagraph files are located
+coronagraph4 = '' ;{scalar} name of the folder where detection coronagraph files are located
+sc_coronagraph1 = '' ;{scalar} name of the folder where spec char coronagraph files are located
+sc_coronagraph2 = '' ;{scalar} name of the folder where spec char coronagraph files are located
+sc_coronagraph3 = '' ;{scalar} name of the folder where spec char coronagraph files are located
+sc_coronagraph4 = '' ;{scalar} name of the folder where spec char coronagraph files are located
+
+;--- CORONAGRAPH PERFORMANCE MODIFIERS ---
+;The following are OPTIONAL inputs that override what is in the coronagraph YIP (or provides the value if it's not in the YIP).
+;THESE SHOULD TYPICALLY BE COMMENTED OUT.
+;Modifying the YIP may be necessary to perform sensitivity studies
+;nrolls1 = 1 ;{scalar} number of roll angles to assume for coronagraph1, if specified this overrides what is in the coronagraph YIP header
+;nrolls2 = 1 ;{scalar} number of roll angles to assume for coronagraph2, if specified this overrides what is in the coronagraph YIP header
+;nrolls3 = 1 ;{scalar} number of roll angles to assume for coronagraph3, if specified this overrides what is in the coronagraph YIP header
+;nrolls4 = 1 ;{scalar} number of roll angles to assume for coronagraph4, if specified this overrides what is in the coronagraph YIP header
+;sc_nrolls1 = 1 ;{scalar} number of roll angles to assume for sc_coronagraph1, if specified this overrides what is in the coronagraph YIP header
+;sc_nrolls2 = 1 ;{scalar} number of roll angles to assume for sc_coronagraph2, if specified this overrides what is in the coronagraph YIP header
+;sc_nrolls3 = 1 ;{scalar} number of roll angles to assume for sc_coronagraph3, if specified this overrides what is in the coronagraph YIP header
+;sc_nrolls4 = 1 ;{scalar} number of roll angles to assume for sc_coronagraph4, if specified this overrides what is in the coronagraph YIP header
+;coro_bw_multiplier = 1.0 ;{scalar} multiplies the coronagraph design BW by this factor, shows up in coronagraph plots--to take advantage of this you may have to adjust SR (see below)
+;coro_contrast_multiplier = 1.0 ;{scalar} multiplies the coronagraph design contrast by this factor (stellar_intens gets multiplied), prior to evaluating noise floor
+;coro_throughput_multiplier = 1.0 ;{scalar} multiplies the coronagraph design throughput by this factor (stellar_intens, offax_psf, and skytrans get multiplied), shows up in coronagraph plots
+;coro_pixscale_multiplier = 1.0 ;{scalar} multiplies the coronagraph design pixelscale by this factor, shows up in coronagraph plots
+;sc_coro_bw_multiplier = 1.0 ;{scalar} multiplies the coronagraph design BW by this factor, shows up in coronagraph plots
+;sc_coro_contrast_multiplier = 1.0 ;{scalar} multiplies the coronagraph design contrast by this factor (stellar_intens gets multiplied), prior to evaluating noise floor, shows up in coronagraph plots
+;sc_coro_throughput_multiplier = 1.0 ;{scalar} multiplies the coronagraph design core throughput by this factor (stellar_intens, offax_psf, and skytrans get multiplied), shows up in coronagraph plots
+;sc_coro_pixscale_multiplier = 1.0 ;{scalar} multiplies the coronagraph design pixelscale by this factor, shows up in coronagraph plots
+;corosensitivity=1 ;{scalar} setting this flag to 1 evaluates sensitivity of yield to coro params, but MULTIPLIES RUNTIME BY 5x
+
+;--- CORONGRAPH PARAMETERS AND PERFORMANCE CUTS ---
+nchannels = 2 ;{scalar} number of parallel detection channels (channels evaluated as one contiguous channel)
+raw_contrast_floor = 0.000000E+00 ;{scalar} raw contrast is set to larger of design value and this, 0 means impose no floor
+IWA = 1.00000  ;(lambda/D) {scalar} hard IWA cutoff regardless of coronagraph design (making this non-zero helps reduce run time of code)
+OWA = 60.0000 ;(lambda/D) {scalar} hard OWA cutoff regardless of coronagraph design
+
+;--- PSF SUBTRACTION / NOISE FLOOR ---
+CRb_multiplier = 2 ;{scalar} all background terms multiplied by this. 1=perfect model-based PSF subtraction, 2=ADI (2 probably also roughly appropriate for RDI)
+;Only use one of the following two options to specify how the noise floor is calculate
+;noisefloor_contrast = 0.0 ;{scalar} 1-sigma post-processed noise floor contrast, uniform over field of view and indepent of raw contrast (cannot specify this and noisefloor_PPF at same time)
+noisefloor_PPF = 30.0000 ;{scalar} the post-processing factor that sets the 1-sigma noise floor contrast, noisefloor = raw_contrast / PPF (cannot specify this and nosiefloor_contrast at same time)
+
+;--- TARGET LIST CUTS ---
+target_vmag_cut = 9.00000 ;(mags) {scalar} maximum magnitude at V band, removes fainter targets, speeds up calculations but runs the risk of artificially limiting results
+target_distance_cut = 30.0000 ;(pc) {scalar} maximum distance, removes more distant targets, speeds up calculations but runs the risk of artificially limiting results
+
+;--- MISC ---
+nexozodis = 3.00000 ;(zodis) {scalar} exozodi level of all stars
+Tcontam = 0.950000 ;{scalar} effective throughput factor to budget for contamination, scalar value only
+temperature = 290.000 ;(K) {scalar} temperature of warm optics
+photap_rad = 0.850000 ;(l/D) {scalar} photometric aperture radius used for plots and some basic exp time estimates, recommended = 0.7 l/D_inscribed ~ 0.85 l/D
+sc_photap_rad = 0.850000 ;(l/D) {scalar} photometric aperture radius used for plots and some basic exp time estimates, recommended = 0.7 l/D_inscribed ~ 0.85 l/D
+PSF_trunc_ratio = [0.30] ;{array} PSF truncation ratios defining possible photometric apertures to use for all exp times, using a single value (recommended [0.35]) will speed up calculations
+
+;--- DETECTION OBSERVATIONS ---
+minvisits =                6 ;{scalar} minimum # of detection obs. per star
+broadband = 		   1 ;{scalar} setting to 1 overrides SR below and sets the BW of the observation to equal that of the coronagraph (usually this = 1 for detections)
+td_limit =                  5.184000E+06   ;(s) {scalar} detection time upper limit, 2 months = 5.184e6 s
+toverhead_fixed =     8381.30 ;(s) {scalar} static overhead for all detection observations, slew + settle + initial digging of dark hole
+toverhead_multi =     1.10000       ;{scalar} dynamic overhead for all detection observations, i.e. a tax on the science exposure time, time to touch up dark hole
+lambda =              [0.350, 0.400, 0.450, 0.500, 0.550, 0.600, 0.650, 0.700, 0.750, 0.800, 0.850, 0.900, 0.950, 1.000] ;(microns) {array of length NLD} possible detection wavelengths
+SR     =              5.0 ;{scalar OR array of length NLD} desired spectral resolution for detections, code uses the smaller of this bandpass and the coronagraph's design
+SNR    =              7.0 ;{scalar OR array of length NLD} minimum SNR for detections
+Toptical =            [0.045, 0.219, 0.329, 0.362, 0.365, 0.354, 0.338, 0.320, 0.298, 0.288, 0.304, 0.342, 0.282, 0.198] ;{scalar OR array of length NLD} optical throughput for detection observations
+epswarmTrcold =       1.0 ;{scalar OR array of length NLD} product of cummulative warm emissivity and cummulative cold transmission
+det_QE =              0.900   ;{scalar OR scalar OR array of length NLD} detector QE for detection observations
+det_dQE =             0.750   ;{scalar OR array of length NLD} detector dQE for detection observations
+det_DC =              0.000000E+00  ;(counts pix^-1 s^-1) {scalar OR array of length NLD} detector dark currents for detection observations
+det_RN =              0.000000E+00  ;(counts pix^-1 read^-1) {scalar OR array of length NLD} detector read noise for detection observations
+det_CIC =             0.000000E+00  ;(counts pix^-1 photon_count^-1) {scalar OR array of length NLD} detector clock induced charge for detection observations
+det_tread =           1000.0 ;(s) {scalar OR array of length NLD} detector read times for detection observations
+det_npix_multiplier = 2.0  ;{scalar OR array of length NLD} mutiplication factor on # of detector pixels for detection observations
+det_pixscale_mas =    4.62000 ;(mas) {scalar} detector pixel scale for detection observations
+
+;--- CHARACTERIZATION OBSERVATIONS ---
+tsc_limit =                         5.18400e+06  ;(s) {scalar} spec char time upper limit, 2 months = 5.184e6 s
+sc_broadband = 		   0 ;{scalar} setting to 1 overrides sc_SR below and sets the BW of the observation to equal that of the coronagraph (usually this = 0 for characterizations)
+sc_toverhead_fixed =        8381.30 ;(s) {scalar} static overhead for all spec char observations, slew + settle + initial digging of dark hole
+sc_toverhead_multi =        1.10000       ;{scalar} dynamic overhead for all spec char observations, i.e. a tax on the science exposure time, time to touch up dark hole
+sc_lambda =              [0.727, 0.746, 0.765, 0.783, 0.802, 0.821, 0.839, 0.859, 0.878, 0.896, 0.915, 0.934, 0.953, 0.971, 1.000]  ;(microns) {array of length NLSC} possible spec char wavelengths
+sc_SR =                  [140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0, 140.0]   ;{scalar OR array of length NLSC} desired spectral resolution for spec char
+sc_SNR =                 [14.0, 13.0, 13.0, 12.0, 12.0, 12.0, 10.0, 10.0, 10.0, 10.0, 11.0, 11.0, 9.0, 8.0, 5.0]   ;{scalar OR array of length NLSC} required SNR for spec char
+sc_Toptical =            [0.215, 0.210, 0.205, 0.202, 0.202, 0.204, 0.209, 0.217, 0.226, 0.237, 0.238, 0.216, 0.195, 0.173, 0.139]   ;{scalar OR array of length NLSC} optical throughput for spec char observations
+sc_epswarmTrcold =       1.0 ;{scalar OR array of length NLSC} product of cummulative warm emissivity and cummulative cold transmission
+sc_det_QE =              0.900   ;{scalar OR array of length NLSC} detector QE for spec char observations
+sc_det_dQE =             0.750   ;{scalar OR array of length NLSC} detector dQE for spec char observations
+sc_det_DC =              0.000000E+00  ;(counts pix^-1 s^-1) {scalar OR array of length NLSC} detector dark currents for spec char observations
+sc_det_RN =              0.000000E+00  ;(counts pix^-1 read^-1) {scalar OR array of length NLSC} detector read noise for spec char observations
+sc_det_CIC =             0.000000E+00  ;(counts pix^-1 photon_count^-1) {scalar OR array of length NLSC} detector clock induced charge for spec char observations
+sc_det_tread =           1000.0 ;(s) {scalar OR array of length NLD} detector read times for detection observations
+sc_det_npix_multiplier = 12.0  ;{scalar OR array of length NLSC} mutiplication factor on # of detector pixels for spec char observations, for IFS this is 6 dispersed pix per lenslet at native spec char resolution
+sc_det_pixscale_mas =    4.62000 ;(mas) {scalar} detector (or lenslet for an IFS) pixel scale for spec char observations
