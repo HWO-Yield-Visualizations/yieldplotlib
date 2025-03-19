@@ -1,4 +1,4 @@
-# List of Available yieldplotlib Parameters 
+# List of Available yieldplotlib Parameters
 
 | Parameter               | Description                                                          |
 |-------------------------|----------------------------------------------------------------------|
