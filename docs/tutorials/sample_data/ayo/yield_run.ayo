@@ -15,11 +15,11 @@ total_survey_time = 2.00000         ;(years) {scalar} total observation time inc
 
 ;--- CORONAGRAPH INPUT FILES ---
 ;AYO can handle up to 8 different coronagraphs, 4 for detections and 4 for spec char
-coronagraph1 = 'FRIDAY_Coronagraphs_SHARED/eac1_aavc' ;{scalar} name of the folder where detection coronagraph files are located
+coronagraph1 = '' ;{scalar} name of the folder where detection coronagraph files are located
 coronagraph2 = '' ;{scalar} name of the folder where detection coronagraph files are located
 coronagraph3 = '' ;{scalar} name of the folder where detection coronagraph files are located
 coronagraph4 = '' ;{scalar} name of the folder where detection coronagraph files are located
-sc_coronagraph1 = 'FRIDAY_Coronagraphs_SHARED/eac1_aavc' ;{scalar} name of the folder where spec char coronagraph files are located
+sc_coronagraph1 = '' ;{scalar} name of the folder where spec char coronagraph files are located
 sc_coronagraph2 = '' ;{scalar} name of the folder where spec char coronagraph files are located
 sc_coronagraph3 = '' ;{scalar} name of the folder where spec char coronagraph files are located
 sc_coronagraph4 = '' ;{scalar} name of the folder where spec char coronagraph files are located
