@@ -25,5 +25,9 @@ tutorials/yieldplotlib_tutorial.ipynb
 ```
 ```{toctree}
 :maxdepth: 1
+user/cite.md
+```
+```{toctree}
+:maxdepth: 1
 develop/_changelog.md
 ```
