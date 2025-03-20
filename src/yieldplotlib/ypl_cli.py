@@ -42,6 +42,7 @@ from yieldplotlib.pipeline import ypl_pipeline
 
 
 def main():
+    """Runs the command line interface."""
     runs = []
     arguments = docopt(__doc__, version="0.1")
     run_paths = arguments["PATH"]

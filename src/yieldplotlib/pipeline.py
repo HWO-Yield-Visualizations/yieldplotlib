@@ -12,6 +12,7 @@ from yieldplotlib.plots.yield_hist import plot_hist
 
 
 def ypl_pipeline(runs):
+    """Runs the yieldplotlib pipeline to generate a page of summary plots."""
     ax_kwargs = {}
 
     fig, axes = plt.subplot_mosaic("ABC;DEE;FGG", figsize=(8.5, 11))
