@@ -29,5 +29,9 @@ user/cite.md
 ```
 ```{toctree}
 :maxdepth: 1
+plot_gallery/gallery.md
+```
+```{toctree}
+:maxdepth: 1
 develop/_changelog.md
 ```
