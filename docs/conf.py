@@ -44,8 +44,7 @@ html_favicon = "_static/favicon.ico"
 html_title = "yieldplotlib"
 
 html_theme_options = {
-    "repository_url":
-        "https://www.github.com/HWO-Yield-Visualizations/yieldplotlib",
+    "repository_url": "https://www.github.com/HWO-Yield-Visualizations/yieldplotlib",
     "repository_branch": "main",
     "use_repository_button": True,
     "show_toc_level": 2,
@@ -69,15 +68,13 @@ if not zenodo_path.exists():
         import requests
 
         headers = {"accept": "application/x-bibtex"}
-        response = requests.get("https://zenodo.org/records/15013341",
-                                headers=headers)
+        response = requests.get("https://zenodo.org/records/15013341", headers=headers)
         response.encoding = "utf-8"
         zenodo_record = ".. code-block:: bibtex\n\n" + textwrap.indent(
             response.text, " " * 4
         )
     except Exception as e:
-        warnings.warn(f"Failed to retrieve Zenodo record for yieldplotlib:"
-                      f" {str(e)}")
+        warnings.warn(f"Failed to retrieve Zenodo record for yieldplotlib: {str(e)}")
         zenodo_record = (
             "`Retrieve the Zenodo record here <https://zenodo.org/records/15013341>`_"
         )
