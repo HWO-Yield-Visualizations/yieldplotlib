@@ -1,8 +1,5 @@
 """Sphinx configuration file."""
 
-import pathlib
-import warnings
-
 import yieldplotlib
 
 project = "yieldplotlib"
