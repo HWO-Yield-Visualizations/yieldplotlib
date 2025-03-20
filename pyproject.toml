@@ -19,6 +19,7 @@ dependencies = [
     "yippy",
     "pyparsing>=3.1.4",
     "lod-unit>=1.6.0",
+    "docopt",
 ]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
@@ -33,6 +34,9 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/HWO-Yield-Visualizations/yieldplotlib"
 Issues = "https://github.com/HWO-Yield-Visualizations/yieldplotlib/issues"
+
+[project.scripts]
+run_ypl = "yieldplotlib.ypl_cli:main"
 
 [tool.hatch.version]
 source = "vcs"
