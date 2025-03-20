@@ -57,27 +57,3 @@ source_suffix = {
     ".md": "myst-nb",
 }
 nb_execution_mode = "cache"
-
-# -- Automatically get Zenodo Citation ---------------------------------------
-
-zenodo_path = pathlib.Path("ZENODO.rst")
-if not zenodo_path.exists():
-    import textwrap
-
-    try:
-        import requests
-
-        headers = {"accept": "application/x-bibtex"}
-        response = requests.get("https://zenodo.org/records/15013341", headers=headers)
-        response.encoding = "utf-8"
-        zenodo_record = ".. code-block:: bibtex\n\n" + textwrap.indent(
-            response.text, " " * 4
-        )
-    except Exception as e:
-        warnings.warn(f"Failed to retrieve Zenodo record for yieldplotlib: {str(e)}")
-        zenodo_record = (
-            "`Retrieve the Zenodo record here <https://zenodo.org/records/15013341>`_"
-        )
-
-    with open(zenodo_path, "w") as f:
-        f.write(zenodo_record)
