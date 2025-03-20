@@ -62,6 +62,7 @@ def main():
 
 
 def is_superdir(path):
+    """True if a directory only contains other directories."""
     for directory in glob.glob(f"{path}/*"):
         if not os.path.isdir(directory):
             return False
@@ -69,6 +70,7 @@ def is_superdir(path):
 
 
 def is_ayo(path):
+    """True if a directory is an AYO run directory."""
     for file in os.listdir(path):
         if file.endswith(".ayo"):
             return True
