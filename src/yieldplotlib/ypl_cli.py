@@ -35,7 +35,6 @@ import os
 import glob
 from pathlib import Path
 
-import numpy as np
 from docopt import docopt
 from yieldplotlib.load.ayo_directory import AYODirectory
 from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
@@ -48,7 +47,7 @@ def main():
     run_paths = arguments["PATH"]
 
     if is_superdir(run_paths):
-        run_dirs = [r.path for r in os.scandir(run_paths) if r.is_dir()]
+        run_dirs = glob.glob(f"{run_paths}/*")
     else:
         run_dirs = [run_paths]
 
