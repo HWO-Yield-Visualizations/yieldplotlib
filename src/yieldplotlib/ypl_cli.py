@@ -34,6 +34,8 @@ Options:
 import os
 import glob
 from pathlib import Path
+
+import numpy as np
 from docopt import docopt
 from yieldplotlib.load.ayo_directory import AYODirectory
 from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
@@ -46,9 +48,9 @@ def main():
     run_paths = arguments["PATH"]
 
     if is_superdir(run_paths):
-        run_dirs = glob.glob(f"{run_paths}/*")
+        run_dirs = [r.path for r in os.scandir(run_paths) if r.is_dir()]
     else:
-        run_dirs = list(run_paths)
+        run_dirs = [run_paths]
 
     for run_dir in run_dirs:
         print(run_dir)
@@ -73,21 +75,3 @@ def is_ayo(path):
             return True
     return False
 
-
-run_paths = ("/Users/ssteiger/repos/yieldplotlib/docs/tutorials/sample_data/exosims")
-runs = []
-EXOSIMSDirectory(Path(run_paths[0]))
-# if is_superdir(run_paths):
-#     run_dirs = glob.glob(f"{run_paths}/*")
-# else:
-#     run_dirs = list(run_paths)
-#
-# print(run_dirs)
-# for run_dir in run_dirs:
-#     print(run_dir)
-#     if is_ayo(run_dir):
-#         runs.append(AYODirectory(Path(run_dir)))
-#     else:
-#         runs.append(EXOSIMSDirectory(Path(run_dir)))
-#
-# ypl_pipeline(runs)
