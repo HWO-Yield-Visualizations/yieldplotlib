@@ -156,6 +156,10 @@ class EXOSIMSInputFile(JSONFile):
                         # Delete the key from the exosims_specs dictionary
                         del self.exosims_specs[key]
                         self.all_local_paths = False
+                    elif self.exosims_specs[key] == "":
+                        # Delete the key from the exosims_specs dictionary but don't
+                        # set all_local_paths to False because it's not a path
+                        del self.exosims_specs[key]
 
         # Handle starlight suppression systems
         sss = self.data["starlightSuppressionSystems"]
@@ -170,6 +174,12 @@ class EXOSIMSInputFile(JSONFile):
                         if _file_exists:
                             _data, _hdr = OpticalSystem.get_param_data(None, syst[key])
                             syst[key] = _data
+                        elif syst[key] == "":
+                            # Delete the key from the exosims_specs dictionary but don't
+                            # set all_local_paths to False because it's not a path
+                            del self.exosims_specs["starlightSuppressionSystems"][
+                                syst_ind
+                            ][key]
                         else:
                             # Delete the key from the exosims_specs dictionary
                             del self.exosims_specs["starlightSuppressionSystems"][
@@ -190,6 +200,10 @@ class EXOSIMSInputFile(JSONFile):
                         if _file_exists:
                             _data, _ = OpticalSystem.get_param_data(None, inst[key])
                             inst[key] = _data
+                        elif inst[key] == "":
+                            # Delete the key from the exosims_specs dictionary but don't
+                            # set all_local_paths to False because it's not a path
+                            del self.exosims_specs["scienceInstruments"][inst_ind][key]
                         else:
                             # Delete the key from the exosims_specs dictionary
                             del self.exosims_specs["scienceInstruments"][inst_ind][key]
