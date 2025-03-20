@@ -1,5 +1,4 @@
-'''
- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+"""@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -29,13 +28,14 @@ Usage:
 
 Options:
   -h, --help  Show this help message and exit.
-'''
+"""
 
-import os
 import glob
+import os
 from pathlib import Path
 
 from docopt import docopt
+
 from yieldplotlib.load.ayo_directory import AYODirectory
 from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
 from yieldplotlib.pipeline import ypl_pipeline
@@ -43,7 +43,7 @@ from yieldplotlib.pipeline import ypl_pipeline
 
 def main():
     runs = []
-    arguments = docopt(__doc__, version='0.1')
+    arguments = docopt(__doc__, version="0.1")
     run_paths = arguments["PATH"]
 
     if is_superdir(run_paths):
@@ -73,4 +73,3 @@ def is_ayo(path):
         if file.endswith(".ayo"):
             return True
     return False
-

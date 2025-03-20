@@ -1,5 +1,6 @@
-import yieldplotlib as ypl
 import matplotlib.pyplot as plt
+
+import yieldplotlib as ypl
 
 
 def ypl_pipeline(runs):
