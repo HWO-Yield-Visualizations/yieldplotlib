@@ -36,6 +36,7 @@ def ypl_pipeline(runs):
     newax.axis("off")
     newax.imshow(ypl_logo)
 
+    # Plot summary yield text for a reasonable number of runs.
     if len(runs) < 5:
         y_locs = np.linspace(0.92, 0.94, len(runs))
         for i, run in enumerate(runs):
@@ -59,6 +60,7 @@ def ypl_pipeline(runs):
     for ax in axes.values():
         ax.set(**ax_kwargs)
 
+    # Plot stellar parameters.
     ypl.compare(axes["A"], runs, "star_dist", y="star_L", plot_type="scatter")
 
     hist_kwargs = {"histtype": "step"}
@@ -76,6 +78,7 @@ def ypl_pipeline(runs):
     axes["F"].set_ylabel("# Targets")
     ypl.compare(axes["F"], runs, "exp_time_char", plot_type="hist", **hist_kwargs)
 
+    # Plot HZ completeness.
     ypl.compare(
         axes["E"], runs, "star_dist", y="star_L", c="star_comp_det", plot_type="scatter"
     )
@@ -95,6 +98,7 @@ def ypl_pipeline(runs):
     cbar.ax.xaxis.set_ticks_position("bottom")
     cbar.ax.tick_params(labelsize=6, width=1.0)
 
+    # Plot planet yield bar chart.
     temps = ["hot", "warm", "cold"]
     planet_bins = ["Earth", "Rocky", "Super Earth"]
     run_labels = [
