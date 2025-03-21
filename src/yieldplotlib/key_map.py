@@ -21,6 +21,46 @@ KEY_MAP = {
         },
         "comment": "EXOSIMS TargetList object attribute"
     },
+    "blind_comp_det": {
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "blind_comp_det",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "blind_comp_det",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "All of this has to be handled custom"
+    },
+    "blind_comp_spec": {
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "blind_comp_spec",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "blind_comp_spec",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "All of this has to be handled custom"
+    },
     "Bmag": {
         "AYOCSVFile": {
             "file": "target_list.csv",
@@ -1754,7 +1794,7 @@ KEY_MAP = {
                 "value": None
             }
         },
-        "comment": ""
+        "comment": "EXOSIMS's value here represents the *last* observation of the star made in each DRM, not the first one which is typically what we think of using blind completeness for"
     },
     "h_star_det_earth_frac_mean": {
         "EXOSIMSCSVFile": {
