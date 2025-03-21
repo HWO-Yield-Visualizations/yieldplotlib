@@ -15,7 +15,7 @@ params = {
     "axes.titlesize": 12,
     "axes.labelsize": 8,
     "lines.linewidth": 4,
-    "lines.markersize": 3,
+    "lines.markersize": 4,
     "xtick.labelsize": 8,
     "ytick.labelsize": 8,
     "legend.fontsize": 8,
@@ -61,7 +61,10 @@ def ypl_pipeline(runs):
         ax.set(**ax_kwargs)
 
     # Plot stellar parameters.
-    ypl.compare(axes["A"], runs, "star_dist", y="star_L", plot_type="scatter")
+    scatter_kwargs = {"alpha": 0.7}
+    axes["A"].set_yscale("log")
+    ypl.compare(axes["A"], runs, "star_dist", y="star_L",
+                plot_type="scatter", **scatter_kwargs)
 
     hist_kwargs = {"histtype": "step"}
     axes["B"].set_ylabel("# Targets")
@@ -80,7 +83,8 @@ def ypl_pipeline(runs):
 
     # Plot HZ completeness.
     ypl.compare(
-        axes["E"], runs, "star_dist", y="star_L", c="star_comp_det", plot_type="scatter"
+        axes["E"], runs, "star_dist", y="star_L", c="star_comp_det",
+        plot_type="scatter", **scatter_kwargs
     )
 
     # Create the inset colorbar axes object.
