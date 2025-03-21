@@ -53,7 +53,6 @@ def main():
         run_dirs = [run_paths]
 
     for run_dir in run_dirs:
-        print(run_dir)
         if is_ayo(run_dir):
             runs.append(AYODirectory(Path(run_dir)))
         else:
