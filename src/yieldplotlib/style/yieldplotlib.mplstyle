@@ -13,4 +13,4 @@ ytick.labelsize: 12
 image.cmap: "plasma"
 
 # Hex colors generated using https://venngage.com/tools/accessible-color-palette-generator
-axes.prop_cycle: (cycler(color=['5f7fe7', '7861e4', 'af5fd5', 'dd67aa', 'ec6e77']) + cycler(linestyle=['-', '--', ':', '-.', '(0, (3, 1, 1, 1))'])) # note these must be the same length
+axes.prop_cycle: (cycler(color=['5f7fe7', 'dd67aa', '7861e4', 'af5fd5', 'ec6e77']) + cycler(linestyle=['-', '--', ':', '-.', '(0, (3, 1, 1, 1))'])) # note these must be the same length
