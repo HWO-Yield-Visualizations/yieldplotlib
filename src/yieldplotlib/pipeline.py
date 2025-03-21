@@ -10,6 +10,18 @@ import yieldplotlib as ypl
 from yieldplotlib.load import AYODirectory, EXOSIMSDirectory
 from yieldplotlib.plots.yield_hist import plot_hist
 
+# Set pipeline plot specific params
+params = {
+    "axes.titlesize": 12,
+    "axes.labelsize": 8,
+    "lines.linewidth": 4,
+    "lines.markersize": 3,
+    "xtick.labelsize": 8,
+    "ytick.labelsize": 8,
+    "legend.fontsize": 8,
+}
+plt.rcParams.update(params)
+
 
 def ypl_pipeline(runs):
     """Runs the yieldplotlib pipeline to generate a page of summary plots."""
