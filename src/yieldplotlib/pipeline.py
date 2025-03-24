@@ -1,6 +1,9 @@
 """Pipeline for generating a standard sheet of yield plots."""
 
+import io
+import importlib_resources
 import matplotlib.pyplot as plt
+from PIL import Image
 import numpy as np
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
@@ -31,7 +34,8 @@ def ypl_pipeline(runs):
     plt.margins(0.1, 0.2)
 
     # Add ypl "watermark".
-    ypl_logo = plt.imread("/Users/ssteiger/repos/yieldplotlib/docs/_static/logo.png")
+    ypl_im = importlib_resources.read_binary("yieldplotlib", "logo.png")
+    ypl_logo = Image.open(io.BytesIO(ypl_im))
     newax = fig.add_axes([0.05, 0.9, 0.05, 0.05], anchor="NE", zorder=1)
     newax.axis("off")
     newax.imshow(ypl_logo)
