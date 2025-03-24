@@ -60,10 +60,10 @@ class AccessibilityManager:
         # Get colormap used for scatter points.
         try:
             scatter_cmap = self.ax.collections[0].get_cmap()
-            if isinstance(scatter_cmap,
-                          matplotlib.colors.LinearSegmentedColormap):
-                rgb_values = self.ax.collections[0].get_cmap()(
-                    np.arange(0, 1, 0.1))[:, :3]
+            if isinstance(scatter_cmap, matplotlib.colors.LinearSegmentedColormap):
+                rgb_values = self.ax.collections[0].get_cmap()(np.arange(0, 1, 0.1))[
+                    :, :3
+                ]
                 cmap_colors = []
                 for val in rgb_values:
                     cmap_colors.append([val[0], val[1], val[2]])
@@ -108,10 +108,12 @@ class AccessibilityManager:
             return
 
         if np.abs(np.max(lightness) - np.min(lightness)) < 50:
-            warning = (f"Colors do not have enough dynamic range, lightness "
-                       f"difference is"
-                       f" {np.abs(np.max(lightness) - np.min(lightness)):.2f} "
-                       f"and should be at least 50.")
+            warning = (
+                f"Colors do not have enough dynamic range, lightness "
+                f"difference is"
+                f" {np.abs(np.max(lightness) - np.min(lightness)):.2f} "
+                f"and should be at least 50."
+            )
             self.warnings.append(warning)
             logger.warning(warning)
 
