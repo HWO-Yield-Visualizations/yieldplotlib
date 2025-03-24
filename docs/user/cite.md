@@ -6,8 +6,7 @@ of the version you used as a software citation:
 ```
 @software{sarah_steiger_2025_15013341,
   author       = {Sarah Steiger and
-                  Corey Spohn and
-                  actions-user},
+                  Corey Spohn},
   title        = {HWO-Yield-Visualizations/yieldplotlib: v0.3.0},
   month        = mar,
   year         = 2025,
