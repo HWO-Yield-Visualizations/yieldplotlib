@@ -1,13 +1,14 @@
 """Pipeline for generating a standard sheet of yield plots."""
 
 import io
+
 import importlib_resources
 import matplotlib.pyplot as plt
-from PIL import Image
 import numpy as np
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from PIL import Image
 
 import yieldplotlib as ypl
 from yieldplotlib.load import AYODirectory, EXOSIMSDirectory
