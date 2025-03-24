@@ -35,6 +35,9 @@ classifiers = [
 Homepage = "https://github.com/HWO-Yield-Visualizations/yieldplotlib"
 Issues = "https://github.com/HWO-Yield-Visualizations/yieldplotlib/issues"
 
+[tool.hatch.build]
+include = ["src/yieldplotlib/data/logo.png"]
+
 [project.scripts]
 run_ypl = "yieldplotlib.ypl_cli:main"
 
