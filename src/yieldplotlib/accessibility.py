@@ -57,8 +57,35 @@ class AccessibilityManager:
         for lc in line_colors:
             rgb.append(lc)
 
-        # Get colors for all faces (i.e. scatter points).
-        face_colors = [list(to_rgb(s.get_facecolor())) for s in self.ax.collections]
+        # Get colormap used for scatter points.
+        try:
+            scatter_cmap = self.ax.collections[0].get_cmap()
+            if isinstance(scatter_cmap,
+                          matplotlib.colors.LinearSegmentedColormap):
+                rgb_values = self.ax.collections[0].get_cmap()(
+                    np.arange(0, 1, 0.1))[:, :3]
+                cmap_colors = []
+                for val in rgb_values:
+                    cmap_colors.append([val[0], val[1], val[2]])
+
+            else:
+                cmap_colors = scatter_cmap.colors
+                cmap_colors = [to_rgb(color) for color in cmap_colors]
+
+            cmap_lab = cspace_converter("sRGB1", "CAM02-UCS")(cmap_colors)
+            cmap_lightness = cmap_lab[:, 0]
+
+            if not is_monotonic(cmap_lightness):
+                warning = "Colormap for scatter points is not monotonic"
+                self.warnings.append(warning)
+                logger.warning(warning)
+
+        except IndexError:
+            pass
+
+        # Get colors for all faces.
+        fcs = [s.get_facecolor() for s in self.ax.collections]
+        face_colors = [list(to_rgb(fc)) for fc in np.squeeze(fcs)]
         for fc in face_colors:
             rgb.append(fc)
 
@@ -81,12 +108,15 @@ class AccessibilityManager:
             return
 
         if np.abs(np.max(lightness) - np.min(lightness)) < 50:
-            warning = "Colors do not have enough dynamic range"
+            warning = (f"Colors do not have enough dynamic range, lightness "
+                       f"difference is"
+                       f" {np.abs(np.max(lightness) - np.min(lightness)):.2f} "
+                       f"and should be at least 50.")
             self.warnings.append(warning)
             logger.warning(warning)
 
         if not is_monotonic(lightness):
-            warning = "Colors are not monotonic"
+            warning = "Colors may not be monotonic"
             self.warnings.append(warning)
             logger.warning(warning)
 
