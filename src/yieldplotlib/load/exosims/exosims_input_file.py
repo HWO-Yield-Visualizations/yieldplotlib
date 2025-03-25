@@ -529,9 +529,9 @@ class EXOSIMSInputFile(JSONFile):
             int_times = int_times[index_map]
         # Make sure the integration times are being used for the correct stars
 
-        assert (
-            int_times.shape == exosims_name_order.shape
-        ), "int_times and star_names must have the same shape"
+        assert int_times.shape == exosims_name_order.shape, (
+            "int_times and star_names must have the same shape"
+        )
         if not self.all_local_paths:
             logger.warning(
                 "Completeness per integration time shouldn't be trusted without "
