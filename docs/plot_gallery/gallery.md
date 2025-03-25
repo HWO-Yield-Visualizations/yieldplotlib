@@ -1,4 +1,4 @@
-# Plot Gallery 
+# Plot Gallery
 
 ![image info](./plots/core_throughput.png)
 
