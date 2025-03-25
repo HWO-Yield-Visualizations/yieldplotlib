@@ -239,7 +239,7 @@ KEY_MAP = {
                 "value": None
             }
         },
-        "comment": ""
+        "comment": "For AYO this is a hard cutoff, not the actual IWA of the coronagraph which comes from the YIP. This is also true for EXOSIMS, when the param is set in the observingMode, or manually set in the starlightSuppressionSystem definition (which the obsmode then inherits).  Otherwise, it is the largest IWA-value from the input files in the YIP."
     },
     "Jmag": {
         "AYOCSVFile": {
@@ -419,7 +419,7 @@ KEY_MAP = {
                 "value": None
             }
         },
-        "comment": ""
+        "comment": "For AYO this is a hard cutoff, not the actual OWA of the coronagraph which comes from the YIP. This is also true for EXOSIMS, when the param is set in the observingMode, or manually set in the starlightSuppressionSystem definition (which the obsmode then inherits).  Otherwise, it is the largest OWA-value from the input files in the YIP."
     },
     "pixel_scale": {
         "EXOSIMSInputFile": {
