@@ -3,12 +3,15 @@
 import copy
 from pathlib import Path
 
+import numpy as np
+import pandas as pd
 from astropy import units as u
 from EXOSIMS.Prototypes.OpticalSystem import OpticalSystem
 from EXOSIMS.util.get_module import get_module_from_specs
 
 from yieldplotlib.core.file_nodes import JSONFile
 from yieldplotlib.key_map import KEY_MAP
+from yieldplotlib.logger import logger
 
 # Define which nested keys correspond to the modes, systems, and
 # instruments for parsing.
@@ -86,6 +89,12 @@ TL_PARAMS = [
     "MsTrue",  # Note: The `true` mass is probabilistic based on MsEst
 ]
 
+# Keys that need special handling
+SPECIAL_KEYS = {
+    "blind_comp_det": "_get_comp_per_intTime",
+    "blind_comp_spec": "_get_comp_per_intTime",
+}
+
 
 class EXOSIMSInputFile(JSONFile):
     """Node for handling the EXOSIMS input JSON files.
@@ -156,10 +165,18 @@ class EXOSIMSInputFile(JSONFile):
                         # Delete the key from the exosims_specs dictionary
                         del self.exosims_specs[key]
                         self.all_local_paths = False
+                        logger.debug(
+                            f"Deleting key {key} from {self.file_name} because it "
+                            "does not exist locally."
+                        )
                     elif self.exosims_specs[key] == "":
                         # Delete the key from the exosims_specs dictionary but don't
                         # set all_local_paths to False because it's not a path
                         del self.exosims_specs[key]
+                        logger.debug(
+                            f"Deleting key {key} from {self.file_name} because an "
+                            "empty string was provided."
+                        )
 
         # Handle starlight suppression systems
         sss = self.data["starlightSuppressionSystems"]
@@ -177,6 +194,11 @@ class EXOSIMSInputFile(JSONFile):
                         elif syst[key] == "":
                             # Delete the key from the exosims_specs dictionary but don't
                             # set all_local_paths to False because it's not a path
+                            logger.debug(
+                                f"Deleting key {key} from {self.file_name}'s "
+                                f"starlight suppression system {system} because an "
+                                "empty string was provided."
+                            )
                             del self.exosims_specs["starlightSuppressionSystems"][
                                 syst_ind
                             ][key]
@@ -186,6 +208,11 @@ class EXOSIMSInputFile(JSONFile):
                                 syst_ind
                             ][key]
                             self.all_local_paths = False
+                            logger.debug(
+                                f"Deleting key {key} from {self.file_name}'s "
+                                f"starlight suppression system {system} because it "
+                                "does not exist locally."
+                            )
 
         # Handle science instruments
         for instrument in self.used_insts:
@@ -204,10 +231,20 @@ class EXOSIMSInputFile(JSONFile):
                             # Delete the key from the exosims_specs dictionary but don't
                             # set all_local_paths to False because it's not a path
                             del self.exosims_specs["scienceInstruments"][inst_ind][key]
+                            logger.debug(
+                                f"Deleting key {key} from {self.file_name}'s "
+                                f"science instrument {instrument} because an "
+                                "empty string was provided."
+                            )
                         else:
                             # Delete the key from the exosims_specs dictionary
                             del self.exosims_specs["scienceInstruments"][inst_ind][key]
                             self.all_local_paths = False
+                            logger.debug(
+                                f"Deleting key {key} from {self.file_name}'s "
+                                f"science instrument {instrument} because it "
+                                "does not exist locally."
+                            )
 
     def get_unit(self, key):
         """Get the associated unit for a given key.
@@ -276,6 +313,8 @@ class EXOSIMSInputFile(JSONFile):
         Returns:
             The value(s) associated with the key.
         """
+        if key in SPECIAL_KEYS:
+            return getattr(self, SPECIAL_KEYS[key])(key, **kwargs)
         in_TL = key in TL_PARAMS
         if in_TL:
             # Simple case, just return the value from the TargetList object
@@ -380,6 +419,139 @@ class EXOSIMSInputFile(JSONFile):
             self.TL = get_module_from_specs(self.exosims_specs, "TargetList")(
                 **self.exosims_specs
             )
+
+    def _get_comp_per_intTime(self, key, int_times=None, star_names=None):
+        """Get the completeness per integration time.
+
+        Args:
+            key (str):
+                The key to get the completeness for, either "blind_comp_det" or
+                "blind_comp_spec".
+            int_times (astropy.units.Quantity):
+                The integration times.
+            star_names (list):
+                The names of the stars of interest.
+
+        Returns:
+            np.ndarray:
+                The completeness values for each integration time and star.
+        """
+        is_spec = key == "blind_comp_spec"
+        if is_spec:
+            # Get the default spectroscopy mode
+            mode_syst_ind = self.spec_syst_ind
+            mode_inst_ind = self.spec_inst_ind
+            mode_syst = self.data["starlightSuppressionSystems"][mode_syst_ind]["name"]
+            mode_inst = self.data["scienceInstruments"][mode_inst_ind]["name"]
+        else:
+            # Get the default detection mode
+            mode_syst_ind = self.det_syst_ind
+            mode_inst_ind = self.det_inst_ind
+            mode_syst = self.data["starlightSuppressionSystems"][mode_syst_ind]["name"]
+            mode_inst = self.data["scienceInstruments"][mode_inst_ind]["name"]
+
+        TL = self.TL
+        OS = TL.OpticalSystem
+        SU = self.SS.SimulatedUniverse
+        if star_names is None:
+            valid_stars = np.ones(len(TL.Name), dtype=bool)
+            _star_names = TL.Name
+        else:
+            # Check for which stars are in the target list
+            valid_stars = np.isin(star_names, TL.Name)
+            _star_names = star_names[valid_stars]
+            n_invalid_stars = np.sum(~valid_stars)
+            if n_invalid_stars > 0:
+                logger.warning(
+                    f"Found {n_invalid_stars} stars in the provided star_names that "
+                    "were not found in the TargetList object. These stars will be "
+                    "ignored."
+                )
+        # Get the mode dictionary from the generated EXOSIMS objects,
+        # NOTE: We cannot take them from the input file because the `hex` value
+        # is not populated in the input file
+        matching_modes = [
+            m
+            for m in OS.observingModes
+            if m["instName"] == mode_inst and m["systName"] == mode_syst
+        ]
+        if len(matching_modes) > 1:
+            logger.warning(
+                f"Found {len(matching_modes)} modes with the both inst {mode_inst}"
+                f" and syst {mode_syst}. Using the first one with SNR: "
+                f"{matching_modes[0]['SNR']}"
+            )
+        mode = matching_modes[0]
+        sInds = np.arange(len(TL.Name))[np.isin(TL.Name, _star_names)]
+        exosims_name_order = TL.Name[sInds]
+        # Get the index map of the original star name for each of the stars in the
+        # filtered star list
+        star_name_to_idx = {name: idx for idx, name in enumerate(star_names)}
+        index_map = np.array(
+            [star_name_to_idx.get(name) for name in exosims_name_order]
+        )
+
+        # Standard local zodi flux
+        fZ = np.repeat(TL.ZodiacalLight.fZ0, len(sInds))
+
+        # Standard working angle (get's luminosity corrected in EXOSIMS)
+        WA = TL.int_WA[sInds]
+        # Standard planet-star dMag to use (also luminosity corrected by EXOSIMS)
+        dMag = TL.int_dMag[sInds]
+
+        # Scale to the working angles
+        JEZ0 = TL.JEZ0[mode["hex"]][sInds]
+        # Calculate the planet-star distance based on the working angles
+        d = np.tan(WA) * TL.dist[sInds]
+
+        # Get nEZ values for stars with planets, default to 3 for stars without planets
+        star_nEZ = np.full(len(sInds), 3.0)  # default value of 3
+        # For each star with planets, get its nEZ value
+        for i, sInd in enumerate(sInds):
+            # Get indices of all planets for this star
+            planet_indices = np.where(SU.plan2star == sInd)[0]
+            # Use the first planet's nEZ value for the star
+            if len(planet_indices) > 0:
+                star_nEZ[i] = SU.nEZ[planet_indices[0]]
+
+        # Use these nEZ values to scale JEZ
+        JEZ = JEZ0 * star_nEZ * (1 / d.to("AU").value) ** 2
+
+        # Get the star indices for the given star names
+        if int_times is None:
+            int_times = OS.calc_intTime(TL, sInds, fZ, JEZ, dMag, WA, mode)
+            # Set nan values to the maximum integration time
+            int_times[np.isnan(int_times)] = OS.intCutoff
+        elif isinstance(int_times, pd.Series):
+            int_times = int_times.values * u.d
+            int_times = int_times[index_map]
+        else:
+            int_times = int_times[index_map]
+        # Make sure the integration times are being used for the correct stars
+
+        assert int_times.shape == exosims_name_order.shape, (
+            "int_times and star_names must have the same shape"
+        )
+        if not self.all_local_paths:
+            logger.warning(
+                "Completeness per integration time shouldn't be trusted without "
+                "having all the necessary files to generate the OpticalSystem object."
+                "Returning None."
+            )
+            return None
+
+        # Finally, calculate completeness
+        comp = TL.Completeness.comp_per_intTime(int_times, TL, sInds, fZ, JEZ, WA, mode)
+        # Use the filtered comp_star_names instead of TL.Name[sInds]
+        result = pd.DataFrame(
+            {
+                "completeness": comp,
+                "star_name": exosims_name_order,
+                "integration_time": int_times,
+            },
+        )
+
+        return result
 
     def find_unit_for_exosims_key(self, exosims_key):
         """Find the unit for a given EXOSIMS key.

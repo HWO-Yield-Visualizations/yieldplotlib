@@ -42,7 +42,7 @@ class FileNode(Node):
         # translated_key = self.translate_key(key)
         has_key = key in self.file_key_map.keys()
         if has_key:
-            logger.info(f"Key {key} found in {self.file_name}.")
+            logger.debug(f"Key {key} found in {self.file_name}.")
             data = self._get(self.file_key_map[key], **kwargs)
             return self.transform_data(key, data, **kwargs)
         else:
