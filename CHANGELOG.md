@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.4.0...v0.4.1) (2025-03-25)
+
+
+### Bug Fixes
+
+* Remove leftover code ([7b09691](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/7b09691fb5c3b8770fa82a1140a71f48a083017b))
+
 ## [0.4.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.3.0...v0.4.0) (2025-03-25)
 
 
