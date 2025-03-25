@@ -5,6 +5,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Angdiam (mas)",
+            "unit": "mas",
             "transform": {
                 "type": "none",
                 "value": None
@@ -25,6 +26,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "blind_comp_det",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -45,6 +47,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "blind_comp_spec",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -65,6 +68,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Bmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -94,6 +98,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_CIC",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -114,6 +119,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_DC",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -125,6 +131,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Dec",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -154,6 +161,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Total Spec Char Time (days)",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -174,6 +182,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Total BB Imaging Time (days)",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -185,6 +194,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Hmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -205,6 +215,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Imag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -234,6 +245,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "IWA",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -245,6 +257,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Jmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -265,6 +278,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Kmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -285,6 +299,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Mass (Msun)",
+            "unit": "M_sun",
             "transform": {
                 "type": "none",
                 "value": None
@@ -314,6 +329,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "M_V",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -334,6 +350,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "lambda",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -354,6 +371,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "starID",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -374,6 +392,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "HIP",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -394,6 +413,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "Toptical",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -414,6 +434,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "OWA",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -434,6 +455,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_pixscale_mas",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -454,6 +476,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "D",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -474,6 +497,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_QE",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -494,6 +518,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "SR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -505,6 +530,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "RA",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -534,6 +560,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_RN",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -545,6 +572,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Rmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -574,6 +602,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_det_CIC",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -594,6 +623,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_det_DC",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -614,6 +644,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_lambda",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -634,6 +665,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_Toptical",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -654,6 +686,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_det_pixscale_mas",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -674,6 +707,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_det_QE",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -694,6 +728,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_SR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -714,6 +749,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_det_RN",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -734,6 +770,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_SNR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -754,6 +791,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_det_tread",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -774,6 +812,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "SNR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -794,6 +833,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Total HZ Completeness",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -814,6 +854,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "dist (pc)",
+            "unit": "pc",
             "transform": {
                 "type": "none",
                 "value": None
@@ -834,6 +875,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "starID",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -854,6 +896,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Lstar (Lsun)",
+            "unit": "L_sun",
             "transform": {
                 "type": "none",
                 "value": None
@@ -874,6 +917,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "HIP",
+            "unit": "",
             "transform": {
                 "type": "custom",
                 "value": None
@@ -894,6 +938,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Type",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -914,6 +959,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_tread",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -925,6 +971,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Umag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -945,6 +992,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Vmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -974,6 +1022,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Cold Jupiter yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -994,6 +1043,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Cold Neptune yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1014,6 +1064,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Cold Rocky yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1034,6 +1085,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Cold Sub-Neptune yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1054,6 +1106,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Cold SuperEarth yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1074,6 +1127,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "exoEarth candidate yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1094,6 +1148,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Hot Jupiter yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1114,6 +1169,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Hot Neptune yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1134,6 +1190,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Hot Rocky yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1154,6 +1211,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Hot Sub-Neptune yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1174,6 +1232,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Hot SuperEarth yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1194,6 +1253,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Warm Jupiter yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1214,6 +1274,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Warm Neptune yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1234,6 +1295,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Warm Rocky yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1254,6 +1316,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Warm Sub-Neptune yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1274,6 +1337,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Warm SuperEarth yield",
+            "unit": "",
             "transform": {
                 "type": "sum",
                 "value": None
@@ -1285,6 +1349,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "WDS_sep",
+            "unit": "",
             "transform": {
                 "type": "custom",
                 "value": None
@@ -1296,6 +1361,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "WDS_dmag",
+            "unit": "",
             "transform": {
                 "type": "custom",
                 "value": None
@@ -1307,6 +1373,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Detection Coronagraph ID",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1318,6 +1385,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Characterization Coronagraph ID",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1329,6 +1397,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Detection Wavelength (microns)",
+            "unit": "um",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1340,6 +1409,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Characterization Wavelength (microns)",
+            "unit": "um",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1351,6 +1421,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "EEID (mas)",
+            "unit": "mas",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1362,6 +1433,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "nexozodis (zodis)",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1373,6 +1445,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Total EEC Yield",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1384,6 +1457,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Visit #",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1395,6 +1469,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Visit dt (years)",
+            "unit": "years",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1406,6 +1481,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Exp Time (days)",
+            "unit": "days",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1417,6 +1493,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Spec char time (days)",
+            "unit": "days",
             "transform": {
                 "type": "none",
                 "value": None
