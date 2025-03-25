@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.4.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.4.0...v0.4.1) (2025-03-25)
+
+
+### Bug Fixes
+
+* Remove leftover code ([7b09691](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/7b09691fb5c3b8770fa82a1140a71f48a083017b))
+
+## [0.4.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.3.0...v0.4.0) (2025-03-25)
+
+
+### Features
+
+* add command line interface and simple pipeline ([ec69c29](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/ec69c298fb70cda779e1d28d8e21d9631434e8ac))
+* Add comparison plots ([b2d0fc7](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/b2d0fc77d604b4405109c5eaafad5a29b457e922))
+* Add generic plots that extend the standard matplotlib Axes class ([b5f339a](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/b5f339a0dade2bc54c7a915da2bfbc1965ffae39))
+* Added example scripts ([3bcd1c6](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/3bcd1c6b663184e8c8e46ed73d381506c0eb95ec))
+* Added method to get/calculate single-visit completeness values from AYO and EXOSIMS ([df233a0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/df233a0d781b37b2258d9918072b8aebd2eb315b))
+* AYO unit management for CSV files ([daa56d1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/daa56d109e6992902d8539a8ec8f1d8c51083e7d))
+* Enhance data retrieval methods in file nodes ([e26e610](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/e26e610edb49ee8b72a470ae21db3d157969af27))
+* Intermediate access to EXOSIMS TargetList parameters ([427deb1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/427deb1fc982a5364baf5b2a6dbc990b263ccac8))
+* New plotting methods ([a02c638](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/a02c6384c8bfeba2dd9f36c08445151b1037114d))
+* Support simple expresion parsing in the AYO input files ([0dc84ec](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/0dc84ec9923cfdeb316d96bace4be3b42a470f07))
+* Use common bins for histograms in comparison plots ([ee1ba90](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/ee1ba907b5990b2cafff96804ffcac5addcc8998))
+
+
+### Bug Fixes
+
+* blank line ([a59905d](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/a59905d51dc6fcd8ba8165de920499bce0b1dffb))
+* change default color cycler for now for higher visibility ([d95fcce](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/d95fccee9750231af4e4ada0718a482ff8654e6d))
+* Handle situations where an empty string is passed as a path ([e0aafa2](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/e0aafa2bee8a1a5c2e9d3fbba408d0a25a8a77f0))
+* Handle situations where an empty string is passed as a path parameter ([a5022cc](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/a5022cc564ced49c2c97e70b913002fafc8f956a))
+* have make_offax_psf_movie take YIPDirectory as input ([214b70b](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/214b70b0feee2392c105aadbd80dca045a5f2461))
+* make stellar luminosity logscale and make markers easier to see ([ef8fee6](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/ef8fee694229170ddf8f8c7e7bd907b50e667073))
+* move summary line to top ([8f7b7f9](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/8f7b7f9479a71c4d9df422c180529ae99baaea71))
+
 ## [0.3.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.2.0...v0.3.0) (2025-03-12)
 
 

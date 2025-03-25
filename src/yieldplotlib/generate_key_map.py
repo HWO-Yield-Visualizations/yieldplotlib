@@ -180,6 +180,7 @@ def parse_csv(input_csv):
             ayo_file = row.get("AYO file", "").strip()
             ayo_class = row.get("AYO Class", "").strip()
             exo_unit = row.get("EXOSIMS unit", "").strip()
+            ayo_unit = row.get("AYO unit", "").strip()
             comment = row.get("Comment", "").strip()
 
             # New columns for transformation
@@ -234,6 +235,7 @@ def parse_csv(input_csv):
                     "class": ayo_class,
                     "file": ayo_file,
                     "name": ayo_name,
+                    "unit": ayo_unit,
                     "transform": {
                         "type": ayo_transform_type if ayo_transform_type else "none",
                         "value": ayo_transform_value if ayo_transform_value else None,
@@ -289,6 +291,7 @@ def parse_csv(input_csv):
             map_entry[ayo_class] = {
                 "file": ayo_entry["file"],
                 "name": ayo_entry["name"],
+                "unit": ayo_entry["unit"],
                 "transform": {
                     "type": ayo_entry["transform"]["type"],
                     "value": ayo_entry["transform"]["value"],
@@ -351,8 +354,9 @@ def write_key_map(key_map, output_py):
                     f.write(f'        "{lib_class}": {{\n')
                     f.write(f'            "file": "{lib_entry["file"]}",\n')
                     f.write(f'            "name": "{lib_entry["name"]}",\n')
-                    if lib_class.startswith("EXOSIMS"):
-                        f.write(f'            "unit": "{lib_entry["unit"]}",\n')
+                    f.write(f'            "unit": "{lib_entry["unit"]}",\n')
+                    # elif lib_class.startswith("AYO"):
+                    #     f.write(f'            "unit": "{lib_entry["unit"]}",\n')
                     # Handle transformation details
                     transform_type = lib_entry["transform"]["type"]
                     transform_value = lib_entry["transform"]["value"]

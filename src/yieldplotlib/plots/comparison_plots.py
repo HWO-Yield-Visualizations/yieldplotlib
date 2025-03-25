@@ -4,6 +4,7 @@ This module provides functions for easily comparing data from multiple directory
 in a single plot or across multiple subplots.
 """
 
+import astropy.units as u
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -31,6 +32,49 @@ def _get_plot_method(ax, plot_type):
             (f"Unsupported plot_type: {plot_type}. Use 'scatter', 'plot', or 'hist'.")
         )
     return plot_method
+
+
+def _calculate_consistent_bins(directories, x, bins_param=None):
+    """Calculate consistent histogram bins across multiple directories.
+
+    Args:
+        directories (list):
+            List of DirectoryNode objects.
+        x (str):
+            Key for data to calculate bins for.
+        bins_param (int, sequence, or str, optional):
+            Bins parameter to use. If None, auto-calculated bins will be used.
+
+    Returns:
+        array-like:
+            Calculated bin edges to use for histograms.
+    """
+    all_data = []
+    data_with_units = None
+
+    # Collect all data from all directories
+    for directory in directories:
+        data = directory.get(x)
+        if data is not None:
+            all_data.extend(np.asarray(data).flatten())
+            # Keep track of any Quantity objects to preserve units
+            if isinstance(data, u.Quantity) and data_with_units is None:
+                data_with_units = data
+
+    if not all_data:
+        return None
+
+    # Calculate bins based on all data combined
+    if bins_param is not None:
+        bins = bins_param
+    else:
+        bins = np.histogram_bin_edges(all_data, bins="auto")
+
+    # Preserve units if needed
+    if data_with_units is not None:
+        bins = bins * data_with_units.unit
+
+    return bins
 
 
 def _validate_y_parameter(plot_type, y):
@@ -369,6 +413,12 @@ def compare(
     if linestyles is None and plot_type == "plot":
         linestyles = default_linestyles
 
+    # For histograms, calculate consistent bins across all directories
+    if plot_type == "hist":
+        bins = _calculate_consistent_bins(directories, x, kwargs.get("bins"))
+        if bins is not None:
+            kwargs["bins"] = bins
+
     # Plot each dataset
     for i, (directory, label) in enumerate(zip(directories, labels)):
         # Create plot kwargs for this dataset
@@ -470,6 +520,12 @@ def multi(
         sharey=sharey,
         squeeze=False,
     )
+
+    # For histograms, calculate consistent bins across all directories
+    if plot_type == "hist":
+        bins = _calculate_consistent_bins(directories, x, kwargs.get("bins"))
+        if bins is not None:
+            kwargs["bins"] = bins
 
     # Flatten axes for easy iteration
     axes_flat = axes.flatten()
@@ -589,6 +645,23 @@ def panel(
     if len(titles) < n_plots:
         titles.extend([f"Plot {i + 1}" for i in range(len(titles), n_plots)])
 
+    # Prepare consistent bins for each spec if it's a histogram
+    spec_bins = {}
+    for j, spec in enumerate(specs):
+        plot_type = spec.get("plot_type", "scatter")
+        x = spec.get("x")
+
+        if plot_type == "hist" and x:
+            # Combine all kwargs: global kwargs + spec-specific
+            combined_kwargs = kwargs.copy()
+            for k, v in spec.items():
+                if k not in ["x", "y", "plot_type"]:
+                    combined_kwargs[k] = v
+
+            spec_bins[j] = _calculate_consistent_bins(
+                directories, x, combined_kwargs.get("bins")
+            )
+
     # Plot each directory-spec combination
     plot_idx = 0
     for i, directory in enumerate(directories):
@@ -619,6 +692,10 @@ def panel(
             for k, v in spec.items():
                 if k not in ["x", "y", "plot_type"]:
                     plot_kwargs[k] = v
+
+            # Apply consistent bins if this is a histogram
+            if plot_type == "hist" and j in spec_bins and spec_bins[j] is not None:
+                plot_kwargs["bins"] = spec_bins[j]
 
             # Plot the data
             _plot_data(ax, directory, x, y, plot_type, plot_kwargs)
@@ -730,13 +807,29 @@ def xy_grid(
     default_markers = ["o", "s", "^", "D", "v", "<", ">", "p", "*", "h", "H", "+", "x"]
     default_linestyles = ["-", "--", "-.", ":"]
 
+    # For each x_key, calculate consistent bins if histogram
+    if plot_type == "hist":
+        x_key_bins = {}
+        for j, x_key in enumerate(x_keys):
+            x_key_bins[j] = _calculate_consistent_bins(
+                directories, x_key, kwargs.get("bins")
+            )
+
     # Loop over each grid cell and plot
     for i, y_key in enumerate(y_keys):
         for j, x_key in enumerate(x_keys):
             ax = axes[i, j]
+
+            # If histogram, set consistent bins for this x_key
+            if plot_type == "hist" and j in x_key_bins and x_key_bins[j] is not None:
+                local_kwargs = kwargs.copy()
+                local_kwargs["bins"] = x_key_bins[j]
+            else:
+                local_kwargs = kwargs
+
             # For each directory, plot on this axis
             for idx, directory in enumerate(directories):
-                plot_kwargs = kwargs.copy()
+                plot_kwargs = local_kwargs.copy()
                 # Use the directory class name as default label if not provided
                 if "label" not in plot_kwargs:
                     plot_kwargs["label"] = directory.__class__.__name__

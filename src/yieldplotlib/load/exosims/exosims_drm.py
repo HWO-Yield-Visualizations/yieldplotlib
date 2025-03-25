@@ -12,9 +12,13 @@ class DRMFile(PickleFile):
 
     def load(self):
         """Load the DRM file as a list of dictionaries."""
+        # INFO: We are ignoring DRM files because they are often built on
+        # EXOSIMS versions that are not available on the local machine and
+        # cannot be loaded. The vast majority of the information the DRM data
+        # is available in the CSV files.
         pass
 
-    def _get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Custom logic for DRM files."""
         # TODO: Implement custom logic for DRM files.
         return None

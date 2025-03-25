@@ -1,20 +1,16 @@
 """Generate plots for yield input packages."""
 
-from pathlib import Path
-
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
 
-from yieldplotlib.load.yip_directory import YIPDirectory
 
-
-def make_offax_psf_movie(yip_folder, save_name, ax_kwargs={}, plot_kwargs={}):
+def make_offax_psf_movie(yip, save_name, ax_kwargs={}, plot_kwargs={}):
     """Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
 
     Args:
-        yip_folder (str):
-            File path to the yield input package folder.
+        yip (YIPDirectory):
+            YIPDirectory to plot.
         save_name (str):
             File path to where the output movie will be saved.
         ax_kwargs (dict, optional):
@@ -25,9 +21,6 @@ def make_offax_psf_movie(yip_folder, save_name, ax_kwargs={}, plot_kwargs={}):
     Returns:
         None
     """
-    # Define the YIPDirectory.
-    yip = YIPDirectory(Path(yip_folder))
-
     # Get the off-axis stellar PSF data from the YIP.
     offax_psf_data = yip.get("offax.data")
     offax_psf_offsets_list = yip.get("offax_offset_list.data")
@@ -144,7 +137,7 @@ def plot_core_throughtput(
             ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
 
     ax.set(**ax_kwargs)
-    plt.xlabel("Separation ($\lambda/D$)")
+    plt.xlabel("Separation ($\\lambda/D$)")
     plt.ylabel("Throughput")
 
     plt.legend()

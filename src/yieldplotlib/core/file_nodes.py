@@ -42,18 +42,25 @@ class FileNode(Node):
         # translated_key = self.translate_key(key)
         has_key = key in self.file_key_map.keys()
         if has_key:
-            logger.info(f"Key {key} found in {self.file_name}.")
-            data = self._get(self.file_key_map[key])
+            logger.debug(f"Key {key} found in {self.file_name}.")
+            data = self._get(self.file_key_map[key], **kwargs)
             return self.transform_data(key, data, **kwargs)
         else:
             logger.debug(f"Key {key} not found in {self.file_name}.")
             return None
 
-    def _get(self, translated_key: str):
-        """Subclass-specific method to retrieve the data associated with the key."""
+    def _get(self, translated_key: str, **kwargs):
+        """Subclass-specific method to retrieve the data associated with the key.
+
+        Args:
+            translated_key: The key to look up in the data.
+            **kwargs: Additional arguments that may be used by specific implementations.
+        """
         raise NotImplementedError("Subclasses must implement the _get method.")
 
-    def transform_data(self, key: str, data, type_override=None, value_override=None):
+    def transform_data(
+        self, key: str, data, type_override=None, value_override=None, **kwargs
+    ):
         """Apply key-specific data transformations defined in the subclass."""
         _type = self.file_transforms[key]["type"]
         _val = self.file_transforms[key]["value"]
@@ -97,7 +104,7 @@ class CSVFile(FileNode):
         # Strip whitespace from column names
         self.data.columns = self.data.columns.str.strip()
 
-    def _get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""
         if key in self.data.columns:
             return self.data[key].values
@@ -117,7 +124,7 @@ class JSONFile(FileNode):
         with open(self.file_path, "r") as f:
             self.data = json.load(f)
 
-    def _get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""
         values = {}
 
@@ -158,7 +165,7 @@ class PickleFile(FileNode):
         with open(self.file_path, "rb") as f:
             self.data = pickle.load(f)
 
-    def _get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""
         return self.data.get(key, None)
 
@@ -176,7 +183,7 @@ class FitsFile(FileNode):
         """Load the fits file."""
         self.fits_file = pyfits.open(self.file_path)
 
-    def get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""
         if key == "data":
             return pyfits.getdata(self.file_path)

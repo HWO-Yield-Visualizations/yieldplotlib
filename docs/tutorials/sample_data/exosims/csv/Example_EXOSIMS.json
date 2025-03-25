@@ -222,7 +222,7 @@
   "modules": {
     "PlanetPopulation": "AlbedoByRadiusDulzPlavchan",
     "StarCatalog": "EXOCAT1",
-    "OpticalSystem": "Nemati_2xbg",
+    "OpticalSystem": "Nemati",
     "ZodiacalLight": "Mennesson",
     "BackgroundSources": "GalaxiesFaintStars",
     "PlanetPhysicalModel": "Forecaster",
@@ -233,7 +233,7 @@
     "TargetList": " ",
     "SimulatedUniverse": "DulzPlavchanUniverseEarthsOnly",
     "SurveySimulation": "coroOnlyScheduler",
-    "SurveyEnsemble": "EXOSIMS_local.IPClusterEnsembleJPL2"
+    "SurveyEnsemble": " "
   },
   "completeness_specs": {
     "modules": {

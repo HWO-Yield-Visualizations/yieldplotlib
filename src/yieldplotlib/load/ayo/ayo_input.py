@@ -35,7 +35,7 @@ class AYOInputFile(FileNode):
             self.raw_data = f.read()
         logger.info(f"Loaded AYO input file: {self.file_path}")
 
-    def _get(self, key: str):
+    def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""
         return self.data.get(key, None)
 
@@ -77,6 +77,51 @@ class AYOInputFile(FileNode):
             .setParseAction(self._convert_array)
         )
 
+        # Define parameter reference (used in expressions)
+        param_ref = identifier.copy().setName("param_ref")
+
+        # Define expression parts - handle addition, subtraction,
+        # multiplication, division
+        expr_term = number | param_ref
+
+        # Simple expressions (value op value)
+        simple_expr = (expr_term + pp.oneOf("+ - * /") + expr_term).setName(
+            "simple_expr"
+        )
+
+        # Define a post-processing function for mathematical expressions
+        def process_expression(tokens):
+            """Process a mathematical expression with parameter references."""
+            if len(tokens) == 3:  # It's an expression like a + b or a - b
+                left, op, right = tokens
+
+                # If the right side is a parameter reference, look it up
+                if isinstance(right, str) and right in self.data:
+                    right_val = self.data[right]
+                else:
+                    right_val = right
+
+                # If the left side is a parameter reference, look it up
+                if isinstance(left, str) and left in self.data:
+                    left_val = self.data[left]
+                else:
+                    left_val = left
+
+                # Perform the operation
+                if op == "+":
+                    return left_val + right_val
+                elif op == "-":
+                    return left_val - right_val
+                elif op == "*":
+                    return left_val * right_val
+                elif op == "/":
+                    return left_val / right_val
+
+            return tokens[0]  # Not an expression we recognize
+
+        # Define the expression and set its parse action
+        expression = simple_expr.setParseAction(process_expression)
+
         # Define type identifier in curly braces
         type_literal = (
             pp.Suppress("{")
@@ -93,15 +138,19 @@ class AYOInputFile(FileNode):
             + pp.Suppress(") ")
         )
 
+        # Define all possible value types with priorities (try more specific
+        # patterns first)
+        value_types = expression | array | string | number | param_ref
+
         # Define key-value pair with type, optional unit, and optional comments
         key_value = (
             identifier.setResultsName("key")
             + pp.Suppress("=")
-            + (number | string | array).setResultsName("value")
+            + value_types.setResultsName("value")
             + pp.Suppress(";")
             + pp.Optional(unit_literal)
             + pp.Optional(pp.SkipTo("{").setResultsName("comment_before_type"))
-            + type_literal
+            + pp.Optional(type_literal)
             + pp.Optional(pp.SkipTo(pp.lineEnd()).setResultsName("comment_after_type"))
         )
 
@@ -115,41 +164,25 @@ class AYOInputFile(FileNode):
             if not line or line.startswith(";") or line.startswith("#"):
                 continue
 
-            # Parse the line using the defined parser
-            parsed = key_value.parseString(line, parseAll=True)
+            try:
+                # Parse the line using the defined parser
+                parsed = key_value.parseString(line, parseAll=True)
 
-            # Extract key, value, and type from the parsed result
-            key = parsed["key"]
-            type_ = parsed["type"].lower()
-            value = parsed["value"][0]
-            if "units" in parsed:
-                unit = parsed["units"]
-                value *= unit
+                # Extract key, value, and type from the parsed result
+                key = parsed["key"]
+                type_ = parsed.get("type", "string").lower()
+                value = parsed["value"][0]
+                if "units" in parsed:
+                    unit = parsed["units"]
+                    value *= unit
 
-            # Depending on the type, process the value accordingly
-            if type_ == "scalar":
-                # Value is already converted to int or float
+                # Store the value in self.data
                 self.data[key] = value
-                logger.debug(f"Parsed scalar: {key} = {value}")
-
-            elif type_ == "string":
-                # Value is already a string without quotes
-                self.data[key] = value
-                logger.debug(f"Parsed string: {key} = {value}")
-
-            elif type_ == "array":
-                # Value is a list of scalars or strings
-                self.data[key] = value
-                logger.debug(f"Parsed array: {key} = {value}")
-            else:
-                # Unsupported type; treat value as string and log a warning
-                self.data[key] = value
-                logger.warning(
-                    (
-                        f"Unknown type '{type_}' for key '{key}' at line {line_number}."
-                        " Treated as string."
-                    )
-                )
+                logger.debug(f"Parsed {type_}: {key} = {value}")
+            except pp.ParseException as e:
+                logger.warning(f"Failed to parse line {line_number}: {line}")
+                logger.warning(f"Error: {e}")
+                continue
 
         # After parsing, set expected_keys based on the input keys
         self.expected_keys = list(self.data.keys())
@@ -172,6 +205,7 @@ class AYOInputFile(FileNode):
             "counts": u.count,
             "photon_count": u.photon,
             "read": read,
+            "degrees": u.deg,
         }
         _whitelist = []
         final_unit = None

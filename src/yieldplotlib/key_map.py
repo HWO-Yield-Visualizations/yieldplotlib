@@ -1,430 +1,11 @@
 """Key mapping for yieldplotlib library."""
 
 KEY_MAP = {
-    "star_id": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "star_sInd",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "starID",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "star_name": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "star_Name",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "HIP",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "star_L": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "star_L",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Lstar (Lsun)",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "star_dist": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "star_dist",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "dist (pc)",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "star_spec": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "star_Spec",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Type",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "exp_time_char": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "h_star_char_tInt_mean",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Total Spec Char Time (days)",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "star_comp_det": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "h_star_det_earth_cume_mean",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Total HZ Completeness",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": "The EXOSIMS value is not guaranteed to be habitable zone but AYO is"
-    },
-    "exp_time_det": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-star-target.csv",
-            "name": "h_star_det_tInt_mean",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Total BB Imaging Time (days)",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "obs_target_name": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-earth-char-list.csv",
-            "name": "name",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "HIP",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "obs_target_ind": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-earth-char-list.csv",
-            "name": "sind",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "starID",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "MV": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-earth-char-list.csv",
-            "name": "MV",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "M_V",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "RA": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "RA",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "coords_RA",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Dec": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Dec",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "coords_Dec",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Umag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Umag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Umag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Bmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Bmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Bmag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Vmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Vmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Vmag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Rmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Rmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Rmag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Imag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Imag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Imag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Jmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Jmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Jmag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Hmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Hmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Hmag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
-    "Kmag": {
-        "AYOCSVFile": {
-            "file": "target_list.csv",
-            "name": "Kmag",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "Kmag",
-            "unit": "",
-            "transform": {
-                "type": "custom",
-                "value": None
-            }
-        },
-        "comment": "EXOSIMS TargetList object attribute"
-    },
     "angdiam": {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Angdiam (mas)",
+            "unit": "mas",
             "transform": {
                 "type": "none",
                 "value": None
@@ -435,16 +16,59 @@ KEY_MAP = {
             "name": "diameter",
             "unit": "",
             "transform": {
-                "type": "custom",
+                "type": "none",
                 "value": None
             }
         },
         "comment": "EXOSIMS TargetList object attribute"
     },
-    "Ms": {
+    "blind_comp_det": {
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "blind_comp_det",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "blind_comp_det",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "All of this has to be handled custom"
+    },
+    "blind_comp_spec": {
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "blind_comp_spec",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "blind_comp_spec",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "All of this has to be handled custom"
+    },
+    "Bmag": {
         "AYOCSVFile": {
             "file": "target_list.csv",
-            "name": "Mass (Msun)",
+            "name": "Bmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -452,340 +76,20 @@ KEY_MAP = {
         },
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "MsTrue",
+            "name": "Bmag",
             "unit": "",
             "transform": {
-                "type": "custom",
+                "type": "none",
                 "value": None
             }
         },
         "comment": "EXOSIMS TargetList object attribute"
     },
-    "yield_earth": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-earth.csv",
-            "name": "exoE_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "exoEarth candidate yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_hot_rocky": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 0
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Hot Rocky yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": "AYO reports these on a per-observation basis, EXOSIMS reports the mission average and many other parameters (h_RpL_det_main_mean is the unique detections, h_RpL_population_mean includes revisit observations, not sure what the \"alt_\" ones are)"
-    },
-    "yield_warm_rocky": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 1
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Warm Rocky yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_cold_rocky": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 2
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Cold Rocky yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_hot_super_earth": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 3
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Hot SuperEarth yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_warm_super_earth": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 4
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Warm SuperEarth yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_cold_super_earth": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 5
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Cold SuperEarth yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_hot_sub_neptune": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 6
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Hot Sub-Neptune yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_warm_sub_neptune": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 7
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Warm Sub-Neptune yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_cold_sub_neptune": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 8
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Cold Sub-Neptune yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_hot_neptune": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 9
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Hot Neptune yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_warm_neptune": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 10
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Warm Neptune yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_cold_neptune": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 11
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Cold Neptune yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_hot_jupiter": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 12
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Hot Jupiter yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_warm_jupiter": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 13
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Warm Jupiter yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "yield_cold_jupiter": {
-        "EXOSIMSCSVFile": {
-            "file": "reduce-radlum.csv",
-            "name": "h_RpL_det_alt_mean",
-            "unit": "",
-            "transform": {
-                "type": "index",
-                "value": 14
-            }
-        },
-        "AYOCSVFile": {
-            "file": "observations.csv",
-            "name": "Cold Jupiter yield",
-            "transform": {
-                "type": "sum",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "pupil_diam": {
+    "cic": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "pupilDiam",
-            "unit": "meter",
+            "name": "CIC",
+            "unit": "count pix^-1 s^-1",
             "transform": {
                 "type": "none",
                 "value": None
@@ -793,87 +97,8 @@ KEY_MAP = {
         },
         "AYOInputFile": {
             "file": "ayo",
-            "name": "D",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "qe": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "QE",
+            "name": "det_CIC",
             "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "det_QE",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "optics_throughput": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "optics",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "Toptical",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "pixel_scale": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "pixelScale",
-            "unit": "mas",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "det_pixscale_mas",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "read_noise": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "sread",
-            "unit": "count pix^-1 read^-1",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "det_RN",
             "transform": {
                 "type": "none",
                 "value": None
@@ -894,106 +119,49 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "det_DC",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "cic": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "CIC",
-            "unit": "count pix^-1 s^-1",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "det_CIC",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "texp": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "texp",
-            "unit": "s",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "det_tread",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "sc_qe": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "sc_QE",
             "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
             }
         },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_det_QE",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
         "comment": ""
     },
-    "sc_optics_throughput": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "sc_optics",
+    "Dec": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Dec",
             "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
             }
         },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_Toptical",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "sc_pixel_scale": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "sc_pixelScale",
+            "name": "coords_Dec",
             "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
             }
         },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_det_pixscale_mas",
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "exp_time_char": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "h_star_char_tInt_mean",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Total Spec Char Time (days)",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1001,39 +169,20 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "sc_read_noise": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "sc_sread",
-            "unit": "count pix^-1 read^-1",
+    "exp_time_det": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "h_star_det_tInt_mean",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
             }
         },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_det_RN",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "sc_dark_current": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "sc_idark",
-            "unit": "count pix^-1 s^-1",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_det_DC",
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Total BB Imaging Time (days)",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1041,45 +190,47 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "sc_cic": {
+    "Hmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Hmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "sc_CIC",
-            "unit": "count pix^-1 s^-1",
+            "name": "Hmag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
             }
         },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_det_CIC",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
+        "comment": "EXOSIMS TargetList object attribute"
     },
-    "sc_texp": {
+    "Imag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Imag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "sc_texp",
-            "unit": "s",
+            "name": "Imag",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
             }
         },
-        "AYOInputFile": {
-            "file": "ayo",
-            "name": "sc_det_tread",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
+        "comment": "EXOSIMS TargetList object attribute"
     },
     "iwa": {
         "EXOSIMSInputFile": {
@@ -1094,6 +245,175 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "IWA",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "For AYO this is a hard cutoff, not the actual IWA of the coronagraph which comes from the YIP. This is also true for EXOSIMS, when the param is set in the observingMode, or manually set in the starlightSuppressionSystem definition (which the obsmode then inherits).  Otherwise, it is the largest IWA-value from the input files in the YIP."
+    },
+    "Jmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Jmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Jmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Kmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Kmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Kmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Ms": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Mass (Msun)",
+            "unit": "M_sun",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "MsTrue",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "MV": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-earth-char-list.csv",
+            "name": "MV",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "M_V",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "obs_lam": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "lam",
+            "unit": "nm",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "lambda",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "obs_target_ind": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-earth-char-list.csv",
+            "name": "sind",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "starID",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "obs_target_name": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-earth-char-list.csv",
+            "name": "name",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "HIP",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "optics_throughput": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "optics",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "Toptical",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1114,6 +434,70 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "OWA",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "For AYO this is a hard cutoff, not the actual OWA of the coronagraph which comes from the YIP. This is also true for EXOSIMS, when the param is set in the observingMode, or manually set in the starlightSuppressionSystem definition (which the obsmode then inherits).  Otherwise, it is the largest OWA-value from the input files in the YIP."
+    },
+    "pixel_scale": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "pixelScale",
+            "unit": "mas",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "det_pixscale_mas",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "pupil_diam": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "pupilDiam",
+            "unit": "meter",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "D",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "qe": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "QE",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "det_QE",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1134,6 +518,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "SR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1141,10 +526,136 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "snr": {
+    "RA": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "RA",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "SNR",
+            "name": "coords_RA",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "read_noise": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sread",
+            "unit": "count pix^-1 read^-1",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "det_RN",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "Rmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Rmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Rmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "sc_cic": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sc_CIC",
+            "unit": "count pix^-1 s^-1",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "sc_det_CIC",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "sc_dark_current": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sc_idark",
+            "unit": "count pix^-1 s^-1",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "sc_det_DC",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "sc_obs_lam": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sc_lam",
+            "unit": "nm",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "sc_lambda",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "sc_optics_throughput": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sc_optics",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1153,7 +664,8 @@ KEY_MAP = {
         },
         "AYOInputFile": {
             "file": "ayo",
-            "name": "SNR",
+            "name": "sc_Toptical",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1161,10 +673,10 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "sc_snr": {
+    "sc_pixel_scale": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "sc_SNR",
+            "name": "sc_pixelScale",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1173,7 +685,29 @@ KEY_MAP = {
         },
         "AYOInputFile": {
             "file": "ayo",
-            "name": "sc_SNR",
+            "name": "sc_det_pixscale_mas",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "sc_qe": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sc_QE",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "sc_det_QE",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1194,6 +728,7 @@ KEY_MAP = {
         "AYOInputFile": {
             "file": "ayo",
             "name": "sc_SR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1201,10 +736,31 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "obs_lam": {
+    "sc_read_noise": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "lam",
+            "name": "sc_sread",
+            "unit": "count pix^-1 read^-1",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "sc_det_RN",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "sc_snr": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "sc_SNR",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1213,7 +769,8 @@ KEY_MAP = {
         },
         "AYOInputFile": {
             "file": "ayo",
-            "name": "lambda",
+            "name": "sc_SNR",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1221,10 +778,31 @@ KEY_MAP = {
         },
         "comment": ""
     },
-    "sc_obs_lambda": {
+    "sc_texp": {
         "EXOSIMSInputFile": {
             "file": "json",
-            "name": "sc_lam",
+            "name": "sc_texp",
+            "unit": "s",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "sc_det_tread",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "snr": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "SNR",
             "unit": "",
             "transform": {
                 "type": "none",
@@ -1233,9 +811,535 @@ KEY_MAP = {
         },
         "AYOInputFile": {
             "file": "ayo",
-            "name": "sc_lambda",
+            "name": "SNR",
+            "unit": "",
             "transform": {
                 "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "star_comp_det": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "h_star_det_earth_cume_mean",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Total HZ Completeness",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "The EXOSIMS value is not guaranteed to be habitable zone but AYO is"
+    },
+    "star_dist": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "star_dist",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "dist (pc)",
+            "unit": "pc",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "star_id": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "star_sInd",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "starID",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "star_L": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "star_L",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Lstar (Lsun)",
+            "unit": "L_sun",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "star_name": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "star_Name",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "HIP",
+            "unit": "",
+            "transform": {
+                "type": "custom",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "star_spec": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-star-target.csv",
+            "name": "star_Spec",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Type",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "texp": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "texp",
+            "unit": "s",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOInputFile": {
+            "file": "ayo",
+            "name": "det_tread",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "Umag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Umag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Umag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "Vmag": {
+        "AYOCSVFile": {
+            "file": "target_list.csv",
+            "name": "Vmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "Vmag",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": "EXOSIMS TargetList object attribute"
+    },
+    "yield_cold_jupiter": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 14
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Cold Jupiter yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_cold_neptune": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 11
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Cold Neptune yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_cold_rocky": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 2
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Cold Rocky yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_cold_sub_neptune": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 8
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Cold Sub-Neptune yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_cold_super_earth": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 5
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Cold SuperEarth yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_earth": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-earth.csv",
+            "name": "exoE_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "exoEarth candidate yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_hot_jupiter": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 12
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Hot Jupiter yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_hot_neptune": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 9
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Hot Neptune yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_hot_rocky": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 0
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Hot Rocky yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": "AYO reports these on a per-observation basis, EXOSIMS reports the mission average and many other parameters (h_RpL_det_main_mean is the unique detections, h_RpL_population_mean includes revisit observations, not sure what the \"alt_\" ones are)"
+    },
+    "yield_hot_sub_neptune": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 6
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Hot Sub-Neptune yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_hot_super_earth": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 3
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Hot SuperEarth yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_warm_jupiter": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 13
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Warm Jupiter yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_warm_neptune": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 10
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Warm Neptune yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_warm_rocky": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 1
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Warm Rocky yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_warm_sub_neptune": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 7
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Warm Sub-Neptune yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "yield_warm_super_earth": {
+        "EXOSIMSCSVFile": {
+            "file": "reduce-radlum.csv",
+            "name": "h_RpL_det_alt_mean",
+            "unit": "",
+            "transform": {
+                "type": "index",
+                "value": 4
+            }
+        },
+        "AYOCSVFile": {
+            "file": "observations.csv",
+            "name": "Warm SuperEarth yield",
+            "unit": "",
+            "transform": {
+                "type": "sum",
                 "value": None
             }
         },
@@ -1245,6 +1349,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "WDS_sep",
+            "unit": "",
             "transform": {
                 "type": "custom",
                 "value": None
@@ -1256,6 +1361,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "WDS_dmag",
+            "unit": "",
             "transform": {
                 "type": "custom",
                 "value": None
@@ -1267,6 +1373,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Detection Coronagraph ID",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1278,6 +1385,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Characterization Coronagraph ID",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1289,6 +1397,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Detection Wavelength (microns)",
+            "unit": "um",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1300,6 +1409,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Characterization Wavelength (microns)",
+            "unit": "um",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1311,6 +1421,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "EEID (mas)",
+            "unit": "mas",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1322,6 +1433,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "nexozodis (zodis)",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1333,6 +1445,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "target_list.csv",
             "name": "Total EEC Yield",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1344,6 +1457,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Visit #",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1355,6 +1469,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Visit dt (years)",
+            "unit": "years",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1366,6 +1481,7 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Exp Time (days)",
+            "unit": "days",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1377,6 +1493,103 @@ KEY_MAP = {
         "AYOCSVFile": {
             "file": "observations.csv",
             "name": "Spec char time (days)",
+            "unit": "days",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "core_thruput": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "core_thruput",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "coron_bw": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "syst_BW",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "coron_lam": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "syst_lam",
+            "unit": "nm",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "coron_optics_thorughput": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "syst_optics",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "instruments": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "scienceInstruments",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "istar": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "core_mean_intensity",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "modes": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "observingModes",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
+    "systs": {
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "starlightSuppressionSystems",
+            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
@@ -1658,7 +1871,7 @@ KEY_MAP = {
                 "value": None
             }
         },
-        "comment": ""
+        "comment": "EXOSIMS's value here represents the *last* observation of the star made in each DRM, not the first one which is typically what we think of using blind completeness for"
     },
     "h_star_det_earth_frac_mean": {
         "EXOSIMSCSVFile": {
@@ -4990,106 +5203,10 @@ KEY_MAP = {
             "name": "Teff",
             "unit": "",
             "transform": {
-                "type": "custom",
+                "type": "none",
                 "value": None
             }
         },
         "comment": "EXOSIMS TargetList object attribute"
-    },
-    "instruments": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "scienceInstruments",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "modes": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "observingModes",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "systs": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "starlightSuppressionSystems",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "bw": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "BW",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "coron_lam": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "lam",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "coron_optics_thorughput": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "optics",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "core_thruput": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "core_thruput",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "istar": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "core_mean_intensity",
-            "unit": "",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
     },
 }
