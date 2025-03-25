@@ -29,14 +29,23 @@ bibliography: paper.bib
 
 # Summary
 
-Determining the expected number of detected and characterized exoplanets for proposed flagship space
-observatories, such as the upcoming Habitable Worlds Observatory (HWO), is essential for performing key
-architecture trades and ultimately ensuring the success of the mission. There are many of these "yield"
-codes that perform these complex calculations which non-exhaustively include simulating
-astrophysical scenes, simulating observatory performance, scheduling observations, and performing
-exposure time calculations. Being able to directly compare and visualize the inputs and output of
-different yield codes is therefore incredibly important to verify performance, independently validate results,
-and identify potential discrepancies.
+NASA’s next flagship observatory, as recommended by the Astro2020 decadal survey, 
+is the Habitable World’s Observatory (HWO) which has the ambitious goal to "search 
+for biosignatures from a robust number of about ∼25 habitable zone planets and be 
+a transformative facility for general astrophysics’’. In the phrasing of this science 
+goal, the importance of expected exo-Earth yield (the total number of detected habitable 
+zone planets) on the success of the mission is made apparent. As HWO is being developed 
+and trade spaces are explored, yield codes such as the Altruistic Yield Optimization (AYO) 
+and EXOSIMS that can calculate the expected number of detected and characterized planets 
+for a given mission architecture are essential. While these yield codes have the same goal, 
+they can be complex and have major differences in their inputs and outputs that has made 
+comparing results difficult. The need for a unified library for visualizing the inputs 
+and outputs of these yield codes in a complete, descriptive, and accessible way has therefore 
+also become apparent. To this end we have developed yieldplotlib, an open-source python 
+library to communicate the results of yield codes to the broader community and produce 
+publication-quality plots. Currently, there are modules for analyzing AYO and EXOSIMS, 
+but yieldplotlib is easily extensible and support for other yield codes can be easily 
+added in the future.   
 
 # Statement of need
 
