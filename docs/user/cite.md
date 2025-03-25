@@ -1,7 +1,14 @@
 # Citation and Attribution
 
-Please cite the Zenodo DOI <a href="https://doi.org/10.5281/zenodo.15013341"><img src="https://img.shields.io/badge/DOI-10.5281/zenodo.15013341-blue?style=flat-square" alt="DOI"></a>
-of the version you used as a software citation:
+
+## Citing a Specific Version
+
+For reproducibility, always cite the specific version of `yieldplotlib` you used
+by downloading the citation from the [Zenodo
+records](https://zenodo.org/records/15085430). An example of the initial
+release is shown here:
+
+<a href="https://doi.org/10.5281/zenodo.15013341"><img src="https://img.shields.io/badge/DOI-10.5281/zenodo.15013341-blue?style=flat-square" alt="DOI"></a>
 
 ```
 @software{sarah_steiger_2025_15013341,
@@ -21,5 +28,23 @@ of the version you used as a software citation:
                    25790aed81a9;path=HWO-Yield-Visualizations-
                    yieldplotlib-863a596
                   },
+}
+```
+
+## Citing All Versions
+
+To cite `yieldplotlib` as a project generally, please use the Concept DOI that always
+resolves to the latest version:
+
+<a href="https://doi.org/10.5281/zenodo.15013340"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15013340.svg" alt="DOI"></a>
+
+```
+@software{steiger_spohn_yieldplotlib,
+  author       = {Sarah Steiger and
+                  Corey Spohn},
+  title        = {HWO-Yield-Visualizations/yieldplotlib},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.15013340},
+  url          = {https://doi.org/10.5281/zenodo.15013340}
 }
 ```
