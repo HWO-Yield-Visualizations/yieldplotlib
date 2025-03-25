@@ -84,6 +84,11 @@ following table.
 Once the yield packages are parsed a getter can be called on the directories
 (i.e. `ayo.get('yield_earth')`) to return the corresponding value from the yield code.
 
+Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed 
+using the same file node and directory structure. This allows users to access key coronagraph performance 
+metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib` 
+uses `yippy` as a backend though the user interface is the same as for the AYO and EXOSIMS Directories.  
+
 ## Plotting
 
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
