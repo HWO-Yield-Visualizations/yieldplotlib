@@ -38,4 +38,4 @@ be installed by running:
 `pip install yieldplotlib`
 
 See the [Developer Documentation](dev.md) for more information on how to do an editable install
-of yieldplotlib. 
+of yieldplotlib.
