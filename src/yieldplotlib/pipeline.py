@@ -1,13 +1,13 @@
 """Pipeline for generating a standard sheet of yield plots."""
 
+import importlib.resources as resources
 import io
 
-import importlib_resources
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 from PIL import Image
 
 import yieldplotlib as ypl
@@ -35,7 +35,8 @@ def ypl_pipeline(runs):
     plt.margins(0.1, 0.2)
 
     # Add ypl "watermark".
-    ypl_im = importlib_resources.read_binary("yieldplotlib", "logo.png")
+    with resources.files("yieldplotlib.data").joinpath("logo.png").open("rb") as f:
+        ypl_im = f.read()
     ypl_logo = Image.open(io.BytesIO(ypl_im))
     newax = fig.add_axes([0.05, 0.9, 0.05, 0.05], anchor="NE", zorder=1)
     newax.axis("off")
@@ -97,20 +98,15 @@ def ypl_pipeline(runs):
         plot_type="scatter",
         **scatter_kwargs,
     )
+    axes["E"].set_yscale("log")
 
-    # Create the inset colorbar axes object.
-    cax = inset_axes(
-        axes["E"],
-        width="60%",
-        height="5%",
-        loc="upper left",
-    )
+    # Create the colorbar axes object to the right of the main axes.
+    divider = make_axes_locatable(axes["E"])
+    cax = divider.append_axes("right", size="5%", pad=0.05)
 
     cmappable = ScalarMappable(Normalize(0, 1))
-    cbar = fig.colorbar(cmappable, cax=cax, orientation="horizontal")
-    cbar.set_label("HZ Completeness", loc="center", fontsize=8)
-    cbar.ax.xaxis.set_label_position("bottom")
-    cbar.ax.xaxis.set_ticks_position("bottom")
+    cbar = fig.colorbar(cmappable, cax=cax, orientation="vertical")
+    cbar.set_label("HZ Completeness", fontsize=8)
     cbar.ax.tick_params(labelsize=6, width=1.0)
 
     # Plot planet yield bar chart.
