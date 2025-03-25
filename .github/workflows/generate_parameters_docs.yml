@@ -56,4 +56,4 @@ jobs:
         git add docs/user/parameters_table.md
 
         # Only commit and push if there are actual changes to the file
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update parameters_table.md from Google Sheets" && git push) 
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update parameters_table.md from Google Sheets" && git push)
