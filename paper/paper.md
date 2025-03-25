@@ -36,7 +36,7 @@ codes that perform these complex calculations which non-exhaustively include sim
 astrophysical scenes, simulating observatory performance, scheduling observations, and performing
 exposure time calculations. Being able to directly compare and visualize the inputs and output of
 different yield codes is important to verify performance, independently validate results, and identify
-any potential discrepancies. 
+any potential discrepancies.
 
 # Statement of need
 
@@ -47,8 +47,8 @@ explored, yield codes such as the Altruistic Yield Optimizer (AYO; [@AYO2014]) a
 [@EXOSIMS2016] that can calculate the expected number of detected and characterized planets for a
 given mission architecture are essential. While these yield codes have the same goal, they can be
 complex and have major differences in their inputs and outputs that has made comparing results
-difficult. The need for a unified library for visualizing these yield codes in a complete, descriptive, 
-and accessible way has therefore also become apparent. This is non-trivial due to the differing 
+difficult. The need for a unified library for visualizing these yield codes in a complete, descriptive,
+and accessible way has therefore also become apparent. This is non-trivial due to the differing
 syntaxes, structures, and assumptions that each of these codes make.
 
 When these values are interrogated directly, however, new insights are achieved. This is
@@ -84,10 +84,10 @@ following table.
 Once the yield packages are parsed a getter can be called on the directories
 (i.e. `ayo.get('yield_earth')`) to return the corresponding value from the yield code.
 
-Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed 
-using the same file node and directory structure. This allows users to access key coronagraph performance 
-metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib` 
-uses `yippy` as a backend though the user interface is the same as for the AYO and EXOSIMS Directories.  
+Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed
+using the same file node and directory structure. This allows users to access key coronagraph performance
+metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib`
+uses `yippy` as a backend though the user interface is the same as for the AYO and EXOSIMS Directories.
 
 ## Plotting
 
@@ -95,13 +95,13 @@ uses `yippy` as a backend though the user interface is the same as for the AYO a
 
 `yieldplotlib` extends the commonly used python plotting package `matplotlib` to take advantage
 of the wide variety of customization `matplotlib` offers, as well as the extensive knowledge base many
-users of `yieldplotlib` will have with that package. The generic plots are designed to be used for single 
-yield run visualizations and can make scatter plots, standard plots, and histograms. 
+users of `yieldplotlib` will have with that package. The generic plots are designed to be used for single
+yield run visualizations and can make scatter plots, standard plots, and histograms.
 
-The comparison plots are designed for plotting multiple yield runs in either the same multi-panel figure, 
-or on the same set of axes for more complex comparisons.   
+The comparison plots are designed for plotting multiple yield runs in either the same multi-panel figure,
+or on the same set of axes for more complex comparisons.
 
-### Plotting Scripts 
+### Plotting Scripts
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
 provide instant usability for comparing AYO and EXOSIMS as motivated by rapid pace of the ongoing
 architecture trade studies for HWO. This also serves to provide examples on how the package can be
@@ -138,10 +138,10 @@ of difference can also lie in the interpolation methods used by all of the codes
 
 ## Pipeline and Command Line Interface
 
-In order to generate summary plots quickly, `yieldplotlib` comes packaged with a command line interface 
+In order to generate summary plots quickly, `yieldplotlib` comes packaged with a command line interface
 and plotting pipeline to create a suite of commonly used yield plots. This is accessed by running
 `run_ypl` and providing a path to a single folder containing the outputs for a single AYO ir EXOSIMS run,
-or to a directory containing subdirectories of many AYO and EXOSIMS runs. 
+or to a directory containing subdirectories of many AYO and EXOSIMS runs.
 
 # Acknowledgements
 
