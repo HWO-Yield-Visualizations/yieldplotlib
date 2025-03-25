@@ -29,23 +29,23 @@ bibliography: paper.bib
 
 # Summary
 
-NASA’s next flagship observatory, as recommended by the Astro2020 decadal survey, 
-is the Habitable World’s Observatory (HWO) which has the ambitious goal to "search 
-for biosignatures from a robust number of about ∼25 habitable zone planets and be 
-a transformative facility for general astrophysics’’. In the phrasing of this science 
-goal, the importance of expected exo-Earth yield (the total number of detected habitable 
-zone planets) on the success of the mission is made apparent. As HWO is being developed 
-and trade spaces are explored, yield codes such as the Altruistic Yield Optimization (AYO) 
-and EXOSIMS that can calculate the expected number of detected and characterized planets 
-for a given mission architecture are essential. While these yield codes have the same goal, 
-they can be complex and have major differences in their inputs and outputs that has made 
-comparing results difficult. The need for a unified library for visualizing the inputs 
-and outputs of these yield codes in a complete, descriptive, and accessible way has therefore 
-also become apparent. To this end we have developed yieldplotlib, an open-source python 
-library to communicate the results of yield codes to the broader community and produce 
-publication-quality plots. Currently, there are modules for analyzing AYO and EXOSIMS, 
-but yieldplotlib is easily extensible and support for other yield codes can be easily 
-added in the future.   
+NASA’s next flagship observatory, as recommended by the Astro2020 decadal survey,
+is the Habitable World’s Observatory (HWO) which has the ambitious goal to "search
+for biosignatures from a robust number of about ∼25 habitable zone planets and be
+a transformative facility for general astrophysics’’. In the phrasing of this science
+goal, the importance of expected exo-Earth yield (the total number of detected habitable
+zone planets) on the success of the mission is made apparent. As HWO is being developed
+and trade spaces are explored, yield codes such as the Altruistic Yield Optimization (AYO)
+and EXOSIMS that can calculate the expected number of detected and characterized planets
+for a given mission architecture are essential. While these yield codes have the same goal,
+they can be complex and have major differences in their inputs and outputs that has made
+comparing results difficult. The need for a unified library for visualizing the inputs
+and outputs of these yield codes in a complete, descriptive, and accessible way has therefore
+also become apparent. To this end we have developed yieldplotlib, an open-source python
+library to communicate the results of yield codes to the broader community and produce
+publication-quality plots. Currently, there are modules for analyzing AYO and EXOSIMS,
+but yieldplotlib is easily extensible and support for other yield codes can be easily
+added in the future.
 
 # Statement of need
 
