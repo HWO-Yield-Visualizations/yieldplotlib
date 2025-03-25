@@ -1,12 +1,8 @@
 """Generate plots for yield input packages."""
 
-from pathlib import Path
-
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
-
-from yieldplotlib.load.yip_directory import YIPDirectory
 
 
 def make_offax_psf_movie(yip, save_name, ax_kwargs={}, plot_kwargs={}):
