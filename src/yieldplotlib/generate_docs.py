@@ -12,7 +12,9 @@ Usage Examples:
 
 2. Download from Google Sheets using temporary credentials:
    ```
-   python generate_docs.py --sheets SHEET_ID --output ../../docs/user/parameters_table.md --temp
+   python generate_docs.py --sheets SHEET_ID \
+       --output ../../docs/user/parameters_table.md \
+       --temp
    ```
 """
 
