@@ -1,6 +1,6 @@
 # Installation
 
-Before installing, we recommend running `yieldplotlib` in a clean conda or
+We recommend running `yieldplotlib` in a clean conda or
 virtual environment. This is done by using `venv`, `virtualenv`, `uv`, `conda`,
 or a similar tool. We recommend `venv` or `conda` if you are unfamiliar with
 this process which can be used as follows:
