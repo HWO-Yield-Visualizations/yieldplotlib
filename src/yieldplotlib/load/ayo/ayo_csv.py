@@ -97,12 +97,6 @@ class AYOCSVFile(CSVFile):
                 return self.data[key].values
         return None
 
-    def _get(self, key: str, **kwargs):
-        """Return the data associated with the key."""
-        # Check if we have a unit for this key
-
-        return None
-
     def _get_blind_comp(self):
         """Get the blind completeness data from first visits.
 
