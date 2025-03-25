@@ -35,7 +35,7 @@ architecture trades and ultimately ensuring the success of the mission. There ar
 codes that perform these complex calculations which non-exhaustively include simulating
 astrophysical scenes, simulating observatory performance, scheduling observations, and performing
 exposure time calculations. Being able to directly compare and visualize the inputs and output of
-different yield codes is therefore incredibly important to verify performance, independently validate results, 
+different yield codes is therefore incredibly important to verify performance, independently validate results,
 and identify potential discrepancies.
 
 # Statement of need
@@ -51,18 +51,18 @@ difficult. The need for a unified library for visualizing these yield codes in a
 and accessible way has therefore also become apparent. This is non-trivial due to the differing
 syntaxes, structures, and assumptions that each of these codes make.
 
-Despite the challenges, when these values are interrogated directly, new insights are achieved. 
-Some of these insights are highlighted in detail in [@ETCCrossCal2025] where a comparison of just 
+Despite the challenges, when these values are interrogated directly, new insights are achieved.
+Some of these insights are highlighted in detail in [@ETCCrossCal2025] where a comparison of just
 the internal exposure time calculations of AYO and EXOSIMS revealed sources of previously unknown
 discrepancy. `yieldplotlib` is in many ways a continuation of that initial work, but
 aimed instead at the higher level yield products which are of the most direct interest.
 
 `yieldplotlib` is a Python package for visualizing the inputs and outputs of AYO and EXOSIMS
-through the use of a custom loading and parsing structure that allows for the easy access of equivalent data 
-across yield code outputs. `yieldplotlib` is designed to communicate the results of yield codes to the 
-broader community and produce publication-quality plots without the need to understand the complex 
-underlying yield codes that were used to generate the data. Currently `yieldplotlib` contains modules 
-for analyzing AYO and EXOSIMS, but is easily extensible and support for other yield codes can be easily 
+through the use of a custom loading and parsing structure that allows for the easy access of equivalent data
+across yield code outputs. `yieldplotlib` is designed to communicate the results of yield codes to the
+broader community and produce publication-quality plots without the need to understand the complex
+underlying yield codes that were used to generate the data. Currently `yieldplotlib` contains modules
+for analyzing AYO and EXOSIMS, but is easily extensible and support for other yield codes can be easily
 added in the future.
 
 # Methods and Functionality
@@ -71,8 +71,8 @@ added in the future.
 `yieldplotlib` uses a file node and directory structure to parse the yield output or input packages
 from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a
 universal key in `yieldplotlib`. This `key_map` is automatically generated from a CSV file which
-has a version hosted on the repository that is automatically updated daily from the active development 
-version which is hosted on Google Sheets for broader collaboration. An example few lines from the CSV 
+has a version hosted on the repository that is automatically updated daily from the active development
+version which is hosted on Google Sheets for broader collaboration. An example few lines from the CSV
 file can be found in the following table.
 
 | yieldplotlib name | description                              | EXOSIMS name      | EXOSIMS file           | EXOSIMS Class  | AYO name                 | AYO file         | AYO Class  | EXOSIMS unit | Comment | EXOSIMS transform type | EXOSIMS transform value | AYO transform type | AYO transform value |
@@ -93,19 +93,19 @@ uses `yippy` as a backend though the user interface is the same as for the AYO a
 ### Generic and Comparison Plots
 
 `yieldplotlib` extends the commonly used python plotting package `matplotlib` to take advantage
-of the wide variety of customization options that  `matplotlib` offers, as well as the extensive 
-knowledge base many users of `yieldplotlib` will have with that package. The `yieldplotlib` generic 
+of the wide variety of customization options that  `matplotlib` offers, as well as the extensive
+knowledge base many users of `yieldplotlib` will have with that package. The `yieldplotlib` generic
 plots are designed to be used for single yield run visualizations and can make scatter plots, standard plots,
 and histograms.
 
-The comparison plots are designed for plotting multiple yield runs in either the same multi-panel 
+The comparison plots are designed for plotting multiple yield runs in either the same multi-panel
 figure, or on the same set of axes for more complex comparisons.
 
 ### Plotting Scripts
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
 provide instant usability for comparing AYO and EXOSIMS as motivated by rapid pace of the ongoing
 architecture trade studies for HWO. This also serves to provide examples on how the package can be
-used for those who want to use the more generic `yieldplotlib` parsing and plotting structure to 
+used for those who want to use the more generic `yieldplotlib` parsing and plotting structure to
 generate their own bespoke visualizations.
 
 Figure \autoref{fig:hz_completeness} and Figure \autoref{fig:planet_hists} show two different types
