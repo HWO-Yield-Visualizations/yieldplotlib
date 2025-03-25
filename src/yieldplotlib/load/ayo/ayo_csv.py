@@ -1,11 +1,8 @@
 """Node for handling AYO's CSV files."""
 
 import numpy as np
-
-from astropy import units as u
-
 import pandas as pd
-
+from astropy import units as u
 
 from yieldplotlib.core import CSVFile
 from yieldplotlib.key_map import KEY_MAP
@@ -29,7 +26,6 @@ class AYOCSVFile(CSVFile):
     def transform_WDS_dmag(self, data):
         """Convert the WDS dMag to floats."""
         return np.array(data, dtype=float)
-
 
     def find_unit_for_ayo_key(self, ayo_key):
         """Find the unit for a given AYO key.
@@ -105,8 +101,8 @@ class AYOCSVFile(CSVFile):
         """Return the data associated with the key."""
         # Check if we have a unit for this key
 
-        return None      
-      
+        return None
+
     def _get_blind_comp(self):
         """Get the blind completeness data from first visits.
 
@@ -136,4 +132,3 @@ class AYOCSVFile(CSVFile):
         )
 
         return result
-
