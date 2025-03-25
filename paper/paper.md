@@ -138,6 +138,11 @@ of difference can also lie in the interpolation methods used by all of the codes
 
 ## Pipeline and Command Line Interface
 
+In order to generate summary plots quickly, `yieldplotlib` comes packaged with a command line interface 
+and plotting pipeline to create a suite of commonly used yield plots. This is accessed by running
+`run_ypl` and providing a path to a single folder containing the outputs for a single AYO ir EXOSIMS run,
+or to a directory containing subdirectories of many AYO and EXOSIMS runs. 
+
 # Acknowledgements
 
 S.S. acknowledges support from an STScI Postdoctoral Fellowship.
