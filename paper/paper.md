@@ -91,6 +91,17 @@ uses `yippy` as a backend though the user interface is the same as for the AYO a
 
 ## Plotting
 
+### Generic and Comparison Plots
+
+`yieldplotlib` extends the commonly used python plotting package `matplotlib` to take advantage
+of the wide variety of customization `matplotlib` offers, as well as the extensive knowledge base many
+users of `yieldplotlib` will have with that package. The generic plots are designed to be used for single 
+yield run visualizations and can make scatter plots, standard plots, and histograms. 
+
+The comparison plots are designed for plotting multiple yield runs in either the same multi-panel figure, 
+or on the same set of axes for more complex comparisons.   
+
+### Plotting Scripts 
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
 provide instant usability for comparing AYO and EXOSIMS as motivated by rapid pace of the ongoing
 architecture trade studies for HWO. This also serves to provide examples on how the package can be
