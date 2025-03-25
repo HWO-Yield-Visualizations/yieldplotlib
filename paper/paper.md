@@ -31,12 +31,12 @@ bibliography: paper.bib
 
 Determining the expected number of detected and characterized exoplanets for proposed flagship space
 observatories, such as the upcoming Habitable Worlds Observatory (HWO), is essential for performing key
-architecture trades and ensuring the success of the mission. There are many of these ``yield''
+architecture trades and ultimately ensuring the success of the mission. There are many of these "yield"
 codes that perform these complex calculations which non-exhaustively include simulating
 astrophysical scenes, simulating observatory performance, scheduling observations, and performing
 exposure time calculations. Being able to directly compare and visualize the inputs and output of
-different yield codes is important to verify performance, independently validate results, and identify
-any potential discrepancies.
+different yield codes is therefore incredibly important to verify performance, independently validate results, 
+and identify potential discrepancies.
 
 # Statement of need
 
@@ -51,20 +51,19 @@ difficult. The need for a unified library for visualizing these yield codes in a
 and accessible way has therefore also become apparent. This is non-trivial due to the differing
 syntaxes, structures, and assumptions that each of these codes make.
 
-When these values are interrogated directly, however, new insights are achieved. This is
-highlighted in detail in [@ETCCrossCal2025] where a comparison of just the internal exposure time
-calculations of AYO and EXOSIMS was done and both errors and sources of previously unknown
-discrepancy were found. `yieldplotlib` is in many ways a continuation of that initial work but
+Despite the challenges, when these values are interrogated directly, new insights are achieved. 
+Some of these insights are highlighted in detail in [@ETCCrossCal2025] where a comparison of just 
+the internal exposure time calculations of AYO and EXOSIMS revealed sources of previously unknown
+discrepancy. `yieldplotlib` is in many ways a continuation of that initial work, but
 aimed instead at the higher level yield products which are of the most direct interest.
 
 `yieldplotlib` is a Python package for visualizing the inputs and outputs of AYO and EXOSIMS
-through the use of a loading and parsing structure that allows for the easy access of keywords
-in each code that represent the same quantity.
-
-`yieldplotlib` is designed to communicate the results of yield codes to the broader community and
-produce publication-quality plots without the need to understand the complex yield codes that were
-used to generate the data. Currently `yieldplotlib` contains modules for analyzing AYO and EXOSIMS,
-but is easily extensible and support for other yield codes can be easily added in the future.
+through the use of a custom loading and parsing structure that allows for the easy access of equivalent data 
+across yield code outputs. `yieldplotlib` is designed to communicate the results of yield codes to the 
+broader community and produce publication-quality plots without the need to understand the complex 
+underlying yield codes that were used to generate the data. Currently `yieldplotlib` contains modules 
+for analyzing AYO and EXOSIMS, but is easily extensible and support for other yield codes can be easily 
+added in the future.
 
 # Methods and Functionality
 
@@ -72,9 +71,9 @@ but is easily extensible and support for other yield codes can be easily added i
 `yieldplotlib` uses a file node and directory structure to parse the yield output or input packages
 from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a
 universal key in `yieldplotlib`. This `key_map` is automatically generated from a CSV file which
-has a stable version hosted locally on the repository and an active development version on Google
-Sheets for broader collaboration. An example few lines from the CSV file can be found in the
-following table.
+has a version hosted on the repository that is automatically updated daily from the active development 
+version which is hosted on Google Sheets for broader collaboration. An example few lines from the CSV 
+file can be found in the following table.
 
 | yieldplotlib name | description                              | EXOSIMS name      | EXOSIMS file           | EXOSIMS Class  | AYO name                 | AYO file         | AYO Class  | EXOSIMS unit | Comment | EXOSIMS transform type | EXOSIMS transform value | AYO transform type | AYO transform value |
 |-------------------|------------------------------------------|-------------------|------------------------|----------------|--------------------------|------------------|------------|--------------|---------|------------------------|-------------------------|--------------------|---------------------|
@@ -87,28 +86,30 @@ Once the yield packages are parsed a getter can be called on the directories
 Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed
 using the same file node and directory structure. This allows users to access key coronagraph performance
 metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib`
-uses `yippy` as a backend though the user interface is the same as for the AYO and EXOSIMS Directories.
+uses `yippy` as a backend though the user interface is the same as for the AYO and EXOSIMS directories.
 
 ## Plotting
 
 ### Generic and Comparison Plots
 
 `yieldplotlib` extends the commonly used python plotting package `matplotlib` to take advantage
-of the wide variety of customization `matplotlib` offers, as well as the extensive knowledge base many
-users of `yieldplotlib` will have with that package. The generic plots are designed to be used for single
-yield run visualizations and can make scatter plots, standard plots, and histograms.
+of the wide variety of customization options that  `matplotlib` offers, as well as the extensive 
+knowledge base many users of `yieldplotlib` will have with that package. The `yieldplotlib` generic 
+plots are designed to be used for single yield run visualizations and can make scatter plots, standard plots,
+and histograms.
 
-The comparison plots are designed for plotting multiple yield runs in either the same multi-panel figure,
-or on the same set of axes for more complex comparisons.
+The comparison plots are designed for plotting multiple yield runs in either the same multi-panel 
+figure, or on the same set of axes for more complex comparisons.
 
 ### Plotting Scripts
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
 provide instant usability for comparing AYO and EXOSIMS as motivated by rapid pace of the ongoing
 architecture trade studies for HWO. This also serves to provide examples on how the package can be
-used for those who want to use the `yieldplotlib` structure to generate their own visualizations.
+used for those who want to use the more generic `yieldplotlib` parsing and plotting structure to 
+generate their own bespoke visualizations.
 
 Figure \autoref{fig:hz_completeness} and Figure \autoref{fig:planet_hists} show two different types
-of yield outputs. Figure \autoref{fig:hz_completeness} shows the the fraction of a star's habitable
+of yield outputs. Figure \autoref{fig:hz_completeness} shows the fraction of a star's habitable
 zone that cen be sampled by during the lifetime of a mission known as the ``habitable zone
 completeness'' with the two yield codes in side by side axes and using the same color bar for ease
 of comparison. Figure \autoref{fig:planet_hists} shows histograms of the total number of detected
@@ -122,10 +123,10 @@ results are on the right.\label{fig:hz_completeness}](figures/TEMP_hz_completene
 Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters.
 \label{fig:planet_hists}](figures/TEMP_planet_histograms.jpeg)
 
-Yield code inputs can also have a profound impact on their calculations and so plottign these
+Yield code inputs can also have a profound impact on their calculations and so plotting these
 values is also important to ensure consistency. Figure \autoref{fig:core_throughput} shows the
 throughput for a key series of optics in the observatory known as a coronagraph. Smaller
-throughputs mean less planet late makes it onto the detector and can have a profound impact on
+throughputs mean less planet light makes it onto the detector and can have a profound impact on
 yields.
 
 ![Core throughput vs. separation (in lambda/D) for the amplitude apodized vortex coronagraph
