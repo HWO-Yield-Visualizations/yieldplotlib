@@ -137,7 +137,7 @@ def plot_core_throughtput(
             ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
 
     ax.set(**ax_kwargs)
-    plt.xlabel("Separation ($\lambda/D$)")
+    plt.xlabel("Separation ($\\lambda/D$)")
     plt.ylabel("Throughput")
 
     plt.legend()
