@@ -32,7 +32,7 @@ bibliography: paper.bib
 NASA’s next flagship observatory, as recommended by the Astro2020 decadal survey,
 is the Habitable World’s Observatory (HWO) which has the ambitious goal to "search
 for biosignatures from a robust number of about ∼25 habitable zone planets and be
-a transformative facility for general astrophysics’’. In the phrasing of this science
+a transformative facility for general astrophysics". In the phrasing of this science
 goal, the importance of expected exo-Earth yield (the total number of detected habitable
 zone planets) on the success of the mission is made apparent. As HWO is being developed
 and trade spaces are explored, yield codes such as the Altruistic Yield Optimization (AYO)
@@ -80,8 +80,8 @@ added in the future.
 `yieldplotlib` uses a file node and directory structure to parse the yield output or input packages
 from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a
 universal key in `yieldplotlib`. This `key_map` is automatically generated from a CSV file which
-has a version hosted on the repository that is automatically updated daily from the active development
-version which is hosted on Google Sheets for broader collaboration. An example few lines from the CSV
+is hosted on the repository and automatically updated on a daily basis daily from an active development
+version hosted on Google Sheets for broader collaboration. An example few lines from the CSV
 file can be found in the following table.
 
 | yieldplotlib name | description                              | EXOSIMS name      | EXOSIMS file           | EXOSIMS Class  | AYO name                 | AYO file         | AYO Class  | EXOSIMS unit | Comment | EXOSIMS transform type | EXOSIMS transform value | AYO transform type | AYO transform value |
@@ -89,7 +89,7 @@ file can be found in the following table.
 | star_dist         | Distance to the star (in parsecs).       | star_dist         | reduce-star-target.csv | EXOSIMSCSVFile | dist (pc)                | target_list.csv  | AYOCSVFile |              |         |                        |                         |                    |                     |
 | yield_earth       | Yield of Earth-like exoplanet candidates | exoE_det_alt_mean | reduce-earth.csv       | EXOSIMSCSVFile | exoEarth candidate yield | observations.csv | AYOCSVFile |              |         |                        |                         | sum                |                     |
 
-Once the yield packages are parsed a getter can be called on the directories
+Once the yield packages are loaded and  parsed, a getter can be called on the directories
 (i.e. `ayo.get('yield_earth')`) to return the corresponding value from the yield code.
 
 Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed
