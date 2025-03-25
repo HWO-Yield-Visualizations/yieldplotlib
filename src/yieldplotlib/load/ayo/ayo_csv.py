@@ -1,8 +1,13 @@
 """Node for handling AYO's CSV files."""
 
 import numpy as np
+import pandas as pd
 
 from yieldplotlib.core import CSVFile
+
+OVERRIDE_KEYS = {
+    "blind_comp_det": "_get_blind_comp",
+}
 
 
 class AYOCSVFile(CSVFile):
@@ -19,3 +24,41 @@ class AYOCSVFile(CSVFile):
     def transform_WDS_dmag(self, data):
         """Convert the WDS dMag to floats."""
         return np.array(data, dtype=float)
+
+    def _get(self, key: str, **kwargs):
+        """Return the data associated with the key."""
+        if key in OVERRIDE_KEYS:
+            return getattr(self, OVERRIDE_KEYS[key])()
+        if key in self.data.columns:
+            return self.data[key].values
+        return None
+
+    def _get_blind_comp(self):
+        """Get the blind completeness data from first visits.
+
+        Returns:
+            np.ndarray:
+                A structured array with completeness, star names, and integration times
+                for all first visits.
+        """
+        # Filter data to only include first visits
+        first_visits = self.data[self.data["Visit #"] == 1]
+
+        # Extract the required data
+        completeness = first_visits["exoEarth candidate yield"].values.astype(float)
+        hip_ids = first_visits["HIP"].values
+        integration_times = first_visits["Exp Time (days)"].values.astype(float)
+
+        # Create star names with HIP prefix
+        star_names = np.array([f"HIP {int(hip)}" for hip in hip_ids])
+
+        # Create a structured array with the data
+        result = pd.DataFrame(
+            {
+                "completeness": completeness,
+                "star_name": star_names,
+                "integration_time": integration_times,
+            },
+        )
+
+        return result
