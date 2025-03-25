@@ -13,6 +13,10 @@ user/intro
 ```
 ```{toctree}
 :maxdepth: 2
+user/installation
+```
+```{toctree}
+:maxdepth: 2
 user/dev
 ```
 ```{toctree}
