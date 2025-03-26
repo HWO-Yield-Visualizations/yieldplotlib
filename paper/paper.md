@@ -84,10 +84,8 @@ which is automatically updated on a daily basis daily from an active development
 version hosted on Google Sheets for broader collaboration. An example few lines from the CSV
 file can be found in the following table.
 
-| yieldplotlib name | description                              | EXOSIMS name      | EXOSIMS file           | EXOSIMS Class  | AYO name                 | AYO file         | AYO Class  | EXOSIMS unit | Comment | EXOSIMS transform type | EXOSIMS transform value | AYO transform type | AYO transform value |
-|-------------------|------------------------------------------|-------------------|------------------------|----------------|--------------------------|------------------|------------|--------------|---------|------------------------|-------------------------|--------------------|---------------------|
-| star_dist         | Distance to the star (in parsecs).       | star_dist         | reduce-star-target.csv | EXOSIMSCSVFile | dist (pc)                | target_list.csv  | AYOCSVFile |              |         |                        |                         |                    |                     |
-| yield_earth       | Yield of Earth-like exoplanet candidates | exoE_det_alt_mean | reduce-earth.csv       | EXOSIMSCSVFile | exoEarth candidate yield | observations.csv | AYOCSVFile |              |         |                        |                         | sum                |                     |
+![Example portion of the yieldplotlib key map CSV file containing the 
+mappings between AYO, EXOSIMS, and yieldplotlib parameters.](figures/ypl_csv_table.jpeg)
 
 Once the yield packages are loaded and parsed, a getter can be called on the directories
 (i.e. `ayo.get('yield_earth')`) to return the corresponding value from the respective yield code.
