@@ -1,7 +1,7 @@
 """Data management utilities for yieldplotlib.
 
-This module provides utilities for managing and accessing data files used by yieldplotlib.
-It uses pooch to handle data downloads and caching.
+This module provides utilities for managing and accessing data files used by
+yieldplotlib. It uses pooch to handle data downloads and caching.
 """
 
 import pooch
