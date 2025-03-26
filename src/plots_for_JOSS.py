@@ -1,14 +1,22 @@
-from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
-from yieldplotlib.load.ayo_directory import AYODirectory
 from pathlib import Path
-from yieldplotlib.plots.yield_hist import plot_hist
-import matplotlib.pyplot as plt
-from yieldplotlib.plots.hz_completeness import plot_hz_completeness
-from yieldplotlib.plots.yip_plots import plot_core_throughtput
-from yieldplotlib.load.yip_directory import YIPDirectory
 
-ayo = AYODirectory(Path("/Users/ssteiger/repos/yieldplotlib/input/AYO/EAC1_yields/EAC1-QE_0.9-noiseless-H2O"))
-exosims = EXOSIMSDirectory(Path("/Users/ssteiger/repos/yieldplotlib/input/EXOSIMS/Example_EAC1_EXOSIMS2_QE90_noiseless"))
+import matplotlib.pyplot as plt
+
+from yieldplotlib.load.ayo_directory import AYODirectory
+from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
+from yieldplotlib.load.yip_directory import YIPDirectory
+from yieldplotlib.plots.yip_plots import plot_core_throughtput
+
+ayo = AYODirectory(
+    Path(
+        "/Users/ssteiger/repos/yieldplotlib/input/AYO/EAC1_yields/EAC1-QE_0.9-noiseless-H2O"
+    )
+)
+exosims = EXOSIMSDirectory(
+    Path(
+        "/Users/ssteiger/repos/yieldplotlib/input/EXOSIMS/Example_EAC1_EXOSIMS2_QE90_noiseless"
+    )
+)
 yip = YIPDirectory(Path("/Users/ssteiger/repos/yieldplotlib/input/eac1_aavc"))
 # temps = ["hot", "warm", "cold"]
 # planet_bins = ["Earth", "Rocky", "Super Earth", "Sub Neptune", "Neptune", "Jupiter"]
@@ -28,10 +36,16 @@ yip = YIPDirectory(Path("/Users/ssteiger/repos/yieldplotlib/input/eac1_aavc"))
 # plt.savefig("/Users/ssteiger/repos/yieldplotlib/paper/figures/hz_completeness_cyber.png")
 # plt.show()
 
-fig, ax = plot_core_throughtput([exosims], ["EXOSIMS"], yip,
-                      title="Coronagraph Throughput", use_cyberpunk=False,
-                      ax_kwargs={"xlim": (0, 32),
-                                 "ylim": (0, 0.4)})
+fig, ax = plot_core_throughtput(
+    [exosims],
+    ["EXOSIMS"],
+    yip,
+    title="Coronagraph Throughput",
+    use_cyberpunk=False,
+    ax_kwargs={"xlim": (0, 32), "ylim": (0, 0.4)},
+)
 
-plt.savefig('/Users/ssteiger/repos/yieldplotlib/paper/figures/core_throughput_all_curves.jpeg')
+plt.savefig(
+    "/Users/ssteiger/repos/yieldplotlib/paper/figures/core_throughput_all_curves.jpeg"
+)
 plt.show()

@@ -129,10 +129,10 @@ Solar luminosity) and distance (in parsecs). Here the AYO results are on the lef
 results are on the right.\label{fig:hz_completeness}](figures/hz_completeness.png)
 
 ![Bar chart showing expected EXOSIMS planet yields for hot (pink), warm (yellow), and cold (blue)
-Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters. Earth-like planets which are 
-of the most interest for HWO are shown in green. This plot uses the "cyberpunk" 
-theme from matplotlib which is supported as a keyword argument to yieldplotlib as a dark mode 
-alternative to the standard plotting color schemes. 
+Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters. Earth-like planets which are
+of the most interest for HWO are shown in green. This plot uses the "cyberpunk"
+theme from matplotlib which is supported as a keyword argument to yieldplotlib as a dark mode
+alternative to the standard plotting color schemes.
 \label{fig:planet_hists}](figures/yield_hist_cyber.png)
 
 Yield code inputs can also have a profound impact on their results and so plotting these
@@ -162,6 +162,6 @@ or to a directory containing subdirectories of many AYO and EXOSIMS runs.
 S.S. acknowledges support from an STScI Postdoctoral Fellowship.
 
 The authors would also like to acknowledge Christopher Stark, Dmitry Savransky, Rhonda Morgan, and
-Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. They would also like 
+Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. They would also like
 to thank Alex Howe, Justin Hom, and the whole Exoplanet Science Yields Working Group (ESYWG) for
-their valuable feedback and discussions. 
+their valuable feedback and discussions.

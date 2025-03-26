@@ -104,7 +104,10 @@ def plot_core_throughtput(
             Figure and axes objects for the plot.
     """
     import pandas as pd
-    ayo_data = pd.read_csv("/Users/ssteiger/repos/yieldplotlib/input/AYO/EAC1_yields/EAC1-QE_0.9-noiseless-H2O/coronagraph1_plot-eac1_aavc.csv")
+
+    ayo_data = pd.read_csv(
+        "/Users/ssteiger/repos/yieldplotlib/input/AYO/EAC1_yields/EAC1-QE_0.9-noiseless-H2O/coronagraph1_plot-eac1_aavc.csv"
+    )
 
     if use_cyberpunk:
         import mplcyberpunk  # noqa: F401
