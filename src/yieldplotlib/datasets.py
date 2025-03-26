@@ -13,7 +13,7 @@ from .load.exosims_directory import EXOSIMSDirectory
 # Create a pooch registry for data files
 REGISTRY = {
     "ayo.zip": "md5:af4a8853e77a19c7fe91bffb3f57ccfe",
-    "exosims.zip": "md5:8bd6809f56a98db8855613f8e68d3739",
+    "exosims.zip": "md5:0ada773ec50d1bcc12c112025b8319df",
 }
 
 # Create a pooch instance named after Corey's dog
