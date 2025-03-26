@@ -164,4 +164,4 @@ S.S. acknowledges support from an STScI Postdoctoral Fellowship.
 The authors would also like to acknowledge Christopher Stark, Dmitry Savransky, Rhonda Morgan, and
 Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. They would also like
 to thank Alex Howe, Justin Hom, and the rest of the Exoplanet Science Yields Working Group (ESYWG) for
-their valuable feedback and discussions.
+their valuable feedback and discussions
