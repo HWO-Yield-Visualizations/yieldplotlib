@@ -84,7 +84,7 @@ which is automatically updated on a daily basis daily from an active development
 version hosted on Google Sheets for broader collaboration. An example few lines from the CSV
 file can be found in the following table.
 
-![Example portion of the yieldplotlib key map CSV file containing the 
+![Example portion of the yieldplotlib key map CSV file containing the
 mappings between AYO, EXOSIMS, and yieldplotlib parameters.](figures/ypl_csv_table.jpeg)
 
 Once the yield packages are loaded and parsed, a getter can be called on the directories
