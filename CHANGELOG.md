@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.5.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.4.1...v0.5.0) (2025-03-26)
+
+
+### Features
+
+* Fetching functions now return DirectoryNode objects ([edc30f2](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/edc30f24d4f86edc047f342e4ac94b5e2434e8db))
+* GitHub Actions workflow and script to autogenerate the YPL parameters documentation table ([1cbe01c](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/1cbe01c4354c3dd9933ffb512b42ed82eb0c6875))
+* Pooch-based data management ([c228d5a](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/c228d5a994080d5768e13ba484960f478c6836ea))
+
+
+### Bug Fixes
+
+* add token to checkout repository ([8c6e2e8](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/8c6e2e843e49e9556fd4071eee8bcd2147083035))
+* push and commit paper pdf ([ff59a62](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/ff59a62308117ab5b179f63c08216ce67c1265df))
+
 ## [0.4.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.4.0...v0.4.1) (2025-03-25)
 
 
