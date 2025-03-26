@@ -43,4 +43,4 @@ jobs:
           git add paper/paper.pdf
 
           # Only commit and push if there are actual changes to the file
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update key_map.py from Google Sheets" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update JOSS paper" && git push)
