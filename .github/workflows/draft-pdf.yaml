@@ -29,9 +29,14 @@ jobs:
           # paper.md
           path: paper/paper.pdf
 
-      - name: Commit PDF to repository
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: '(auto) Paper PDF Draft'
-          # This should be the path to the paper within your repo.
-          add: 'paper/paper.pdf' # 'paper/*.pdf' to commit all PDFs in the paper directory
+      - name: Commit and push changes
+        run: |
+          # Configure git user for the commit
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+  
+          # Add the generated file to git
+          git add paper/paper.pdf
+  
+          # Only commit and push if there are actual changes to the file
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update key_map.py from Google Sheets" && git push)
