@@ -12,8 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Paper Draft
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.HWO_RELEASE_PLEASE_TOKEN }}
       - name: Build draft PDF
         uses: openjournals/openjournals-draft-action@master
         with:
@@ -34,9 +36,9 @@ jobs:
           # Configure git user for the commit
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-  
+
           # Add the generated file to git
           git add paper/paper.pdf
-  
+
           # Only commit and push if there are actual changes to the file
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update key_map.py from Google Sheets" && git push)
