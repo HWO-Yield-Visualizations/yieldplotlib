@@ -9,14 +9,33 @@ provides the API reference and examples to help you get started.
 
 ```{toctree}
 :maxdepth: 2
+user/intro
+```
+```{toctree}
+:maxdepth: 1
+user/installation
+```
+```{toctree}
+:maxdepth: 1
 user/dev
+```
+```{toctree}
+:maxdepth: 2
+user/ypl_parameters
+```
+```{toctree}
+:maxdepth: 1
+tutorials/yieldplotlib_tutorial.ipynb
+```
+```{toctree}
+:maxdepth: 1
+user/cite.md
+```
+```{toctree}
+:maxdepth: 1
+plot_gallery/gallery.md
 ```
 ```{toctree}
 :maxdepth: 1
 develop/_changelog.md
-```
-
-```{toctree}
-:maxdepth: 1
-tutorials/yieldplotlib_tutorial.ipynb
 ```

@@ -41,7 +41,7 @@ html_favicon = "_static/favicon.ico"
 html_title = "yieldplotlib"
 
 html_theme_options = {
-    "repository_url": "https://www.github.com/CoreySpohn/yieldplotlib",
+    "repository_url": "https://www.github.com/HWO-Yield-Visualizations/yieldplotlib",
     "repository_branch": "main",
     "use_repository_button": True,
     "show_toc_level": 2,
