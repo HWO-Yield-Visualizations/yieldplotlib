@@ -54,3 +54,4 @@ source_suffix = {
     ".md": "myst-nb",
 }
 nb_execution_mode = "cache"
+nb_execution_timeout = -1
