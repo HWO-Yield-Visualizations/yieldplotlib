@@ -103,6 +103,9 @@ def plot_core_throughtput(
         matplotlib.figure.Figure, matplotlib.axes.Axes:
             Figure and axes objects for the plot.
     """
+    import pandas as pd
+    ayo_data = pd.read_csv("/Users/ssteiger/repos/yieldplotlib/input/AYO/EAC1_yields/EAC1-QE_0.9-noiseless-H2O/coronagraph1_plot-eac1_aavc.csv")
+
     if use_cyberpunk:
         import mplcyberpunk  # noqa: F401
         from cycler import cycler
@@ -127,15 +130,9 @@ def plot_core_throughtput(
         ax.plot(separations, core_thruput_from_yip, label="yippy")
 
     for i, run in enumerate(runs):
-        fits = run.get("core_thruput")
-        if isinstance(fits, dict):
-            for name in fits:
-                thruput_data = fits[name].get("data")
-                ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=run_labels[i])
-        else:
-            thruput_data = fits.get("data")
-            ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
-
+        thruput_data = run.get("core_thruput")
+        ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
+    ax.plot(ayo_data["Sep (l/D)"], ayo_data["Core throughput"], label="AYO")
     ax.set(**ax_kwargs)
     plt.xlabel("Separation ($\\lambda/D$)")
     plt.ylabel("Throughput")

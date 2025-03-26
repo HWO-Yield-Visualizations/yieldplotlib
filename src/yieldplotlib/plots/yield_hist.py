@@ -220,14 +220,14 @@ def plot_hist(
     )
 
     # Create the combined legend
-    combined_legend = ax.legend(handles=handles, labels=labels, ncol=1)
+    combined_legend = ax.legend(handles=handles, labels=labels, ncol=1, fontsize=14)
     ax.add_artist(combined_legend)
 
     # Set labels and title
-    ax.set_ylabel("Yield")
+    ax.set_ylabel("Yield", fontsize=18)
     ax.set_xticks([0] + planet_x.tolist() if plotting_earths else planet_x.tolist())
     xtick_labels = ["Earth"] + planet_types if plotting_earths else planet_types
-    ax.set_xticklabels(xtick_labels, ha="center")
+    ax.set_xticklabels(xtick_labels, ha="center", fontsize=16)
 
     ax.set(**ax_kwargs)
 
@@ -247,6 +247,6 @@ def autolabel(ax, rects, use_cyberpunk=False):
                 textcoords="offset points",
                 ha="center",
                 va="bottom",
-                fontsize=8,
+                fontsize=12,
                 color="white" if use_cyberpunk else "black",
             )

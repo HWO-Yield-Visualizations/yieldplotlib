@@ -77,10 +77,10 @@ added in the future.
 # Methods and Functionality
 
 ## Parsing and Getting Values
-`yieldplotlib` uses a file node and directory structure to parse the yield output or input packages
+`yieldplotlib` uses a file node and directory structure to parse the yield output packages
 from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a
-universal key in `yieldplotlib`. This `key_map` is automatically generated from a CSV file which
-is hosted on the repository and automatically updated on a daily basis daily from an active development
+universal key in `yieldplotlib`. This `key_map` is generated from a CSV file in the repository
+which is automatically updated on a daily basis daily from an active development
 version hosted on Google Sheets for broader collaboration. An example few lines from the CSV
 file can be found in the following table.
 
@@ -89,19 +89,19 @@ file can be found in the following table.
 | star_dist         | Distance to the star (in parsecs).       | star_dist         | reduce-star-target.csv | EXOSIMSCSVFile | dist (pc)                | target_list.csv  | AYOCSVFile |              |         |                        |                         |                    |                     |
 | yield_earth       | Yield of Earth-like exoplanet candidates | exoE_det_alt_mean | reduce-earth.csv       | EXOSIMSCSVFile | exoEarth candidate yield | observations.csv | AYOCSVFile |              |         |                        |                         | sum                |                     |
 
-Once the yield packages are loaded and  parsed, a getter can be called on the directories
-(i.e. `ayo.get('yield_earth')`) to return the corresponding value from the yield code.
+Once the yield packages are loaded and parsed, a getter can be called on the directories
+(i.e. `ayo.get('yield_earth')`) to return the corresponding value from the respective yield code.
 
 Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed
 using the same file node and directory structure. This allows users to access key coronagraph performance
 metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib`
-uses `yippy` as a backend though the user interface is the same as for the AYO and EXOSIMS directories.
+uses `yippy` as a backend, though the user interface is identical to accessing the AYO and EXOSIMS directories.
 
 ## Plotting
 
 ### Generic and Comparison Plots
 
-`yieldplotlib` extends the commonly used python plotting package `matplotlib` to take advantage
+`yieldplotlib` extends the commonly used Python plotting package `matplotlib` to take advantage
 of the wide variety of customization options that  `matplotlib` offers, as well as the extensive
 knowledge base many users of `yieldplotlib` will have with that package. The `yieldplotlib` generic
 plots are designed to be used for single yield run visualizations and can make scatter plots, standard plots,
@@ -112,45 +112,49 @@ figure, or on the same set of axes for more complex comparisons.
 
 ### Plotting Scripts
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
-provide instant usability for comparing AYO and EXOSIMS as motivated by rapid pace of the ongoing
+provide instant usability for comparing AYO and EXOSIMS as motivated by the rapid pace of the ongoing
 architecture trade studies for HWO. This also serves to provide examples on how the package can be
-used for those who want to use the more generic `yieldplotlib` parsing and plotting structure to
+used for those who want to adapt the generic `yieldplotlib` parsing structure and plotting methods to
 generate their own bespoke visualizations.
 
 Figure \autoref{fig:hz_completeness} and Figure \autoref{fig:planet_hists} show two different types
 of yield outputs. Figure \autoref{fig:hz_completeness} shows the fraction of a star's habitable
-zone that cen be sampled by during the lifetime of a mission known as the ``habitable zone
-completeness'' with the two yield codes in side by side axes and using the same color bar for ease
+zone that cen be sampled by during the lifetime of a mission known as the "habitable zone
+completeness" with the two yield codes in side by side axes and using the same color bar for ease
 of comparison. Figure \autoref{fig:planet_hists} shows histograms of the total number of detected
-planets foudn for each yield code as a function of planet type.
+planets found for each yield code as a function of planet type.
 
 ![Plot of the Habitable Zone (HZ) completeness as a function of host star luminosity (in units of
 Solar luminosity) and distance (in parsecs). Here the AYO results are on the left and the EXOSIMS
-results are on the right.\label{fig:hz_completeness}](figures/TEMP_hz_completeness.jpeg)
+results are on the right.\label{fig:hz_completeness}](figures/hz_completeness.png)
 
 ![Bar chart showing expected EXOSIMS planet yields for hot (pink), warm (yellow), and cold (blue)
-Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters.
-\label{fig:planet_hists}](figures/TEMP_planet_histograms.jpeg)
+Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters. Earth-like planets which are 
+of the most interest for HWO are shown in green. This plot uses the "cyberpunk" 
+theme from matplotlib which is supported as a keyword argument to yieldplotlib as a dark mode 
+alternative to the standard plotting color schemes. 
+\label{fig:planet_hists}](figures/yield_hist_cyber.png)
 
-Yield code inputs can also have a profound impact on their calculations and so plotting these
-values is also important to ensure consistency. Figure \autoref{fig:core_throughput} shows the
+Yield code inputs can also have a profound impact on their results and so plotting these
+values is important to ensure consistency. Figure \autoref{fig:core_throughput} shows the
 throughput for a key series of optics in the observatory known as a coronagraph. Smaller
 throughputs mean less planet light makes it onto the detector and can have a profound impact on
-yields.
+final yields.
 
-![Core throughput vs. separation (in lambda/D) for the amplitude apodized vortex coronagraph
-assumed by AYO (dotted yellow), EXOSIMS (dashed pink) and pulled directly from the yield input
+![Core throughput vs. separation (in lambda/D) for the coronagraph
+assumed by AYO (dotted purple), EXOSIMS (dashed pink) and pulled directly from the yield input
 package using yippy (solid blue). Slight differences between the codes can be attributed to how
 the "core" is defined. EXOSIMS and yippy adopt a fixed radius circular aperture whereas AYO
 defines an aperture based on pixels having more than 30% of the peak flux. Additional sources
-of difference can also lie in the interpolation methods used by all of the codes.
-\label{fig:core_throughput}](figures/TEMP_core_throughput.jpg)
+of difference can also lie in the interpolation methods used by all of the codes. This highlights
+the types of insights that tools like yieldplotlib can help to uncover.
+\label{fig:core_throughput}](figures/core_throughput_all_curves.jpeg)
 
 ## Pipeline and Command Line Interface
 
 In order to generate summary plots quickly, `yieldplotlib` comes packaged with a command line interface
 and plotting pipeline to create a suite of commonly used yield plots. This is accessed by running
-`run_ypl` and providing a path to a single folder containing the outputs for a single AYO ir EXOSIMS run,
+`run_ypl` and providing a path to a single folder containing the outputs for a single AYO or EXOSIMS run,
 or to a directory containing subdirectories of many AYO and EXOSIMS runs.
 
 # Acknowledgements
@@ -158,4 +162,6 @@ or to a directory containing subdirectories of many AYO and EXOSIMS runs.
 S.S. acknowledges support from an STScI Postdoctoral Fellowship.
 
 The authors would also like to acknowledge Christopher Stark, Dmitry Savransky, Rhonda Morgan, and
-Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories.
+Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. They would also like 
+to thank Alex Howe, Justin Hom, and the whole Exoplanet Science Yields Working Group (ESYWG) for
+their valuable feedback and discussions. 
