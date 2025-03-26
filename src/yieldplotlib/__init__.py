@@ -2,6 +2,7 @@
 
 __all__ = [
     "__version__",
+    "fetch_sample_data",
     "KEY_MAP",
     "logger",
     "calculate_axis_limits_and_ticks",
@@ -18,6 +19,7 @@ import importlib.resources
 import matplotlib.pyplot as plt
 
 from ._version import __version__
+from .datasets import fetch_sample_data
 from .key_map import KEY_MAP
 from .logger import logger
 from .plots.comparison_plots import compare, multi, panel, xy_grid
