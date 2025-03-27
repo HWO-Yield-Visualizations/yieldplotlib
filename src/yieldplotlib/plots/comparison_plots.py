@@ -46,23 +46,35 @@ def _calculate_consistent_bins(directories, x, bins_param=None):
             Bins parameter to use. If None, auto-calculated bins will be used.
 
     Returns:
-        array-like:
-            Calculated bin edges to use for histograms.
+        tuple:
+            (bins, reference_unit) - bin edges to use and their unit (None if unitless)
     """
     all_data = []
-    data_with_units = None
+    reference_unit = None  # Track the first unit we encounter
 
     # Collect all data from all directories
     for directory in directories:
         data = directory.get(x)
         if data is not None:
-            all_data.extend(np.asarray(data).flatten())
-            # Keep track of any Quantity objects to preserve units
-            if isinstance(data, u.Quantity) and data_with_units is None:
-                data_with_units = data
+            # Handle Astropy Quantity objects
+            if hasattr(data, "unit"):
+                # Initialize reference unit with the first unit we find
+                if reference_unit is None:
+                    reference_unit = data.unit
+
+                # If units don't match, convert to the reference unit
+                if data.unit != reference_unit:
+                    data = data.to(reference_unit)
+
+                # Extract values after unit conversion
+                data_values = data.value
+                all_data.extend(np.asarray(data_values).flatten())
+            else:
+                # For data without units
+                all_data.extend(np.asarray(data).flatten())
 
     if not all_data:
-        return None
+        return None, None
 
     # Calculate bins based on all data combined
     if bins_param is not None:
@@ -71,10 +83,10 @@ def _calculate_consistent_bins(directories, x, bins_param=None):
         bins = np.histogram_bin_edges(all_data, bins="auto")
 
     # Preserve units if needed
-    if data_with_units is not None:
-        bins = bins * data_with_units.unit
+    if reference_unit is not None and isinstance(bins, u.Quantity):
+        bins = bins.to(reference_unit).value
 
-    return bins
+    return bins, reference_unit
 
 
 def _validate_y_parameter(plot_type, y):
@@ -94,7 +106,7 @@ def _validate_y_parameter(plot_type, y):
         raise ValueError(f"y must be provided for {plot_type} plots")
 
 
-def _handle_histogram(plot_method, directory, x, plot_kwargs):
+def _handle_histogram(plot_method, directory, x, plot_kwargs, reference_unit=None):
     """Handle histogram plotting and legend.
 
     Args:
@@ -106,6 +118,8 @@ def _handle_histogram(plot_method, directory, x, plot_kwargs):
             Key for x-axis data.
         plot_kwargs (dict):
             Keyword arguments for the plot.
+        reference_unit (astropy.units.Unit, optional):
+            Reference unit to use for conversion.
 
     Returns:
         tuple:
@@ -118,6 +132,10 @@ def _handle_histogram(plot_method, directory, x, plot_kwargs):
     _kwargs.pop("alpha", None)
     _kwargs.pop("s", None)
     _kwargs.pop("marker", None)
+
+    # Add reference unit to ensure consistent unit handling
+    if reference_unit is not None:
+        _kwargs["reference_unit"] = reference_unit
 
     _, _, patches = plot_method(directory, x=x, **_kwargs)
     # Store the first patch for legend purposes
@@ -301,7 +319,7 @@ def _validate_color_data_shapes(directory, x, y, c):
         )
 
 
-def _plot_data(ax, directory, x, y, plot_type, plot_kwargs):
+def _plot_data(ax, directory, x, y, plot_type, plot_kwargs, reference_unit=None):
     """Plot data using the appropriate method.
 
     Args:
@@ -317,6 +335,8 @@ def _plot_data(ax, directory, x, y, plot_type, plot_kwargs):
             Type of plot to create.
         plot_kwargs (dict):
             Keyword arguments for the plot.
+        reference_unit (astropy.units.Unit, optional):
+            Reference unit to use for consistent unit conversion.
 
     Returns:
         The plot object(s) created.
@@ -338,7 +358,7 @@ def _plot_data(ax, directory, x, y, plot_type, plot_kwargs):
     if plot_type == "hist":
         # Validate histogram data
         _validate_histogram_data(directory, x)
-        return _handle_histogram(plot_method, directory, x, plot_kwargs)
+        return _handle_histogram(plot_method, directory, x, plot_kwargs, reference_unit)
     else:
         # Validate scatter/line plot data
         _validate_data_shapes(directory, x, y)
@@ -414,8 +434,11 @@ def compare(
         linestyles = default_linestyles
 
     # For histograms, calculate consistent bins across all directories
+    reference_unit = None
     if plot_type == "hist":
-        bins = _calculate_consistent_bins(directories, x, kwargs.get("bins"))
+        bins, reference_unit = _calculate_consistent_bins(
+            directories, x, kwargs.get("bins")
+        )
         if bins is not None:
             kwargs["bins"] = bins
 
@@ -437,8 +460,8 @@ def compare(
         elif plot_type == "plot" and linestyles is not None:
             plot_kwargs["linestyle"] = linestyles[i % len(linestyles)]
 
-        # Plot the data
-        _plot_data(ax, directory, x, y, plot_type, plot_kwargs)
+        # Plot the data with reference unit for consistent rendering
+        _plot_data(ax, directory, x, y, plot_type, plot_kwargs, reference_unit)
 
     # Add legend if requested
     if legend:
@@ -522,8 +545,11 @@ def multi(
     )
 
     # For histograms, calculate consistent bins across all directories
+    reference_unit = None
     if plot_type == "hist":
-        bins = _calculate_consistent_bins(directories, x, kwargs.get("bins"))
+        bins, reference_unit = _calculate_consistent_bins(
+            directories, x, kwargs.get("bins")
+        )
         if bins is not None:
             kwargs["bins"] = bins
 
@@ -538,8 +564,8 @@ def multi(
             # Create plot kwargs for this dataset
             plot_kwargs = kwargs.copy()
 
-            # Plot the data
-            _plot_data(ax, directory, x, y, plot_type, plot_kwargs)
+            # Plot the data with reference unit for consistent rendering
+            _plot_data(ax, directory, x, y, plot_type, plot_kwargs, reference_unit)
 
             # Set title for this subplot
             ax.set_title(title)
@@ -647,6 +673,7 @@ def panel(
 
     # Prepare consistent bins for each spec if it's a histogram
     spec_bins = {}
+    spec_units = {}  # Track the reference unit for each spec
     for j, spec in enumerate(specs):
         plot_type = spec.get("plot_type", "scatter")
         x = spec.get("x")
@@ -658,9 +685,11 @@ def panel(
                 if k not in ["x", "y", "plot_type"]:
                     combined_kwargs[k] = v
 
-            spec_bins[j] = _calculate_consistent_bins(
+            bins, reference_unit = _calculate_consistent_bins(
                 directories, x, combined_kwargs.get("bins")
             )
+            spec_bins[j] = bins
+            spec_units[j] = reference_unit  # Save the reference unit
 
     # Plot each directory-spec combination
     plot_idx = 0
@@ -694,11 +723,15 @@ def panel(
                     plot_kwargs[k] = v
 
             # Apply consistent bins if this is a histogram
-            if plot_type == "hist" and j in spec_bins and spec_bins[j] is not None:
-                plot_kwargs["bins"] = spec_bins[j]
+            reference_unit = None
+            if plot_type == "hist":
+                if j in spec_bins and spec_bins[j] is not None:
+                    plot_kwargs["bins"] = spec_bins[j]
+                if j in spec_units:
+                    reference_unit = spec_units[j]
 
-            # Plot the data
-            _plot_data(ax, directory, x, y, plot_type, plot_kwargs)
+            # Plot the data with reference unit if available
+            _plot_data(ax, directory, x, y, plot_type, plot_kwargs, reference_unit)
 
             # Set title for this subplot
             title = (
@@ -808,24 +841,31 @@ def xy_grid(
     default_linestyles = ["-", "--", "-.", ":"]
 
     # For each x_key, calculate consistent bins if histogram
+    x_key_bins = {}
+    x_key_units = {}  # Track reference units for each x_key
     if plot_type == "hist":
-        x_key_bins = {}
         for j, x_key in enumerate(x_keys):
-            x_key_bins[j] = _calculate_consistent_bins(
+            bins, reference_unit = _calculate_consistent_bins(
                 directories, x_key, kwargs.get("bins")
             )
+            x_key_bins[j] = bins
+            x_key_units[j] = reference_unit  # Save the reference unit
 
     # Loop over each grid cell and plot
     for i, y_key in enumerate(y_keys):
         for j, x_key in enumerate(x_keys):
             ax = axes[i, j]
 
-            # If histogram, set consistent bins for this x_key
-            if plot_type == "hist" and j in x_key_bins and x_key_bins[j] is not None:
-                local_kwargs = kwargs.copy()
-                local_kwargs["bins"] = x_key_bins[j]
-            else:
-                local_kwargs = kwargs
+            # Set up kwargs for this cell
+            local_kwargs = kwargs.copy()
+
+            # If histogram, set consistent bins and reference unit for this x_key
+            reference_unit = None
+            if plot_type == "hist":
+                if j in x_key_bins and x_key_bins[j] is not None:
+                    local_kwargs["bins"] = x_key_bins[j]
+                if j in x_key_units:
+                    reference_unit = x_key_units[j]
 
             # For each directory, plot on this axis
             for idx, directory in enumerate(directories):
@@ -842,8 +882,10 @@ def xy_grid(
                         idx % len(default_linestyles)
                     ]
 
-                # Plot the data
-                _plot_data(ax, directory, x_key, y_key, plot_type, plot_kwargs)
+                # Plot the data with reference unit if available
+                _plot_data(
+                    ax, directory, x_key, y_key, plot_type, plot_kwargs, reference_unit
+                )
 
             idx = i * n_cols + j
             ax.set_title(titles[idx])

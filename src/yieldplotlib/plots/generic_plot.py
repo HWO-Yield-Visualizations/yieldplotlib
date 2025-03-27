@@ -9,6 +9,7 @@ import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
+from astropy import units as u
 from matplotlib.axes import Axes
 from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize
@@ -47,9 +48,24 @@ def ypl_plot(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
         raise ValueError(f"Could not find data for key: y='{y}'")
 
     plot_kwargs = kwargs.copy()
+
+    # Handle units for x and y data
+    x_unit, y_unit = None, None
+
+    if isinstance(x_data, u.Quantity):
+        x_unit, x_data = x_data.unit, x_data.value
+
+    if isinstance(y_data, u.Quantity):
+        y_unit, y_data = y_data.unit, y_data.value
+
+    # Set axis labels with units if available
     if autolabel:
-        self.set_xlabel(x.replace("_", " ").title())
-        self.set_ylabel(y.replace("_", " ").title())
+        _xlabel = x.replace("_", " ").title()
+        _ylabel = y.replace("_", " ").title()
+        _xlabel += f" ({x_unit})" if x_unit else ""
+        _ylabel += f" ({y_unit})" if y_unit else ""
+        self.set_xlabel(_xlabel)
+        self.set_ylabel(_ylabel)
 
     # Handle additional data parameters
     if c:
@@ -58,6 +74,13 @@ def ypl_plot(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
         else:
             c_data = c
         if c_data is not None:
+            # Handle units for color data
+            _clabel = c.replace("_", " ").title()
+            if isinstance(c_data, u.Quantity):
+                c_unit = c_data.unit
+                c_data = c_data.value
+                _clabel += f" [{c_unit}]"
+
             plot_kwargs["c"] = c_data
 
             # Add colorbar if requested
@@ -67,7 +90,7 @@ def ypl_plot(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
                 sm = ScalarMappable(cmap=cmap, norm=norm)
                 sm.set_array([])
                 cbar = plt.colorbar(sm, ax=self)
-                cbar.set_label(c.replace("_", " ").title())
+                cbar.set_label(_clabel)
 
     # Use the standard plot method with our extracted data
     return self.plot(x_data, y_data, **plot_kwargs)
@@ -85,8 +108,8 @@ def ypl_scatter(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
             Key for x-axis data.
         y (str):
             Key for y-axis data.
-        c (str, optional):
-            Key for color data.
+        c (str or array-like, optional):
+            Key for color data or an array of color values.
         autolabel (bool, optional):
             Whether to automatically label the axes.
         **kwargs:
@@ -106,9 +129,25 @@ def ypl_scatter(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
         raise ValueError(f"Could not get key '{y}' from {directory_node}")
 
     scatter_kwargs = kwargs.copy()
+
+    # Handle units for x and y data
+    x_unit = None
+    y_unit = None
+
+    if isinstance(x_data, u.Quantity):
+        x_unit, x_data = x_data.unit, x_data.value
+
+    if isinstance(y_data, u.Quantity):
+        y_unit, y_data = y_data.unit, y_data.value
+
+    # Set axis labels with units if available
     if autolabel:
-        self.set_xlabel(x.replace("_", " ").title())
-        self.set_ylabel(y.replace("_", " ").title())
+        _xlabel = x.replace("_", " ").title()
+        _ylabel = y.replace("_", " ").title()
+        _xlabel += f" ({x_unit})" if x_unit else ""
+        _ylabel += f" ({y_unit})" if y_unit else ""
+        self.set_xlabel(_xlabel)
+        self.set_ylabel(_ylabel)
 
     # Handle additional data parameters
     if c is not None:
@@ -117,7 +156,18 @@ def ypl_scatter(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
         else:
             c_data = c
         if c_data is not None:
-            scatter_kwargs["c"] = c_data
+            # Handle units for color data
+            if isinstance(c, str):
+                _clabel = c.replace("_", " ").title()
+                if isinstance(c_data, u.Quantity):
+                    c_unit, c_data = c_data.unit, c_data.value
+                    _clabel += f" [{c_unit}]"
+            else:
+                # If c was passed as an array, we don't know the unit
+                # or label, so we don't add anything
+                pass
+
+            scatter_kwargs["c"] = np.array(c_data)
 
             # Add colorbar if requested
             if kwargs.get("colorbar", False):
@@ -126,7 +176,7 @@ def ypl_scatter(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
                 sm = ScalarMappable(cmap=cmap, norm=norm)
                 sm.set_array([])
                 cbar = plt.colorbar(sm, ax=self)
-                cbar.set_label(c.replace("_", " ").title())
+                cbar.set_label(_clabel)
                 # Remove the colorbar from the kwargs
                 scatter_kwargs.pop("colorbar", None)
 
@@ -134,7 +184,7 @@ def ypl_scatter(self, directory_node, x, y, c=None, autolabel=True, **kwargs):
     return self.scatter(x_data, y_data, **scatter_kwargs)
 
 
-def ypl_hist(self, directory_node, x, autolabel=True, **kwargs):
+def ypl_hist(self, directory_node, x, autolabel=True, reference_unit=None, **kwargs):
     """Create a histogram from DirectoryNode data.
 
     Args:
@@ -146,6 +196,10 @@ def ypl_hist(self, directory_node, x, autolabel=True, **kwargs):
             Key for the data to be histogrammed.
         autolabel (bool, optional):
             Whether to automatically label the axes.
+        reference_unit (astropy.units.Unit, optional):
+            Reference unit to convert data to. If provided, all data will be converted
+            to this unit before plotting. This ensures unit consistency across
+            multiple datasets.
         **kwargs:
             Additional keyword arguments passed to the hist method.
 
@@ -160,8 +214,31 @@ def ypl_hist(self, directory_node, x, autolabel=True, **kwargs):
         raise ValueError(f"Could not get key '{x}' from {directory_node}")
 
     hist_kwargs = kwargs.copy()
+
+    # Handle units for the data
+    x_unit = None
+
+    if isinstance(x_data, u.Quantity):
+        # Save the original unit for labeling
+        x_unit = x_data.unit
+
+        # If reference unit provided, convert the data
+        if reference_unit is not None:
+            if x_data.unit != reference_unit:
+                x_data = x_data.to(reference_unit)
+                # Update the display unit
+                x_unit = reference_unit
+
+        # Extract numerical values for histogram
+        x_data = x_data.value
+        if "bins" in hist_kwargs and isinstance(hist_kwargs["bins"], u.Quantity):
+            hist_kwargs["bins"] = hist_kwargs["bins"].to(x_unit).value.astype(int)
+
+    # Set axis label with unit if available
     if autolabel:
-        self.set_xlabel(x.replace("_", " ").title())
+        _xlabel = x.replace("_", " ").title()
+        _xlabel += f" ({x_unit})" if x_unit else ""
+        self.set_xlabel(_xlabel)
 
     # Use the standard hist method with our extracted data
     return self.hist(x_data, **hist_kwargs)
