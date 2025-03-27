@@ -61,7 +61,7 @@ and accessible way has therefore also become apparent. This is non-trivial due t
 syntaxes, structures, and assumptions that each of these codes make.
 
 Despite the challenges, when these values are interrogated directly, new insights are achieved.
-Some of these insights are highlighted in detail in [@ETCCrossCal2025] where a comparison of just
+Some of these insights are highlighted in detail in @ETCCrossCal2025 where a comparison of just
 the internal exposure time calculations of AYO and EXOSIMS revealed sources of previously unknown
 discrepancy. `yieldplotlib` is in many ways a continuation of that initial work, but
 aimed instead at the higher level yield products which are of the most direct interest.
