@@ -171,8 +171,9 @@ def get_unit(key, module_name, find_unit_func=None):
         module_name (str):
             The name of the module making the request (used for KEY_MAP lookup).
         find_unit_func (callable, optional):
-            Optional custom fallback function that takes a key and returns a unit string.
-            If None, the built-in find_unit_for_module_key function will be used.
+            Optional custom fallback function that takes a key and returns a
+            unit string. If None, the built-in find_unit_for_module_key
+            function will be used.
 
     Returns:
         astropy.units.Unit or None:
