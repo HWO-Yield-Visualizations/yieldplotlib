@@ -52,7 +52,7 @@ added in the future.
 Expected exoplanetary yield is an important metric when evaluating the success of proposed
 flagship space observatory architectures such as those currently being considered for the Habitable
 Worlds Observatory (HWO; [@HWOFeinberg2024]). As HWO is being developed and trade spaces are
-explored, yield codes such as the Altruistic Yield Optimizer (AYO; [@AYO2014]) and EXOSIMS
+explored, yield codes such as the Altruistic Yield Optimizer (AYO; @AYO2014) and EXOSIMS
 [@EXOSIMS2016] that can calculate the expected number of detected and characterized planets for a
 given mission architecture are essential. While these yield codes have the same goal, they can be
 complex and have major differences in their inputs and outputs that has made comparing results
