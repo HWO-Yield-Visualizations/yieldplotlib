@@ -88,12 +88,29 @@ file can be found in the following table.
 mappings between AYO, EXOSIMS, and yieldplotlib parameters.](figures/ypl_csv_table.jpeg)
 
 Once the yield packages are loaded and parsed, a getter can be called on the directories
-(i.e. `ayo.get('yield_earth')`) to return the corresponding value from the respective yield code.
+to return the corresponding value from the respective yield code.
+
+```angular2html
+from yieldplotlib.load.ayo_directory import AYODirectory
+from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
+
+ayo = AYODirectory(Path("path/to/my/ayo_data")) 
+exosims = EXOSIMSDirectory(Path("path/to/my/exosims_data")) 
+
+ayo.get("yield_earth")
+exosims.get("yield_earth")
+```
 
 Yield input packages (YIPs) specifying input coronagraph parameters can also be read in and accessed
 using the same file node and directory structure. This allows users to access key coronagraph performance
 metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib`
-uses `yippy` as a backend, though the user interface is identical to accessing the AYO and EXOSIMS directories.
+uses `yippy` as a backend, though the user interface is identical to generating the AYO and EXOSIMS directories.
+
+```angular2html
+from yieldplotlib.load.yip_directory import YIPDirectory
+
+yip = YIPDirectory(Path("path/to/my/yip_data"))
+```
 
 ## Plotting
 
