@@ -133,10 +133,10 @@ used for those who want to adapt the generic `yieldplotlib` parsing structure an
 generate their own bespoke visualizations.
 
 \autoref{fig:hz_completeness} and \autoref{fig:planet_hists} show two different types
-of yield outputs. Figure \autoref{fig:hz_completeness} shows the fraction of a star's habitable
+of yield outputs. \autoref{fig:hz_completeness} shows the fraction of a star's habitable
 zone that cen be sampled by during the lifetime of a mission known as the "habitable zone
 completeness" with the two yield codes in side by side axes and using the same color bar for ease
-of comparison. Figure \autoref{fig:planet_hists} shows histograms of the total number of detected
+of comparison. \autoref{fig:planet_hists} shows histograms of the total number of detected
 planets found for each yield code as a function of planet type.
 
 ![Plot of the Habitable Zone (HZ) completeness as a function of host star luminosity (in units of
@@ -151,7 +151,7 @@ alternative to the standard plotting color schemes.
 \label{fig:planet_hists}](figures/yield_hist_cyber.png)
 
 Yield code inputs can also have a profound impact on their results and so plotting these
-values is important to ensure consistency. Figure \autoref{fig:core_throughput} shows the
+values is important to ensure consistency. \autoref{fig:core_throughput} shows the
 throughput for a key series of optics in the observatory known as a coronagraph. Smaller
 throughputs mean less planet light makes it onto the detector and can have a profound impact on
 final yields.
