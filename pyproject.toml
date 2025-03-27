@@ -21,6 +21,7 @@ dependencies = [
   "lod-unit>=1.6.0",
   "docopt",
   "pooch>=1.8.0",
+  "mplcyberpunk",
 ]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
