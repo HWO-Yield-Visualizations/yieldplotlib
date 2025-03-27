@@ -63,8 +63,8 @@ syntaxes, structures, and assumptions that each of these codes make.
 Despite the challenges, when these values are interrogated directly, new insights are achieved.
 Some of these insights are highlighted in detail in @ETCCrossCal2025 where a comparison of just
 the internal exposure time calculations of AYO and EXOSIMS revealed sources of previously unknown
-discrepancy. `yieldplotlib` is in many ways a continuation of that initial work, but
-aimed instead at the higher level yield products which are of the most direct interest.
+discrepancy. `yieldplotlib` is a continuation of that initial work, but aimed instead at the higher 
+level yield products which are of the most direct interest.
 
 `yieldplotlib` is a Python package for visualizing the inputs and outputs of AYO and EXOSIMS
 through the use of a custom loading and parsing structure that allows for the easy access of equivalent data
@@ -171,6 +171,13 @@ In order to generate summary plots quickly, `yieldplotlib` comes packaged with a
 and plotting pipeline to create a suite of commonly used yield plots. This is accessed by running
 `run_ypl` and providing a path to a single folder containing the outputs for a single AYO or EXOSIMS run,
 or to a directory containing subdirectories of many AYO and EXOSIMS runs.
+
+# Future Work 
+
+Following on the completion of the ETC cross-calibration work in @ETCCrossCal2025, a new cross-calibration 
+of high-level yield products is planned which will utilize `yieldplotlib`. This work will be vital to
+the ongoing HWO architecture trade studies by providing more reliable and robust yield estimates, improving 
+current yield codes, and providing a standard to calibrate potentially new yield codes in the future. 
 
 # Acknowledgements
 
