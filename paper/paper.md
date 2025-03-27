@@ -94,8 +94,8 @@ to return the corresponding value from the respective yield code.
 from yieldplotlib.load.ayo_directory import AYODirectory
 from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
 
-ayo = AYODirectory(Path("path/to/my/ayo_data")) 
-exosims = EXOSIMSDirectory(Path("path/to/my/exosims_data")) 
+ayo = AYODirectory(Path("path/to/my/ayo_data"))
+exosims = EXOSIMSDirectory(Path("path/to/my/exosims_data"))
 
 ayo.get("yield_earth")
 exosims.get("yield_earth")
@@ -174,11 +174,11 @@ or to a directory containing subdirectories of many AYO and EXOSIMS runs.
 
 # Acknowledgements
 
-Corey Spohn’s research was supported by an appointment to the NASA Postdoctoral Program at the NASA 
-Goddard Space Flight Center, administered by Oak Ridge Associated Universities under contract with NASA. 
+Corey Spohn’s research was supported by an appointment to the NASA Postdoctoral Program at the NASA
+Goddard Space Flight Center, administered by Oak Ridge Associated Universities under contract with NASA.
 Sarah Steiger acknowledges support from an STScI Postdoctoral Fellowship.
 
 The authors would also like to acknowledge Christopher Stark, Dmitry Savransky, Rhonda Morgan, and
 Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. They would also like
 to thank Alex Howe, Justin Hom, and the rest of the Exoplanet Science Yields Working Group (ESYWG) for
-their valuable feedback and discussions. 
+their valuable feedback and discussions.
