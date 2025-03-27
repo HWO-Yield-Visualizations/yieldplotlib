@@ -4,6 +4,9 @@ import functools
 
 import matplotlib as mpl
 import numpy as np
+from astropy import units as u
+
+from yieldplotlib.key_map import KEY_MAP
 
 
 def get_nice_number(value, round=False):
@@ -120,3 +123,74 @@ def discretize_colormap(num_colors, colormap_name, start_frac=0.1, end_frac=0.9)
     cmap = mpl.colormaps[colormap_name]
     colors = cmap(np.linspace(start_frac, end_frac, num_colors))
     return colors
+
+
+def find_unit_for_module_key(module_key, module_name, key_map):
+    """Find the unit for a given module-specific key.
+
+    Searches through the KEY_MAP to find a mapping where the provided module key
+    matches the 'name' field for the specified module. If found, returns the
+    corresponding unit.
+
+    Args:
+        module_key (str):
+            The module-specific key (e.g., 'Angdiam (mas)' for AYO,
+            'pixelScale' for EXOSIMS).
+        module_name (str):
+            The name of the module (e.g., 'AYOCSVFile', 'EXOSIMSInputFile').
+        key_map (dict):
+            The key mapping dictionary to use for lookups.
+
+    Returns:
+        str or None:
+            The unit string if found, None otherwise.
+    """
+    for yieldplotlib_key, module_data in key_map.items():
+        # Check if this entry has data for the specified module
+        if module_name in module_data:
+            module_info = module_data[module_name]
+            # Check if the 'name' field matches the module key
+            if module_info.get("name") == module_key:
+                return module_info.get("unit", "")
+
+    return None
+
+
+def get_unit(key, module_name, find_unit_func=None):
+    """Get the associated unit for a given key.
+
+    This generic method handles both yieldplotlib keys and module-specific keys:
+    1. First tries a direct lookup in KEY_MAP (assuming key is a yieldplotlib key)
+    2. If not found, tries to find the corresponding yieldplotlib key by looking up
+       the module-specific key in KEY_MAP
+
+    Args:
+        key (str):
+            The key to look up the unit for (can be either a yieldplotlib key
+            or a module-specific key).
+        module_name (str):
+            The name of the module making the request (used for KEY_MAP lookup).
+        find_unit_func (callable, optional):
+            Optional custom fallback function that takes a key and returns a unit string.
+            If None, the built-in find_unit_for_module_key function will be used.
+
+    Returns:
+        astropy.units.Unit or None:
+            The astropy Unit object if found, None otherwise.
+    """
+    # First try direct lookup (for yieldplotlib keys)
+    if key in KEY_MAP and module_name in KEY_MAP[key]:
+        unit = KEY_MAP[key][module_name].get("unit", "")
+    elif find_unit_func is not None:
+        # If not found, try to find the corresponding yieldplotlib key
+        # by using the provided custom fallback function
+        unit = find_unit_func(key)
+    else:
+        # Use the built-in generic function as a fallback
+        unit = find_unit_for_module_key(key, module_name, KEY_MAP)
+
+    if unit:
+        astropy_unit = u.Unit(unit)
+        return astropy_unit
+
+    return None
