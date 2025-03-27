@@ -64,15 +64,15 @@ Despite the challenges, when these values are interrogated directly, new insight
 Some of these insights are highlighted in detail in @ETCCrossCal2025 where a comparison of just
 the internal exposure time calculations of AYO and EXOSIMS revealed sources of previously unknown
 discrepancy. `yieldplotlib` is a continuation of that initial work, but aimed instead at the higher
-level yield products (such as the total number of detected exo-Earths) which are of the most direct 
+level yield products (such as the total number of detected exo-Earths) which are of the most direct
 interest.
 
-To visualize the inputs and outputs of AYO and EXOSIMS, `yieldplotlib` uses a custom loading and 
-parsing structure that allows for the easy access of equivalent data across each of the codes. 
-This allows `yieldplotlib` to communicate the results of yield codes to the broader community 
-and produce publication-quality plots without the need to understand the complex underlying yield 
+To visualize the inputs and outputs of AYO and EXOSIMS, `yieldplotlib` uses a custom loading and
+parsing structure that allows for the easy access of equivalent data across each of the codes.
+This allows `yieldplotlib` to communicate the results of yield codes to the broader community
+and produce publication-quality plots without the need to understand the complex underlying yield
 codes that were used to generate the data. Currently `yieldplotlib` contains modules for analyzing
-AYO and EXOSIMS, but is easily extensible and support for other yield codes can be easily added in 
+AYO and EXOSIMS, but is easily extensible and support for other yield codes can be easily added in
 the future.
 
 # Methods and Functionality
@@ -81,8 +81,8 @@ the future.
 `yieldplotlib` uses a file node and directory structure to parse the yield output packages
 from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a
 universal key in `yieldplotlib`. This `key_map` is generated from a CSV file in the repository
-that is automatically updated with changes from an active development version hosted on Google 
-Sheets for broader collaboration. An example excerpt from the CSV file can be found in 
+that is automatically updated with changes from an active development version hosted on Google
+Sheets for broader collaboration. An example excerpt from the CSV file can be found in
 \autoref{fig:key_map_csv}.
 
 ![Example portion of the yieldplotlib key map CSV file containing the
@@ -105,7 +105,7 @@ exosims.get("yield_earth")
 Yield input packages (YIPs) specifying input coronagraph parameters can also be loaded and accessed
 using the same file node and directory structure. This allows users to access key coronagraph performance
 metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib`
-uses `yippy`[^1] as a backend, though the user interface is identical to generating the AYO and EXOSIMS 
+uses `yippy`[^1] as a backend, though the user interface is identical to generating the AYO and EXOSIMS
 directories, for example:
 
 [^1]: github.com/CoreySpohn/yippy
@@ -126,7 +126,7 @@ knowledge base many users of `yieldplotlib` will have with that package. The `yi
 plots are used for single yield run visualizations and can make scatter plots, standard plots,
 and histograms.
 
-The comparison plots are for more complex comparisons by plotting multiple yield runs in either 
+The comparison plots are for more complex comparisons by plotting multiple yield runs in either
 the same multi-panel figure, or on the same set of axes.
 
 ### Plotting Scripts
@@ -136,7 +136,7 @@ architecture trade studies for HWO. This also serves to provide examples on how 
 used for those who want to adapt the generic `yieldplotlib` parsing structure and plotting methods to
 generate their own bespoke visualizations.
 
-\autoref{fig:hz_completeness} and \autoref{fig:planet_hists} show two different examples of these 
+\autoref{fig:hz_completeness} and \autoref{fig:planet_hists} show two different examples of these
 types of yield outputs. \autoref{fig:hz_completeness} shows the fraction of a star's habitable
 zone that cen be sampled by during the lifetime of a mission known as the "habitable zone
 completeness" with the two yield codes in side by side axes and using the same color bar for ease
@@ -156,8 +156,8 @@ alternative to the standard plotting color schemes.
 
 Yield code inputs can also have a profound impact on their results and so plotting these
 values is important to ensure consistency. \autoref{fig:core_throughput} shows the
-throughput for a key series of starlight supprrssion optics in the observatory known 
-collectively as a coronagraph. Smaller throughputs result in less planet light on the detector 
+throughput for a key series of starlight supprrssion optics in the observatory known
+collectively as a coronagraph. Smaller throughputs result in less planet light on the detector
 which can have a profound impact on final yields.
 
 ![Core throughput vs. separation (in lambda/D) for the coronagraph
