@@ -132,7 +132,7 @@ architecture trade studies for HWO. This also serves to provide examples on how 
 used for those who want to adapt the generic `yieldplotlib` parsing structure and plotting methods to
 generate their own bespoke visualizations.
 
-Figure \autoref{fig:hz_completeness} and Figure \autoref{fig:planet_hists} show two different types
+\autoref{fig:hz_completeness} and \autoref{fig:planet_hists} show two different types
 of yield outputs. Figure \autoref{fig:hz_completeness} shows the fraction of a star's habitable
 zone that cen be sampled by during the lifetime of a mission known as the "habitable zone
 completeness" with the two yield codes in side by side axes and using the same color bar for ease
