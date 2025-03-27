@@ -31,7 +31,7 @@ bibliography: paper.bib
 
 NASA’s next flagship observatory, as recommended by the Astro2020 decadal survey,
 is the Habitable World’s Observatory (HWO) which has the ambitious goal to "search
-for biosignatures from a robust number of about ∼25 habitable zone planets and be
+for biosignatures from a robust number of about ~25 habitable zone planets and be
 a transformative facility for general astrophysics". In the phrasing of this science
 goal, the importance of expected exo-Earth yield (the total number of detected habitable
 zone planets) on the success of the mission is made apparent. As HWO is being developed
