@@ -8,6 +8,10 @@ import astropy.units as u
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Default markers and linestyles for plotting
+DEFAULT_MARKERS = ["o", "s", "^", "D", "v", "<", ">", "p", "*", "h", "H", "+", "x"]
+DEFAULT_LINESTYLES = ["-", "--", "-.", ":"]
+
 
 def _get_plot_method(ax, plot_type):
     """Get the appropriate plot method for the given plot type.
@@ -398,9 +402,9 @@ def compare(
         colors (list, optional):
             List of colors for each directory. If None, uses default color cycle.
         markers (list, optional):
-            List of markers for scatter plots. Ignored for other plot types.
+            List of markers for scatter plots. If None, uses DEFAULT_MARKERS.
         linestyles (list, optional):
-            List of linestyles for line plots. Ignored for other plot types.
+            List of linestyles for line plots. If None, uses DEFAULT_LINESTYLES.
         legend (bool, optional):
             Whether to add a legend. Default is True.
         **kwargs:
@@ -421,17 +425,13 @@ def compare(
     if len(labels) < len(directories):
         labels.extend([d.__class__.__name__ for d in directories[len(labels) :]])
 
-    # Default markers and linestyles
-    default_markers = ["o", "s", "^", "D", "v", "<", ">", "p", "*", "h", "H", "+", "x"]
-    default_linestyles = ["-", "--", "-.", ":"]
-
     # Set up markers if needed for scatter
     if markers is None and plot_type == "scatter":
-        markers = default_markers
+        markers = DEFAULT_MARKERS
 
     # Set up linestyles if needed for plot
     if linestyles is None and plot_type == "plot":
-        linestyles = default_linestyles
+        linestyles = DEFAULT_LINESTYLES
 
     # For histograms, calculate consistent bins across all directories
     reference_unit = None
@@ -509,7 +509,8 @@ def multi(
             List of titles for each subplot. If None, uses directory names.
         **kwargs:
             Additional keyword arguments passed to the plot method. Can include 'c' for
-            color key data.
+            color key data, 'markers' for scatter plots, 'linestyles' for line plots,
+            or 'colors' for custom colors for each directory.
 
     Returns:
         tuple:
@@ -553,6 +554,19 @@ def multi(
         if bins is not None:
             kwargs["bins"] = bins
 
+    # Set up markers if needed for scatter
+    markers = kwargs.pop("markers", None)
+    if markers is None and plot_type == "scatter":
+        markers = DEFAULT_MARKERS
+
+    # Set up linestyles if needed for plot
+    linestyles = kwargs.pop("linestyles", None)
+    if linestyles is None and plot_type == "plot":
+        linestyles = DEFAULT_LINESTYLES
+
+    # Set up colors if provided
+    colors = kwargs.pop("colors", None)
+
     # Flatten axes for easy iteration
     axes_flat = axes.flatten()
 
@@ -563,6 +577,18 @@ def multi(
 
             # Create plot kwargs for this dataset
             plot_kwargs = kwargs.copy()
+
+            # Add marker, linestyle, or color depending on plot type
+            if plot_type == "scatter":
+                if markers is not None:
+                    plot_kwargs["marker"] = markers[i % len(markers)]
+                if colors is not None and "c" not in plot_kwargs:
+                    plot_kwargs["color"] = colors[i % len(colors)]
+            elif plot_type == "plot":
+                if linestyles is not None:
+                    plot_kwargs["linestyle"] = linestyles[i % len(linestyles)]
+                if colors is not None and "c" not in plot_kwargs:
+                    plot_kwargs["color"] = colors[i % len(colors)]
 
             # Plot the data with reference unit for consistent rendering
             _plot_data(ax, directory, x, y, plot_type, plot_kwargs, reference_unit)
@@ -837,8 +863,22 @@ def xy_grid(
             titles.extend(default_titles[len(titles) :])
 
     # Default markers and linestyles
+    # TODO: Make these pull from the yieldplotlib style file
     default_markers = ["o", "s", "^", "D", "v", "<", ">", "p", "*", "h", "H", "+", "x"]
     default_linestyles = ["-", "--", "-.", ":"]
+    if "c" not in kwargs:
+        default_colors = ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9"]
+    else:
+        default_colors = None
+
+    if "markers" in kwargs:
+        # These are the markers for each directory
+        default_markers = kwargs.pop("markers")
+    if "linestyles" in kwargs:
+        default_linestyles = kwargs.pop("linestyles")
+    if "colors" in kwargs:
+        # These are the colors for each directory
+        default_colors = kwargs.pop("colors")
 
     # For each x_key, calculate consistent bins if histogram
     x_key_bins = {}
@@ -877,11 +917,14 @@ def xy_grid(
                 # Add marker or linestyle depending on plot type
                 if plot_type == "scatter":
                     plot_kwargs["marker"] = default_markers[idx % len(default_markers)]
+                    if default_colors is not None:
+                        plot_kwargs["color"] = default_colors[idx % len(default_colors)]
                 elif plot_type == "plot":
                     plot_kwargs["linestyle"] = default_linestyles[
                         idx % len(default_linestyles)
                     ]
-
+                    if default_colors is not None:
+                        plot_kwargs["color"] = default_colors[idx % len(default_colors)]
                 # Plot the data with reference unit if available
                 _plot_data(
                     ax, directory, x_key, y_key, plot_type, plot_kwargs, reference_unit
