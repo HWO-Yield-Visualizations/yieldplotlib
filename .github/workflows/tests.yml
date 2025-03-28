@@ -9,26 +9,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
-    name: ${{ matrix.platform }}
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
         platform: [ubuntu-latest, macos-latest]
-
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: Install uv and set the python version
+      uses: astral-sh/setup-uv@v5
       with:
-        # This version installs nox, nox will handle the other versions
-        python-version: '3.9'
+        python-version: ${{ matrix.python-version }}
+        enable-cache: true
 
-    - name: Install dependencies
+    - name: Install nox and project dependencies
       run: |
-        pip install .[test]
+        uv pip install nox
+        uv sync --all-extras --dev
 
     - name: Test with nox
-      run: |
-        nox -s tests
+      run: uvx nox -s tests/
