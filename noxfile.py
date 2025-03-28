@@ -13,6 +13,7 @@ def tests(session):
     # Run the tests
     session.run(
         "pytest",
+        "tests/",
         "--cov=yieldplotlib",
         "--cov-report=term",
         "--cov-report=html",
