@@ -2,10 +2,8 @@
 
 import nox
 
-PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12"]
 
-
-@nox.session(python=PYTHON_VERSIONS)
+@nox.session
 def tests(session):
     """Run the test suite with pytest."""
     # Install all test dependencies
