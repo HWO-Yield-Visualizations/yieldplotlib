@@ -3,7 +3,7 @@
 import nox
 
 
-@nox.session
+@nox.session(venv_backend="uv", python=["3.9", "3.10", "3.11", "3.12"])
 def tests(session):
     """Run the test suite with pytest."""
     # Install all test dependencies

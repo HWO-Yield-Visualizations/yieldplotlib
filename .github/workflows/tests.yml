@@ -25,10 +25,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
         enable-cache: true
 
-    - name: Install nox and project dependencies
-      run: |
-        uv pip install nox
-        uv sync --all-extras --dev
+    - name: Install nox
+      run: uv tool install nox
 
     - name: Test with nox
-      run: uvx nox -s tests
+      run: uvx nox -s tests --python ${{ matrix.python-version }}
