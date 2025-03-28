@@ -247,6 +247,6 @@ def autolabel(ax, rects, use_cyberpunk=False):
                 textcoords="offset points",
                 ha="center",
                 va="bottom",
-                fontsize=12,
+                fontsize=8,
                 color="white" if use_cyberpunk else "black",
             )
