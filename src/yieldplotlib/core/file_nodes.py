@@ -74,11 +74,11 @@ class FileNode(Node):
         match _type:
             case "none":
                 return data
-            case "custom":
-                transform_func = getattr(self, f"transform_{key}", None)
-                if callable(transform_func):
-                    return transform_func(data)
-                else:
+        elif _type == "custom":
+            transform_func = getattr(self, f"transform_{key}", None)
+            if callable(transform_func):
+                return transform_func(data)
+            else:
                     raise NotImplementedError(
                         f"Custom transform for {key} notimplemented."
                     )
