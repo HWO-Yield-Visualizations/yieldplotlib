@@ -31,4 +31,4 @@ jobs:
         uv sync --all-extras --dev
 
     - name: Test with nox
-      run: uvx nox -s tests/
+      run: uvx nox -s tests
