@@ -1,8 +1,8 @@
 # Plot Gallery
 
-![image info](./plots/core_throughput.png)
+![image info](./plots/core_throughput_all_curves_cyber.jpeg)
 
-![image info](./plots/hz_completeness.png)
+![image info](./plots/hz_completeness_cyber.png)
 
 ![image info](./plots/stellar_parameters.png)
 
