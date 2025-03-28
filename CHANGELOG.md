@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.5.0...v0.5.1) (2025-03-28)
+
+
+### Bug Fixes
+
+* move paper workflow back to push but specify specific paths ([5c83254](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/5c832545c19cf51f76d61920e8ac158c04626331))
+
 ## [0.5.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.4.1...v0.5.0) (2025-03-26)
 
 
