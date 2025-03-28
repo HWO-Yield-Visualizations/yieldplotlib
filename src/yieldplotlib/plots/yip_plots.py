@@ -127,8 +127,14 @@ def plot_core_throughtput(
         ax.plot(separations, core_thruput_from_yip, label="yippy")
 
     for i, run in enumerate(runs):
-        thruput_data = run.get("core_thruput")
-        ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
+        fits = run.get("core_thruput")
+        if isinstance(fits, dict):
+            for name in fits:
+                thruput_data = fits[name].get("data")
+                ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=run_labels[i])
+        else:
+            thruput_data = fits.get("data")
+            ax.plot(thruput_data[:, 0], thruput_data[:, 1], label=f"{run_labels[i]}")
 
     ax.set(**ax_kwargs)
     plt.xlabel("Separation ($\\lambda/D$)")
