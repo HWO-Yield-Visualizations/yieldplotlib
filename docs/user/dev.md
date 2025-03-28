@@ -73,6 +73,10 @@ conda install pip
 python -m pip install -U -e ".[dev]"
 ```
 
+Note: If you would like to run the pytests or build the docs, the
+dependencies for those features are optional and should be installed by running
+the previous command but replacing `.[dev]` with `.[docs]` or `.[test]`
+
 #### 3. Install pre-commit hooks
 We use pre-commit hooks to automatically format code and check for common
 errors before you commit changes. To install these hooks, run the following
