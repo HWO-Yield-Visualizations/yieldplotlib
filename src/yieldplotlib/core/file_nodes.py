@@ -71,23 +71,20 @@ class FileNode(Node):
             _type = self.file_transforms[key]["type"]
             _val = self.file_transforms[key]["value"]
 
-        match _type:
-            case "none":
-                return data
+        if _type == "none":
+            return data
         elif _type == "custom":
             transform_func = getattr(self, f"transform_{key}", None)
             if callable(transform_func):
                 return transform_func(data)
             else:
-                    raise NotImplementedError(
-                        f"Custom transform for {key} notimplemented."
-                    )
-            case "index":
-                return data[_val]
-            case "sum":
-                return data.sum()
-            case _:
-                raise NotImplementedError(f"Transform type {_type} not implemented.")
+                raise NotImplementedError(f"Custom transform for {key} notimplemented.")
+        elif _type == "index":
+            return data[_val]
+        elif _type == "sum":
+            return data.sum()
+        else:
+            raise NotImplementedError(f"Transform type {_type} not implemented.")
 
 
 class CSVFile(FileNode):
