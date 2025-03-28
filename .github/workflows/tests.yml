@@ -4,20 +4,20 @@ on: [push, pull_request]
 
 jobs:
   tests:
-    name: ${{ matrix.platform }} / ${{ matrix.python-version }}
+    name: ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest]
-        python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        # This version installs nox, nox will handle the other versions
+        python-version: '3.9'
 
     - name: Install dependencies
       run: |
