@@ -845,7 +845,7 @@ KEY_MAP = {
         "EXOSIMSCSVFile": {
             "file": "reduce-star-target.csv",
             "name": "star_dist",
-            "unit": "",
+            "unit": "pc",
             "transform": {
                 "type": "none",
                 "value": None
@@ -887,7 +887,7 @@ KEY_MAP = {
         "EXOSIMSCSVFile": {
             "file": "reduce-star-target.csv",
             "name": "star_L",
-            "unit": "",
+            "unit": "L_sun",
             "transform": {
                 "type": "none",
                 "value": None
