@@ -44,9 +44,9 @@ def test_common_key_access(ayo_data, exosims_data):
         try:
             exosims_value = exosims_data.get(key)
             # Just check that we can access the data without error
-            assert (
-                exosims_value is not None
-            ), f"Failed to retrieve EXOSIMS data for key: {key}"
+            assert exosims_value is not None, (
+                f"Failed to retrieve EXOSIMS data for key: {key}"
+            )
         except Exception as e:
             pytest.skip(f"Skipping key {key} for EXOSIMS: {str(e)}")
 
