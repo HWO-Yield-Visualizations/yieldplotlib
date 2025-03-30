@@ -9,6 +9,7 @@ from yieldplotlib.key_map import KEY_MAP
 
 OVERRIDE_KEYS = {
     "blind_comp_det": "_get_blind_comp",
+    "Core throughput": "_get_core_thruput",
 }
 
 
@@ -126,3 +127,11 @@ class AYOCSVFile(CSVFile):
         )
 
         return result
+
+    def _get_core_thruput(self):
+        """Get the core thruput data."""
+        # Get both wavelength and core throughput
+        sep = self.data["Sep (l/D)"].values
+        thruput = self.data["Core throughput"].values
+        df = pd.DataFrame({"sep": sep, "thruput": thruput})
+        return df
