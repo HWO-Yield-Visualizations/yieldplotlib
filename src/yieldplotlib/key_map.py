@@ -106,6 +106,27 @@ KEY_MAP = {
         },
         "comment": ""
     },
+    "core_thruput": {
+        "AYOCSVFile": {
+            "file": "coronagraph1.csv",
+            "name": "Core throughput",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "EXOSIMSInputFile": {
+            "file": "json",
+            "name": "core_thruput",
+            "unit": "",
+            "transform": {
+                "type": "none",
+                "value": None
+            }
+        },
+        "comment": ""
+    },
     "dark_current": {
         "EXOSIMSInputFile": {
             "file": "json",
@@ -1494,18 +1515,6 @@ KEY_MAP = {
             "file": "observations.csv",
             "name": "Spec char time (days)",
             "unit": "days",
-            "transform": {
-                "type": "none",
-                "value": None
-            }
-        },
-        "comment": ""
-    },
-    "core_thruput": {
-        "EXOSIMSInputFile": {
-            "file": "json",
-            "name": "core_thruput",
-            "unit": "",
             "transform": {
                 "type": "none",
                 "value": None
