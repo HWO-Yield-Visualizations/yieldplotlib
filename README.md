@@ -9,8 +9,9 @@
   <a href="https://yieldplotlib.readthedocs.io"><img src="https://readthedocs.org/projects/yieldplotlib/badge/?version=latest&style=flat-square" alt="Documentation Status"/></a>
   <a href="https://github.com/HWO-Yield-Visualizations/yieldplotlib/?tab=coc-ov-file"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat-square" alt="Code of Conduct"/></a>
   <a href="https://doi.org/10.5281/zenodo.15013340"><img src="https://img.shields.io/badge/DOI-10.5281/zenodo.15013340-blue?style=flat-square" alt="DOI"></a>
+  <a href="https://github.com/HWO-Yield-Visualizations/yieldplotlib/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License"></a>
+  <a href="https://github.com/HWO-Yield-Visualizations/yieldplotlib/blob/main/.github/workflows/tests.yml"><img src="https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue.svg?style=flat-square&logo=python" alt="Python Versions"></a>
 </p>
-<!-- <a href="https://github.com/coreyspohn/yieldplotlib/actions/workflows/ci.yml/"><img src="https://img.shields.io/github/actions/workflow/status/coreyspohn/yieldplotlib/ci.yml?branch=main&logo=github&style=flat-square" alt="CI"/></a> -->
 
 
 yieldplotlib
