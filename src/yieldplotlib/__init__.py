@@ -12,6 +12,9 @@ __all__ = [
     "compare",
     "multi",
     "panel",
+    "ypl_colors",
+    "ypl_cycler",
+    "ypl_cmap",
     "xy_grid",
 ]
 
@@ -25,6 +28,7 @@ from .key_map import KEY_MAP
 from .logger import logger
 from .plots.comparison_plots import compare, multi, panel, xy_grid
 from .plots.generic_plot import extend_matplotlib, subplots
+from .style import ypl_cmap, ypl_colors, ypl_cycler, ypl_rainbow
 from .util import calculate_axis_limits_and_ticks, get_nice_number
 
 # Automatically extend matplotlib with our custom methods
