@@ -5,6 +5,7 @@
 
 <p align="center">
   <a href="https://pypi.org/project/yieldplotlib/"><img src="https://img.shields.io/pypi/v/yieldplotlib.svg?style=flat-square&logo=pypi" alt="PyPI"/></a>
+  <a href="https://github.com/coreyspohn/yieldplotlib/actions/workflows/tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/coreyspohn/yieldplotlib/tests.yml?branch=main&logo=github&style=flat-square&label=tests" alt="Tests"/></a>
   <a href="https://yieldplotlib.readthedocs.io"><img src="https://readthedocs.org/projects/yieldplotlib/badge/?version=latest&style=flat-square" alt="Documentation Status"/></a>
   <a href="https://github.com/coreyspohn/yieldplotlib/?tab=coc-ov-file"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=flat-square" alt="Code of Conduct"/></a>
   <a href="https://doi.org/10.5281/zenodo.15013340"><img src="https://img.shields.io/badge/DOI-10.5281/zenodo.15013340-blue?style=flat-square" alt="DOI"></a>
