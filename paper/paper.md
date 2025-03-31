@@ -185,7 +185,7 @@ and plotting pipeline to create a suite of commonly used yield plots. This is ac
 by:
 
 ```angular2html
-run_ypl path/to/yield/runs
+ypl_run path/to/yield/runs
 ```
 where the specified path is either to a single folder containing the outputs for a single AYO or EXOSIMS run,
 or to a directory containing subdirectories of many AYO and EXOSIMS runs.
