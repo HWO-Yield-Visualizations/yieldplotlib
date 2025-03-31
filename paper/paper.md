@@ -82,7 +82,7 @@ the future.
 ## Parsing and Getting Values
 `yieldplotlib` provides a loading system with a unified interface for accessing data from
 the yield codes. The system abstracts the complex and inconsistent file structures of the
-AYO and EXOSIMS inputs and ouputs by organizing them into a heiratchical tree of nodes
+AYO and EXOSIMS inputs and outputs by organizing them into a hierarchical tree of nodes
 representing files and directories. This abstractions creates a consistent API that
 allows users to query data without needing to understand and parse the underlying
 data products. For collaboration purposes the valid queries are managed in a Google
