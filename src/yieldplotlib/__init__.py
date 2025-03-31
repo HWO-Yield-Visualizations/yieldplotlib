@@ -12,9 +12,10 @@ __all__ = [
     "compare",
     "multi",
     "panel",
+    "ypl_cmap",
     "ypl_colors",
     "ypl_cycler",
-    "ypl_cmap",
+    "ypl_rainbow",
     "xy_grid",
 ]
 
