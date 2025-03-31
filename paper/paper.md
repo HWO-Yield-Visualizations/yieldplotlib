@@ -85,7 +85,7 @@ the yield codes. The system manages the complex and inconsistent file structures
 AYO and EXOSIMS inputs and outputs by organizing them into a hierarchical tree of nodes
 representing files and directories. This abstraction creates a consistent API that
 allows users to query data without needing to understand and parse the underlying
-data products. For collaboration purposes the valid queries are managed in a Google
+data products. For collaboration purposes, the valid queries are managed in a Google
 Sheet where collaborators have linked the EXOSIMS and AYO keys to a universal key in `yieldplotlib`.
 This Google Sheet is processed into a `key_map` which is updated daily. Users can update
 the sheet, download it as a CSV file, and process it locally for development.
@@ -148,7 +148,7 @@ generate their own bespoke visualizations.
 \autoref{fig:hz_completeness} and \autoref{fig:planet_hists} show two different examples of these
 types of yield outputs. \autoref{fig:hz_completeness} shows the fraction of a star's habitable
 zone that can be sampled by during the lifetime of a mission known as the "habitable zone
-completeness" with the two yield codes in side by side axes and using the same color bar for ease
+completeness" with the two yield codes in side-by-side axes and using the same color bar for ease
 of comparison. \autoref{fig:planet_hists} shows histograms of the total number of detected
 planets found as a function of planet type in this case just using EXOSIMS.
 
