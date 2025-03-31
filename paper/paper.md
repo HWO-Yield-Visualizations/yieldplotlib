@@ -32,10 +32,10 @@ bibliography: paper.bib
 NASA’s next flagship observatory, as recommended by the Astro2020 decadal survey,
 is the Habitable World’s Observatory (HWO) which has the ambitious goal to "search
 for biosignatures from a robust number of about ~25 habitable zone planets and be
-a transformative facility for general astrophysics". In the phrasing of this science
-goal, the importance of expected exo-Earth yield (the total number of detected habitable
-zone planets) on the success of the mission is made apparent. As HWO is being developed
-and trade spaces are explored, yield codes such as the Altruistic Yield Optimization (AYO)
+a transformative facility for general astrophysics". The total number of habitable zone planets
+detected is referred to as the exo-Earth "yield" and estimating it will be critically important
+to HWO's success. As HWO is being developed
+and trade spaces are explored, yield codes such as the Altruistic Yield Optimizer (AYO)
 and EXOSIMS that can calculate the expected number of detected and characterized planets
 for a given mission architecture are essential. While these yield codes have the same goal,
 they can be complex and have major differences in their inputs and outputs that has made
@@ -49,16 +49,18 @@ added in the future.
 
 # Statement of need
 
-Expected exoplanetary yield is an important metric when evaluating the success of proposed
+Expected exoplanet yield is an important metric when evaluating the success of proposed
 flagship space observatory architectures such as those currently being considered for the Habitable
 Worlds Observatory (HWO; @HWOFeinberg2024). As HWO is being developed and trade spaces are
 explored, yield codes such as the Altruistic Yield Optimizer (AYO; @AYO2014) and EXOSIMS
 [@EXOSIMS2016] that can calculate the expected number of detected and characterized planets for a
-given mission architecture are essential. While these yield codes have the same goal, they can be
-complex and have major differences in their inputs and outputs that has made comparing results
+given mission architecture are essential. While these yield codes have the same goal, they are
+complex, written in different programming languages (AYO is written in IDL and
+EXOSIMS is written in Python), calculate yield with different methods, and have
+major differences in their inputs and outputs that has made comparing results
 difficult. The need for a unified library for visualizing these yield codes in a complete, descriptive,
 and accessible way has therefore also become apparent. This is non-trivial due to the differing
-syntaxes, structures, and assumptions that each of these codes make.
+methods, syntaxes, structures, and assumptions that each of these codes make.
 
 Despite the challenges, when these values are interrogated directly, new insights are achieved.
 Some of these insights are highlighted in detail in @ETCCrossCal2025 where a comparison of just
@@ -78,22 +80,26 @@ the future.
 # Methods and Functionality
 
 ## Parsing and Getting Values
-`yieldplotlib` uses a file node and directory structure to parse the yield output packages
-from AYO and EXOSIMS. It then uses a user generated `key_map` to link the EXOSIMS and AYO keys to a
-universal key in `yieldplotlib`. This `key_map` is generated from a CSV file in the repository
-that is automatically updated with changes from an active development version hosted on Google
-Sheets for broader collaboration. An example excerpt from the CSV file can be found in
+`yieldplotlib` provides a loading system with a unified interface for accessing data from
+the yield codes. The system abstracts the complex and inconsistent file structures of the
+AYO and EXOSIMS inputs and ouputs by organizing them into a heiratchical tree of nodes
+representing files and directories. This abstractions creates a consistent API that
+allows users to query data without needing to understand and parse the underlying
+data products. For collaboration purposes the valid queries are managed in a Google
+Sheet where collaborators have linked the EXOSIMS and AYO keys to a universal key in `yieldplotlib`. 
+This Google Sheet is processed into a `key_map` which is updated daily. Users can update
+the sheet, download it as a CSV file, and process it locally for development.
+An example excerpt from the CSV file can be found in
 \autoref{fig:key_map_csv}.
 
 ![Example portion of the yieldplotlib key map CSV file containing the
 mappings between AYO, EXOSIMS, and yieldplotlib parameters.\label{fig:key_map_csv}](figures/ypl_csv_table.jpeg)
 
-Once the yield packages are loaded and parsed, a getter can be called on the directories
+Once the yield packages are loaded and parsed, a getter can be called on the directory objects
 to return the corresponding value from the respective yield code, for example:
 
 ```angular2html
-from yieldplotlib.load.ayo_directory import AYODirectory
-from yieldplotlib.load.exosims_directory import EXOSIMSDirectory
+from yieldplotlib.load import AYODirectory, EXOSIMSDirectory
 
 ayo = AYODirectory(Path("path/to/my/ayo_data"))
 exosims = EXOSIMSDirectory(Path("path/to/my/exosims_data"))
@@ -111,7 +117,7 @@ directories, for example:
 [^1]: github.com/CoreySpohn/yippy
 
 ```angular2html
-from yieldplotlib.load.yip_directory import YIPDirectory
+from yieldplotlib.load import YIPDirectory
 
 yip = YIPDirectory(Path("path/to/my/yip_data"))
 ```
@@ -138,7 +144,7 @@ generate their own bespoke visualizations.
 
 \autoref{fig:hz_completeness} and \autoref{fig:planet_hists} show two different examples of these
 types of yield outputs. \autoref{fig:hz_completeness} shows the fraction of a star's habitable
-zone that cen be sampled by during the lifetime of a mission known as the "habitable zone
+zone that can be sampled by during the lifetime of a mission known as the "habitable zone
 completeness" with the two yield codes in side by side axes and using the same color bar for ease
 of comparison. \autoref{fig:planet_hists} shows histograms of the total number of detected
 planets found as a function of planet type in this case just using EXOSIMS.
@@ -150,18 +156,18 @@ results are on the right.\label{fig:hz_completeness}](figures/hz_completeness.pn
 ![Bar chart showing expected EXOSIMS planet yields for hot (pink), warm (yellow), and cold (blue)
 Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters. Earth-like planets which are
 of the most interest for HWO are shown in green. This plot uses the "cyberpunk"
-theme from matplotlib which is supported as a keyword argument to yieldplotlib as a dark mode
+theme from the library `mplcyberpunk` which is supported as a keyword argument to yieldplotlib as a dark mode
 alternative to the standard plotting color schemes.
 \label{fig:planet_hists}](figures/yield_hist_cyber.png)
 
 Yield code inputs can also have a profound impact on their results and so plotting these
 values is important to ensure consistency. \autoref{fig:core_throughput} shows the
-throughput for a key series of starlight supprrssion optics in the observatory known
+throughput for a key series of starlight suppression optics in the observatory known
 collectively as a coronagraph. Smaller throughputs result in less planet light on the detector
 which can have a profound impact on final yields.
 
-![Core throughput vs. separation (in lambda/D) for the coronagraph
-assumed by AYO (dotted purple), EXOSIMS (dashed pink) and pulled directly from the yield input
+![Core throughput vs. separation (in $\lambda$/D) for the coronagraph
+assumed by AYO (dotted purple), EXOSIMS (dashed pink), and pulled directly from the yield input
 package using yippy (solid blue). Slight differences between the codes can be attributed to how
 the "core" is defined. EXOSIMS and yippy adopt a fixed radius circular aperture whereas AYO
 defines an aperture based on pixels having more than 30% of the peak flux. Additional sources
