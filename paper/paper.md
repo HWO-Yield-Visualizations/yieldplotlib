@@ -86,7 +86,7 @@ AYO and EXOSIMS inputs and ouputs by organizing them into a heiratchical tree of
 representing files and directories. This abstractions creates a consistent API that
 allows users to query data without needing to understand and parse the underlying
 data products. For collaboration purposes the valid queries are managed in a Google
-Sheet where collaborators have linked the EXOSIMS and AYO keys to a universal key in `yieldplotlib`. 
+Sheet where collaborators have linked the EXOSIMS and AYO keys to a universal key in `yieldplotlib`.
 This Google Sheet is processed into a `key_map` which is updated daily. Users can update
 the sheet, download it as a CSV file, and process it locally for development.
 An example excerpt from the CSV file can be found in
