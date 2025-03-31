@@ -11,29 +11,36 @@
 # ------------------------------------------------------------------------------
 
 # Defined Colors
-# These can be defined as either strings or variable names, depending on preference.
+# These can be defined as either strings or variable names, depending on
+# preference.
 
-ylp_colors = {'ypl_red':'#fe393c','ypl_yellow':'#fdc171','ypl_green':'#37b800','ypl_cyan':'#03c5c2',
-              'ypl_blue':'#035cd6','ypl_magenta':'#ba23fb','ypl_dark_gray':'#555555','ypl_light_gray':'#aaaaaa'}
+ylp_colors = {'ypl_red':'#fe393c','ypl_yellow':'#fdc171',
+              'ypl_green':'#37b800', 'ypl_cyan':'#03c5c2',
+              'ypl_blue':'#035cd6','ypl_magenta':'#ba23fb',
+              'ypl_dark_gray':'#555555','ypl_light_gray':'#aaaaaa'}
 
 Color Cyclers
 
-ypl_cycler = cycler(color=['#000000','#fe393c','#035cd6','#37b800','#fdc171','#03c5c2','#ba23fb'])
+ypl_cycler = cycler(color=['#000000','#fe393c','#035cd6','#37b800','#fdc171',
+                           '#03c5c2','#ba23fb'])
 
-ypl_rainbow = cycler(color=['#f74d50','#fc5b12','#cc7601','#939205','#38bc01','#00ca68',
-                                        '#00c4c1','#1bb7fd','#60a4fe','#9495fe','#d781fc','#fd82bd'])
-                                        
+ypl_rainbow = cycler(color=['#f74d50','#fc5b12','#cc7601','#939205','#38bc01',
+                            '#00ca68','#00c4c1','#1bb7fd','#60a4fe','#9495fe',
+                            '#d781fc','#fd82bd'])
+
 # ------------------------------------------------------------------------------
 # These should be in the style file to make them the default for YPL.
 # ------------------------------------------------------------------------------
 
 # Color Cycler
 
-axes.prop_cycle: cycler('ylp_color', ['#000000','#fe393c','#035cd6','#37b800','#fdc171','#03c5c2','#ba23fb'])
+axes.prop_cycle: cycler('ypl_color', ['#000000','#fe393c','#035cd6','#37b800',
+                        '#fdc171','#03c5c2','#ba23fb'])
 
 # Colormap
 
-# this can also be defined with a variable name in the yieldplotlib module with something like:
+# this can also be defined with a variable name in the yieldplotlib module with
+# something like:
 # ypl_cmap = ListedColormap([(0.000,0.0000,0.0000),...])
 # but since we're making it the default style, we don't really need to.
 
