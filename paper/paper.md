@@ -41,10 +41,10 @@ for a given mission architecture are essential. While these yield codes have the
 they can be complex and have major differences in their inputs and outputs that has made
 comparing results difficult. The need for a unified library for visualizing the inputs
 and outputs of these yield codes in a complete, descriptive, and accessible way has therefore
-also become apparent. To this end we have developed yieldplotlib, an open-source Python
+also become apparent. To this end we have developed `yieldplotlib`, an open-source Python
 library to communicate the results of yield codes to the broader community and produce
 publication-quality plots. Currently, there are modules for analyzing AYO and EXOSIMS,
-but yieldplotlib is easily extensible and support for other yield codes can be easily
+but `yieldplotlib` is easily extensible and support for other yield codes can be easily
 added in the future.
 
 # Statement of need
@@ -92,8 +92,8 @@ the sheet, download it as a CSV file, and process it locally for development.
 An example excerpt from the CSV file can be found in
 \autoref{fig:key_map_csv}.
 
-![Example portion of the yieldplotlib key map CSV file containing the
-mappings between AYO, EXOSIMS, and yieldplotlib parameters.\label{fig:key_map_csv}](figures/ypl_csv_table.jpeg)
+![Example portion of the `yieldplotlib` key map CSV file containing the
+mappings between AYO, EXOSIMS, and `yieldplotlib` parameters.\label{fig:key_map_csv}](figures/ypl_csv_table.jpeg)
 
 Once the yield packages are loaded and parsed, a getter can be called on the directory objects
 to return the corresponding value from the respective yield code, for example:
@@ -156,7 +156,7 @@ results are on the right.\label{fig:hz_completeness}](figures/hz_completeness.pn
 ![Bar chart showing expected EXOSIMS planet yields for hot (pink), warm (yellow), and cold (blue)
 Rocky planets, Super Earths, Sub-Neptunes, Neptunes and Jupiters. Earth-like planets which are
 of the most interest for HWO are shown in green. This plot uses the "cyberpunk"
-theme from the library `mplcyberpunk` which is supported as a keyword argument to yieldplotlib as a dark mode
+theme from the library `mplcyberpunk` which is supported as a keyword argument to `yieldplotlib` as a dark mode
 alternative to the standard plotting color schemes.
 \label{fig:planet_hists}](figures/yield_hist_cyber.png)
 
@@ -172,7 +172,7 @@ package using yippy (solid blue). Slight differences between the codes can be at
 the "core" is defined. EXOSIMS and yippy adopt a fixed radius circular aperture whereas AYO
 defines an aperture based on pixels having more than 30% of the peak flux. Additional sources
 of difference can also lie in the interpolation methods used by all of the codes. This highlights
-the types of insights that tools like yieldplotlib can help to uncover.
+the types of insights that tools like `yieldplotlib` can help to uncover.
 \label{fig:core_throughput}](figures/core_throughput_all_curves.jpeg)
 
 ## Pipeline and Command Line Interface
