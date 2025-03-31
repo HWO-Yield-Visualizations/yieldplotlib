@@ -24,7 +24,7 @@
  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 Usage:
-  run_ypl PATH
+  ypl_run PATH
 
 Options:
   -h, --help  Show this help message and exit.

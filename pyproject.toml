@@ -38,7 +38,7 @@ Homepage = "https://github.com/HWO-Yield-Visualizations/yieldplotlib"
 Issues = "https://github.com/HWO-Yield-Visualizations/yieldplotlib/issues"
 
 [project.scripts]
-run_ypl = "yieldplotlib.ypl_cli:main"
+ypl_run = "yieldplotlib.ypl_cli:main"
 
 [tool.hatch.version]
 source = "vcs"
