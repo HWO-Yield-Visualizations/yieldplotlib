@@ -38,7 +38,7 @@ to HWO's success. As HWO is being developed
 and trade spaces are explored, yield codes such as the Altruistic Yield Optimizer (AYO)
 and EXOSIMS that can calculate the expected number of detected and characterized planets
 for a given mission architecture are essential. While these yield codes have the same goal,
-they can be complex and have major differences in their inputs and outputs that has made
+they can be complex and have major differences in their inputs and outputs which makes
 comparing results difficult. The need for a unified library for visualizing the inputs
 and outputs of these yield codes in a complete, descriptive, and accessible way has therefore
 also become apparent. To this end we have developed `yieldplotlib`, an open-source Python
@@ -57,8 +57,8 @@ explored, yield codes such as the Altruistic Yield Optimizer (AYO; @AYO2014) and
 given mission architecture are essential. While these yield codes have the same goal, they are
 complex, written in different programming languages (AYO is written in IDL and
 EXOSIMS is written in Python), calculate yield with different methods, and have
-major differences in their inputs and outputs that has made comparing results
-difficult. The need for a unified library for visualizing these yield codes in a complete, descriptive,
+major differences in their inputs and outputs.
+The need for a unified library for visualizing these yield codes in a complete, descriptive,
 and accessible way has therefore also become apparent. This is non-trivial due to the differing
 methods, syntaxes, structures, and assumptions that each of these codes make.
 
@@ -81,9 +81,9 @@ the future.
 
 ## Parsing and Getting Values
 `yieldplotlib` provides a loading system with a unified interface for accessing data from
-the yield codes. The system abstracts the complex and inconsistent file structures of the
+the yield codes. The system manages the complex and inconsistent file structures of the
 AYO and EXOSIMS inputs and outputs by organizing them into a hierarchical tree of nodes
-representing files and directories. This abstractions creates a consistent API that
+representing files and directories. This abstraction creates a consistent API that
 allows users to query data without needing to understand and parse the underlying
 data products. For collaboration purposes the valid queries are managed in a Google
 Sheet where collaborators have linked the EXOSIMS and AYO keys to a universal key in `yieldplotlib`.
@@ -130,10 +130,13 @@ yip = YIPDirectory(Path("path/to/my/yip_data"))
 of the wide variety of customization options that  `matplotlib` offers, as well as the extensive
 knowledge base many users of `yieldplotlib` will have with that package. The `yieldplotlib` generic
 plots are used for single yield run visualizations and can make scatter plots, standard plots,
-and histograms.
+and histograms. This extension is achieved through a function that runs when `yieldplotlib`
+is imported that automatically adds new plotting methods (prefixed with `ypl_`) to `matplotlib`'s
+`Axes` class, allowing users to directly call methods like `ax.ypl_plot()` and
+`ax.ypl_scatter()` on any `matplotlib` axes object.
 
-The comparison plots are for more complex comparisons by plotting multiple yield runs in either
-the same multi-panel figure, or on the same set of axes.
+Also provided are comparison plots that can handle multiple yield runs and automatically create
+multi-panel figures.
 
 ### Plotting Scripts
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations to
