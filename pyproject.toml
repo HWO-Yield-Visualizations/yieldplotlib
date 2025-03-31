@@ -20,11 +20,12 @@ dependencies = [
   "pyparsing>=3.1.4",
   "lod-unit>=1.6.0",
   "docopt",
-  "pooch>=1.8.0",
+  "pooch",
+  "mplcyberpunk",
 ]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
@@ -60,7 +61,7 @@ docs = [
   "sphinx_autodoc_typehints",
   "matplotlib",
 ]
-test = ["nox", "pytest", "hypothesis", "pytest-cov"]
+test = ["nox", "pytest", "pytest-cov"]
 
 [tool.ruff]
 exclude = ["src/yieldplotlib/key_map.py"]

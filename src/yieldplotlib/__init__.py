@@ -15,7 +15,7 @@ __all__ = [
     "xy_grid",
 ]
 
-import importlib.resources
+from importlib.resources import as_file, files
 
 import matplotlib.pyplot as plt
 
@@ -30,7 +30,8 @@ from .util import calculate_axis_limits_and_ticks, get_nice_number
 # Automatically extend matplotlib with our custom methods
 extend_matplotlib()
 
-with importlib.resources.path("yieldplotlib", "style") as path:
+# Using the new files() API
+with as_file(files("yieldplotlib").joinpath("style")) as path:
     ypl_stylesheets = plt.style.core.read_style_directory(path)
     plt.style.core.update_nested_dict(plt.style.library, ypl_stylesheets)
     # Set the default style to ypl_default

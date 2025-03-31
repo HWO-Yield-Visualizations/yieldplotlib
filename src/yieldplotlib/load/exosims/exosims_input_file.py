@@ -10,8 +10,8 @@ from EXOSIMS.Prototypes.OpticalSystem import OpticalSystem
 from EXOSIMS.util.get_module import get_module_from_specs
 
 from yieldplotlib.core.file_nodes import JSONFile
-from yieldplotlib.key_map import KEY_MAP
 from yieldplotlib.logger import logger
+from yieldplotlib.util import get_unit
 
 # Define which nested keys correspond to the modes, systems, and
 # instruments for parsing.
@@ -246,37 +246,6 @@ class EXOSIMSInputFile(JSONFile):
                                 "does not exist locally."
                             )
 
-    def get_unit(self, key):
-        """Get the associated unit for a given key.
-
-        This method handles both yieldplotlib keys and EXOSIMS keys:
-        1. First tries a direct lookup in KEY_MAP (assuming key is a yieldplotlib key)
-        2. If not found, tries to find the corresponding yieldplotlib key by looking up
-           the EXOSIMS key in KEY_MAP
-
-        Args:
-            key (str):
-                The key to look up the unit for (can be either a yieldplotlib key
-                or an EXOSIMS key).
-
-        Returns:
-            astropy.units.Unit or None:
-                The astropy Unit object if found, None otherwise.
-        """
-        # First try direct lookup (for yieldplotlib keys)
-        if key in KEY_MAP and "EXOSIMSInputFile" in KEY_MAP[key]:
-            unit = KEY_MAP[key]["EXOSIMSInputFile"].get("unit", "")
-        else:
-            # If not found, try to find the corresponding yieldplotlib key
-            # by looking up the EXOSIMS key
-            unit = self.find_unit_for_exosims_key(key)
-
-        if unit:
-            astropy_unit = u.Unit(unit)
-            return astropy_unit
-
-        return None
-
     def _get_mode_dict(self, inst, syst):
         """Get the dictionary for a given instrument and system.
 
@@ -387,7 +356,7 @@ class EXOSIMSInputFile(JSONFile):
                 # Hacky way to differentiate between system/inst/mode keys
                 key = key[5:]
             value = _dict.get(key)
-            unit = self.get_unit(key)
+            unit = get_unit(key, self.__class__.__name__)
             if unit:
                 return value * unit
             else:
@@ -552,29 +521,3 @@ class EXOSIMSInputFile(JSONFile):
         )
 
         return result
-
-    def find_unit_for_exosims_key(self, exosims_key):
-        """Find the unit for a given EXOSIMS key.
-
-        Searches through the KEY_MAP to find a mapping where the provided EXOSIMS key
-        matches the 'name' field for the specified module. If found, returns the
-        corresponding unit.
-
-        Args:
-            exosims_key (str):
-                The EXOSIMS key (e.g., 'pixelScale').
-
-        Returns:
-            str or None:
-                The unit string if found, None otherwise.
-        """
-        module_name = self.__class__.__name__
-        for yieldplotlib_key, module_data in KEY_MAP.items():
-            # Check if this entry has data for the specified module
-            if module_name in module_data:
-                module_info = module_data[module_name]
-                # Check if the 'name' field matches the EXOSIMS key
-                if module_info.get("name") == exosims_key:
-                    return module_info.get("unit", "")
-
-        return None
