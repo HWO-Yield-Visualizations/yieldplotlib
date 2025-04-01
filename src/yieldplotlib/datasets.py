@@ -13,9 +13,9 @@ from .load.yip_directory import YIPDirectory
 
 # Create a pooch registry for data files
 REGISTRY = {
-    "ayo.zip": "md5:af4a8853e77a19c7fe91bffb3f57ccfe",
+    "ayo.zip": "md5:322175bec3976e35b5f59670b3d2c472",
     "exosims.zip": "md5:0ada773ec50d1bcc12c112025b8319df",
-    "yip.zip": "md5:e250ea1708d6e67fec03454f277d6e9e",
+    "yip.zip": "md5:4705b78b129387f429a06bbad41f68e1",
 }
 
 # Create a pooch instance named after Corey's dog
