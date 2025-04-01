@@ -2,10 +2,11 @@
 
 import copy
 from pathlib import Path
-
+import os
 import numpy as np
 import pandas as pd
 from astropy import units as u
+import astropy.io.fits as pyfits
 from EXOSIMS.Prototypes.OpticalSystem import OpticalSystem
 from EXOSIMS.util.get_module import get_module_from_specs
 
@@ -95,6 +96,10 @@ SPECIAL_KEYS = {
     "blind_comp_spec": "_get_comp_per_intTime",
 }
 
+OVERRIDE_KEYS = {
+    "core_thruput": "_get_core_thruput",
+}
+
 
 class EXOSIMSInputFile(JSONFile):
     """Node for handling the EXOSIMS input JSON files.
@@ -107,6 +112,7 @@ class EXOSIMSInputFile(JSONFile):
     def __init__(self, file_path: Path):
         """Initialize the EXOSIMSInputFile node with the file path."""
         super().__init__(file_path)
+        self.file_path = file_path
         self.is_input = True
         self.used_modes = []
         self.used_insts = []
@@ -284,6 +290,8 @@ class EXOSIMSInputFile(JSONFile):
         """
         if key in SPECIAL_KEYS:
             return getattr(self, SPECIAL_KEYS[key])(key, **kwargs)
+        if key in OVERRIDE_KEYS:
+            return getattr(self, OVERRIDE_KEYS[key])()
         in_TL = key in TL_PARAMS
         if in_TL:
             # Simple case, just return the value from the TargetList object
@@ -521,3 +529,24 @@ class EXOSIMSInputFile(JSONFile):
         )
 
         return result
+
+    def _get_core_thruput(self):
+        """Get the core thruput data."""
+        # Get both wavelength and core throughput
+        thruput_fits = self.data["starlightSuppressionSystems"][0][
+            "core_thruput"]
+        if os.path.exists(thruput_fits):
+            thruput_data = pyfits.getdata(Path(thruput_fits))
+        else:
+            try:
+                thruput_data = pyfits.getdata(Path(os.path.dirname(self.file_path), thruput_fits))
+            except FileNotFoundError:
+                logger.warning(
+                    "No core throuphput file found for EXOSIMS, check file paths in"
+                    " the input JSON are correct. ")
+                return None
+        sep = thruput_data[:, 0]
+        thruput = thruput_data[:, 1]
+        df = pd.DataFrame({"sep": sep, "thruput": thruput})
+        return df
+
