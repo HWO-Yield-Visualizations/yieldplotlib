@@ -29,7 +29,7 @@ affiliations:
    index: 2
  - name: The Catholic University of America, United States
    index: 3
- - name: Center for Research and Exploration in Space Science and Technology, NASA/GSFC, United States 
+ - name: Center for Research and Exploration in Space Science and Technology, NASA/GSFC, United States
    index: 4
 
 date: 28 February 2025
