@@ -16,12 +16,21 @@ authors:
     orcid: 0000-0002-4787-3285
     equal-contrib: true
     affiliation: "2"
+    
+  - name: Alex R. Howe 
+    orcid: 0000-0002-4787-3285
+    equal-contrib: false
+    affiliation: "1, 3, 4"
 
 affiliations:
  - name: Goddard Space Flight Center, United States
    index: 1
  - name: Space Telescope Science Institute, United States
    index: 2
+ - name: The Catholic University of America, United States
+   index: 3
+ - name: Center for Research and Exploration in Space Science and Technology, NASA/GSFC, United States 
+   index: 4
 
 date: 28 February 2025
 bibliography: paper.bib
@@ -205,6 +214,6 @@ Sarah Steiger acknowledges support from an STScI Postdoctoral Fellowship.
 
 The authors would also like to acknowledge Christopher Stark, Dmitry Savransky, Rhonda Morgan, and
 Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. They would also like
-to thank Alex Howe, Justin Hom, and the rest of the Exoplanet Science Yields Working Group (ESYWG) for
+to thank Justin Hom, and the rest of the Exoplanet Science Yields Working Group (ESYWG) for
 their valuable feedback and discussions as well as Susan Redmond for the development of the sample Yield
 Input Package.
