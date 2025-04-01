@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.6.0...v1.0.0) (2025-04-01)
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([b003c85](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/b003c85b2879a11b0ec05444624dfcadbf594008))
+
 ## [0.6.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.5.0...v0.6.0) (2025-04-01)
 
 
