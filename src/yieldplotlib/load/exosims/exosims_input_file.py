@@ -536,9 +536,11 @@ class EXOSIMSInputFile(JSONFile):
         thruput_fits = self.data["starlightSuppressionSystems"][0][
             "core_thruput"]
         if os.path.exists(thruput_fits):
+            # Load fully qualified file path.
             thruput_data = pyfits.getdata(Path(thruput_fits))
         else:
             try:
+                # See if file is in the same directory as the input JSON.
                 thruput_data = pyfits.getdata(Path(os.path.dirname(self.file_path), thruput_fits))
             except FileNotFoundError:
                 logger.warning(
