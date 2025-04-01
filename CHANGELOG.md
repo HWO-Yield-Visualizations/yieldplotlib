@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.6.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.5.0...v0.6.0) (2025-04-01)
+
+
+### Features
+
+* Core throughput get function for ayo ([5850fd1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/5850fd11d30253181fcffa501c6cfdf667a503d6))
+* New colors and stylefile ([9dc0b7b](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/9dc0b7b24a884fcae1ca47f25e6e508103f4a957))
+* New colors and stylefile ([142f710](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/142f710a6f84ddeaf52a104edf6f9d94f9482fbb))
+* Test of the data fetching ([4aa17f7](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/4aa17f7eefac53293391a540eb06c198434a907b))
+* Test of whether the EXOSIMS/AYO objects can get all keys ([4ca760d](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/4ca760d7ecfc0b1e892e8ba9be79f8154619170e))
+* Tests for the ploting methods ([8233d44](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/8233d4444ff48a2c9e02b02715d6de0cdd5ae28d))
+* Tracking units now for consistency when plotting ([293b259](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/293b2597aa9450267c9e1504afc9d456a71f80e3))
+
+
+### Bug Fixes
+
+* move paper workflow back to push but specify specific paths ([5c83254](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/5c832545c19cf51f76d61920e8ac158c04626331))
+* Remove comma from ayo csv header ([bac199a](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/bac199ac76573a1fb0ad2cafc403c516c5c0df77))
+* Remove comma from ayo csv header ([ce5fb05](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/ce5fb05923c0157abc158a3c01c5add5c3b7b33a))
+* Remove match/case syntax for 3.9 support ([4a73f8d](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/4a73f8d62d2507bd5fe66610da38f9cf99b7240e))
+* Solved input parameter issues for various cases ([005e5eb](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/005e5eb9f0abe53ee0272364eff7468e36124c44))
+* typo ([9bd9353](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/9bd93535b579cd399fcf7b641886ad948b773b7c))
+
 ## [0.5.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.4.1...v0.5.0) (2025-03-26)
 
 
