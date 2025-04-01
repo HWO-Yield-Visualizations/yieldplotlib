@@ -4,6 +4,7 @@ __all__ = [
     "__version__",
     "fetch_ayo_data",
     "fetch_exosims_data",
+    "fetch_yip_data",
     "KEY_MAP",
     "logger",
     "calculate_axis_limits_and_ticks",
