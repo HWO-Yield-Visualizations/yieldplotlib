@@ -11,7 +11,7 @@ ytick.labelsize: 12
 
 
 # Set default colors and cyclers
-axes.prop_cycle: (cycler("color", [ "#f74d50", "#fc5b12", "#cc7601", "#939205", "#38bc01", "#00ca68", "#00c4c1", "#1bb7fd", "#60a4fe", "#9495fe", "#d781fc", "#fd82bd" ]) + cycler("linestyle", [ "-", "--", ":", "-.", "(0, (3, 1, 1, 1))", "(0, (5, 1))", "-", "--", ":", "-.", "(0, (3, 1, 1, 1))", "(0, (5, 1))" ]) + cycler("hatch", ["", "/", "\\", "|", "-", "+", "x", "o", "O", ".", "*", "//", ".."]))
+axes.prop_cycle: (cycler("color", [ "#f74d50", "#fc5b12", "#cc7601", "#939205", "#38bc01", "#00ca68", "#00c4c1", "#1bb7fd", "#60a4fe", "#9495fe", "#d781fc", "#fd82bd" ]) + cycler("linestyle", [ "-", "--", ":", "-.", "(0, (3, 1, 1, 1))", "(0, (5, 1))", "-", "--", ":", "-.", "(0, (3, 1, 1, 1))", "(0, (5, 1))" ]))
 
 # Set default colormap
 image.cmap: plasma
