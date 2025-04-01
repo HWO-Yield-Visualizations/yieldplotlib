@@ -1,12 +1,13 @@
 """Node for handling input json files."""
 
 import copy
-from pathlib import Path
 import os
+from pathlib import Path
+
+import astropy.io.fits as pyfits
 import numpy as np
 import pandas as pd
 from astropy import units as u
-import astropy.io.fits as pyfits
 from EXOSIMS.Prototypes.OpticalSystem import OpticalSystem
 from EXOSIMS.util.get_module import get_module_from_specs
 
@@ -533,22 +534,23 @@ class EXOSIMSInputFile(JSONFile):
     def _get_core_thruput(self):
         """Get the core thruput data."""
         # Get both wavelength and core throughput
-        thruput_fits = self.data["starlightSuppressionSystems"][0][
-            "core_thruput"]
+        thruput_fits = self.data["starlightSuppressionSystems"][0]["core_thruput"]
         if os.path.exists(thruput_fits):
             # Load fully qualified file path.
             thruput_data = pyfits.getdata(Path(thruput_fits))
         else:
             try:
                 # See if file is in the same directory as the input JSON.
-                thruput_data = pyfits.getdata(Path(os.path.dirname(self.file_path), thruput_fits))
+                thruput_data = pyfits.getdata(
+                    Path(os.path.dirname(self.file_path), thruput_fits)
+                )
             except FileNotFoundError:
                 logger.warning(
                     "No core throuphput file found for EXOSIMS, check file paths in"
-                    " the input JSON are correct. ")
+                    " the input JSON are correct. "
+                )
                 return None
         sep = thruput_data[:, 0]
         thruput = thruput_data[:, 1]
         df = pd.DataFrame({"sep": sep, "thruput": thruput})
         return df
-
