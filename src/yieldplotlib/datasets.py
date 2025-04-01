@@ -9,11 +9,13 @@ from pooch import Unzip
 
 from .load.ayo_directory import AYODirectory
 from .load.exosims_directory import EXOSIMSDirectory
+from .load.yip_directory import YIPDirectory
 
 # Create a pooch registry for data files
 REGISTRY = {
     "ayo.zip": "md5:af4a8853e77a19c7fe91bffb3f57ccfe",
     "exosims.zip": "md5:0ada773ec50d1bcc12c112025b8319df",
+    "yip.zip": "",
 }
 
 # Create a pooch instance named after Corey's dog
@@ -34,3 +36,9 @@ def fetch_exosims_data():
     """Fetch and unpack EXOSIMS data."""
     PIKACHU.fetch("exosims.zip", processor=Unzip())
     return EXOSIMSDirectory(PIKACHU.abspath / "exosims.zip.unzip/exosims")
+
+
+def fetch_yip_data():
+    """Fetch and unpack YIP data."""
+    PIKACHU.fetch("yip.zip", processor=Unzip())
+    return YIPDirectory(PIKACHU.abspath / "yip.zip.unzip/yip")
