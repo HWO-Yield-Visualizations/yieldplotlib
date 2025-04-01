@@ -16,8 +16,8 @@ authors:
     orcid: 0000-0002-4787-3285
     equal-contrib: true
     affiliation: "2"
-    
-  - name: Alex R. Howe 
+
+  - name: Alex R. Howe
     orcid: 0000-0002-4787-3285
     equal-contrib: false
     affiliation: "1, 3, 4"
@@ -29,7 +29,7 @@ affiliations:
    index: 2
  - name: The Catholic University of America, United States
    index: 3
- - name: Center for Research and Exploration in Space Science and Technology, NASA/GSFC, United States 
+ - name: Center for Research and Exploration in Space Science and Technology, NASA/GSFC, United States
    index: 4
 
 date: 28 February 2025
