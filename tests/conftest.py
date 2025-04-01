@@ -27,7 +27,7 @@ def exosims_data():
 
 @pytest.fixture(scope="session")
 def yip_data():
-    """Fixture that provides YIP cdata for tests.
+    """Fixture that provides YIP data for tests.
 
     Returns:
         YIPDirectory: A YIPDirectory instance.
