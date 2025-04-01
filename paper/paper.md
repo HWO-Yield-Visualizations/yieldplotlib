@@ -16,8 +16,8 @@ authors:
     orcid: 0000-0002-4787-3285
     equal-contrib: true
     affiliation: "2"
-    
-  - name: Alex R. Howe 
+
+  - name: Alex R. Howe
     orcid: 0000-0002-4884-7150
     equal-contrib: false
     affiliation: "1, 3, 4"
