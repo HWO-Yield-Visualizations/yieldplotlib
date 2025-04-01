@@ -32,7 +32,7 @@ affiliations:
  - name: Center for Research and Exploration in Space Science and Technology, NASA/GSFC, United States
    index: 4
 
-date: 28 February 2025
+date: 1 April 2025
 bibliography: paper.bib
 ---
 
