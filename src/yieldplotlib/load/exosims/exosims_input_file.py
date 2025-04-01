@@ -95,9 +95,6 @@ TL_PARAMS = [
 SPECIAL_KEYS = {
     "blind_comp_det": "_get_comp_per_intTime",
     "blind_comp_spec": "_get_comp_per_intTime",
-}
-
-OVERRIDE_KEYS = {
     "core_thruput": "_get_core_thruput",
 }
 
@@ -291,8 +288,6 @@ class EXOSIMSInputFile(JSONFile):
         """
         if key in SPECIAL_KEYS:
             return getattr(self, SPECIAL_KEYS[key])(key, **kwargs)
-        if key in OVERRIDE_KEYS:
-            return getattr(self, OVERRIDE_KEYS[key])()
         in_TL = key in TL_PARAMS
         if in_TL:
             # Simple case, just return the value from the TargetList object
@@ -531,7 +526,7 @@ class EXOSIMSInputFile(JSONFile):
 
         return result
 
-    def _get_core_thruput(self):
+    def _get_core_thruput(self, *args, **kwargs):
         """Get the core thruput data."""
         # Get both wavelength and core throughput
         thruput_fits = self.data["starlightSuppressionSystems"][0]["core_thruput"]
