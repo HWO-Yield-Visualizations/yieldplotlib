@@ -86,11 +86,11 @@ mappings between AYO, EXOSIMS, and `yieldplotlib` parameters.\label{fig:key_map_
 ### Generic and Comparison Plots
 
 `yieldplotlib` extends the widely used Python plotting library `matplotlib`, leveraging
-its extensive customization options and the familiarity many users already have with it.
+its extensive customization options and the familiarity many users will already have with it.
 The `yieldplotlib` generic
 plots (`ypl_plot`, `ypl_scatter`, and `ypl_hist`) are used for single yield run visualizations.
 
-To compare multiple yield runs, `yieldplotlib` provides a set of flexible comparison plots
+To compare multiple yield runs, `yieldplotlib` also provides a set of flexible comparison plots
 that create multi-panel figures to quickly identify discrepancies.
 
 In order to generate summary plots quickly, `yieldplotlib` provides a command line interface
@@ -99,7 +99,7 @@ and plotting pipeline to create a suite of commonly used yield plots.
 ### Plotting Scripts
 
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations. These
-allow users to instantly compare AYO and EXOSIMS results for HWO's rapidly progressing
+allow users to instantly compare AYO and EXOSIMS results as motivated by the rapid progress of HWO's
 architecture trade studies. These scripts also function as examples
 for users who want to adapt the generic `yieldplotlib` methods to
 generate bespoke visualizations.
@@ -108,7 +108,8 @@ generate bespoke visualizations.
 probability that the simulated mission's observations would detect a planet in the habitable zone if one exists,
 as calculated by the two yield codes side-by-side.
 \autoref{fig:planet_hists} shows histograms of the total number of detected
-planets found as a function of planet type in this case just using EXOSIMS.
+planets found as a function of planet type for the two codes though, in this example, the inputs to each code
+also differ resulting in the seen discrepancies.
 
 ![Plot of the Habitable Zone (HZ) completeness as a function of host star luminosity (in units of
 Solar luminosity) and distance (in parsecs). Here the AYO results are on the left and the EXOSIMS
@@ -124,17 +125,17 @@ inputs shown are not directly comparable.
 Yield code inputs have a profound impact on calculated yield and plotting them
 is important to ensure consistency.
 Yield input packages (YIPs), a set of files that describe
-coronagraph performance, can also be loaded and accessed
-to compare how the codes process the same input coronagraph.
-\autoref{fig:core_throughput} shows the
-throughput for a key series of starlight suppression optics in the observatory known
-collectively as a coronagraph. Smaller throughputs result in less planet light on the detector
+coronagraph performance, can also be loaded and accessed in `yieldplotlib`
+to compare how different codes process the same input coronagraph.
+\autoref{fig:core_throughput} shows a comparison of the calculated coronagraph throughput 
+for both the two codes studied, and as accessed via an additional YIP analysis tool called `yippy`. 
+Smaller throughputs result in less planet light on the detector
 which can result in lower yields.
 
 ![Core throughput vs. separation (in $\lambda$/D) for the same coronagraph
 when processed by AYO, EXOSIMS, and calculated by a tool named `yippy`.
 The differences are due to the different interpolation
-methods used and the definition of the "core". This highlights
+methods used and the definition of aperture over which the throughput is calculated. This highlights
 the types of insights that tools like `yieldplotlib` can help to uncover.
 \label{fig:core_throughput}](figures/core_throughput_all_curves.jpeg)
 
