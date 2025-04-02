@@ -54,7 +54,7 @@ To evaluate different designs for HWO [@HWOFeinberg2024], yield codes such as AY
 While these yield codes have the same goal, their implementations
 are so different that validation has become a major obstacle for the community.
 
-Previous efforts have already provided valuable insights. The study @ETCCrossCal2025 compared
+Previous cross-calibration efforts have already provided valuable insights. @ETCCrossCal2025 compared
 the internal exposure time calculations of AYO and EXOSIMS and revealed previously unknown
 discrepancies. `yieldplotlib` is a more ambitious continuation of that work.
 It is a Python library capable of easily accessing hundreds of important quantities
@@ -100,7 +100,7 @@ and plotting pipeline to create a suite of commonly used yield plots.
 
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations. These
 allow users to instantly compare AYO and EXOSIMS results as motivated by the rapid progress of HWO's
-architecture trade studies. These scripts also function as examples
+ongoing architecture trade studies. These scripts also function as examples
 for users who want to adapt the generic `yieldplotlib` methods to
 generate bespoke visualizations.
 
