@@ -127,8 +127,8 @@ is important to ensure consistency.
 Yield input packages (YIPs), a set of files that describe
 coronagraph performance, can also be loaded and accessed in `yieldplotlib`
 to compare how different codes process the same input coronagraph.
-\autoref{fig:core_throughput} shows a comparison of the calculated coronagraph throughput 
-for both the two codes studied, and as accessed via an additional YIP analysis tool called `yippy`. 
+\autoref{fig:core_throughput} shows a comparison of the calculated coronagraph throughput
+for both the two codes studied, and as accessed via an additional YIP analysis tool called `yippy`.
 Smaller throughputs result in less planet light on the detector
 which can result in lower yields.
 
