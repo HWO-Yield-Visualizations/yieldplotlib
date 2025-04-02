@@ -21,6 +21,10 @@ user/dev
 ```
 ```{toctree}
 :maxdepth: 2
+user/functionality
+```
+```{toctree}
+:maxdepth: 2
 user/ypl_parameters
 ```
 ```{toctree}
