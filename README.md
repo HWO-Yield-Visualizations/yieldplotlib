@@ -11,6 +11,7 @@
   <a href="https://doi.org/10.5281/zenodo.15013340"><img src="https://img.shields.io/badge/DOI-10.5281/zenodo.15013340-blue?style=flat-square" alt="DOI"></a>
   <a href="https://github.com/HWO-Yield-Visualizations/yieldplotlib/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License"></a>
   <a href="https://github.com/HWO-Yield-Visualizations/yieldplotlib"><img src="https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue.svg?style=flat-square&logo=python" alt="Python Versions"></a>
+  <a href="https://joss.theoj.org/papers/27e0ba90efbba41a6cefb87bc969db72"><img src="https://joss.theoj.org/papers/27e0ba90efbba41a6cefb87bc969db72/status.svg"></a>
 </p>
 
 
