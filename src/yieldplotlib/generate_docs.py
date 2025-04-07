@@ -160,8 +160,12 @@ def generate_markdown_table(csv_content: str) -> str:
         columns={"yieldplotlib name": "Parameter", "description": "Description"}
     )
 
-    # Return just the table without a header
-    return params_df.to_markdown(index=False)
+    # Generate markdown and ensure it ends with a newline
+    markdown = params_df.to_markdown(index=False)
+    if not markdown.endswith("\n"):
+        markdown += "\n"
+
+    return markdown
 
 
 def main():
