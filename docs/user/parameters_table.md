@@ -7,17 +7,17 @@
 | Jmag                    | J-band magnitude                                                     |
 | Kmag                    | K-band magnitude                                                     |
 | MV                      | Absolute magnitude of the target star.                               |
-| Ms                      | Mass in solar masses                                                 |
+| Ms                      | Mass (Solar masses)                                                  |
 | R                       | Spectral resolution for detection                                    |
 | RA                      | Right Ascension                                                      |
 | Rmag                    | R-band magnitude                                                     |
 | Umag                    | Ultraviolet magnitude                                                |
 | Vmag                    | V-band magnitude                                                     |
-| angdiam                 | Angular diameter in milliarcseconds                                  |
+| angdiam                 | Angular diameter (mas)                                               |
 | blind_comp_det          | Blind (or single-visit) completeness for the detection mode          |
 | blind_comp_spec         | Blind (or single-visit) completeness for the spectroscopy mode       |
 | cic                     | Detector clock induced charge                                        |
-| core_thruput            | nan                                                                  |
+| core_thruput            | Core throughput of the coronagraph                                   |
 | coron_bw                | Bandwidth of the coronagraph                                         |
 | coron_lam               | Central working wavelength for the coronagraph                       |
 | coron_optics_thorughput | Throughput of the coronagraph optics                                 |
@@ -25,7 +25,7 @@
 | exp_time_char           | Total integration time for characterizations per star.               |
 | exp_time_det            | Total integration time for detections per star.                      |
 | instruments             | List of all instrument specifications used (EXOSIMS only)            |
-| istar                   | nan                                                                  |
+| istar                   | Offset PSF peak at the stellocentric distance of the planet          |
 | iwa                     | Inner working angle of the coronagraph                               |
 | modes                   | List of all of the observing modes used (EXOSIMS only)               |
 | obs_lam                 | Observing wavelength for detection mode                              |
@@ -38,7 +38,7 @@
 | qe                      | Quantum efficiency                                                   |
 | read_noise              | Detector read noise                                                  |
 | sc_R                    | Spectral resolution for characterization                             |
-| sc_cic                  | Spectrigraph clock induced charge                                    |
+| sc_cic                  | Spectrograph clock induced charge                                    |
 | sc_dark_current         | Spectrograph dark current                                            |
 | sc_obs_lam              | Observing wavelength for characterization mode                       |
 | sc_optics_throughput    | Throughput of the optics for spectroscopy                            |
@@ -48,7 +48,7 @@
 | sc_snr                  | Required signal to noise ratio for characterization                  |
 | sc_texp                 | Single exposure time for spectroscopic observation                   |
 | snr                     | Required signal to noise ratio for detection                         |
-| star_L                  | Luminosity of the star (in solar luminosities).                      |
+| star_L                  | Luminosity of the star (Solar luminosities).                         |
 | star_comp_det           | Cumulative Earth-like planet detections per star.                    |
 | star_dist               | Distance to the star (in parsecs).                                   |
 | star_id                 | Star index identifier.                                               |
