@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.0.0...v1.0.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* Add newline to markdown table to satisfy pre-commit ([6d14a0d](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/6d14a0dc1866e30003d009df08d566f12a8e4216))
+* Add newline to markdown table to satisfy pre-commit ([47b5d37](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/47b5d375d43e31940f4b58ef586b6905e908aa73))
+* Add tabulate install to workflow ([d379647](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/d379647513ffd52f101836c0a1b2c3f121773d51))
+* Add tabulate install to workflow ([90e6c55](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/90e6c5505a388ad2b8ff7e06ee2799e83b3af9eb))
+
 ## [1.0.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v0.6.0...v1.0.0) (2025-04-01)
 
 
