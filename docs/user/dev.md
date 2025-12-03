@@ -19,7 +19,7 @@ review and understand your changes.
 
 Clone the repository to your local machine using the shell command
 ```bash
-git clone git@github.com:HWO-Yield-Visualizations/yieldplotlib.git
+git clone git clone https://github.com/HWO-Yield-Visualizations/yieldplotlib.git
 ```
 Next, navigate to the repository directory and create a new branch:
 ```bash
