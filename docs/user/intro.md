@@ -44,4 +44,4 @@ in yields.
 ## Issues with the code
 
 If you encounter any problems while using the code, please make an issue on the
-[yieldplotlib](https://github.com/HWO-Yield-Visualizations/yieldplotlib) repository. 
+[yieldplotlib](https://github.com/HWO-Yield-Visualizations/yieldplotlib) repository.
