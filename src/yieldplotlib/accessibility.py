@@ -37,6 +37,8 @@ class AccessibilityManager:
         else:
             logger.warning(f"{len(self.warnings)} accessibility checks failed.")
 
+        return self.warnings
+
     def check_colors(self):
         """Check if colors used are monotonic and span an acceptable lightness range."""
         # Convert RGB colors into greyscale to check lightness.
