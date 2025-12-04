@@ -60,6 +60,7 @@ docs = [
   "sphinx-autoapi",
   "sphinx_autodoc_typehints",
   "matplotlib",
+  "itables",
 ]
 test = ["nox", "pytest", "pytest-cov"]
 
