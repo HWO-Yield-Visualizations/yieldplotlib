@@ -40,3 +40,8 @@ Survey (CDS) Pipeline which is to be made publicly available soon. These
 packages are used as critical inputs to EXOSIMS and AYO and so visualizing
 their contents can also be enlightening for understanding final differences
 in yields.
+
+## Issues with the code
+
+If you encounter any problems while using the code, please make an issue on the
+[yieldplotlib](https://github.com/HWO-Yield-Visualizations/yieldplotlib) repository.
