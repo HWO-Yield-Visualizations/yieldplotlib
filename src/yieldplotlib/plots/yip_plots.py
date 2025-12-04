@@ -122,9 +122,11 @@ def plot_core_throughtput(
         fig = ax.get_figure()
 
     if yip:
-        separations, core_thruput_from_yip = yip.coronagraph.get_throughput_curve(
-            plot=False, aperture_radius_lod=aperture_radius, oversample=1
+        performance_metrics = yip.coronagraph.compute_all_performance_curves(
+            oversample=1, aperture_radius_lod=aperture_radius
         )
+        separations = performance_metrics["separations"]
+        core_thruput_from_yip = performance_metrics["throughput"]
         ax.plot(separations, core_thruput_from_yip, label="yippy")
 
     for i, run in enumerate(runs):
