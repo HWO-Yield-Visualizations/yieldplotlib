@@ -65,6 +65,7 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs={}, plot_kwargs={}):
     # Save the animation to file.
     ani.save(save_name, fps=2, writer="ffmpeg")
     plt.close(fig)
+    return ani
 
 
 def plot_core_throughtput(
