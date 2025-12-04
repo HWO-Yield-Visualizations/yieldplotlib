@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.0.1...v1.1.0) (2025-12-04)
+
+
+### Features
+
+* Add searchable common parameter table to the tutorial ([2d359d5](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/2d359d5390cd975cff1618e105652d692623f6e4))
+
+
+### Bug Fixes
+
+* return FuncAnimation object in make_offax_psf_movie function ([0f4f936](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/0f4f936e52cf553e5ab9a97946013b98d89bd55e))
+* return warnings in AceessibilityManager run_checks function ([c45bbfe](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/c45bbfe046f365416986f5a3d142f9dab3c6dfd9))
+* Revert jupyter kernel name for readthedocs compatibility ([bdbd7ff](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/bdbd7ffe73858488a7983ad4daf4511e211904e2))
+* Revert jupyter kernel name for readthedocs compatibility ([b386487](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/b386487d891723d3ca7d505b8105094c5895de2f))
+* update throughput calculation in plot_core_throughtput function ([637647a](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/637647a4e2d11665064256aa4aebe133ca8c1c96))
+* update throughput calculation in plot_core_throughtput function ([a276ccf](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/a276ccfd41e9be68fe1df1a2e1fea2c28e5ef807))
+
 ## [1.0.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.0.0...v1.0.1) (2025-08-04)
 
 
