@@ -26,6 +26,26 @@ jobs:
         enable-cache: true
         activate-environment: true
 
+    # Cache EXOSIMS data (downloads + computed cache like completeness, star fluxes)
+    # Only invalidates when dependencies change (uv.lock hash)
+    - name: Cache EXOSIMS data
+      uses: actions/cache@v4
+      with:
+        path: ~/.EXOSIMS
+        key: exosims-${{ runner.os }}-${{ hashFiles('uv.lock') }}
+        restore-keys: |
+          exosims-${{ runner.os }}-
+
+    # Pre-download Forecaster parameters if not cached
+    - name: Pre-download Forecaster parameters
+      run: |
+        mkdir -p ~/.EXOSIMS/downloads
+        if [ ! -f ~/.EXOSIMS/downloads/fitting_parameters.h5 ]; then
+          curl -fsSL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://raw.githubusercontent.com/dsavransky/forecaster/master/fitting_parameters.h5" \
+            -o ~/.EXOSIMS/downloads/fitting_parameters.h5 || echo "Download failed, EXOSIMS will retry"
+        fi
+
     - name: Install nox
       run: uv tool install nox
 
