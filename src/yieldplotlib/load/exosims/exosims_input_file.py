@@ -502,9 +502,9 @@ class EXOSIMSInputFile(JSONFile):
             int_times = int_times[index_map]
         # Make sure the integration times are being used for the correct stars
 
-        assert int_times.shape == exosims_name_order.shape, (
-            "int_times and star_names must have the same shape"
-        )
+        assert (
+            int_times.shape == exosims_name_order.shape
+        ), "int_times and star_names must have the same shape"
         if not self.all_local_paths:
             logger.warning(
                 "Completeness per integration time shouldn't be trusted without "
@@ -549,3 +549,246 @@ class EXOSIMSInputFile(JSONFile):
         thruput = thruput_data[:, 1]
         df = pd.DataFrame({"sep": sep, "thruput": thruput})
         return df
+
+
+def export_ayo(self, output_path: str):
+    """Export the current EXOSIMS input to an AYO input file.
+
+    This method aggregates the discrete EXOSIMS Observing Modes into the
+    wavelength-dependent arrays (lambda, SNR, SR, etc.) required by AYO.
+
+    Args:
+        output_path (str): The path to write the .ayo file to.
+    """
+
+    # Helper to safely get params from mode/inst/syst
+    def get_param(obj, key, default):
+        return obj.get(key, default)
+
+    # Helper to format list as string for AYO
+    def to_ayo_list(arr):
+        # Format as [val1, val2, ...]
+        # Check for numpy types
+        return "[" + ", ".join([f"{float(x):.6g}" for x in arr]) + "]"
+
+    # 1. Gather Data
+    # General
+    D = self._get("pupilDiam")  # Quantity with units (m)
+    mission_life = self._get("missionLife")  # Quantity (yr)
+
+    # Starlight Suppression (Assume first one is primary for global params)
+    systs = self.data.get("starlightSuppressionSystems", [{}])
+    syst = systs[0]
+
+    # IWA/OWA Conversion
+    # EXOSIMS IWA is typically in arcsec. AYO requires lambda/D.
+    # We need a reference lambda to convert. We use 500nm as a standard reference.
+    ref_lam = 500 * u.nm
+    if isinstance(D, u.Quantity):
+        D_val_m = D.to_value(u.m)
+    else:
+        D_val_m = float(D)
+
+    # Conversion factor: 1 L/D in arcsec = (lam / D) * 206265
+    lod_as = 206265.0 * (ref_lam.to_value(u.m) / D_val_m)
+
+    iwa_raw = syst.get("IWA", 2.0)
+    # Heuristic: if IWA < 1.0, it is likely arcsec. If > 1.0, it is likely L/D (or very large IWA).
+    # We assume arcsec if small, else assume it's already L/D (or large angle).
+    # AYO expects L/D.
+    if iwa_raw < 1.0:
+        iwa_val = iwa_raw / lod_as
+    else:
+        iwa_val = iwa_raw
+
+    owa_raw = syst.get("OWA", 30.0)
+    if owa_raw < 5.0:  # likely arcsec
+        owa_val = owa_raw / lod_as
+    else:
+        owa_val = owa_raw
+
+    # Pitch: koAngles_Sun
+    pitch = self.data.get("koAngles_Sun", [45, 135])
+
+    # Contrast
+    contrast = syst.get("core_contrast", 1e-10)
+
+    # observingModes processing
+    modes = self.data.get("observingModes", [])
+
+    det_modes = [m for m in modes if m.get("detectionMode", False) == True]
+    char_modes = [m for m in modes if m.get("detectionMode", False) == False]
+
+    # Sort by lambda
+    det_modes.sort(key=lambda x: x.get("lam", 0))
+    char_modes.sort(key=lambda x: x.get("lam", 0))
+
+    # Helper to extract arrays for modes
+    def extract_arrays(mode_list):
+        lams = []  # microns
+        srs = []
+        snrs = []
+        qes = []
+        t_opts = []
+        dc = []
+        rn = []
+        cic = []
+        tread = []
+        pixscale = []
+
+        for m in mode_list:
+            lam_nm = m.get("lam", 500)
+            lams.append(lam_nm / 1000.0)  # nm to um
+
+            # BW/SR
+            bw = m.get("BW", 0.2)  # Fractional
+            srs.append(1.0 / bw if bw > 0 else 5.0)
+
+            snrs.append(m.get("SNR", 5.0))
+
+            # Resolve Instrument
+            inst_name = m.get("instName")
+            inst_matches = [
+                i
+                for i in self.data.get("scienceInstruments", [])
+                if i["name"] == inst_name
+            ]
+            inst = inst_matches[0] if inst_matches else {}
+
+            # Resolve System (for throughput)
+            syst_name = m.get("systName")
+            syst_matches = [
+                s
+                for s in self.data.get("starlightSuppressionSystems", [])
+                if s["name"] == syst_name
+            ]
+            sys_val = syst_matches[0] if syst_matches else {}
+
+            # Params
+            # QE
+            qe_val = inst.get("QE", 0.9)
+            if isinstance(qe_val, str):
+                qe_val = 0.9  # skip paths
+            qes.append(qe_val)
+
+            # Toptical = Inst Optics * System Throughput (Approx)
+            opt_val = inst.get("optics", 0.5)
+            sys_thru = sys_val.get("core_thruput", 1.0)  # often a file
+            if isinstance(sys_thru, str):
+                sys_thru = 1.0
+            t_opts.append(float(opt_val) * float(sys_thru))
+
+            # Detectors
+            dc.append(inst.get("idark", 0))
+            rn.append(inst.get("sread", 0))
+            cic.append(inst.get("CIC", 0))
+            tread.append(inst.get("texp", 0))
+
+            # Pixel scale (arcsec -> mas)
+            ps = inst.get("pixelScale", 0.01)
+            pixscale.append(ps * 1000.0)
+
+        return {
+            "lambda": lams,
+            "SR": srs,
+            "SNR": snrs,
+            "QE": qes,
+            "Toptical": t_opts,
+            "DC": dc,
+            "RN": rn,
+            "CIC": cic,
+            "tread": tread,
+            "pixscale": pixscale,
+        }
+
+    det_data = extract_arrays(det_modes)
+    char_data = extract_arrays(char_modes)
+
+    # Write File
+    with open(output_path, "w") as f:
+        f.write(";This is an exported input file for AYO from EXOSIMS\n\n")
+
+        f.write(";--- GENERAL PARAMETERS ---\n")
+        f.write("AYO_version = 'v17' ; \n")
+        if hasattr(D, "unit"):
+            f.write(
+                f"D = {D.to(u.m).value:.5f} ;(m) {{scalar}} circumscribed diameter of telescope\n"
+            )
+        else:
+            f.write(
+                f"D = {float(D):.5f} ;(m) {{scalar}} circumscribed diameter of telescope\n"
+            )
+
+        if hasattr(mission_life, "unit"):
+            ml_val = mission_life.to_value(u.yr)
+            f.write(
+                f"mission_lifetime = {ml_val:.2f} ;(years) {{scalar}} total lifetime\n"
+            )
+            f.write(
+                f"total_survey_time = {(ml_val * self.data.get('missionPortion', 0.5)):.2f} ;(years) {{scalar}}\n"
+            )
+        else:
+            f.write(
+                f"mission_lifetime = {float(mission_life):.2f} ;(years) {{scalar}} total lifetime\n"
+            )
+            f.write(
+                f"total_survey_time = {(float(mission_life) * self.data.get('missionPortion', 0.5)):.2f} ;(years) {{scalar}}\n"
+            )
+
+        f.write(f"pitch = {to_ayo_list(pitch)} ;(degrees) {{2-element vector}}\n")
+        f.write("\n")
+
+        f.write(";--- CORONGRAPH PARAMETERS ---\n")
+        f.write("coronagraph1 = 'EXPORTED/coronagraph' ; {scalar}\n")
+        f.write(f"raw_contrast_floor = {contrast:.2e} ; {{scalar}}\n")
+        f.write(f"IWA = {iwa_val:.4f} ;(lambda/D) {{scalar}}\n")
+        f.write(f"OWA = {owa_val:.4f} ;(lambda/D) {{scalar}}\n")
+        f.write("\n")
+
+        f.write(";--- DETECTION OBSERVATIONS ---\n")
+        if det_data["lambda"]:
+            f.write(
+                f"lambda = {to_ayo_list(det_data['lambda'])} ;(microns) {{array}}\n"
+            )
+            f.write(f"SR = {to_ayo_list(det_data['SR'])} ; {{array}}\n")
+            f.write(f"SNR = {to_ayo_list(det_data['SNR'])} ; {{array}}\n")
+            f.write(f"Toptical = {to_ayo_list(det_data['Toptical'])} ; {{array}}\n")
+            f.write(f"det_QE = {to_ayo_list(det_data['QE'])} ; {{array}}\n")
+            f.write(
+                f"det_DC = {to_ayo_list(det_data['DC'])} ;(counts pix^-1 s^-1) {{array}}\n"
+            )
+            f.write(
+                f"det_RN = {to_ayo_list(det_data['RN'])} ;(counts pix^-1 read^-1) {{array}}\n"
+            )
+            f.write(f"det_CIC = {to_ayo_list(det_data['CIC'])} ; {{array}}\n")
+            f.write(f"det_tread = {to_ayo_list(det_data['tread'])} ;(s) {{array}}\n")
+            if det_data["pixscale"]:
+                f.write(
+                    f"det_pixscale_mas = {np.mean(det_data['pixscale']):.4f} ;(mas) {{scalar}}\n"
+                )
+
+        f.write("\n;--- CHARACTERIZATION OBSERVATIONS ---\n")
+        if char_data["lambda"]:
+            f.write(
+                f"sc_lambda = {to_ayo_list(char_data['lambda'])} ;(microns) {{array}}\n"
+            )
+            f.write(f"sc_SR = {to_ayo_list(char_data['SR'])} ; {{array}}\n")
+            f.write(f"sc_SNR = {to_ayo_list(char_data['SNR'])} ; {{array}}\n")
+            f.write(f"sc_Toptical = {to_ayo_list(char_data['Toptical'])} ; {{array}}\n")
+            f.write(f"sc_det_QE = {to_ayo_list(char_data['QE'])} ; {{array}}\n")
+            f.write(f"sc_det_DC = {to_ayo_list(char_data['DC'])} ; {{array}}\n")
+            f.write(f"sc_det_RN = {to_ayo_list(char_data['RN'])} ; {{array}}\n")
+            f.write(f"sc_det_CIC = {to_ayo_list(char_data['CIC'])} ; {{array}}\n")
+            if char_data["pixscale"]:
+                f.write(
+                    f"sc_det_pixscale_mas = {np.mean(char_data['pixscale']):.4f} ;(mas) {{scalar}}\n"
+                )
+
+        f.write("\n;--- MISC DEFAULTS ---\n")
+        f.write("nexozodis = 3.0 ; {{scalar}}\n")
+        f.write("target_vmag_cut = 30.0 ; {{scalar}}\n")
+        f.write("target_distance_cut = 100.0 ; {{scalar}}\n")
+        f.write("photap_rad = 0.85 ;(l/D) {{scalar}}\n")
+        f.write("sc_photap_rad = 0.85 ;(l/D) {{scalar}}\n")
+
+    logger.info(f"Exported EXOSIMS parameters to AYO file: {output_path}")
