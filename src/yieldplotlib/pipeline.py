@@ -51,7 +51,7 @@ def ypl_pipeline(runs):
                 plt.figtext(
                     0.11,
                     y_locs[i],
-                    "EXOSIMS ExoEarth yield: {:.2f}".format(earth_yield[0]),
+                    f"EXOSIMS ExoEarth yield: {earth_yield[0]:.2f}",
                     fontdict={"fontsize": 8},
                 )
             elif isinstance(run, AYODirectory):
@@ -59,7 +59,7 @@ def ypl_pipeline(runs):
                 plt.figtext(
                     0.11,
                     y_locs[i],
-                    "AYO ExoEarth yield: {:.2f}".format(earth_yield),
+                    f"AYO ExoEarth yield: {earth_yield:.2f}",
                     fontdict={"fontsize": 8},
                 )
 

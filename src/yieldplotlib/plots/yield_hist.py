@@ -7,7 +7,7 @@ from matplotlib.patches import Patch
 
 
 def plot_hist(
-    temps, planet_bins, runs, run_labels, ax=None, ax_kwargs={}, use_cyberpunk=False
+    temps, planet_bins, runs, run_labels, ax=None, ax_kwargs=None, use_cyberpunk=False
 ):
     """Plot a histogram of planet populations for different temperature bins.
 
@@ -31,6 +31,8 @@ def plot_hist(
         matplotlib.figure.Figure, matplotlib.axes.Axes:
             Figure and axes objects for the plot.
     """
+    if ax_kwargs is None:
+        ax_kwargs = {}
     if use_cyberpunk:
         import mplcyberpunk  # noqa: F401
 
@@ -65,7 +67,7 @@ def plot_hist(
             temperature = "unknown"
             planet_type = "Unknown"
 
-        for run, label in zip(runs, run_labels):
+        for run, label in zip(runs, run_labels, strict=False):
             # Retrieve data
             run_data = run.get(key)
             try:
@@ -91,7 +93,7 @@ def plot_hist(
     plotting_earths = "yield_earth" in planet_populations
     planet_bins = ["Rocky", "Super Earth", "Sub Neptune", "Neptune", "Jupiter"]
     planet_types = [x for x in planet_bins if x in df["planet_type"].unique()]
-    group_labels = ["Earth"] + planet_types if plotting_earths else planet_types
+    group_labels = ["Earth", *planet_types] if plotting_earths else planet_types
     temps = df.temperature.unique()
     # Sort to make sure it's always "hot", "warm", "cold"
     temp_order = ["hot", "warm", "cold"]
@@ -154,7 +156,7 @@ def plot_hist(
     # Iterate over each temperature and model to plot bars
     # Plot the Earth bars first
     if plotting_earths:
-        for j, (run, label) in enumerate(zip(runs, run_labels)):
+        for j, (_run, label) in enumerate(zip(runs, run_labels, strict=False)):
             offset = (j - (n_runs - 1) / 2) * bar_width
             # Filter the df to get the earth values for this run
             subset = df[(df["planet_type"] == "Earth") & (df["model"] == label)]
@@ -171,7 +173,7 @@ def plot_hist(
             autolabel(ax, _bar, use_cyberpunk)
 
     for i, temp in enumerate(temperatures):
-        for j, (run, label) in enumerate(zip(runs, run_labels)):
+        for j, (_run, label) in enumerate(zip(runs, run_labels, strict=False)):
             # Calculate the offset for each bar
             offset = (i * n_runs + j + 0.5) * bar_width - (temp_group_width / 2)
             # Filter the DataFrame for the current temperature and model
@@ -211,7 +213,7 @@ def plot_hist(
     model_title = "Run"
 
     # Combine handles and labels with titles
-    handles = [Patch(alpha=0)] + temp_patches + [Patch(alpha=0)] + model_patches
+    handles = [Patch(alpha=0), *temp_patches, Patch(alpha=0), *model_patches]
     labels = (
         [temp_title]
         + [p.get_label() for p in temp_patches]
@@ -225,8 +227,8 @@ def plot_hist(
 
     # Set labels and title
     ax.set_ylabel("Yield")
-    ax.set_xticks([0] + planet_x.tolist() if plotting_earths else planet_x.tolist())
-    xtick_labels = ["Earth"] + planet_types if plotting_earths else planet_types
+    ax.set_xticks([0, *planet_x.tolist()] if plotting_earths else planet_x.tolist())
+    xtick_labels = ["Earth", *planet_types] if plotting_earths else planet_types
     ax.set_xticklabels(xtick_labels, ha="center")
 
     ax.set(**ax_kwargs)

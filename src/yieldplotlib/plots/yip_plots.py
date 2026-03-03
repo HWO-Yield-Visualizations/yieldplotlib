@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def make_offax_psf_movie(yip, save_name, ax_kwargs={}, plot_kwargs={}):
+def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
     """Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
 
     Args:
@@ -22,6 +22,10 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs={}, plot_kwargs={}):
         None
     """
     # Get the off-axis stellar PSF data from the YIP.
+    if plot_kwargs is None:
+        plot_kwargs = {}
+    if ax_kwargs is None:
+        ax_kwargs = {}
     offax_psf_data = yip.get("offax.data")
     offax_psf_offsets_list = yip.get("offax_offset_list.data")
 
@@ -73,7 +77,7 @@ def plot_core_throughtput(
     run_labels,
     yip=None,
     ax=None,
-    ax_kwargs={},
+    ax_kwargs=None,
     use_cyberpunk=False,
     title=None,
     aperture_radius=0.85,
@@ -104,8 +108,10 @@ def plot_core_throughtput(
         matplotlib.figure.Figure, matplotlib.axes.Axes:
             Figure and axes objects for the plot.
     """
+    if ax_kwargs is None:
+        ax_kwargs = {}
     if use_cyberpunk:
-        import mplcyberpunk  # noqa: F401
+        import mplcyberpunk
         from cycler import cycler
 
         plt.style.use("cyberpunk")

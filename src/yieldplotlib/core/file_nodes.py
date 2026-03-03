@@ -118,7 +118,7 @@ class JSONFile(FileNode):
 
     def load(self):
         """Load the JSON file into memory."""
-        with open(self.file_path, "r") as f:
+        with open(self.file_path) as f:
             self.data = json.load(f)
 
     def _get(self, key: str, **kwargs):
@@ -133,7 +133,7 @@ class JSONFile(FileNode):
                             values[data["name"]] = data.get(key, None)
                         except KeyError:
                             values[data["instName"]] = data.get(key, None)
-                    elif isinstance(v, (dict, list)):
+                    elif isinstance(v, dict | list):
                         json_recur(v, target_key)
             elif isinstance(data, list):
                 for item in data:

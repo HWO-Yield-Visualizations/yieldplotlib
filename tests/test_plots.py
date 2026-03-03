@@ -19,14 +19,14 @@ def test_plot_hist(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"plot_hist failed with error: {str(e)}")
+        pytest.fail(f"plot_hist failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
 def test_compare_plot_types(ayo_data, exosims_data, plot_type):
     """Test comparison with different plot types."""
     try:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        _fig, ax = plt.subplots(figsize=(10, 6))
         kwargs = {
             "ax": ax,
             "directories": [ayo_data, exosims_data],
@@ -52,13 +52,13 @@ def test_compare_plot_types(ayo_data, exosims_data, plot_type):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"compare {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"compare {plot_type} plot failed with error: {e!s}")
 
 
 def test_compare_custom_style(ayo_data, exosims_data):
     """Test comparison with custom markers and colors."""
     try:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        _fig, ax = plt.subplots(figsize=(10, 6))
         compare(
             ax,
             [ayo_data, exosims_data],
@@ -73,13 +73,13 @@ def test_compare_custom_style(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"compare custom style failed with error: {str(e)}")
+        pytest.fail(f"compare custom style failed with error: {e!s}")
 
 
 def test_compare_no_legend(ayo_data, exosims_data):
     """Test comparison without legend."""
     try:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        _fig, ax = plt.subplots(figsize=(10, 6))
         compare(
             ax,
             [ayo_data, exosims_data],
@@ -92,7 +92,7 @@ def test_compare_no_legend(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"compare no legend failed with error: {str(e)}")
+        pytest.fail(f"compare no legend failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -122,17 +122,17 @@ def test_multi_plot_types(ayo_data, exosims_data, plot_type):
         elif plot_type == "hist":
             kwargs["bins"] = 20
 
-        fig, axes = multi(**kwargs)
+        _fig, _axes = multi(**kwargs)
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"multi {plot_type} plot failed with error: {e!s}")
 
 
 def test_multi_auto_layout(ayo_data, exosims_data):
     """Test multi-panel with auto layout."""
     try:
-        fig, axes = multi(
+        _fig, _axes = multi(
             [ayo_data, exosims_data],
             x="star_dist",
             y="star_L",
@@ -145,13 +145,13 @@ def test_multi_auto_layout(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi auto layout failed with error: {str(e)}")
+        pytest.fail(f"multi auto layout failed with error: {e!s}")
 
 
 def test_multi_shared_axes(ayo_data, exosims_data):
     """Test multi-panel with shared axes."""
     try:
-        fig, axes = multi(
+        _fig, _axes = multi(
             [ayo_data, exosims_data],
             x="star_dist",
             y="star_L",
@@ -167,13 +167,13 @@ def test_multi_shared_axes(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi shared axes failed with error: {str(e)}")
+        pytest.fail(f"multi shared axes failed with error: {e!s}")
 
 
 def test_multi_custom_style(ayo_data, exosims_data):
     """Test multi-panel with custom styling."""
     try:
-        fig, axes = multi(
+        _fig, _axes = multi(
             [ayo_data, exosims_data],
             x="star_dist",
             y="star_L",
@@ -189,7 +189,7 @@ def test_multi_custom_style(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi custom style failed with error: {str(e)}")
+        pytest.fail(f"multi custom style failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -215,17 +215,17 @@ def test_panel_plot_types(ayo_data, exosims_data, plot_type):
         elif plot_type == "hist":
             spec["bins"] = 20
 
-        fig, axes = panel([ayo_data, exosims_data], spec, **kwargs)
+        _fig, _axes = panel([ayo_data, exosims_data], spec, **kwargs)
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"panel {plot_type} plot failed with error: {e!s}")
 
 
 def test_panel_mixed_types(ayo_data, exosims_data):
     """Test panel with mixed plot types."""
     try:
-        fig, axes = panel(
+        _fig, _axes = panel(
             [ayo_data, exosims_data],
             {
                 "x": "star_dist",
@@ -249,13 +249,13 @@ def test_panel_mixed_types(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel mixed types failed with error: {str(e)}")
+        pytest.fail(f"panel mixed types failed with error: {e!s}")
 
 
 def test_panel_custom_titles(ayo_data, exosims_data):
     """Test panel with custom titles."""
     try:
-        fig, axes = panel(
+        _fig, _axes = panel(
             [ayo_data, exosims_data],
             {
                 "x": "star_dist",
@@ -276,13 +276,13 @@ def test_panel_custom_titles(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel custom titles failed with error: {str(e)}")
+        pytest.fail(f"panel custom titles failed with error: {e!s}")
 
 
 def test_panel_shared_axes(ayo_data, exosims_data):
     """Test panel with shared axes."""
     try:
-        fig, axes = panel(
+        _fig, _axes = panel(
             [ayo_data, exosims_data],
             {
                 "x": "star_dist",
@@ -305,7 +305,7 @@ def test_panel_shared_axes(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel shared axes failed with error: {str(e)}")
+        pytest.fail(f"panel shared axes failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -340,17 +340,17 @@ def test_xy_grid_plot_types(ayo_data, exosims_data, plot_type):
         if plot_type == "scatter":
             kwargs.update({"c": "star_comp_det", "cmap": "viridis"})
 
-        fig, axes = xy_grid(**kwargs)
+        _fig, _axes = xy_grid(**kwargs)
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"xy grid {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"xy grid {plot_type} plot failed with error: {e!s}")
 
 
 def test_xy_grid_custom_style(ayo_data, exosims_data):
     """Test xy grid with custom styling."""
     try:
-        fig, axes = xy_grid(
+        _fig, _axes = xy_grid(
             [ayo_data, exosims_data],
             ["star_dist"],
             ["star_L", "star_comp_det"],
@@ -365,7 +365,7 @@ def test_xy_grid_custom_style(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"xy grid custom style failed with error: {str(e)}")
+        pytest.fail(f"xy grid custom style failed with error: {e!s}")
 
 
 if __name__ == "__main__":

@@ -2,11 +2,11 @@
 
 __all__ = [
     "AYODirectory",
-    "YIPDirectory",
     "DRMDirectory",
     "EXOSIMSCSVDirectory",
     "EXOSIMSDirectory",
     "SPCDirectory",
+    "YIPDirectory",
 ]
 
 from .ayo_directory import AYODirectory

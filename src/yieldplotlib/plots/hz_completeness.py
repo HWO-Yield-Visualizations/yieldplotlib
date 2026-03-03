@@ -7,7 +7,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 
 def plot_hz_completeness(
-    exosims_dir, ayo_dir, ax_kwargs={}, hline_kwargs={}, use_cyberpunk=False
+    exosims_dir, ayo_dir, ax_kwargs=None, hline_kwargs=None, use_cyberpunk=False
 ):
     """Generate a scatter plot of the habitable zone completeness.
 
@@ -27,6 +27,10 @@ def plot_hz_completeness(
         matplotlib.figure.Figure, matplotlib.axes.Axes:
             Figure and axes objects for the plot.
     """
+    if hline_kwargs is None:
+        hline_kwargs = {}
+    if ax_kwargs is None:
+        ax_kwargs = {}
     if use_cyberpunk:
         import mplcyberpunk  # noqa: F401
 
