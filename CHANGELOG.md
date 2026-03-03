@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.1.0...v1.1.1) (2026-01-23)
+
+
+### Bug Fixes
+
+* Testing test update to cache and fixing scipy below 1.15 to avoid the root_scalar issue ([596d6f0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/596d6f0635837276b2a480f69b527a816ebdc92c))
+
 ## [1.1.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.0.1...v1.1.0) (2025-12-04)
 
 

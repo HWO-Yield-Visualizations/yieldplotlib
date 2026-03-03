@@ -38,9 +38,9 @@ bibliography: paper.bib
 
 # Summary
 
-NASA’s next flagship observatory, the Habitable Worlds Observatory (HWO), aims
-to detect and charaterize ~25 habitable zone planets. The total number of
-habitable zone planets detected is referred to as the exo-Earth "yield" and
+NASA's next flagship observatory, the Habitable Worlds Observatory (HWO), aims
+to detect and characterize ~25 habitable zone planets. The total number of
+habitable-zone planets detected is referred to as the exo-Earth "yield" and
 accurate yield estimates will be critically important to the mission's success. Tools
 like the Altruistic Yield Optimizer (AYO) and EXOSIMS provide these yield
 estimates but differ in language, methods, and outputs. `yieldplotlib` provides
@@ -67,9 +67,9 @@ and produce publication-quality plots without manually processing the complex un
 Currently `yieldplotlib` contains modules for analyzing
 AYO and EXOSIMS, but can be easily extended to support other yield codes.
 
-# Methods and Functionality
+# Methods and functionality
 
-## Parsing and Getting Values
+## Parsing and getting values
 
 `yieldplotlib` provides a loading system with a unified interface for accessing data from
 the yield codes. The system internally manages the complex and inconsistent file structures of the
@@ -83,9 +83,9 @@ mappings between AYO, EXOSIMS, and `yieldplotlib` parameters.\label{fig:key_map_
 
 ## Plotting
 
-### Generic and Comparison Plots
+### Generic and comparison plots
 
-`yieldplotlib` extends the widely used Python plotting library `matplotlib`, leveraging
+`yieldplotlib` extends the widely used Python plotting library Matplotlib, leveraging
 its extensive customization options and the familiarity many users will already have with it.
 The `yieldplotlib` generic
 plots (`ypl_plot`, `ypl_scatter`, and `ypl_hist`) are used for single yield run visualizations.
@@ -93,10 +93,10 @@ plots (`ypl_plot`, `ypl_scatter`, and `ypl_hist`) are used for single yield run 
 To compare multiple yield runs, `yieldplotlib` also provides a set of flexible comparison plots
 that create multi-panel figures to quickly identify discrepancies.
 
-In order to generate summary plots quickly, `yieldplotlib` provides a command line interface
+In order to generate summary plots quickly, `yieldplotlib` provides a command-line interface
 and plotting pipeline to create a suite of commonly used yield plots.
 
-### Plotting Scripts
+### Plotting scripts
 
 `yieldplotlib` contains scripts for generating common plots used in yield code visualizations. These
 allow users to instantly compare AYO and EXOSIMS results as motivated by the rapid progress of HWO's
@@ -104,23 +104,12 @@ ongoing architecture trade studies. These scripts also function as examples
 for users who want to adapt the generic `yieldplotlib` methods to
 generate bespoke visualizations.
 
-\autoref{fig:hz_completeness} compares the mission's "habitable zone completeness", the
+\autoref{fig:hz_completeness} compares the mission's "habitable-zone completeness", the
 probability that the simulated mission's observations would detect a planet in the habitable zone if one exists,
 as calculated by the two yield codes side-by-side.
 \autoref{fig:planet_hists} shows histograms of the total number of detected
 planets found as a function of planet type for the two codes though, in this example, the inputs to each code
 also differ resulting in the seen discrepancies.
-
-![Plot of the Habitable Zone (HZ) completeness as a function of host star luminosity (in units of
-Solar luminosity) and distance (in parsecs). Here the AYO results are on the left and the EXOSIMS
-results are on the right.\label{fig:hz_completeness}](figures/hz_completeness.png)
-
-![Bar chart comparing AYO and EXOSIMS planet
-yields for different classes of planets. This plot demonstrates
-`yieldplotlib`'s usage of the `mplcyberpunk` color scheme as an alternative
-dark mode style. Note that this is a demonstration plot only, the AYO and EXOSIMS
-inputs shown are not directly comparable.
-\label{fig:planet_hists}](figures/comparative_bar_plot_grouped.png)
 
 Yield code inputs have a profound impact on calculated yield and plotting them
 is important to ensure consistency.
@@ -132,6 +121,17 @@ for both the two codes studied, and as accessed via an additional YIP analysis t
 Smaller throughputs result in less planet light on the detector
 which can result in lower yields.
 
+![Plot of the Habitable-Zone (HZ) completeness as a function of host star luminosity (in units of
+Solar luminosity) and distance (in parsecs). Here the AYO results are on the left and the EXOSIMS
+results are on the right.\label{fig:hz_completeness}](figures/hz_completeness.png)
+
+![Bar chart comparing AYO and EXOSIMS planet
+yields for different classes of planets. This plot demonstrates
+`yieldplotlib`'s usage of the `mplcyberpunk` color scheme as an alternative
+dark-mode style. Note that this is a demonstration plot only, the AYO and EXOSIMS
+inputs shown are not directly comparable.
+\label{fig:planet_hists}](figures/comparative_bar_plot_grouped.png)
+
 ![Core throughput vs. separation (in $\lambda$/D) for the same coronagraph
 when processed by AYO, EXOSIMS, and calculated by a tool named `yippy`.
 The differences are due to the different interpolation
@@ -139,7 +139,7 @@ methods used and the definition of aperture over which the throughput is calcula
 the types of insights that tools like `yieldplotlib` can help to uncover.
 \label{fig:core_throughput}](figures/core_throughput_all_curves.jpeg)
 
-# Future Work
+# Future work
 
 A new cross-calibration study
 of yield codes is being organized and will utilize `yieldplotlib`. This study will be vital to
@@ -147,7 +147,7 @@ the ongoing HWO architecture trade studies and ensure more reliable and robust y
 
 # Acknowledgements
 
-Corey Spohn’s research was supported by an appointment to the NASA Postdoctoral Program at the NASA
+Corey Spohn's research was supported by an appointment to the NASA Postdoctoral Program at the NASA
 Goddard Space Flight Center, administered by Oak Ridge Associated Universities under contract with NASA.
 Sarah Steiger acknowledges support from an STScI Postdoctoral Fellowship.
 
@@ -156,3 +156,5 @@ Armen Tokadjian for providing consultation on the AYO and EXOSIMS repositories. 
 to thank Justin Hom, and the rest of the Exoplanet Science Yields Working Group (ESYWG) for
 their valuable feedback and discussions as well as Susan Redmond for the development of the sample Yield
 Input Package.
+
+# References

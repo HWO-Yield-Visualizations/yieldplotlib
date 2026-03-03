@@ -22,6 +22,7 @@ dependencies = [
   "docopt",
   "pooch",
   "mplcyberpunk",
+  "scipy<1.15",
 ]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
