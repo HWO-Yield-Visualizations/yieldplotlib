@@ -25,7 +25,7 @@ dependencies = [
 ]
 license = { file = "LICENSE" }
 dynamic = ['readme', 'version']
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
@@ -68,7 +68,7 @@ test = ["nox", "pytest", "pytest-cov"]
 exclude = ["src/yieldplotlib/key_map.py"]
 
 [tool.ruff.lint]
-select = ["D", "E", "F", "I"]
+select = ["B", "D", "E", "F", "I", "UP", "RUF"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

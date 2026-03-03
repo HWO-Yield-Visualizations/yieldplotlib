@@ -33,7 +33,7 @@ class AYOInputFile(FileNode):
 
     def load(self):
         """Load the text file into memory."""
-        with open(self.file_path, "r", encoding="utf-8") as f:
+        with open(self.file_path, encoding="utf-8") as f:
             self.raw_data = f.read()
         logger.info(f"Loaded AYO input file: {self.file_path}")
 
@@ -324,7 +324,7 @@ class AYOInputFile(FileNode):
             base_path = Path(base_file)
             if not base_path.exists():
                 raise FileNotFoundError(f"Base EXOSIMS file not found: {base_path}")
-            with open(base_path, "r") as f:
+            with open(base_path) as f:
                 out = json.load(f)
             logger.info(f"Loaded base EXOSIMS file: {base_path}")
         else:
@@ -490,7 +490,7 @@ class AYOInputFile(FileNode):
             if coro_path.exists():
                 logger.info(f"Loading coronagraph from: {coro_path}")
                 # Load coronagraph with yippy
-                coro = Coronagraph(coro_path, use_jax=False)
+                coro = Coronagraph(coro_path)
 
                 # Extract coronagraph's design fractional bandwidth from header
                 # AYO uses min(1/SR, coro_design_bw) as the effective bandwidth
@@ -541,7 +541,7 @@ class AYOInputFile(FileNode):
                     exosims_dir = Path(coro_path, "exosims")
                     fits_files = ["occ_trans", "core_thruput", "core_mean_intensity"]
                     for fits_key in fits_files:
-                        if fits_key in syst and syst[fits_key]:
+                        if syst.get(fits_key):
                             # If it's a relative path, make it absolute
                             fits_path = Path(syst[fits_key])
                             if not fits_path.is_absolute():
@@ -872,7 +872,7 @@ class AYOInputFile(FileNode):
 
             # Create Detection Instrument using values at selected wavelength index
             # Format: imaging_{wavelength_nm}_ayo
-            lam_int = int(round(float(lam)))
+            lam_int = round(float(lam))
             inst_det_name = f"imaging_{lam_int}_ayo"
 
             # --- PIXEL MATH CORRECTION ---
@@ -948,7 +948,7 @@ class AYOInputFile(FileNode):
 
             # Create Characterization Instrument using values at selected wavelength
             # Format: spectro_{wavelength_nm}_ayo
-            lam_int = int(round(float(lam)))
+            lam_int = round(float(lam))
             inst_char_name = f"spectro_{lam_int}_ayo"
 
             # --- PIXEL MATH CORRECTION ---
