@@ -15,7 +15,7 @@ runs = [exosims, ayo]
 titles = ["EXOSIMS", "AYO"]
 fig, axs = plt.subplots(1, len(runs), figsize=(15, 5))
 y_range = (0.001, 200)
-for i, (run, title) in enumerate(zip(runs, titles)):
+for i, (run, title) in enumerate(zip(runs, titles, strict=True)):
     star_L = run.get("star_L")
     star_dist = run.get("star_dist")
     star_comp = run.get("star_comp")

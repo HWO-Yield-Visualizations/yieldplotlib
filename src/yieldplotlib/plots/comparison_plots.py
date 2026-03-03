@@ -181,7 +181,7 @@ def _create_subplot_titles(directories, specs=None):
         return [f"{d.__class__.__name__}" for d in directories]
 
     titles = []
-    for d in directories:
+    for _d in directories:
         for s in specs:
             if "y" in s:
                 titles.append(f"{s.get('x', 'x')} vs {s.get('y', 'y')}")
@@ -443,7 +443,7 @@ def compare(
             kwargs["bins"] = bins
 
     # Plot each dataset
-    for i, (directory, label) in enumerate(zip(directories, labels)):
+    for i, (directory, label) in enumerate(zip(directories, labels, strict=False)):
         # Create plot kwargs for this dataset
         plot_kwargs = kwargs.copy()
 
@@ -571,7 +571,7 @@ def multi(
     axes_flat = axes.flatten()
 
     # Plot each directory in its own subplot
-    for i, (directory, title) in enumerate(zip(directories, titles)):
+    for i, (directory, title) in enumerate(zip(directories, titles, strict=False)):
         if i < len(axes_flat):
             ax = axes_flat[i]
 

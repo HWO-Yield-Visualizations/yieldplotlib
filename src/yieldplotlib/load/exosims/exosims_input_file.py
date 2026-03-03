@@ -345,10 +345,10 @@ class EXOSIMSInputFile(JSONFile):
                 _dict = self._get_mode_dict(inst, syst)
             elif in_INST:
                 _insts = self.data["scienceInstruments"]
-                _dict = [_inst for _inst in _insts if _inst["name"] == inst][0]
+                _dict = next(_inst for _inst in _insts if _inst["name"] == inst)
             elif in_SYST:
                 _systs = self.data["starlightSuppressionSystems"]
-                _dict = [_syst for _syst in _systs if _syst["name"] == syst][0]
+                _dict = next(_syst for _syst in _systs if _syst["name"] == syst)
 
         if _dict is None:
             raise ValueError(
@@ -558,6 +558,7 @@ def export_ayo(self, output_path: str):
     wavelength-dependent arrays (lambda, SNR, SR, etc.) required by AYO.
 
     Args:
+        self: EXOSIMSInputFile instance.
         output_path (str): The path to write the .ayo file to.
     """
 
@@ -593,8 +594,9 @@ def export_ayo(self, output_path: str):
     lod_as = 206265.0 * (ref_lam.to_value(u.m) / D_val_m)
 
     iwa_raw = syst.get("IWA", 2.0)
-    # Heuristic: if IWA < 1.0, it is likely arcsec. If > 1.0, it is likely L/D (or very large IWA).
-    # We assume arcsec if small, else assume it's already L/D (or large angle).
+    # Heuristic: if IWA < 1.0, it is likely arcsec.
+    # If > 1.0, it is likely L/D (or very large IWA).
+    # We assume arcsec if small, else assume it's already L/D.
     # AYO expects L/D.
     if iwa_raw < 1.0:
         iwa_val = iwa_raw / lod_as
@@ -616,8 +618,8 @@ def export_ayo(self, output_path: str):
     # observingModes processing
     modes = self.data.get("observingModes", [])
 
-    det_modes = [m for m in modes if m.get("detectionMode", False) == True]
-    char_modes = [m for m in modes if m.get("detectionMode", False) == False]
+    det_modes = [m for m in modes if m.get("detectionMode", False)]
+    char_modes = [m for m in modes if not m.get("detectionMode", False)]
 
     # Sort by lambda
     det_modes.sort(key=lambda x: x.get("lam", 0))
@@ -711,29 +713,27 @@ def export_ayo(self, output_path: str):
         f.write(";--- GENERAL PARAMETERS ---\n")
         f.write("AYO_version = 'v17' ; \n")
         if hasattr(D, "unit"):
-            f.write(
-                f"D = {D.to(u.m).value:.5f} ;(m) {{scalar}} circumscribed diameter of telescope\n"
-            )
+            d_val = D.to(u.m).value
         else:
-            f.write(
-                f"D = {float(D):.5f} ;(m) {{scalar}} circumscribed diameter of telescope\n"
-            )
+            d_val = float(D)
+        f.write(
+            f"D = {d_val:.5f} ;(m) {{scalar}} circumscribed diameter of telescope\n"
+        )
 
         if hasattr(mission_life, "unit"):
             ml_val = mission_life.to_value(u.yr)
             f.write(
                 f"mission_lifetime = {ml_val:.2f} ;(years) {{scalar}} total lifetime\n"
             )
-            f.write(
-                f"total_survey_time = {(ml_val * self.data.get('missionPortion', 0.5)):.2f} ;(years) {{scalar}}\n"
-            )
+            survey = ml_val * self.data.get("missionPortion", 0.5)
+            f.write(f"total_survey_time = {survey:.2f} ;(years) {{scalar}}\n")
         else:
+            ml_val = float(mission_life)
             f.write(
-                f"mission_lifetime = {float(mission_life):.2f} ;(years) {{scalar}} total lifetime\n"
+                f"mission_lifetime = {ml_val:.2f} ;(years) {{scalar}} total lifetime\n"
             )
-            f.write(
-                f"total_survey_time = {(float(mission_life) * self.data.get('missionPortion', 0.5)):.2f} ;(years) {{scalar}}\n"
-            )
+            survey = ml_val * self.data.get("missionPortion", 0.5)
+            f.write(f"total_survey_time = {survey:.2f} ;(years) {{scalar}}\n")
 
         f.write(f"pitch = {to_ayo_list(pitch)} ;(degrees) {{2-element vector}}\n")
         f.write("\n")
@@ -755,17 +755,18 @@ def export_ayo(self, output_path: str):
             f.write(f"Toptical = {to_ayo_list(det_data['Toptical'])} ; {{array}}\n")
             f.write(f"det_QE = {to_ayo_list(det_data['QE'])} ; {{array}}\n")
             f.write(
-                f"det_DC = {to_ayo_list(det_data['DC'])} ;(counts pix^-1 s^-1) {{array}}\n"
+                f"det_DC = {to_ayo_list(det_data['DC'])}"
+                " ;(counts pix^-1 s^-1) {array}\n"
             )
             f.write(
-                f"det_RN = {to_ayo_list(det_data['RN'])} ;(counts pix^-1 read^-1) {{array}}\n"
+                f"det_RN = {to_ayo_list(det_data['RN'])}"
+                " ;(counts pix^-1 read^-1) {array}\n"
             )
             f.write(f"det_CIC = {to_ayo_list(det_data['CIC'])} ; {{array}}\n")
             f.write(f"det_tread = {to_ayo_list(det_data['tread'])} ;(s) {{array}}\n")
             if det_data["pixscale"]:
-                f.write(
-                    f"det_pixscale_mas = {np.mean(det_data['pixscale']):.4f} ;(mas) {{scalar}}\n"
-                )
+                ps = np.mean(det_data["pixscale"])
+                f.write(f"det_pixscale_mas = {ps:.4f} ;(mas) {{scalar}}\n")
 
         f.write("\n;--- CHARACTERIZATION OBSERVATIONS ---\n")
         if char_data["lambda"]:
@@ -780,9 +781,8 @@ def export_ayo(self, output_path: str):
             f.write(f"sc_det_RN = {to_ayo_list(char_data['RN'])} ; {{array}}\n")
             f.write(f"sc_det_CIC = {to_ayo_list(char_data['CIC'])} ; {{array}}\n")
             if char_data["pixscale"]:
-                f.write(
-                    f"sc_det_pixscale_mas = {np.mean(char_data['pixscale']):.4f} ;(mas) {{scalar}}\n"
-                )
+                ps = np.mean(char_data["pixscale"])
+                f.write(f"sc_det_pixscale_mas = {ps:.4f} ;(mas) {{scalar}}\n")
 
         f.write("\n;--- MISC DEFAULTS ---\n")
         f.write("nexozodis = 3.0 ; {{scalar}}\n")

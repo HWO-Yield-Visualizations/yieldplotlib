@@ -115,7 +115,7 @@ def rgetattr(obj, attr, *args):
     def _getattr(obj, attr):
         return getattr(obj, attr, *args)
 
-    return functools.reduce(_getattr, [obj] + attr.split("."))
+    return functools.reduce(_getattr, [obj, *attr.split(".")])
 
 
 def discretize_colormap(num_colors, colormap_name, start_frac=0.1, end_frac=0.9):
@@ -145,7 +145,7 @@ def find_unit_for_module_key(module_key, module_name, key_map):
         str or None:
             The unit string if found, None otherwise.
     """
-    for yieldplotlib_key, module_data in key_map.items():
+    for _yieldplotlib_key, module_data in key_map.items():
         # Check if this entry has data for the specified module
         if module_name in module_data:
             module_info = module_data[module_name]

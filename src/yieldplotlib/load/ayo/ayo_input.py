@@ -271,9 +271,9 @@ class AYOInputFile(FileNode):
             """Round float values to specified decimal places."""
             if val is None:
                 return None
-            if isinstance(val, (int, float)):
+            if isinstance(val, int | float):
                 return round(float(val), decimals)
-            if isinstance(val, (list, np.ndarray)):
+            if isinstance(val, list | np.ndarray):
                 return [round_float(v, decimals) for v in val]
             return val
 
@@ -309,7 +309,7 @@ class AYOInputFile(FileNode):
             else:
                 v = val
 
-            if isinstance(v, (list, np.ndarray)):
+            if isinstance(v, list | np.ndarray):
                 if idx < len(v):
                     return v[idx]
                 # Warn when index is out of bounds - likely array length mismatch
@@ -611,7 +611,7 @@ class AYOInputFile(FileNode):
                             lams_nm = lams.to(u.nm).value
                         else:
                             lams_nm = np.array(lams) * 1000
-                        if not isinstance(lams_nm, (list, np.ndarray)):
+                        if not isinstance(lams_nm, list | np.ndarray):
                             lams_nm = [lams_nm]
                         lams_nm = np.array(lams_nm)
 
@@ -732,7 +732,7 @@ class AYOInputFile(FileNode):
                         lams_nm = lams.to(u.nm).value
                     else:
                         lams_nm = np.array(lams) * 1000
-                    if not isinstance(lams_nm, (list, np.ndarray)):
+                    if not isinstance(lams_nm, list | np.ndarray):
                         lams_nm = [lams_nm]
                     lams_nm = np.array(lams_nm)
 
@@ -849,7 +849,7 @@ class AYOInputFile(FileNode):
                     np.array(lams) * 1000
                 )  # Assume microns if no unit, convert to nm
 
-            if not isinstance(lams_nm, (list, np.ndarray)):
+            if not isinstance(lams_nm, list | np.ndarray):
                 lams_nm = [lams_nm]
             lams_nm = np.array(lams_nm)
 
@@ -925,7 +925,7 @@ class AYOInputFile(FileNode):
             else:
                 sc_lams_nm = np.array(sc_lams) * 1000
 
-            if not isinstance(sc_lams_nm, (list, np.ndarray)):
+            if not isinstance(sc_lams_nm, list | np.ndarray):
                 sc_lams_nm = [sc_lams_nm]
             sc_lams_nm = np.array(sc_lams_nm)
 
@@ -1053,7 +1053,7 @@ class AYOInputFile(FileNode):
                 special_arrays[key] = value
             elif key == "completeness_specs":
                 completeness_specs = value
-            elif isinstance(value, (dict, list)) and key != "modules":
+            elif isinstance(value, dict | list) and key != "modules":
                 other_objects[key] = value
             else:
                 top_level[key] = value

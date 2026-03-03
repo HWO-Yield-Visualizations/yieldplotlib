@@ -26,7 +26,7 @@ def test_plot_hist(ayo_data, exosims_data):
 def test_compare_plot_types(ayo_data, exosims_data, plot_type):
     """Test comparison with different plot types."""
     try:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        _fig, ax = plt.subplots(figsize=(10, 6))
         kwargs = {
             "ax": ax,
             "directories": [ayo_data, exosims_data],
@@ -58,7 +58,7 @@ def test_compare_plot_types(ayo_data, exosims_data, plot_type):
 def test_compare_custom_style(ayo_data, exosims_data):
     """Test comparison with custom markers and colors."""
     try:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        _fig, ax = plt.subplots(figsize=(10, 6))
         compare(
             ax,
             [ayo_data, exosims_data],
@@ -79,7 +79,7 @@ def test_compare_custom_style(ayo_data, exosims_data):
 def test_compare_no_legend(ayo_data, exosims_data):
     """Test comparison without legend."""
     try:
-        fig, ax = plt.subplots(figsize=(10, 6))
+        _fig, ax = plt.subplots(figsize=(10, 6))
         compare(
             ax,
             [ayo_data, exosims_data],
@@ -122,7 +122,7 @@ def test_multi_plot_types(ayo_data, exosims_data, plot_type):
         elif plot_type == "hist":
             kwargs["bins"] = 20
 
-        fig, axes = multi(**kwargs)
+        _fig, _axes = multi(**kwargs)
         plt.close()
     except Exception as e:
         plt.close()
@@ -132,7 +132,7 @@ def test_multi_plot_types(ayo_data, exosims_data, plot_type):
 def test_multi_auto_layout(ayo_data, exosims_data):
     """Test multi-panel with auto layout."""
     try:
-        fig, axes = multi(
+        _fig, _axes = multi(
             [ayo_data, exosims_data],
             x="star_dist",
             y="star_L",
@@ -151,7 +151,7 @@ def test_multi_auto_layout(ayo_data, exosims_data):
 def test_multi_shared_axes(ayo_data, exosims_data):
     """Test multi-panel with shared axes."""
     try:
-        fig, axes = multi(
+        _fig, _axes = multi(
             [ayo_data, exosims_data],
             x="star_dist",
             y="star_L",
@@ -173,7 +173,7 @@ def test_multi_shared_axes(ayo_data, exosims_data):
 def test_multi_custom_style(ayo_data, exosims_data):
     """Test multi-panel with custom styling."""
     try:
-        fig, axes = multi(
+        _fig, _axes = multi(
             [ayo_data, exosims_data],
             x="star_dist",
             y="star_L",
@@ -215,7 +215,7 @@ def test_panel_plot_types(ayo_data, exosims_data, plot_type):
         elif plot_type == "hist":
             spec["bins"] = 20
 
-        fig, axes = panel([ayo_data, exosims_data], spec, **kwargs)
+        _fig, _axes = panel([ayo_data, exosims_data], spec, **kwargs)
         plt.close()
     except Exception as e:
         plt.close()
@@ -225,7 +225,7 @@ def test_panel_plot_types(ayo_data, exosims_data, plot_type):
 def test_panel_mixed_types(ayo_data, exosims_data):
     """Test panel with mixed plot types."""
     try:
-        fig, axes = panel(
+        _fig, _axes = panel(
             [ayo_data, exosims_data],
             {
                 "x": "star_dist",
@@ -255,7 +255,7 @@ def test_panel_mixed_types(ayo_data, exosims_data):
 def test_panel_custom_titles(ayo_data, exosims_data):
     """Test panel with custom titles."""
     try:
-        fig, axes = panel(
+        _fig, _axes = panel(
             [ayo_data, exosims_data],
             {
                 "x": "star_dist",
@@ -282,7 +282,7 @@ def test_panel_custom_titles(ayo_data, exosims_data):
 def test_panel_shared_axes(ayo_data, exosims_data):
     """Test panel with shared axes."""
     try:
-        fig, axes = panel(
+        _fig, _axes = panel(
             [ayo_data, exosims_data],
             {
                 "x": "star_dist",
@@ -340,7 +340,7 @@ def test_xy_grid_plot_types(ayo_data, exosims_data, plot_type):
         if plot_type == "scatter":
             kwargs.update({"c": "star_comp_det", "cmap": "viridis"})
 
-        fig, axes = xy_grid(**kwargs)
+        _fig, _axes = xy_grid(**kwargs)
         plt.close()
     except Exception as e:
         plt.close()
@@ -350,7 +350,7 @@ def test_xy_grid_plot_types(ayo_data, exosims_data, plot_type):
 def test_xy_grid_custom_style(ayo_data, exosims_data):
     """Test xy grid with custom styling."""
     try:
-        fig, axes = xy_grid(
+        _fig, _axes = xy_grid(
             [ayo_data, exosims_data],
             ["star_dist"],
             ["star_L", "star_comp_det"],
