@@ -1,8 +1,8 @@
 """Nodes for EXOSIMS specific data files."""
 
 __all__ = [
-    "EXOSIMSCSVFile",
     "DRMFile",
+    "EXOSIMSCSVFile",
     "EXOSIMSInputFile",
     "SPCFile",
 ]

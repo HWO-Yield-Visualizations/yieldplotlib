@@ -19,7 +19,7 @@ def test_plot_hist(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"plot_hist failed with error: {str(e)}")
+        pytest.fail(f"plot_hist failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -52,7 +52,7 @@ def test_compare_plot_types(ayo_data, exosims_data, plot_type):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"compare {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"compare {plot_type} plot failed with error: {e!s}")
 
 
 def test_compare_custom_style(ayo_data, exosims_data):
@@ -73,7 +73,7 @@ def test_compare_custom_style(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"compare custom style failed with error: {str(e)}")
+        pytest.fail(f"compare custom style failed with error: {e!s}")
 
 
 def test_compare_no_legend(ayo_data, exosims_data):
@@ -92,7 +92,7 @@ def test_compare_no_legend(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"compare no legend failed with error: {str(e)}")
+        pytest.fail(f"compare no legend failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -126,7 +126,7 @@ def test_multi_plot_types(ayo_data, exosims_data, plot_type):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"multi {plot_type} plot failed with error: {e!s}")
 
 
 def test_multi_auto_layout(ayo_data, exosims_data):
@@ -145,7 +145,7 @@ def test_multi_auto_layout(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi auto layout failed with error: {str(e)}")
+        pytest.fail(f"multi auto layout failed with error: {e!s}")
 
 
 def test_multi_shared_axes(ayo_data, exosims_data):
@@ -167,7 +167,7 @@ def test_multi_shared_axes(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi shared axes failed with error: {str(e)}")
+        pytest.fail(f"multi shared axes failed with error: {e!s}")
 
 
 def test_multi_custom_style(ayo_data, exosims_data):
@@ -189,7 +189,7 @@ def test_multi_custom_style(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"multi custom style failed with error: {str(e)}")
+        pytest.fail(f"multi custom style failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -219,7 +219,7 @@ def test_panel_plot_types(ayo_data, exosims_data, plot_type):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"panel {plot_type} plot failed with error: {e!s}")
 
 
 def test_panel_mixed_types(ayo_data, exosims_data):
@@ -249,7 +249,7 @@ def test_panel_mixed_types(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel mixed types failed with error: {str(e)}")
+        pytest.fail(f"panel mixed types failed with error: {e!s}")
 
 
 def test_panel_custom_titles(ayo_data, exosims_data):
@@ -276,7 +276,7 @@ def test_panel_custom_titles(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel custom titles failed with error: {str(e)}")
+        pytest.fail(f"panel custom titles failed with error: {e!s}")
 
 
 def test_panel_shared_axes(ayo_data, exosims_data):
@@ -305,7 +305,7 @@ def test_panel_shared_axes(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"panel shared axes failed with error: {str(e)}")
+        pytest.fail(f"panel shared axes failed with error: {e!s}")
 
 
 @pytest.mark.parametrize("plot_type", ["scatter", "plot", "hist"])
@@ -344,7 +344,7 @@ def test_xy_grid_plot_types(ayo_data, exosims_data, plot_type):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"xy grid {plot_type} plot failed with error: {str(e)}")
+        pytest.fail(f"xy grid {plot_type} plot failed with error: {e!s}")
 
 
 def test_xy_grid_custom_style(ayo_data, exosims_data):
@@ -365,7 +365,7 @@ def test_xy_grid_custom_style(ayo_data, exosims_data):
         plt.close()
     except Exception as e:
         plt.close()
-        pytest.fail(f"xy grid custom style failed with error: {str(e)}")
+        pytest.fail(f"xy grid custom style failed with error: {e!s}")
 
 
 if __name__ == "__main__":

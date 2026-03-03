@@ -105,7 +105,7 @@ def plot_core_throughtput(
             Figure and axes objects for the plot.
     """
     if use_cyberpunk:
-        import mplcyberpunk  # noqa: F401
+        import mplcyberpunk
         from cycler import cycler
 
         plt.style.use("cyberpunk")

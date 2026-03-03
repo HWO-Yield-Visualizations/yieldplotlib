@@ -33,7 +33,7 @@ def _get_plot_method(ax, plot_type):
     plot_method = getattr(ax, f"ypl_{plot_type}")
     if plot_method is None:
         raise ValueError(
-            (f"Unsupported plot_type: {plot_type}. Use 'scatter', 'plot', or 'hist'.")
+            f"Unsupported plot_type: {plot_type}. Use 'scatter', 'plot', or 'hist'."
         )
     return plot_method
 

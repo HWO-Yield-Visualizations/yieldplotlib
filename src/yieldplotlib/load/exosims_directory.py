@@ -56,10 +56,8 @@ class EXOSIMSCSVDirectory(EXOSIMSDirectory):
             return EXOSIMSCSVFile(path)
         else:
             logger.warning(
-                (
-                    f"Unexpected file type {path.suffix} for CSV directory. "
-                    f"File {path.name}."
-                )
+                f"Unexpected file type {path.suffix} for CSV directory. "
+                f"File {path.name}."
             )
             return self.create_base_file(path)
 
@@ -73,10 +71,8 @@ class DRMDirectory(EXOSIMSDirectory):
             return DRMFile(path)
         else:
             logger.warning(
-                (
-                    f"Unexpected file type {path.suffix} for DRM directory. "
-                    f"File {path.name}."
-                )
+                f"Unexpected file type {path.suffix} for DRM directory. "
+                f"File {path.name}."
             )
             return self.create_base_file(path)
 
@@ -90,9 +86,7 @@ class SPCDirectory(EXOSIMSDirectory):
             return SPCFile(path)
         else:
             logger.warning(
-                (
-                    f"Unexpected file type {path.suffix} for SPC directory. "
-                    f"File {path.name}."
-                )
+                f"Unexpected file type {path.suffix} for SPC directory. "
+                f"File {path.name}."
             )
             return self.create_base_file(path)

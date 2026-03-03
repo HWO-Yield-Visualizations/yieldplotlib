@@ -78,11 +78,9 @@ def download_from_google_sheets(sheet_id, output_path, credentials_json_path=Non
         from googleapiclient.discovery import build
     except ImportError:
         print(
-            (
-                "Error: Google API libraries not installed. "
-                "Run: pip install google-auth google-auth-oauthlib"
-                " google-api-python-client"
-            )
+            "Error: Google API libraries not installed. "
+            "Run: pip install google-auth google-auth-oauthlib"
+            " google-api-python-client"
         )
         sys.exit(1)
 
@@ -91,7 +89,7 @@ def download_from_google_sheets(sheet_id, output_path, credentials_json_path=Non
     # First check for credentials file path
     if credentials_json_path:
         try:
-            with open(credentials_json_path, "r") as f:
+            with open(credentials_json_path) as f:
                 credentials_info = json.load(f)
             credentials = service_account.Credentials.from_service_account_info(
                 credentials_info,
@@ -106,10 +104,8 @@ def download_from_google_sheets(sheet_id, output_path, credentials_json_path=Non
         credentials_b64 = os.environ.get("GOOGLE_CREDENTIALS_B64")
         if not credentials_b64:
             print(
-                (
-                    "Error: No credentials provided. Either set GOOGLE_CREDENTIALS_B64"
-                    " or provide --credentials"
-                )
+                "Error: No credentials provided. Either set GOOGLE_CREDENTIALS_B64"
+                " or provide --credentials"
             )
             sys.exit(1)
 
@@ -206,10 +202,8 @@ def parse_csv(input_csv):
                     key = exo_name
                 else:
                     print(
-                        (
-                            f"Warning: Row {row_num} has no 'yieldplotlib name'"
-                            " and no clear library names. Skipping."
-                        )
+                        f"Warning: Row {row_num} has no 'yieldplotlib name'"
+                        " and no clear library names. Skipping."
                     )
                     continue  # Skip rows that don't meet criteria
 
@@ -255,10 +249,8 @@ def parse_csv(input_csv):
             else:
                 # If neither library has complete info, skip the row
                 print(
-                    (
-                        f"Warning: Row {row_num} does not have complete "
-                        "information for either library. Skipping."
-                    )
+                    f"Warning: Row {row_num} does not have complete "
+                    "information for either library. Skipping."
                 )
                 continue
 
@@ -303,10 +295,8 @@ def parse_csv(input_csv):
 
         if key in key_map:
             print(
-                (
-                    f"Warning: Duplicate key '{key}' found in {context}."
-                    " Overwriting previous entry."
-                )
+                f"Warning: Duplicate key '{key}' found in {context}."
+                " Overwriting previous entry."
             )
 
         key_map[key] = map_entry

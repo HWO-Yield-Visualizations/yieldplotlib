@@ -1,23 +1,23 @@
 """yieldplotlib - A library for plotting yield data."""
 
 __all__ = [
+    "KEY_MAP",
     "__version__",
+    "calculate_axis_limits_and_ticks",
+    "compare",
     "fetch_ayo_data",
     "fetch_exosims_data",
     "fetch_yip_data",
-    "KEY_MAP",
-    "logger",
-    "calculate_axis_limits_and_ticks",
     "get_nice_number",
-    "subplots",
-    "compare",
+    "logger",
     "multi",
     "panel",
+    "subplots",
+    "xy_grid",
     "ypl_cmap",
     "ypl_colors",
     "ypl_cycler",
     "ypl_rainbow",
-    "xy_grid",
 ]
 
 from importlib.resources import as_file, files

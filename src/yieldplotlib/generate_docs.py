@@ -24,7 +24,6 @@ import csv
 import io
 import os
 import sys
-from typing import Optional
 
 import pandas as pd
 from google.oauth2 import service_account
@@ -53,7 +52,7 @@ def parse_args():
 
 
 def download_from_google_sheets(
-    sheet_id: str, credentials_json_path: Optional[str] = None
+    sheet_id: str, credentials_json_path: str | None = None
 ) -> str:
     """Download a CSV file from Google Sheets.
 
@@ -128,7 +127,7 @@ def read_csv_file(file_path: str) -> str:
         CSV content as a string.
     """
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             return f.read()
     except Exception as e:
         print(f"Error reading CSV file: {e}")

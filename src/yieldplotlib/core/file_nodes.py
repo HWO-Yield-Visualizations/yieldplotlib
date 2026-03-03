@@ -118,7 +118,7 @@ class JSONFile(FileNode):
 
     def load(self):
         """Load the JSON file into memory."""
-        with open(self.file_path, "r") as f:
+        with open(self.file_path) as f:
             self.data = json.load(f)
 
     def _get(self, key: str, **kwargs):

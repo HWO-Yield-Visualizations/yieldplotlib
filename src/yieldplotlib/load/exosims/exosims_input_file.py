@@ -294,7 +294,7 @@ class EXOSIMSInputFile(JSONFile):
             if "coords" not in key:
                 val = getattr(self.TL, key)
             else:
-                coords = getattr(self.TL, "coords")
+                coords = self.TL.coords
                 if key == "coords_RA":
                     val = coords.ra
                 elif key == "coords_Dec":
@@ -502,9 +502,9 @@ class EXOSIMSInputFile(JSONFile):
             int_times = int_times[index_map]
         # Make sure the integration times are being used for the correct stars
 
-        assert (
-            int_times.shape == exosims_name_order.shape
-        ), "int_times and star_names must have the same shape"
+        assert int_times.shape == exosims_name_order.shape, (
+            "int_times and star_names must have the same shape"
+        )
         if not self.all_local_paths:
             logger.warning(
                 "Completeness per integration time shouldn't be trusted without "

@@ -1,12 +1,12 @@
 """Custom plot designs."""
 
 __all__ = [
-    "plot_hist",
-    "make_offax_psf_movie",
-    "comparison_plots",
     "compare",
+    "comparison_plots",
+    "make_offax_psf_movie",
     "multi",
     "panel",
+    "plot_hist",
     "xy_grid",
 ]
 

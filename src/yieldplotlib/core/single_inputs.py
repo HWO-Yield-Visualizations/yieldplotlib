@@ -13,7 +13,7 @@ class SingleInput(dict):
 
     def __init__(self, *args, **kwargs):
         """Initialise the SingleInput class."""
-        super(SingleInput, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def apply(self, key, func):
         """Apply a function to all values of a given key."""
@@ -30,10 +30,8 @@ class SingleInput(dict):
                 for value in iterator:
                     if value.unit != desired_unit:
                         raise AssertionError(
-                            (
-                                f"Value {value} for {key} does not have desired "
-                                f"unit {desired_unit}"
-                            )
+                            f"Value {value} for {key} does not have desired "
+                            f"unit {desired_unit}"
                         )
             except AttributeError:
                 raise AttributeError(
