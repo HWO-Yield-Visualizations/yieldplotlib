@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.1.1...v1.2.0) (2026-03-03)
+
+
+### Features
+
+* Adding initial implementation of AYO input conversion to EXOSIMS and updating to match the new yippy API ([547a338](https://github.com/HWO-Yield-Visualizations/yieldplotlib/commit/547a3385ef3a134bee412a988235d821509b0430))
+
 ## [1.1.1](https://github.com/HWO-Yield-Visualizations/yieldplotlib/compare/v1.1.0...v1.1.1) (2026-01-23)
 
 
