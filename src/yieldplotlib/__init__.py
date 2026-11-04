@@ -22,6 +22,7 @@ __all__ = [
 
 from importlib.resources import as_file, files
 
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 from ._version import __version__
@@ -36,9 +37,10 @@ from .util import calculate_axis_limits_and_ticks, get_nice_number
 # Automatically extend matplotlib with our custom methods
 extend_matplotlib()
 
-# Using the new files() API
+# Register packaged styles by name using Matplotlib's public APIs.
 with as_file(files("yieldplotlib").joinpath("style")) as path:
-    ypl_stylesheets = plt.style.core.read_style_directory(path)
-    plt.style.core.update_nested_dict(plt.style.library, ypl_stylesheets)
-    # Set the default style to ypl_default
+    for style_path in path.glob("*.mplstyle"):
+        params = mpl.rc_params_from_file(style_path, use_default_template=False)
+        plt.style.library.setdefault(style_path.stem, {}).update(params)
+    # Set the default style to yieldplotlib.
     plt.style.use("yieldplotlib")
