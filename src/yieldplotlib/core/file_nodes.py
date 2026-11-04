@@ -173,12 +173,12 @@ class FitsFile(FileNode):
     def __init__(self, file_path: Path):
         """Initialize the node with the file path."""
         super().__init__(file_path)
-        self.load()
         self.file_name = posixpath.basename(file_path)
 
     def load(self):
         """Load the fits file."""
-        self.fits_file = pyfits.open(self.file_path)
+        with pyfits.open(self.file_path, memmap=False) as hdus:
+            self.fits_file = pyfits.HDUList([hdu.copy() for hdu in hdus])
 
     def _get(self, key: str, **kwargs):
         """Return the data associated with the key."""

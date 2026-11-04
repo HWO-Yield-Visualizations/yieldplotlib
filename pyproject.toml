@@ -68,6 +68,15 @@ test = ["nox", "pytest", "pytest-cov"]
 [tool.ruff]
 exclude = ["src/yieldplotlib/key_map.py"]
 
+[tool.pytest.ini_options]
+filterwarnings = [
+  "error",
+  # EXOSIMS validates the bundled example's default FoV against its pixel scale.
+  'ignore:Input FoV .* is larger than FoV computed from pixelScale .*:UserWarning:EXOSIMS\.Prototypes\.OpticalSystem',
+  # EXOSIMS Mennesson leaves its bundled zodiacal-distribution FITS file open.
+  'ignore:unclosed file .*nominal_maxL_distribution\.fits.*:ResourceWarning',
+]
+
 [tool.ruff.lint]
 select = ["B", "D", "E", "F", "I", "UP", "RUF"]
 

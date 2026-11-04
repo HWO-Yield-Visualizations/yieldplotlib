@@ -52,7 +52,7 @@ class AYOInputFile(FileNode):
         unit = compound_unit("unit")
 
         # Define an optional exponent, e.g., ^-1, ^2
-        exponent = pp.Suppress("^") + pp.Regex(r"[+-]?\d+").setParseAction(
+        exponent = pp.Suppress("^") + pp.Regex(r"[+-]?\d+").set_parse_action(
             lambda t: int(t[0])
         )
 
@@ -60,34 +60,36 @@ class AYOInputFile(FileNode):
         unit_with_exp = pp.Group(unit + pp.Optional(exponent, default=1)("degree"))
 
         # Define grammar for a single key-value pair with type identifier
-        identifier = pp.Word(pp.alphas + "_", pp.alphanums + "_").setName("identifier")
+        identifier = pp.Word(pp.alphas + "_", pp.alphanums + "_").set_name("identifier")
 
         # Define number (integer or float)
-        number = pp.common.number().setName("number")
+        number = pp.common.number().set_name("number")
 
         # Define string (single or double quoted)
-        string = pp.QuotedString("'", escChar="\\") | pp.QuotedString('"', escChar="\\")
+        string = pp.QuotedString("'", esc_char="\\") | pp.QuotedString(
+            '"', esc_char="\\"
+        )
 
         # Define array
         array = (
             pp.Group(
                 pp.Suppress("[")
-                + pp.Optional(pp.delimitedList(number | string, delim=","))
+                + pp.Optional(pp.DelimitedList(number | string, delim=","))
                 + pp.Suppress("]")
             )
-            .setName("array")
-            .setParseAction(self._convert_array)
+            .set_name("array")
+            .set_parse_action(self._convert_array)
         )
 
         # Define parameter reference (used in expressions)
-        param_ref = identifier.copy().setName("param_ref")
+        param_ref = identifier.copy().set_name("param_ref")
 
         # Define expression parts - handle addition, subtraction,
         # multiplication, division
         expr_term = number | param_ref
 
         # Simple expressions (value op value)
-        simple_expr = (expr_term + pp.oneOf("+ - * /") + expr_term).setName(
+        simple_expr = (expr_term + pp.one_of("+ - * /") + expr_term).set_name(
             "simple_expr"
         )
 
@@ -122,12 +124,12 @@ class AYOInputFile(FileNode):
             return tokens[0]  # Not an expression we recognize
 
         # Define the expression and set its parse action
-        expression = simple_expr.setParseAction(process_expression)
+        expression = simple_expr.set_parse_action(process_expression)
 
         # Define type identifier in curly braces
         type_literal = (
             pp.Suppress("{")
-            + pp.Word(pp.alphas).setResultsName("type")
+            + pp.Word(pp.alphas).set_results_name("type")
             + pp.SkipTo(pp.Suppress("}"))
         )
 
@@ -135,8 +137,8 @@ class AYOInputFile(FileNode):
         unit_literal = (
             pp.Suppress("(")
             + pp.OneOrMore(unit_with_exp)
-            .setResultsName("units")
-            .setParseAction(self._convert_unit)
+            .set_results_name("units")
+            .set_parse_action(self._convert_unit)
             + pp.Suppress(") ")
         )
 
@@ -146,14 +148,16 @@ class AYOInputFile(FileNode):
 
         # Define key-value pair with type, optional unit, and optional comments
         key_value = (
-            identifier.setResultsName("key")
+            identifier.set_results_name("key")
             + pp.Suppress("=")
-            + value_types.setResultsName("value")
+            + value_types.set_results_name("value")
             + pp.Optional(pp.Suppress(";"))  # Semicolon is optional
             + pp.Optional(unit_literal)
-            + pp.Optional(pp.SkipTo("{").setResultsName("comment_before_type"))
+            + pp.Optional(pp.SkipTo("{").set_results_name("comment_before_type"))
             + pp.Optional(type_literal)
-            + pp.Optional(pp.SkipTo(pp.lineEnd()).setResultsName("comment_after_type"))
+            + pp.Optional(
+                pp.SkipTo(pp.LineEnd()).set_results_name("comment_after_type")
+            )
         )
 
         # Split the raw data into individual lines
@@ -168,7 +172,7 @@ class AYOInputFile(FileNode):
 
             try:
                 # Parse the line using the defined parser
-                parsed = key_value.parseString(line, parseAll=True)
+                parsed = key_value.parse_string(line, parse_all=True)
 
                 # Extract key, value, and type from the parsed result
                 key = parsed["key"]
