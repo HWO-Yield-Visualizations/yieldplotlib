@@ -1,5 +1,5 @@
 [build-system]
-requires = ['hatchling', "hatch-fancy-pypi-readme", "hatch-vcs"]
+requires = ['hatchling>=1.27.0', "hatch-fancy-pypi-readme>=24.1.0", "hatch-vcs>=0.4.0"]
 build-backend = "hatchling.build"
 
 [project]
@@ -10,18 +10,18 @@ authors = [
 ]
 description = "A Python pipeline to generate plots for exoplanet yield simulations."
 dependencies = [
-  "matplotlib",
-  "astropy",
-  "colorspacious",
-  "synphot",
-  "EXOSIMS",
-  "tqdm",
-  "yippy",
+  "matplotlib>=3.9.0",
+  "astropy>=7.2.0",
+  "colorspacious>=1.1.2",
+  "synphot>=1.7.0",
+  "EXOSIMS>=3.6.6",
+  "tqdm>=4.67.1",
+  "yippy>=2.10.0",
   "pyparsing>=3.1.4",
   "lod-unit>=1.6.0",
-  "docopt",
-  "pooch",
-  "mplcyberpunk",
+  "docopt>=0.6.2",
+  "pooch>=1.8.0",
+  "mplcyberpunk>=0.7.6",
   "scipy>=1.15",
 ]
 license = { file = "LICENSE" }
@@ -55,15 +55,15 @@ path = "README.md"
 
 [project.optional-dependencies]
 docs = [
-  "sphinx",
-  "myst-nb",
-  "sphinx-book-theme",
-  "sphinx-autoapi",
-  "sphinx_autodoc_typehints",
-  "matplotlib",
-  "itables",
+  "sphinx>=7.2.0",
+  "myst-nb>=1.1.0",
+  "sphinx-book-theme>=1.1.0",
+  "sphinx-autoapi>=3.0.0",
+  "sphinx_autodoc_typehints>=2.0.0",
+  "matplotlib>=3.9.0",
+  "itables>=2.0.0",
 ]
-test = ["nox", "pytest", "pytest-cov"]
+test = ["nox>=2024.3.2", "pytest>=7.3.2", "pytest-cov>=4.1.0"]
 
 [tool.ruff]
 exclude = ["src/yieldplotlib/key_map.py"]
