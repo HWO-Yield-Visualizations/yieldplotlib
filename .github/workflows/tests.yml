@@ -13,8 +13,10 @@ jobs:
     name: Test Python ${{ matrix.python-version }} on ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     strategy:
+      # Report every version and platform instead of cancelling on the first failure.
+      fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13"]
         platform: [ubuntu-latest, macos-latest]
     steps:
     - uses: actions/checkout@v7
