@@ -360,11 +360,24 @@ class EXOSIMSInputFile(JSONFile):
                 # Hacky way to differentiate between system/inst/mode keys
                 key = key[5:]
             value = _dict.get(key)
+            if key == "Rs":
+                value = self._resolving_power(_dict)
             unit = get_unit(key, self.__class__.__name__)
             if unit:
                 return value * unit
             else:
                 return value
+
+    def _resolving_power(self, inst):
+        """Return the resolving power EXOSIMS uses for an instrument.
+
+        EXOSIMS's OpticalSystem treats any instrument whose name lacks "spec"
+        as an imager with Rs = 1 and ignores an input value. A spectrograph
+        uses its own Rs, else the top-level Rs, else 50.
+        """
+        if "spec" not in inst.get("name", "").lower():
+            return 1.0
+        return float(inst.get("Rs", self.data.get("Rs", 50)))
 
     def create_exosims_objects(self):
         """Create a TargetList object from the input JSON file.
