@@ -13,14 +13,14 @@ import matplotlib.pyplot as plt
 from yieldplotlib.load import EXOSIMSDirectory
 
 # Load your simulation data
-exosims = EXOSIMSDirectory('path/to/exosims/run')
+exosims = EXOSIMSDirectory("path/to/exosims/run")
 
 # Get the single visit detection completeness
-det_info = exosims.get('blind_comp_det')
+det_info = exosims.get("blind_comp_det")
 
 # Create a scatter plot of star distance vs. yield
 fig, ax = plt.subplots()
-ax.ypl_scatter(exosims, x='star_dist', y='yield_earth')
+ax.ypl_scatter(exosims, x="star_dist", y="yield_earth")
 ```
 
 ## Parameter Reference Table
