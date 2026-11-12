@@ -1,12 +1,25 @@
 """Tests for the plotting functionality."""
 
+import matplotlib
 import matplotlib.pyplot as plt
 import pytest
 
 from yieldplotlib.plots import compare, multi, panel, plot_hist, xy_grid
 
+# mplcyberpunk 0.7.6 reads matplotlib.style.core, which Matplotlib 3.11 no longer
+# exposes, so importing it fails (https://github.com/dhaitz/mplcyberpunk/issues/48).
+_CYBERPUNK_BROKEN = pytest.mark.xfail(
+    matplotlib.__version_info__ >= (3, 11),
+    reason="mplcyberpunk does not import on Matplotlib 3.11 (mplcyberpunk issue 48)",
+    raises=pytest.fail.Exception,
+    strict=True,
+)
 
-def test_plot_hist(ayo_data, exosims_data):
+
+@pytest.mark.parametrize(
+    "use_cyberpunk", [False, pytest.param(True, marks=_CYBERPUNK_BROKEN)]
+)
+def test_plot_hist(ayo_data, exosims_data, use_cyberpunk):
     """Test that the histogram plotting functionality works without errors."""
     try:
         plot_hist(
@@ -14,7 +27,7 @@ def test_plot_hist(ayo_data, exosims_data):
             planet_bins=["Rocky", "Super Earth", "Sub Neptune", "Neptune", "Jupiter"],
             runs=[ayo_data, exosims_data],
             run_labels=["AYO", "EXOSIMS"],
-            use_cyberpunk=True,
+            use_cyberpunk=use_cyberpunk,
         )
         plt.close()
     except Exception as e:
