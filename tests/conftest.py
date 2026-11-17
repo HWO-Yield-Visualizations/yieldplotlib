@@ -1,5 +1,7 @@
 """Test configuration for yieldplotlib."""
 
+import importlib.util
+
 import pytest
 
 from yieldplotlib.datasets import fetch_ayo_data, fetch_exosims_data, fetch_yip_data
@@ -33,3 +35,8 @@ def yip_data():
         YIPDirectory: A YIPDirectory instance.
     """
     return fetch_yip_data()
+
+
+pytest_plugins = []
+if importlib.util.find_spec("hwoutils.internal_refs") is not None:
+    pytest_plugins.append("hwoutils.internal_refs")
