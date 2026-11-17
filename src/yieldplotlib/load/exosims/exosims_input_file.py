@@ -7,7 +7,6 @@ from pathlib import Path
 import astropy.io.fits as pyfits
 import numpy as np
 import pandas as pd
-import zodi
 from astropy import units as u
 from EXOSIMS.Prototypes.OpticalSystem import OpticalSystem
 from EXOSIMS.util.get_module import get_module_from_specs
@@ -501,11 +500,8 @@ class EXOSIMSInputFile(JSONFile):
             if len(planet_indices) > 0:
                 star_nEZ[i] = SU.nEZ[planet_indices[0]]
 
-        # JEZ0 is the EEID reference, so the epoch value carries L / r**2.
-        JEZ = (
-            zodi.scale_jez(JEZ0.value, star_nEZ, d.to_value(u.AU), 1.0, TL.L[sInds])
-            << JEZ0.unit
-        )
+        # Use these nEZ values to scale JEZ
+        JEZ = JEZ0 * star_nEZ * (1 / d.to("AU").value) ** 2
 
         # Get the star indices for the given star names
         if int_times is None:
