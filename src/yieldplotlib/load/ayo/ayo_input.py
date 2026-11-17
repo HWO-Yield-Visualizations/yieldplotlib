@@ -7,6 +7,7 @@ import astropy.units as u
 import numpy as np
 import pyparsing as pp
 from lod_unit import lod
+from optixstuff.apertures import Circular
 from yippy.coronagraph import Coronagraph
 
 from yieldplotlib.core.file_nodes import FileNode
@@ -494,7 +495,11 @@ class AYOInputFile(FileNode):
             if coro_path.exists():
                 logger.info(f"Loading coronagraph from: {coro_path}")
                 # Load coronagraph with yippy
-                coro = Coronagraph(coro_path)
+                # Use the AYO photometric aperture radius if available
+                aperture_radius = get_val("photap_rad", lod, 0.7)
+                if aperture_radius is None:
+                    aperture_radius = 0.7
+                coro = Coronagraph(coro_path, rules=(Circular(float(aperture_radius)),))
 
                 # Extract coronagraph's design fractional bandwidth from header
                 # AYO uses min(1/SR, coro_design_bw) as the effective bandwidth
@@ -517,25 +522,12 @@ class AYOInputFile(FileNode):
                         f"MAXLAM={coro.header.maxlam}, LAMBDA={coro.header.lambda0})"
                     )
 
-                # Generate EXOSIMS files and get system info
-                # Use AYO parameters if available, otherwise defaults
-                aperture_radius = get_val("photap_rad", lod, 0.7)
-                if aperture_radius is None:
-                    aperture_radius = 0.7
-                else:
-                    aperture_radius = aperture_radius
-
                 # Get IWA/OWA from AYO if available, otherwise use defaults
                 iwa_lod = get_val("IWA", lod, None)
                 owa_lod = get_val("OWA", lod, None)
 
                 # Generate EXOSIMS format files
-                exosims_specs = coro.to_exosims(
-                    aperture_radius_lod=aperture_radius,
-                    fit_gaussian_for_core_area=False,
-                    use_phot_aperture_as_min=False,
-                    units="LAMBDA/D",
-                )
+                exosims_specs = coro.to_exosims(units="LAMBDA/D")
 
                 # Get the system from the generated specs
                 if exosims_specs.get("starlightSuppressionSystems"):
