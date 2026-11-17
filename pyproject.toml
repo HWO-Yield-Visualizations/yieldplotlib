@@ -17,6 +17,7 @@ dependencies = [
   "EXOSIMS>=3.6.6",
   "tqdm>=4.67.1",
   "yippy>=2.10.0",
+  "optixstuff",
   "pyparsing>=3.1.4",
   "lod-unit>=1.6.0",
   "docopt>=0.6.2",

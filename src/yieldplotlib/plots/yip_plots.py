@@ -3,6 +3,7 @@
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
+from optixstuff.apertures import Circular
 
 
 def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
@@ -38,7 +39,7 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
     ax.imshow(initial_image)
     fig.tight_layout()
 
-    # Add an inset text with the current λ/D value.
+    # Add an inset text with the current lambda/D value.
     props = dict(boxstyle="round", facecolor="white", alpha=0.5)
     text_obj = ax.text(
         0.95,
@@ -128,11 +129,11 @@ def plot_core_throughtput(
         fig = ax.get_figure()
 
     if yip:
-        performance_metrics = yip.coronagraph.compute_all_performance_curves(
-            oversample=1, aperture_radius_lod=aperture_radius
-        )
-        separations = performance_metrics["separations"]
-        core_thruput_from_yip = performance_metrics["throughput"]
+        rule = Circular(aperture_radius)
+        coro = yip.coronagraph.with_rules((rule,))
+        performance_metrics = coro.curves(rule)
+        separations = performance_metrics.separation_lod
+        core_thruput_from_yip = performance_metrics.throughput
         ax.plot(separations, core_thruput_from_yip, label="yippy")
 
     for i, run in enumerate(runs):
