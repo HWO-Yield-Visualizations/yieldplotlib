@@ -6,7 +6,6 @@ __all__ = [
     "EXOSIMSCSVDirectory",
     "EXOSIMSDirectory",
     "SPCDirectory",
-    "YIPDirectory",
 ]
 
 from .ayo_directory import AYODirectory
@@ -16,4 +15,3 @@ from .exosims_directory import (
     EXOSIMSDirectory,
     SPCDirectory,
 )
-from .yip_directory import YIPDirectory

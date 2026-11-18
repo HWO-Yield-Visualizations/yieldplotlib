@@ -26,17 +26,14 @@ ayo.get("yield_earth")
 exosims.get("yield_earth")
 ```
 
-Yield input packages (YIPs) specifying input coronagraph parameters can also be loaded and accessed
-using the same file node and directory structure. This allows users to access key coronagraph performance
-metrics that serve as critical inputs to these yield codes. In order to process the YIPs, `yieldplotlib`
-uses [yippy](https://github.com/CoreySpohn/yippy) as a backend, though the user interface is identical to generating the AYO and EXOSIMS
-directories, for example:
+YIP plots accept a native package opened by yippy. The offset at row `i` is
+the signed XY position of `package.offaxis_psfs[i]` in lambda/D. Throughput
+plots prepare an aperture on that same package.
 
+```python
+from yippy import open_yip
 
-```angular2html
-from yieldplotlib.load import YIPDirectory
-
-yip = YIPDirectory(Path("path/to/my/yip_data"))
+package = open_yip("path/to/my/yip_data")
 ```
 
 ## Plotting

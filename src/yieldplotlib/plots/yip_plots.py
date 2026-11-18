@@ -4,14 +4,14 @@ import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
 from optixstuff.apertures import Circular
+from yippy import YIPPackage
 
 
-def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
+def make_offax_psf_movie(yip: YIPPackage, save_name, ax_kwargs=None, plot_kwargs=None):
     """Generate a movie of the off-axis stellar PSF moving as a function of lambda/D.
 
     Args:
-        yip (YIPDirectory):
-            YIPDirectory to plot.
+        yip: Native yield input package.
         save_name (str):
             File path to where the output movie will be saved.
         ax_kwargs (dict, optional):
@@ -20,23 +20,30 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
             Keyword arguments to pass to plt.figure().
 
     Returns:
-        None
+        matplotlib.animation.FuncAnimation: The saved animation.
     """
     # Get the off-axis stellar PSF data from the YIP.
     if plot_kwargs is None:
         plot_kwargs = {}
     if ax_kwargs is None:
         ax_kwargs = {}
-    offax_psf_data = yip.get("offax.data")
-    offax_psf_offsets_list = yip.get("offax_offset_list.data")
+    psfs = yip.offaxis_psfs
+    offsets = yip.offsets_xy_lod
+
+    def log_psf(frame):
+        with np.errstate(divide="ignore", invalid="ignore"):
+            data = np.log(psfs[frame])
+        return np.where(np.isfinite(data), data, -20)
+
+    def offset_label(frame):
+        x, y = offsets[frame]
+        return rf"$(x, y) = ({x:.2f}, {y:.2f})\,\lambda/D$"
 
     # Set up the figure and axis.
     fig, ax = plt.subplots(**plot_kwargs)
 
     # Prepare the initial image.
-    initial_image = np.log(offax_psf_data[0])
-    initial_image[~np.isfinite(initial_image)] = -20
-    ax.imshow(initial_image)
+    im_obj = ax.imshow(log_psf(0))
     fig.tight_layout()
 
     # Add an inset text with the current lambda/D value.
@@ -44,7 +51,7 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
     text_obj = ax.text(
         0.95,
         0.9,
-        f"$\\lambda / D$ = {offax_psf_offsets_list[0]:.2f}",
+        offset_label(0),
         transform=ax.transAxes,
         fontsize=12,
         verticalalignment="bottom",
@@ -57,15 +64,12 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
 
     # Update frames
     def update(frame):
-        im_data = np.log(offax_psf_data[frame])
-        im_data[~np.isfinite(im_data)] = -20
-        im_obj = ax.imshow(im_data)
-        # Update the text
-        text_obj.set_text(f"$\\lambda / D$ = {offax_psf_offsets_list[frame]:.2f}")
+        im_obj.set_data(log_psf(frame))
+        text_obj.set_text(offset_label(frame))
         return im_obj, text_obj
 
     # Create the animation.
-    ani = animation.FuncAnimation(fig, update, frames=len(offax_psf_data), blit=True)
+    ani = animation.FuncAnimation(fig, update, frames=len(psfs), blit=True)
 
     # Save the animation to file.
     ani.save(save_name, fps=2, writer="ffmpeg")
@@ -76,7 +80,7 @@ def make_offax_psf_movie(yip, save_name, ax_kwargs=None, plot_kwargs=None):
 def plot_core_throughtput(
     runs,
     run_labels,
-    yip=None,
+    yip: YIPPackage | None = None,
     ax=None,
     ax_kwargs=None,
     use_cyberpunk=False,
@@ -90,9 +94,7 @@ def plot_core_throughtput(
             List of EXOSIMSDirectories and AYODirectories to plot.
         run_labels (list):
             List of labels for each run.
-        yip (YIPDirectory):
-            YIPDirectory to plot. If None, the throughput directly from the YIP
-            (accessed via yippy) will not be plotted.
+        yip: Optional native yield input package for the reference throughput.
         ax (matplotlib.axes.Axes, optional):
             Axes to plot on. If None, a new figure is created.
         ax_kwargs (dict, optional):
@@ -128,9 +130,9 @@ def plot_core_throughtput(
     else:
         fig = ax.get_figure()
 
-    if yip:
+    if yip is not None:
         rule = Circular(aperture_radius)
-        coro = yip.coronagraph.with_rules((rule,))
+        coro = yip.prepare(rules=(rule,))
         performance_metrics = coro.curves(rule)
         separations = performance_metrics.separation_lod
         core_thruput_from_yip = performance_metrics.throughput

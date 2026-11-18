@@ -8,7 +8,7 @@ import numpy as np
 import pyparsing as pp
 from lod_unit import lod
 from optixstuff.apertures import Circular
-from yippy.coronagraph import Coronagraph
+from yippy import open_yip
 
 from yieldplotlib.core.file_nodes import FileNode
 from yieldplotlib.logger import logger
@@ -499,7 +499,9 @@ class AYOInputFile(FileNode):
                 aperture_radius = get_val("photap_rad", lod, 0.7)
                 if aperture_radius is None:
                     aperture_radius = 0.7
-                coro = Coronagraph(coro_path, rules=(Circular(float(aperture_radius)),))
+                coro = open_yip(coro_path).prepare(
+                    rules=(Circular(float(aperture_radius)),)
+                )
 
                 # Extract coronagraph's design fractional bandwidth from header
                 # AYO uses min(1/SR, coro_design_bw) as the effective bandwidth

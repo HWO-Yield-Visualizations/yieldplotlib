@@ -32,7 +32,7 @@ def yip_data():
     """Fixture that provides YIP data for tests.
 
     Returns:
-        YIPDirectory: A YIPDirectory instance.
+        YIPPackage: Native products in the bundled YIP.
     """
     return fetch_yip_data()
 

@@ -381,6 +381,34 @@ def test_xy_grid_custom_style(ayo_data, exosims_data):
         pytest.fail(f"xy grid custom style failed with error: {e!s}")
 
 
+def test_movie_pairs_each_native_psf_with_xy(tmp_path, monkeypatch):
+    """Fails if a movie frame loses its signed XY position or native PSF."""
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+
+    import numpy as np
+
+    from yieldplotlib.plots import yip_plots
+
+    package = SimpleNamespace(
+        offsets_xy_lod=np.array([[3, -2], [-4, 1]]),
+        offaxis_psfs=np.array([[[1.0, 0.0]], [[0.0, 1.0]]]),
+    )
+
+    def inspect_frames(fig, update, frames, *, blit):
+        assert frames == 2
+        for i, (label, values) in enumerate(
+            (("(3.00, -2.00)", [[0.0, -20.0]]), ("(-4.00, 1.00)", [[-20.0, 0.0]]))
+        ):
+            image, text = update(i)
+            assert label in text.get_text()
+            np.testing.assert_array_equal(image.get_array(), values)
+        return Mock()
+
+    monkeypatch.setattr(yip_plots.animation, "FuncAnimation", inspect_frames)
+    yip_plots.make_offax_psf_movie(package, tmp_path / "xy.gif")
+
+
 if __name__ == "__main__":
     import yieldplotlib as ypl
 

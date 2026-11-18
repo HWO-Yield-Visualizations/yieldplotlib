@@ -6,10 +6,10 @@ yieldplotlib. It uses pooch to handle data downloads and caching.
 
 import pooch
 from pooch import Unzip
+from yippy import YIPPackage, open_yip
 
 from .load.ayo_directory import AYODirectory
 from .load.exosims_directory import EXOSIMSDirectory
-from .load.yip_directory import YIPDirectory
 
 # Create a pooch registry for data files
 REGISTRY = {
@@ -38,7 +38,7 @@ def fetch_exosims_data():
     return EXOSIMSDirectory(PIKACHU.abspath / "exosims.zip.unzip/exosims")
 
 
-def fetch_yip_data():
-    """Fetch and unpack YIP data."""
+def fetch_yip_data() -> YIPPackage:
+    """Open the bundled example as a native YIP package."""
     PIKACHU.fetch("yip.zip", processor=Unzip())
-    return YIPDirectory(PIKACHU.abspath / "yip.zip.unzip/yip")
+    return open_yip(PIKACHU.abspath / "yip.zip.unzip/yip")

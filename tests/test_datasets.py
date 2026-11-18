@@ -1,5 +1,7 @@
 """Tests for the datasets module."""
 
+from yippy import YIPPackage
+
 from yieldplotlib.datasets import fetch_ayo_data, fetch_exosims_data, fetch_yip_data
 
 
@@ -22,6 +24,5 @@ def test_fetch_exosims_data():
 def test_fetch_yip_data():
     """Test that YIP data can be fetched and loaded."""
     yip = fetch_yip_data()
-    assert yip is not None
-    # Simple sanity check that the data is loaded
-    assert yip.get("offax.data") is not None
+    assert isinstance(yip, YIPPackage)
+    assert yip.offsets_xy_lod.shape == (len(yip.offaxis_psfs), 2)
